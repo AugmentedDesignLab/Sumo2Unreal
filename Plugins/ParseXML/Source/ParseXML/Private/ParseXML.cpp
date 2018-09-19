@@ -91,9 +91,7 @@ void FParseXMLModule::PluginButtonClicked()
 
 	UfileParser fileParser;
 	fileParser.loadxml();
-	
-
-	UE_LOG(LogEngine, Warning, TEXT("xml file parsed!"))
+	UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
 
 
 	
