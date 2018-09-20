@@ -10,26 +10,32 @@ class SimpleEdge {
 
 public:
 
-	//SimpleEdge(FString id, SimpleNode* fromNode, SimpleNode* toNode, double length, FString shape);
+	//constructor
+	SimpleEdge();
 
 
 	void setId(FString id);
-	//void setFrom(SimpleNode* fromNode);
-	//void setTo(SimpleNode* toNode);
 	void setLaneLength(double length);
 	void setLaneWidth(double width);
-
-	//just a tester since I don't have simpleNode yet
-	SimpleEdge::SimpleEdge(FString id, FString fromNode, FString toNode, double length);
 	void setFrom(FString fromNode);
 	void setTo(FString toNode);
 
-private:
+	
+	FString getID();
+	FString getFromID();
+	FString getToID();
+	FString getMyShape();
+	double getMyLaneLength();
+	double getMyLaneWidth();
+
+	//just a tester since I don't have simpleNode yet
+	//ignore these
+	SimpleEdge::SimpleEdge(FString id, FString fromNode, FString toNode, double length);
+
+
+public:
 
 	FString myID;
-
-	//SimpleNode* myFrom;
-	//SimpleNode* myTo;
 
 	double myLaneLength;
 	double myLaneWidth;
@@ -38,7 +44,7 @@ private:
 
 
 	//testers
-	FString myToTest;
-	FString myFromTest;
+	FString myFromID;
+	FString myToID;
 
 };
