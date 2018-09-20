@@ -27,6 +27,18 @@ void SimpleEdge::setLaneWidth(double width) {
 	myLaneWidth = width;
 }
 
+void SimpleEdge::setFirstShape(std::pair<double, double> shape) {
+	firstShape = shape;
+}
+
+void SimpleEdge::setSecondShape(std::pair<double, double> shape) {
+	secondShape = shape;
+}
+
+
+
+
+
 FString SimpleEdge::getID() {
 	return myID;
 }
@@ -47,9 +59,13 @@ double SimpleEdge::getMyLaneWidth() {
 	return myLaneWidth;
 }
 
-//FString SimpleEdge::getMyShape() {
-//
-//}
+std::pair<double, double> SimpleEdge::getFirstShape() {
+
+}
+
+std::pair<double, double> SimpleEdge::getSecondShape() {
+
+}
 
 //tester constructor
 SimpleEdge::SimpleEdge(FString id, FString fromNode, FString toNode, double length) {

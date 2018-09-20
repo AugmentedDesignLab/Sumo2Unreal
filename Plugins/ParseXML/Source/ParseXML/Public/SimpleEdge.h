@@ -2,7 +2,9 @@
 #pragma once
 
 //#include SimpleNode.h;
+#include <utility>
 #include "Engine.h"
+
 
 class SimpleEdge {
 
@@ -19,14 +21,17 @@ public:
 	void setLaneWidth(double width);
 	void setFrom(FString fromNode);
 	void setTo(FString toNode);
+	void setFirstShape(std::pair<double, double> shape);
+	void setSecondShape(std::pair<double, double> shape);
 
 	
 	FString getID();
 	FString getFromID();
 	FString getToID();
-	FString getMyShape();
 	double getMyLaneLength();
 	double getMyLaneWidth();
+	std::pair <double, double> getFirstShape();
+	std::pair <double, double> getSecondShape();
 
 	//just a tester since I don't have simpleNode yet
 	//ignore these
@@ -40,7 +45,14 @@ public:
 	double myLaneLength;
 	double myLaneWidth;
 
-	FString myShape;
+	double shapeX1;
+	double shapeY1;
+
+	std::pair <double, double> firstShape;
+	std::pair <double, double> secondShape;
+
+	double shapeX2;
+	double shapeY2;
 
 
 	//testers
