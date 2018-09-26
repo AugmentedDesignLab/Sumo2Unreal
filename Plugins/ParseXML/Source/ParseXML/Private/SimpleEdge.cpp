@@ -60,11 +60,11 @@ double SimpleEdge::getMyLaneWidth() {
 }
 
 std::pair<double, double> SimpleEdge::getFirstShape() {
-
+	return firstShape;
 }
 
 std::pair<double, double> SimpleEdge::getSecondShape() {
-
+	return secondShape;
 }
 
 //tester constructor

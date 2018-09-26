@@ -69,7 +69,7 @@ void FParseXMLModule::PluginButtonClicked()
 	FMessageDialog::Open(EAppMsgType::Ok, DialogText);
 
 	const FString& windowTitle = "Browse XML Files";
-	const FString& defaultFilePath = "C:/Users/iparanja/Documents/Unreal Projects/SumoToUnreal/Source/SumoToUnreal";
+	const FString& defaultFilePath = "C:/Users";
 	const FString& defaultFileName = "SumoToUnreal.cpp";
 	const FString& defaultFileType = "*.jpg";
 
@@ -86,12 +86,12 @@ void FParseXMLModule::PluginButtonClicked()
 		ParentWindowWindowHandle = MainFrameParentWindow->GetNativeWindow()->GetOSWindowHandle();
 		DesktopPlatform->OpenFileDialog(ParentWindowWindowHandle, windowTitle, defaultFilePath, defaultFileName,
 			defaultFileType, 0x00, OutFilenames);
-		UE_LOG(LogTemp, Warning, TEXT("Plugin is still working!"));
+		//UE_LOG(LogTemp, Warning, TEXT("Plugin is still working!"));
 	}
 
 	UfileParser fileParser;
 	fileParser.loadxml();
-	UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
+	//UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
 
 
 	

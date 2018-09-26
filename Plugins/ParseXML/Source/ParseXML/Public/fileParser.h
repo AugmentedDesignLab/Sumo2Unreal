@@ -1,6 +1,9 @@
 #pragma once
 #include "Runtime/XmlParser/Public/FastXml.h"
 #include "Runtime/XmlParser/Public/XmlParser.h"
+#include "Runtime/Core/Public/Containers/Map.h"
+#include "SimpleEdge.h"
+
 #include "ContainersAndTypes.h"
 
 #include <stack>
@@ -35,6 +38,15 @@ public:
 	FString getTempNodeID();
 	bool setTempNodeID(const TCHAR*);
 
+	//parses through edgelist and prints all edges
+	void printEdges();
+
+	//adds attributes to edge
+	void InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue);
+
+	//adds edges to the edge list
+	void addEdge(const TCHAR* Element);
+
 private:
 	std::vector<float> Shapecoordinates;
 
@@ -48,7 +60,9 @@ private:
 	bool yCoordinateIsSet = false;
 
 
-	//edge flags
+	//edge flags and member variables
+	SimpleEdge edgeHolder;
+	TMap<FString, SimpleEdge> EdgeList;
 	bool isElementEdge = false;
 	
 	void resetFlagsAndTempMembers();
