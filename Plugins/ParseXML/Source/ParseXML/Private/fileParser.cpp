@@ -18,6 +18,58 @@ UfileParser::~UfileParser()
 
 }
 
+void UfileParser::printEdges() {
+	for (auto& Elem : EdgeList) {
+		FString id = Elem.Value.getID();
+		FString from = Elem.Value.myFromID;
+		FString to = Elem.Value.myToID;
+		double length = Elem.Value.myLaneLength;
+		UE_LOG(LogTemp, Warning, TEXT("%s and its from %s and goes to %s and it is %d long"), *id, *from, *to, length);
+	}
+}
+
+
+void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue) {
+	FString attributeName = FString(AttributeName);
+	FString attributeValue = FString(AttributeValue);
+
+
+	if (isElementEdge) {
+
+
+		if (attributeName == "id") {
+			edgeHolder.setId(AttributeValue);
+		}
+		else if (attributeName == "from") {
+			edgeHolder.setFrom(AttributeValue);
+		}
+		else if (attributeName == "to") {
+			edgeHolder.setTo(AttributeValue);
+		}
+
+	}
+	else if (!isElementNode) {
+		if (attributeName == TEXT("length")) {
+			edgeHolder.setLaneLength(FCString::Atod(AttributeValue));
+			FString id = edgeHolder.getID();
+			FString from = edgeHolder.myFromID;
+			FString to = edgeHolder.myToID;
+			double length = FCString::Atof(AttributeValue);
+			UE_LOG(LogTemp, Warning, TEXT("%s and its from %s and goes to %s and it is %d long but correct lane length is %s"), *id, *from, *to, length, *attributeValue);
+
+		}
+	}
+}
+
+void UfileParser::addEdge(const TCHAR* Element) {
+	FString element = FString(Element);
+
+	//i feel like i definitely don't need this
+	if (element == "lane") {
+		EdgeList.Add(edgeHolder.getID(), edgeHolder);
+	}
+}
+
 FString UfileParser::getTempNodeID()
 {
 	return tempNodeID;
@@ -138,7 +190,7 @@ bool UfileParser::loadxml()
 {
 	FText outError;
 	int32 outErrorNum;
-	FString XML = "C:/Users/iparanja/net.net.xml";
+	FString XML = "C:/Users/janiguid/Desktop/net.net.xml";
 	bool success = FFastXml::ParseXmlFile((IFastXmlCallback*)(this), XML.GetCharArray().GetData(), TEXT(""), nullptr, false, false, outError, outErrorNum);
 	return success;
 }
@@ -182,6 +234,9 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 			UE_LOG(LogEngine, Warning, TEXT("Node object created!"));
 		}
 		
+	}
+	else if (isElementEdge) {
+
 	}
 	UE_LOG(LogEngine, Warning, TEXT("ProcessAttribute AttributeName: %s, AttributeValue: %s"), AttributeName, AttributeValue);
 
