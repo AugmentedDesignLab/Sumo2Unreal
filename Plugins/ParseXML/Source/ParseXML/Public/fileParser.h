@@ -29,15 +29,20 @@ public:
 	//Put the shape coordinates into Shapecoordinates vector
 	void ShapeProcessing(const TCHAR*);
 
+	//----Functions for initializing the node objects----
+
 	//Collect all required node attributes for one object as member variables and then initialize a node object
 	void InitializeNodeAttributes(const TCHAR*, const TCHAR*);
 	SimpleNodePtr InitializeNode();
-	NodeCont NodeContainer;		//one container object to store all node mappings
+
+	//one container object to store all node mappings
+	NodeCont NodeContainer;		
 
 	//Getter and setter methods of temporary node ID for the latest node created
 	FString getTempNodeID();
 	bool setTempNodeID(const TCHAR*);
 
+<<<<<<< Updated upstream
 	//parses through edgelist and prints all edges
 	void printEdges();
 
@@ -46,6 +51,15 @@ public:
 
 	//adds edges to the edge list
 	void addEdge(const TCHAR* Element);
+=======
+	//----Functions for initializing the edge objects----
+
+	//Collect all the required edge attributes for one object as member variables and then initialize a edge object
+	void InitializeEdgeAttributes(const TCHAR*, const TCHAR*);
+	SimpleEdgePtr InitializeEdge();
+
+	//Container object for edge mappings
+	EdgeCont EdgeContainer;
 
 private:
 	std::vector<float> Shapecoordinates;
@@ -53,7 +67,7 @@ private:
 	//node flags and temp member variables
 	bool isElementNode = false;
 	bool isPriorityNode = false;
-	bool shapeIsSet = false;
+	
 	const TCHAR* nodeXCoordinate;
 	const TCHAR* nodeYCoordinate;
 	bool xCoordinateIsSet = false;
@@ -63,10 +77,20 @@ private:
 	//edge flags and member variables
 	SimpleEdge edgeHolder;
 	TMap<FString, SimpleEdge> EdgeList;
+
+	//edge flags and temp member variables
 	bool isElementEdge = false;
+	FString fromNode = "";
+	FString toNode = "";
+	FString laneLength = "";
+	bool fromNodeSet = false;
+	bool toNodeSet = false;
+	bool lengthIsSet = false;
 	
 	void resetFlagsAndTempMembers();
+	bool shapeIsSet = false;
 
 	//temporary ID
 	FString tempNodeID = "";
+	FString tempEdgeID = "";
 };

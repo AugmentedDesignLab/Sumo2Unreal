@@ -181,7 +181,7 @@ SimpleNodePtr UfileParser::InitializeNode()
 	Node->nodeShapecoordinates = Shapecoordinates;
 	Node->SetPosition(nodeXCoordinate, nodeYCoordinate);
 
-	//initialize map with the pointer for extended lifetime
+	//initialize map with the pointer for extended node lifetime
 	NodeContainer.NodeMap.Add(*tempNodeID, Node.get());
 	return Node;
 }
@@ -235,7 +235,14 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 		}
 		
 	}
-	else if (isElementEdge) {
+	else if (isElementEdge == true) {
+		InitializeEdgeAttributes(AttributeName, AttributeValue);
+		if ((fromNodeSet == true) && (toNodeSet == true) && (lengthIsSet == true))
+		{
+			InitializeEdge();
+			resetFlagsAndTempMembers();
+			UE_LOG(LogEngine, Warning, TEXT("Edge object created!")); 
+		}
 
 	}
 	UE_LOG(LogEngine, Warning, TEXT("ProcessAttribute AttributeName: %s, AttributeValue: %s"), AttributeName, AttributeValue);
