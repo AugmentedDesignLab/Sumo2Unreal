@@ -1,8 +1,8 @@
 #pragma once
-#pragma once
 
 //#include SimpleNode.h;
 #include <utility>
+#include <vector>
 #include "Engine.h"
 
 
@@ -38,11 +38,11 @@ public:
 	SimpleEdge::SimpleEdge(FString id, FString fromNode, FString toNode, double length);
 
 
-public:
+private:
 
 	FString myID;
 
-	double myLaneLength;
+	float myLaneLength;
 	double myLaneWidth;
 
 	double shapeX1;
@@ -50,6 +50,8 @@ public:
 
 	std::pair <double, double> firstShape;
 	std::pair <double, double> secondShape;
+
+	std::vector<float> edgeShapeCoordinates;
 
 	double shapeX2;
 	double shapeY2;
