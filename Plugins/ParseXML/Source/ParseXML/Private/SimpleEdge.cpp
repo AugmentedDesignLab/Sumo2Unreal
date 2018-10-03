@@ -1,28 +1,34 @@
 #include "SimpleEdge.h"
 #include "Engine.h"
 
-
-
 SimpleEdge::SimpleEdge() {
 
 }
 
-void SimpleEdge::setId(FString id) {
-	myID = id;
+SimpleEdge::~SimpleEdge() {
+
 }
 
-void SimpleEdge::setFrom(FString fromNode) {
-	myFromID = fromNode;
+void SimpleEdge::SetID(const TCHAR* id) {
+	EdgeID = FString(id);
 }
 
-void SimpleEdge::setTo(FString toNode) {
-	myToID = toNode;
+void SimpleEdge::setShapeCoordinates(const std::vector<float>& inputShapeVector)
+{
+	edgeShapeCoordinates = inputShapeVector;
 }
 
-void SimpleEdge::setLaneLength(double length) {
-	myLaneLength = length;
+void SimpleEdge::setFromID(const TCHAR* fromIDParsed)
+{
+	fromID = FString(fromIDParsed);
 }
 
+void SimpleEdge::setToID(const TCHAR* toIDParsed)
+{
+	toID = FString(toIDParsed);
+}
+
+/*
 void SimpleEdge::setLaneWidth(double width) {
 	myLaneWidth = width;
 }
@@ -34,27 +40,31 @@ void SimpleEdge::setFirstShape(std::pair<double, double> shape) {
 void SimpleEdge::setSecondShape(std::pair<double, double> shape) {
 	secondShape = shape;
 }
-
-
-
+*/
 
 
 FString SimpleEdge::getID() {
-	return myID;
+	return EdgeID;
 }
 
 FString SimpleEdge::getFromID() {
-	return myFromID;
+	return fromNodeID;
 }
 
 FString SimpleEdge::getToID() {
-	return myToID;
+	return toNodeID;
 }
 
-double SimpleEdge::getMyLaneLength() {
-	return myLaneLength;
+void SimpleEdge::setLaneLength(const TCHAR* laneLengthParameter)
+{
+	LaneLength = FCString::Atof(laneLengthParameter);
 }
 
+float SimpleEdge::getLaneLength() {
+	return LaneLength;
+}
+
+/*
 double SimpleEdge::getMyLaneWidth() {
 	return myLaneWidth;
 }
@@ -75,3 +85,4 @@ SimpleEdge::SimpleEdge(FString id, FString fromNode, FString toNode, double leng
 	setLaneLength(length);
 
 }
+*/
