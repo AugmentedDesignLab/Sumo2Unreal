@@ -42,7 +42,7 @@ public:
 	FString getTempNodeID();
 	bool setTempNodeID(const TCHAR*);
 
-<<<<<<< Updated upstream
+	/*
 	//parses through edgelist and prints all edges
 	void printEdges();
 
@@ -51,7 +51,8 @@ public:
 
 	//adds edges to the edge list
 	void addEdge(const TCHAR* Element);
-=======
+	*/
+
 	//----Functions for initializing the edge objects----
 
 	//Collect all the required edge attributes for one object as member variables and then initialize a edge object
@@ -72,11 +73,6 @@ private:
 	const TCHAR* nodeYCoordinate;
 	bool xCoordinateIsSet = false;
 	bool yCoordinateIsSet = false;
-
-
-	//edge flags and member variables
-	SimpleEdge edgeHolder;
-	TMap<FString, SimpleEdge> EdgeList;
 
 	//edge flags and temp member variables
 	bool isElementEdge = false;

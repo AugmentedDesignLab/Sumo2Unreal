@@ -18,6 +18,7 @@ UfileParser::~UfileParser()
 
 }
 
+/*
 void UfileParser::printEdges() {
 	for (auto& Elem : EdgeList) {
 		FString id = Elem.Value.getID();
@@ -27,40 +28,54 @@ void UfileParser::printEdges() {
 		UE_LOG(LogTemp, Warning, TEXT("%s and its from %s and goes to %s and it is %d long"), *id, *from, *to, length);
 	}
 }
+*/
 
 
-void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue) {
-	FString attributeName = FString(AttributeName);
-	FString attributeValue = FString(AttributeValue);
-
-
-	if (isElementEdge) {
-
-
-		if (attributeName == "id") {
-			edgeHolder.setId(AttributeValue);
-		}
-		else if (attributeName == "from") {
-			edgeHolder.setFrom(AttributeValue);
-		}
-		else if (attributeName == "to") {
-			edgeHolder.setTo(AttributeValue);
-		}
-
+void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue) 
+{
+	if (FString(AttributeName).Equals(TEXT("id")))
+	{
+		tempEdgeID = FString(AttributeValue);
+		return;
 	}
-	else if (!isElementNode) {
-		if (attributeName == TEXT("length")) {
-			edgeHolder.setLaneLength(FCString::Atod(AttributeValue));
-			FString id = edgeHolder.getID();
-			FString from = edgeHolder.myFromID;
-			FString to = edgeHolder.myToID;
-			double length = FCString::Atof(AttributeValue);
-			UE_LOG(LogTemp, Warning, TEXT("%s and its from %s and goes to %s and it is %d long but correct lane length is %s"), *id, *from, *to, length, *attributeValue);
 
-		}
+	else if (FString(AttributeName).Equals(TEXT("from")))
+	{
+		fromNode = FString(AttributeValue);
+		fromNodeSet = true;
+		return;
 	}
+
+	else if (FString(AttributeName).Equals(TEXT("to")))
+	{
+		toNode = FString(AttributeValue);
+		toNodeSet = true;
+		return;
+	}
+
+	else if (FString(AttributeName).Equals(TEXT("length")))
+	{
+		laneLength = FString(AttributeValue);
+		lengthIsSet = true;
+		return;
+	}
+
+	else if (FString(AttributeName).Equals(TEXT("shape")))
+	{
+		ShapeProcessing(AttributeValue);
+		shapeIsSet = true;
+		return;
+	}
+	else
+	{
+		return;
+	}
+
+	UE_LOG(LogEngine, Warning, TEXT("Edge Attributes initialized!"));
+	
 }
 
+/*
 void UfileParser::addEdge(const TCHAR* Element) {
 	FString element = FString(Element);
 
@@ -69,6 +84,7 @@ void UfileParser::addEdge(const TCHAR* Element) {
 		EdgeList.Add(edgeHolder.getID(), edgeHolder);
 	}
 }
+*/
 
 FString UfileParser::getTempNodeID()
 {
@@ -121,6 +137,15 @@ void UfileParser::resetFlagsAndTempMembers()
 	xCoordinateIsSet = false;
 	yCoordinateIsSet = false;
 	shapeIsSet = false;
+
+	//isElementEdge = false;
+	tempEdgeID = "";
+	fromNode = "";
+	toNode = "";
+	laneLength = "";
+	fromNodeSet = false;
+	toNodeSet = false;
+	lengthIsSet = false;
 }
 
 void UfileParser::InitializeNodeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue)
@@ -141,8 +166,6 @@ void UfileParser::InitializeNodeAttributes(const TCHAR* AttributeName, const TCH
 	//Set temp node positions
 	if ((isPriorityNode == true) && ((FString(AttributeName)).Equals(TEXT("x"))))
 	{
-		UE_LOG(LogEngine, Warning, TEXT("Attribute name is %s"), AttributeName);
-		UE_LOG(LogEngine, Warning, TEXT("Attribute value is %s"), AttributeValue);
 		nodeXCoordinate = AttributeValue;
 		xCoordinateIsSet = true;
 		return;
@@ -150,8 +173,6 @@ void UfileParser::InitializeNodeAttributes(const TCHAR* AttributeName, const TCH
 
 	else if ((isPriorityNode == true) && ((FString(AttributeName)).Equals(TEXT("y"))))
 	{
-		UE_LOG(LogEngine, Warning, TEXT("Attribute name is %s"), AttributeName);
-		UE_LOG(LogEngine, Warning, TEXT("Attribute value is %s"), AttributeValue);
 		nodeYCoordinate = AttributeValue;
 		yCoordinateIsSet = true;
 		return;
@@ -186,11 +207,26 @@ SimpleNodePtr UfileParser::InitializeNode()
 	return Node;
 }
 
+SimpleEdgePtr UfileParser::InitializeEdge()
+{
+	//unique_ptr for object creation for extended lifetime
+	SimpleEdgePtr Edge = std::make_unique<SimpleEdge>();
+	Edge->SetID(*tempEdgeID);
+	Edge->setShapeCoordinates(Shapecoordinates);
+	Edge->setFromID(*fromNode);
+	Edge->setToID(*toNode);
+
+	//initialize map with the pointer for extended node lifetime
+	EdgeContainer.EdgeMap.Add(*tempEdgeID, Edge.get());
+	return Edge;
+}
+
 bool UfileParser::loadxml()
 {
+	UE_LOG(LogEngine, Warning, TEXT("Loading started"));
 	FText outError;
 	int32 outErrorNum;
-	FString XML = "C:/Users/janiguid/Desktop/net.net.xml";
+	FString XML = "C:/Users/iparanja/net.net.xml";
 	bool success = FFastXml::ParseXmlFile((IFastXmlCallback*)(this), XML.GetCharArray().GetData(), TEXT(""), nullptr, false, false, outError, outErrorNum);
 	return success;
 }
@@ -206,6 +242,7 @@ bool UfileParser::ProcessElement(const TCHAR* ElementName, const TCHAR* ElementD
 	if ((FString(ElementName)).Equals(TEXT("junction")))
 	{
 		isElementNode = true;
+		isElementEdge = false;
 	}
 	else if ((FString(ElementName)).Equals(TEXT("edge")))
 	{
@@ -235,9 +272,10 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 		}
 		
 	}
-	else if (isElementEdge == true) {
+	else if (isElementEdge == true) 
+	{
 		InitializeEdgeAttributes(AttributeName, AttributeValue);
-		if ((fromNodeSet == true) && (toNodeSet == true) && (lengthIsSet == true))
+		if ((fromNodeSet == true) && (toNodeSet == true) && (lengthIsSet == true) && (shapeIsSet == true))
 		{
 			InitializeEdge();
 			resetFlagsAndTempMembers();
