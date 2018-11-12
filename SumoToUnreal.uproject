@@ -4,14 +4,13 @@
 	"Category": "",
 	"Description": "",
 	"Modules": [
-    {
-      "Name": "SumoToUnreal",
-      "Type": "Runtime",
-      "LoadingPhase": "Default",
-      "AdditionalDependencies": [
-        "Engine",
-        "XmlParser"
-      ]
-    }
+		{
+			"Name": "SumoToUnreal",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
 	]
 }
