@@ -3,9 +3,12 @@
 #include "Runtime/XmlParser/Public/XmlParser.h"
 #include "Engine.h"
 #include "SimpleNode.h"
+#include "Editor.h"
+#include "Editor/UnrealEd/Classes/Editor/EditorEngine.h"
 
 #include <sstream>
 #include <memory>
+
 
 
 UfileParser::UfileParser()
@@ -17,19 +20,6 @@ UfileParser::~UfileParser()
 {
 
 }
-
-/*
-void UfileParser::printEdges() {
-	for (auto& Elem : EdgeList) {
-		FString id = Elem.Value.getID();
-		FString from = Elem.Value.myFromID;
-		FString to = Elem.Value.myToID;
-		double length = Elem.Value.myLaneLength;
-		UE_LOG(LogTemp, Warning, TEXT("%s and its from %s and goes to %s and it is %d long"), *id, *from, *to, length);
-	}
-}
-*/
-
 
 void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue) 
 {
@@ -74,17 +64,6 @@ void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCH
 	UE_LOG(LogEngine, Warning, TEXT("Edge Attributes initialized!"));
 	
 }
-
-/*
-void UfileParser::addEdge(const TCHAR* Element) {
-	FString element = FString(Element);
-
-	//i feel like i definitely don't need this
-	if (element == "lane") {
-		EdgeList.Add(edgeHolder.getID(), edgeHolder);
-	}
-}
-*/
 
 FString UfileParser::getTempNodeID()
 {
@@ -215,9 +194,43 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 	Edge->setShapeCoordinates(Shapecoordinates);
 	Edge->setFromID(*fromNode);
 	Edge->setToID(*toNode);
+	Edge->setLaneLength(*laneLength);
+	Edge->setVertexCoordinates();
 
 	//initialize map with the pointer for extended node lifetime
 	EdgeContainer.EdgeMap.Add(*tempEdgeID, Edge.get());
+
+	FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
+	FVector origin(0.0f, 0.0f, 0.0f);
+	UWorld* World = GEditor->GetEditorWorldContext().World();
+
+	FTransform SpawnTransform(RotationEdge, origin);
+	AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
+	
+	if (MyDeferredActor)
+
+	{
+		for (int i = 0; i < (Edge->vertexAnglesSorted).Num(); i++) //find the corresponding index of the sorted angle to the unsorted angle vertex
+		{
+			UE_LOG(LogEngine, Warning, TEXT("The sorted angle is %f"),(Edge->vertexAnglesSorted[i]));
+			for (int j = 0; j < (Edge->vertexAnglesUnSorted).Num(); j++)
+			{
+				if ((Edge->vertexAnglesUnSorted[j]) == (Edge->vertexAnglesSorted[i]))
+				{
+					UE_LOG(LogEngine, Warning, TEXT("This corresponds to vertex %d"), (j + 1));
+					(MyDeferredActor->vertices).Add(Edge->vertexArray[j]);
+				}
+
+			}
+		}
+		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
+		//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
+
+		UE_LOG(LogEngine, Warning, TEXT("the edge actor is spawned"));
+	}
+
+
+
 	return Edge;
 }
 
@@ -254,20 +267,20 @@ bool UfileParser::ProcessElement(const TCHAR* ElementName, const TCHAR* ElementD
 		isElementNode = false;
 	}
 
-
 	UE_LOG(LogEngine, Warning, TEXT("ProcessElement ElementName: %s, ElementValue: %s"), ElementName, ElementData);
 	return true;
 }
 
 bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* AttributeValue)
 {
+	UE_LOG(LogEngine, Warning, TEXT("ProcessAttribute AttributeName: %s, AttributeValue: %s"), AttributeName, AttributeValue);
+
 	if (isElementNode == true)
 	{
 		InitializeNodeAttributes(AttributeName, AttributeValue);
 		if ((shapeIsSet == true) && (xCoordinateIsSet == true) && (yCoordinateIsSet == true))
 		{
 			InitializeNode();
-			resetFlagsAndTempMembers();
 			UE_LOG(LogEngine, Warning, TEXT("Node object created!"));
 		}
 		
@@ -278,18 +291,17 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 		if ((fromNodeSet == true) && (toNodeSet == true) && (lengthIsSet == true) && (shapeIsSet == true))
 		{
 			InitializeEdge();
-			resetFlagsAndTempMembers();
 			UE_LOG(LogEngine, Warning, TEXT("Edge object created!")); 
 		}
 
 	}
-	UE_LOG(LogEngine, Warning, TEXT("ProcessAttribute AttributeName: %s, AttributeValue: %s"), AttributeName, AttributeValue);
-
+	
 	return true;
 }
 
 bool UfileParser::ProcessClose(const TCHAR* Element)
 {
+	resetFlagsAndTempMembers();
 	UE_LOG(LogEngine, Warning, TEXT("ProcessClose Element %s"), Element);
 	return true;
 }
