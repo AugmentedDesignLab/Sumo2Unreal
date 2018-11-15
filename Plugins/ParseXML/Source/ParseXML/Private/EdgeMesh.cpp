@@ -14,6 +14,7 @@ const float pi = std::acos(-1);
 // Sets default values
 AEdgeMesh::AEdgeMesh()
 {
+	UE_LOG(LogTemp, Warning, TEXT("*** Constructor of AEdgeMesh ***"));
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	mesh = CreateDefaultSubobject<UProceduralMeshComponent>(TEXT("GeneratedMesh"));
@@ -22,9 +23,17 @@ AEdgeMesh::AEdgeMesh()
 }
 
 
-void AEdgeMesh::CreateFace(FVector vertex1b, FVector vertex2b, FVector vertex3b, FVector vertex4b, int32 indexb)
+void AEdgeMesh::CreateFace(int32 indexb)
 {
 	
+	for (int i = 0; i < vertices.Num(); i++) {
+		UE_LOG(LogTemp, Warning, TEXT("vertices[%d]: "), i);
+		UE_LOG(LogTemp, Warning, TEXT("FVectorX: %f"), vertices[i].X);
+		UE_LOG(LogTemp, Warning, TEXT("FVectorY: %f"), vertices[i].Y);
+		UE_LOG(LogTemp, Warning, TEXT("FVectorZ: %f"), vertices[i].Z);
+		UE_LOG(LogTemp, Warning, TEXT("====="));
+	}
+
 	Triangles.Add(0);
 	Triangles.Add(3);
 	Triangles.Add(1);
@@ -33,6 +42,10 @@ void AEdgeMesh::CreateFace(FVector vertex1b, FVector vertex2b, FVector vertex3b,
 	Triangles.Add(3);
 	Triangles.Add(2);
 
+	for (int i = 0; i < Triangles.Num(); i++) {
+		UE_LOG(LogTemp, Warning, TEXT("Triangles[%d]: %d "), i, Triangles[i]);
+		UE_LOG(LogTemp, Warning, TEXT("====="));
+	}
 
 	normals.Add(FVector(0, 0, 1));
 	normals.Add(FVector(0, 0, 1));
@@ -55,9 +68,9 @@ void AEdgeMesh::CreateFace(FVector vertex1b, FVector vertex2b, FVector vertex3b,
 
 }
 
-void AEdgeMesh::CreateSection(FVector vertex1a, FVector vertex2a, FVector vertex3a, FVector vertex4a, int32 indexa)
+void AEdgeMesh::CreateSection(int32 indexa)
 {
-	CreateFace(vertex1a, vertex2a, vertex3a, vertex4a, indexa);
+	CreateFace(indexa);
 
 	mesh->CreateMeshSection_LinearColor(indexa, vertices, Triangles, normals, UV0, vertexColors, tangents, true);
 
@@ -68,12 +81,35 @@ void AEdgeMesh::CreateSection(FVector vertex1a, FVector vertex2a, FVector vertex
 }
 
 
+void AEdgeMesh::OnConstruction(const FTransform & Transform)
+{
+	
+	AActor::OnConstruction(Transform);
+	UE_LOG(LogTemp, Warning, TEXT("==> In OnConstruction"));
+	/*
+	CreateFace(0);
+
+	mesh->CreateMeshSection_LinearColor(0, vertices, Triangles, normals, UV0, vertexColors, tangents, true);
+	
+	// Enable collision data
+	mesh->ContainsPhysicsTriMeshData(true);
+	*/
+}
+
+void AEdgeMesh::PostInitializeComponents()
+{
+	AActor::PostInitializeComponents();
+	UE_LOG(LogTemp, Warning, TEXT("==> In PostInitializeComponents"));
+}
+
+
+
 void AEdgeMesh::PostActorCreated()
 {
 	AActor::PostActorCreated();
 
 	//Reset All Tarrays
-	vertices.Reset(0);
+	//vertices.Reset(0);
 	Triangles.Reset(0);
 	normals.Reset(0);
 	UV0.Reset(0);
@@ -90,7 +126,8 @@ void AEdgeMesh::PostLoad()
 // Called when the game starts or when spawned
 void AEdgeMesh::BeginPlay()
 {
-	CreateSection(vertex1, vertex2, vertex3, vertex4, 0);
+	UE_LOG(LogTemp, Warning, TEXT("*** BeginPlay of AEdgeMesh ***"));
+	CreateSection(0);
 	AActor::BeginPlay();
 
 }
