@@ -61,7 +61,7 @@ void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCH
 		return;
 	}
 
-	UE_LOG(LogEngine, Warning, TEXT("Edge Attributes initialized!"));
+	//UE_LOG(LogEngine, Warning, TEXT("Edge Attributes initialized!"));
 	
 }
 
@@ -169,7 +169,7 @@ void UfileParser::InitializeNodeAttributes(const TCHAR* AttributeName, const TCH
 		return;
 	}
 
-	UE_LOG(LogEngine, Warning, TEXT("Node Attributes initialized!"));
+	//UE_LOG(LogEngine, Warning, TEXT("Node Attributes initialized!"));
 
 }
 
@@ -223,6 +223,15 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 
 			}
 		}
+
+		for (int i = 0; i < (MyDeferredActor->vertices.Num()); i++) {
+			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[i].X);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[i].Y);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[i].Z);
+			UE_LOG(LogEngine, Warning, TEXT("====="));
+		}
+
 		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 		//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
 
@@ -239,7 +248,7 @@ bool UfileParser::loadxml()
 	UE_LOG(LogEngine, Warning, TEXT("Loading started"));
 	FText outError;
 	int32 outErrorNum;
-	FString XML = "C:/Users/iparanja/net.net.xml";
+	FString XML = "C:/Users/iparanja/Documents/Unreal Projects/SumoToUnreal/net.net.xml";
 	bool success = FFastXml::ParseXmlFile((IFastXmlCallback*)(this), XML.GetCharArray().GetData(), TEXT(""), nullptr, false, false, outError, outErrorNum);
 	return success;
 }
@@ -267,13 +276,13 @@ bool UfileParser::ProcessElement(const TCHAR* ElementName, const TCHAR* ElementD
 		isElementNode = false;
 	}
 
-	UE_LOG(LogEngine, Warning, TEXT("ProcessElement ElementName: %s, ElementValue: %s"), ElementName, ElementData);
+	//UE_LOG(LogEngine, Warning, TEXT("ProcessElement ElementName: %s, ElementValue: %s"), ElementName, ElementData);
 	return true;
 }
 
 bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* AttributeValue)
 {
-	UE_LOG(LogEngine, Warning, TEXT("ProcessAttribute AttributeName: %s, AttributeValue: %s"), AttributeName, AttributeValue);
+	//UE_LOG(LogEngine, Warning, TEXT("ProcessAttribute AttributeName: %s, AttributeValue: %s"), AttributeName, AttributeValue);
 
 	if (isElementNode == true)
 	{
@@ -281,7 +290,7 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 		if ((shapeIsSet == true) && (xCoordinateIsSet == true) && (yCoordinateIsSet == true))
 		{
 			InitializeNode();
-			UE_LOG(LogEngine, Warning, TEXT("Node object created!"));
+			//UE_LOG(LogEngine, Warning, TEXT("Node object created!"));
 		}
 		
 	}
@@ -291,7 +300,7 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 		if ((fromNodeSet == true) && (toNodeSet == true) && (lengthIsSet == true) && (shapeIsSet == true))
 		{
 			InitializeEdge();
-			UE_LOG(LogEngine, Warning, TEXT("Edge object created!")); 
+			//UE_LOG(LogEngine, Warning, TEXT("Edge object created!")); 
 		}
 
 	}
@@ -302,13 +311,13 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 bool UfileParser::ProcessClose(const TCHAR* Element)
 {
 	resetFlagsAndTempMembers();
-	UE_LOG(LogEngine, Warning, TEXT("ProcessClose Element %s"), Element);
+	//UE_LOG(LogEngine, Warning, TEXT("ProcessClose Element %s"), Element);
 	return true;
 }
 
 bool UfileParser::ProcessComment(const TCHAR* Comment)
 {
-	UE_LOG(LogEngine, Warning, TEXT("ProcessComment Comment: %s"), Comment);
+	//UE_LOG(LogEngine, Warning, TEXT("ProcessComment Comment: %s"), Comment);
 	return true;
 }
 

@@ -17,7 +17,9 @@ public:
 	AEdgeMesh();
 
 	UProceduralMeshComponent *mesh;
+	UPROPERTY(NonPIEDuplicateTransient)
 	TArray<FVector> vertices;
+	
 	TArray<int32> Triangles;
 	TArray<FVector> normals;
 	TArray<FVector2D> UV0;
@@ -40,7 +42,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void PostActorCreated() override;
 	virtual void PostLoad() override;
+	virtual void OnConstruction(const FTransform & Transform) override;
+	virtual void PostInitializeComponents() override;
 
-	void CreateFace(FVector, FVector, FVector, FVector, int32);
-	void CreateSection(FVector, FVector, FVector, FVector, int32);
+	void CreateFace(int32);
+	void CreateSection(int32);
 };
