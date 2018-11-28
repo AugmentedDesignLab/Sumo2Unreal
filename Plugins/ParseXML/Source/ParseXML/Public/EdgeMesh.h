@@ -17,7 +17,7 @@ public:
 	AEdgeMesh();
 
 	UProceduralMeshComponent *mesh;
-	UPROPERTY(NonPIEDuplicateTransient)
+	UPROPERTY(NonPIEDuplicateTransient) //To make sure that the vertices also get copied for every PIE instance (No loss of actor data)
 	TArray<FVector> vertices;
 	
 	TArray<int32> Triangles;

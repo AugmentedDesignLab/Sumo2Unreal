@@ -26,7 +26,8 @@ AEdgeMesh::AEdgeMesh()
 void AEdgeMesh::CreateFace(int32 indexb)
 {
 	
-	for (int i = 0; i < vertices.Num(); i++) {
+	for (int i = 0; i < vertices.Num(); i++) 
+	{
 		UE_LOG(LogTemp, Warning, TEXT("vertices[%d]: "), i);
 		UE_LOG(LogTemp, Warning, TEXT("FVectorX: %f"), vertices[i].X);
 		UE_LOG(LogTemp, Warning, TEXT("FVectorY: %f"), vertices[i].Y);
@@ -42,7 +43,8 @@ void AEdgeMesh::CreateFace(int32 indexb)
 	Triangles.Add(3);
 	Triangles.Add(2);
 
-	for (int i = 0; i < Triangles.Num(); i++) {
+	for (int i = 0; i < Triangles.Num(); i++) 
+	{
 		UE_LOG(LogTemp, Warning, TEXT("Triangles[%d]: %d "), i, Triangles[i]);
 		UE_LOG(LogTemp, Warning, TEXT("====="));
 	}
@@ -86,14 +88,12 @@ void AEdgeMesh::OnConstruction(const FTransform & Transform)
 	
 	AActor::OnConstruction(Transform);
 	UE_LOG(LogTemp, Warning, TEXT("==> In OnConstruction"));
-	/*
 	CreateFace(0);
 
 	mesh->CreateMeshSection_LinearColor(0, vertices, Triangles, normals, UV0, vertexColors, tangents, true);
 	
 	// Enable collision data
 	mesh->ContainsPhysicsTriMeshData(true);
-	*/
 }
 
 void AEdgeMesh::PostInitializeComponents()
