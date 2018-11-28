@@ -14,10 +14,15 @@
 	"IsBetaVersion": false,
 	"Installed": false,
 	"Modules": [
-		{
-			"Name": "ParseXML",
-			"Type": "Editor",
-			"LoadingPhase": "Default"
-		}
+    {
+      "Name": "ParseXML",
+      "Type": "Editor",
+      "LoadingPhase": "Default",
+      "AdditionalDependencies": [
+        "Engine",
+        "XmlParser",
+        "ProceduralMeshComponent"
+      ]
+    }
 	]
 }

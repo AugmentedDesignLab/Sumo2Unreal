@@ -3,11 +3,15 @@
 //#include SimpleNode.h;
 #include <utility>
 #include <vector>
+#include "EdgeMesh.h"
+#include "fileParser.h"
 #include "Engine.h"
 #include "Platform.h"
 
 
 class SimpleEdge {
+
+	friend class UfileParser;
 
 public:
 
@@ -37,6 +41,13 @@ public:
 	FString getToID();
 	float getLaneLength();
 
+	//Setting the vertices to be used during the edge mesh creation on UE4
+	void setVertexCoordinates();
+
+	//Spawn Function - Add some features to the mesh and spawn
+	void SpawnEdgeMesh();
+
+
 	/*
 	double getMyLaneWidth();
 	std::pair <double, double> getFirstShape();
@@ -54,6 +65,10 @@ private:
 	float LaneLength;
 	FString fromID;
 	FString toID;
+
+	TArray<FVector> vertexArray; //Array to store vertices
+	TArray<float> vertexAnglesUnSorted;
+	TArray<float> vertexAnglesSorted;
 	
 	/*
 	double myLaneWidth;
@@ -66,6 +81,7 @@ private:
 	*/
 
 	std::vector<float> edgeShapeCoordinates;
+	int32 laneWidth = 4;
 
 	//testers
 	FString fromNodeID;

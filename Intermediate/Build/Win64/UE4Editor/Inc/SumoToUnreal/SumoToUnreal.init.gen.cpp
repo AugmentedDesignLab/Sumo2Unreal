@@ -19,8 +19,8 @@ void EmptyLinkFunctionForGeneratedCodeSumoToUnreal_init() {}
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/SumoToUnreal",
 				PKG_CompiledIn | 0x00000000,
-				0xDA7D88D8,
-				0xED03DB8F,
+				0x007F30A3,
+				0x9A3D04BB,
 				nullptr, 0,
 				METADATA_PARAMS(nullptr, 0)
 			};
