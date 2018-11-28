@@ -355,8 +355,6 @@
 /I "C:\Program Files\Epic Games\UE_4.18\Engine\Source\Runtime\AudioMixer\Public\DSP"
 /I "C:\Program Files\Epic Games\UE_4.18\Engine\Intermediate\Build\Win64\UE4Editor\Inc\AudioMixer"
 /I "C:\Program Files\Epic Games\UE_4.18\Engine\Source\Runtime\AudioMixer"
-/I "C:\Program Files\Epic Games\UE_4.18\Engine\Source\Runtime\XmlParser\Public"
-/I "C:\Program Files\Epic Games\UE_4.18\Engine\Source\Runtime\XmlParser"
 /FI"C:\Program Files\Epic Games\UE_4.18\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h"
 /Yu"C:\Program Files\Epic Games\UE_4.18\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h"
 /Fp"C:\Program Files\Epic Games\UE_4.18\Engine\Intermediate\Build\Win64\UE4Editor\Development\Engine\SharedPCH.Engine.h.pch"

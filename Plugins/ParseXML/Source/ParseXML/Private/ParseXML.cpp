@@ -61,7 +61,7 @@ void FParseXMLModule::PluginButtonClicked()
 {
 	// Put your "OnButtonClicked" stuff here
 	FText DialogText = FText::Format(
-							LOCTEXT("Open your xml", "What's good?"),
+							LOCTEXT("Open your xml", "Find the SUMO XML file on this device"),
 							FText::FromString(TEXT("FParseXMLModule::PluginButtonClicked()")),
 							FText::FromString(TEXT("ParseXML.cpp"))
 					   );
@@ -74,7 +74,7 @@ void FParseXMLModule::PluginButtonClicked()
 	const FString& defaultFileType = "*.jpg";
 
 	TArray <FString> originalOutFileNames = { "bro", "broski" };
-	TArray < FString > & OutFilenames = originalOutFileNames;
+	TArray < FString >& OutFilenames = originalOutFileNames;
 
 	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
 
@@ -89,7 +89,9 @@ void FParseXMLModule::PluginButtonClicked()
 		//UE_LOG(LogTemp, Warning, TEXT("Plugin is still working!"));
 	}
 
-	UfileParser fileParser;
+	FString selectedFile = FString(OutFilenames[2]);
+
+	UfileParser fileParser(*selectedFile); //Selected File from the file dialog
 	fileParser.loadxml();
 	UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
 

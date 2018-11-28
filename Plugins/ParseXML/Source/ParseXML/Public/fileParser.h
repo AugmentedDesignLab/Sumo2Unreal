@@ -15,8 +15,8 @@ class SimpleNode;
 class UfileParser : public IFastXmlCallback
 {
 public:
-	UfileParser();
-	~UfileParser();
+	UfileParser(const TCHAR*);
+	virtual ~UfileParser();
 
 	//IFastXMLCallback
 	bool ProcessXmlDeclaration(const TCHAR* ElementData, int32 XmlFileLineNumber);
@@ -64,6 +64,7 @@ public:
 
 private:
 	std::vector<float> Shapecoordinates;
+	FString selectedXMLFile;
 
 	//node flags and temp member variables
 	bool isElementNode = false;
