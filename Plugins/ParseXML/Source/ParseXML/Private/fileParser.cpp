@@ -11,7 +11,7 @@
 
 
 
-UfileParser::UfileParser()
+UfileParser::UfileParser(const TCHAR* selectedFile) : selectedXMLFile(selectedFile)
 {
 
 }
@@ -237,9 +237,6 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 
 		UE_LOG(LogEngine, Warning, TEXT("the edge actor is spawned"));
 	}
-
-
-
 	return Edge;
 }
 
@@ -248,8 +245,7 @@ bool UfileParser::loadxml()
 	UE_LOG(LogEngine, Warning, TEXT("Loading started"));
 	FText outError;
 	int32 outErrorNum;
-	FString XML = "C:/Users/iparanja/Documents/Unreal Projects/SumoToUnreal/net.net.xml";
-	bool success = FFastXml::ParseXmlFile((IFastXmlCallback*)(this), XML.GetCharArray().GetData(), TEXT(""), nullptr, false, false, outError, outErrorNum);
+	bool success = FFastXml::ParseXmlFile((IFastXmlCallback*)(this), selectedXMLFile.GetCharArray().GetData(), TEXT(""), nullptr, false, false, outError, outErrorNum);
 	return success;
 }
 

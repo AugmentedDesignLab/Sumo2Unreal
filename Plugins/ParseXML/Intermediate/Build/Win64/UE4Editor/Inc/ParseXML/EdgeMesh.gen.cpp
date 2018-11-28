@@ -44,6 +44,7 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 #if WITH_METADATA
 			static const UE4CodeGen_Private::FMetaDataPairParam NewProp_vertices_MetaData[] = {
 				{ "ModuleRelativePath", "Public/EdgeMesh.h" },
+				{ "ToolTip", "To make sure that the vertices also get copied for every PIE instance (No loss of actor data)" },
 			};
 #endif
 			static const UE4CodeGen_Private::FArrayPropertyParams NewProp_vertices = { UE4CodeGen_Private::EPropertyClass::Array, "vertices", RF_Public|RF_Transient|RF_MarkAsNative, 0x0010800000000000, 1, nullptr, STRUCT_OFFSET(AEdgeMesh, vertices), METADATA_PARAMS(NewProp_vertices_MetaData, ARRAY_COUNT(NewProp_vertices_MetaData)) };
@@ -70,7 +71,7 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AEdgeMesh, 607596857);
+	IMPLEMENT_CLASS(AEdgeMesh, 1009004432);
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AEdgeMesh(Z_Construct_UClass_AEdgeMesh, &AEdgeMesh::StaticClass, TEXT("/Script/ParseXML"), TEXT("AEdgeMesh"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AEdgeMesh);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

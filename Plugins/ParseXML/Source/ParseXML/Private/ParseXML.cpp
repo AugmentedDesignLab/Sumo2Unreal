@@ -74,7 +74,7 @@ void FParseXMLModule::PluginButtonClicked()
 	const FString& defaultFileType = "*.jpg";
 
 	TArray <FString> originalOutFileNames = { "bro", "broski" };
-	TArray < FString > & OutFilenames = originalOutFileNames;
+	TArray < FString >& OutFilenames = originalOutFileNames;
 
 	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
 
@@ -89,8 +89,9 @@ void FParseXMLModule::PluginButtonClicked()
 		//UE_LOG(LogTemp, Warning, TEXT("Plugin is still working!"));
 	}
 
+	FString selectedFile = FString(OutFilenames[2]);
 
-	UfileParser fileParser;
+	UfileParser fileParser(*selectedFile); //Selected File from the file dialog
 	fileParser.loadxml();
 	UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
 

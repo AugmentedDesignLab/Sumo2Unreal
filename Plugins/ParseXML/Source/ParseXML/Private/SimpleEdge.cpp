@@ -1,7 +1,7 @@
 #include "SimpleEdge.h"
 #include "Engine.h"
 
-const float pi = std::acos(-1);
+const float pi_value = std::acos(-1);
 SimpleEdge::SimpleEdge() {
 
 }
@@ -92,10 +92,10 @@ void SimpleEdge::setVertexCoordinates()
 	float theta = std::asin(intermediateTheta);
 	UE_LOG(LogEngine, Warning, TEXT("theta is %f"), theta);
 
-	float xOffset = ((laneWidth / 2)*(std::cos((pi / 2) - theta)));
+	float xOffset = ((laneWidth / 2)*(std::cos((pi_value / 2) - theta)));
 	UE_LOG(LogEngine, Warning, TEXT("The value of xOffset is %f"), xOffset);
 
-	float yOffset = ((laneWidth / 2)*(std::sin((pi / 2) - theta)));
+	float yOffset = ((laneWidth / 2)*(std::sin((pi_value / 2) - theta)));
 	UE_LOG(LogEngine, Warning, TEXT("The value of yOffset is %f"), yOffset);
 
 	Ax0.X = edgeShapeCoordinates[0] - xOffset;
@@ -144,7 +144,7 @@ void SimpleEdge::setVertexCoordinates()
 	{
 		FVector dir = vertexArray[i] - *centroid;		//Direction vector A to B. Calculated using (FVector B - FVector A)
 
-		float angle = std::atan2((vertexArray[i].Y - centroid->Y), (vertexArray[i].X - centroid->X)) + pi;		//convert direction vector to heading angle to get it in 0-2pi range
+		float angle = std::atan2((vertexArray[i].Y - centroid->Y), (vertexArray[i].X - centroid->X)) + pi_value;		//convert direction vector to heading angle to get it in 0-2pi range
 		if (i == 3)
 		{
 			angle -= 0.00001;  // hack to handle case where final two angles are identical, force ordering to 3 then 2
