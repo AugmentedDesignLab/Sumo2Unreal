@@ -61,7 +61,7 @@ void FParseXMLModule::PluginButtonClicked()
 {
 	// Put your "OnButtonClicked" stuff here
 	FText DialogText = FText::Format(
-							LOCTEXT("Open your xml", "What's good?"),
+							LOCTEXT("Open your xml", "Find the SUMO XML file on this device"),
 							FText::FromString(TEXT("FParseXMLModule::PluginButtonClicked()")),
 							FText::FromString(TEXT("ParseXML.cpp"))
 					   );
