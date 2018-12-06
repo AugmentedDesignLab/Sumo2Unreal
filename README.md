@@ -6,3 +6,6 @@ To run clone repository, right click on .uproject file and click "Generate Visua
 Please have a look at the [wiki pages](https://github.com/AugmentedDesignLab/Sumo2Unreal/wiki) for requirements, instructions on how to run and resources if you want to contribute. 
 
 Track our progress [here](https://github.com/AugmentedDesignLab/Sumo2Unreal/projects/1).
+
+###References
+For selecting the correct order of vertices for creating triangles, we are using the [earcut](https://github.com/mapbox/earcut.hpp) polygon triangulation library
