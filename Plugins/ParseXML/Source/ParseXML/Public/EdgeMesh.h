@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "ProceduralMeshComponent.h"
+#include "earcut.h"
+#include <array>
 #include "EdgeMesh.generated.h"
 
 UCLASS()
@@ -15,6 +17,7 @@ class PARSEXML_API AEdgeMesh : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AEdgeMesh();
+	~AEdgeMesh();
 
 	UProceduralMeshComponent *mesh;
 	UPROPERTY(NonPIEDuplicateTransient) //To make sure that the vertices also get copied for every PIE instance (No loss of actor data)
@@ -26,18 +29,19 @@ public:
 	TArray<FProcMeshTangent> tangents;
 	TArray<FLinearColor> vertexColors;
 
-	FVector vertex1;
-	FVector vertex2;
-	FVector vertex3;
-	FVector vertex4;
-
-	int32 returnEdge;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
+private:
+	using Coord = double;
+	using N = uint32_t;
+	using Point = std::array<Coord, 2>;
+
+	std::vector<std::vector<Point>> polygon;
+	std::vector<Point> polygonVertices;
+	
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void PostActorCreated() override;
