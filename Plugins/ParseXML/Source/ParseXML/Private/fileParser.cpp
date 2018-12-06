@@ -183,6 +183,57 @@ SimpleNodePtr UfileParser::InitializeNode()
 
 	//initialize map with the pointer for extended node lifetime
 	NodeContainer.NodeMap.Add(*tempNodeID, Node.get());
+
+	FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
+	FVector origin(0.0f, 0.0f, 0.0f);
+	UWorld* World = GEditor->GetEditorWorldContext().World();
+
+	FTransform SpawnTransform(RotationEdge, origin);
+	AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
+
+	if (MyDeferredActor)
+
+	{
+		FVector coordinates;
+		int i=0;
+		while ((i+2) <= Node->nodeShapecoordinates.size())
+		{
+				
+				coordinates.X = Node->nodeShapecoordinates[i];
+				coordinates.Y = Node->nodeShapecoordinates[i + 1];
+				coordinates.Z = 0.0f;
+				MyDeferredActor->vertices.Add(coordinates);	
+				i += 2;
+		}
+		/*
+		for (int i = 0; i < (Node->vertexAnglesSorted).Num(); i++) //find the corresponding index of the sorted angle to the unsorted angle vertex
+		{
+			UE_LOG(LogEngine, Warning, TEXT("The sorted angle is %f"), (Node->vertexAnglesSorted[i]));
+			for (int j = 0; j < (Node->vertexAnglesUnSorted).Num(); j++)
+			{
+				if ((Node->vertexAnglesUnSorted[j]) == (Node->vertexAnglesSorted[i]))
+				{
+					UE_LOG(LogEngine, Warning, TEXT("This corresponds to vertex %d"), (j + 1));
+					(MyDeferredActor->vertices).Add(Node->vertexArray[j]);
+				}
+
+			}
+		}
+		*/
+
+		for (int i = 0; i < (MyDeferredActor->vertices.Num()); i++) {
+			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[i].X);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[i].Y);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[i].Z);
+			UE_LOG(LogEngine, Warning, TEXT("====="));
+		}
+
+		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
+		//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
+
+		UE_LOG(LogEngine, Warning, TEXT("the Node actor is spawned"));
+	}
 	return Node;
 }
 

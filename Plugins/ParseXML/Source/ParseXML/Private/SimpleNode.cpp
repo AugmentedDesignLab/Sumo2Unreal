@@ -1,5 +1,6 @@
 #pragma once
 #include "SimpleNode.h"
+#include "earcut.h"
 //#include "SimpleEdge.h"
 
 SimpleNode::SimpleNode()
@@ -25,17 +26,6 @@ void SimpleNode::SetPosition(const TCHAR* xCoordinate, const TCHAR* yCoordinate)
 	NodePosition.Y = FCString::Atof(yCoordinate);
 }
 
-/*To be defined when needed...
-EdgeContainer* SimpleNode::fetchApproachingEdges(EdgeContainer*)
-{ 
-	
-}
-
-EdgeContainer* SimpleNode::fetchOutgoingEdges(EdgeContainer*)
-{
-	
-}
-*/
 
 
 

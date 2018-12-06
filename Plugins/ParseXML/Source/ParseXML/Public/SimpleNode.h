@@ -2,6 +2,7 @@
 #include "ContainersAndTypes.h"
 #include "Platform.h"
 #include "Engine.h"
+#include <vector>
 
 //class declaration
 class UfileParser;

@@ -13,9 +13,9 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define PARSEXML_EdgeMesh_generated_h
 
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_RPC_WRAPPERS
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_RPC_WRAPPERS_NO_PURE_DECLS
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_INCLASS_NO_PURE_DECLS \
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_RPC_WRAPPERS
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_RPC_WRAPPERS_NO_PURE_DECLS
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAEdgeMesh(); \
 	friend PARSEXML_API class UClass* Z_Construct_UClass_AEdgeMesh(); \
@@ -25,7 +25,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_INCLASS \
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_INCLASS \
 private: \
 	static void StaticRegisterNativesAEdgeMesh(); \
 	friend PARSEXML_API class UClass* Z_Construct_UClass_AEdgeMesh(); \
@@ -35,7 +35,7 @@ public: \
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_STANDARD_CONSTRUCTORS \
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AEdgeMesh(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AEdgeMesh) \
@@ -48,7 +48,7 @@ private: \
 public:
 
 
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_ENHANCED_CONSTRUCTORS \
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AEdgeMesh(AEdgeMesh&&); \
@@ -59,26 +59,26 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AEdgeMesh); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AEdgeMesh)
 
 
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_PRIVATE_PROPERTY_OFFSET
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_10_PROLOG
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_GENERATED_BODY_LEGACY \
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_PRIVATE_PROPERTY_OFFSET
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_12_PROLOG
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_PRIVATE_PROPERTY_OFFSET \
-	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_RPC_WRAPPERS \
-	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_INCLASS \
-	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_STANDARD_CONSTRUCTORS \
+	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_PRIVATE_PROPERTY_OFFSET \
+	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_RPC_WRAPPERS \
+	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_INCLASS \
+	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_GENERATED_BODY \
+#define SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_PRIVATE_PROPERTY_OFFSET \
-	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
-	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_INCLASS_NO_PURE_DECLS \
-	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_13_ENHANCED_CONSTRUCTORS \
+	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_PRIVATE_PROPERTY_OFFSET \
+	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_INCLASS_NO_PURE_DECLS \
+	SumoToUnreal_Plugins_ParseXML_Source_ParseXML_Public_EdgeMesh_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

@@ -11,6 +11,9 @@
 
 const float pi = std::acos(-1);
 
+
+
+
 // Sets default values
 AEdgeMesh::AEdgeMesh()
 {
@@ -22,27 +25,38 @@ AEdgeMesh::AEdgeMesh()
 	mesh->bUseAsyncCooking = true;
 }
 
+AEdgeMesh::~AEdgeMesh()
+{}
+
 
 void AEdgeMesh::CreateFace(int32 indexb)
 {
 	
-	for (int i = 0; i < vertices.Num(); i++) 
+	for (int i = 0; i < vertices.Num(); i++)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("vertices[%d]: "), i);
 		UE_LOG(LogTemp, Warning, TEXT("FVectorX: %f"), vertices[i].X);
 		UE_LOG(LogTemp, Warning, TEXT("FVectorY: %f"), vertices[i].Y);
 		UE_LOG(LogTemp, Warning, TEXT("FVectorZ: %f"), vertices[i].Z);
 		UE_LOG(LogTemp, Warning, TEXT("====="));
+
+		Point vertex;
+		vertex[0] = vertices[i].X;
+		vertex[1] = vertices[i].Y;
+		polygonVertices.push_back(vertex);
 	}
+	polygon.push_back(polygonVertices);
 
-	Triangles.Add(0);
-	Triangles.Add(3);
-	Triangles.Add(1);
+	std::vector<N> indices = mapbox::earcut<N>(polygon);//3 consecutive indices in clockwise order
 
-	Triangles.Add(1);
-	Triangles.Add(3);
-	Triangles.Add(2);
-
+	int i = 0;
+	while((i+3)<=indices.size())
+	{
+		Triangles.Add((int32)indices[i + 2]);
+		Triangles.Add((int32)indices[i + 1]);
+		Triangles.Add((int32)indices[i]);
+		i += 3;
+	}
 	for (int i = 0; i < Triangles.Num(); i++) 
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Triangles[%d]: %d "), i, Triangles[i]);
