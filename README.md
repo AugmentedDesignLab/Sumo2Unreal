@@ -7,5 +7,5 @@ Please have a look at the [wiki pages](https://github.com/AugmentedDesignLab/Sum
 
 Track our progress [here](https://github.com/AugmentedDesignLab/Sumo2Unreal/projects/1).
 
-###References
+### References
 For selecting the correct order of vertices for creating triangles, we are using the [earcut](https://github.com/mapbox/earcut.hpp) polygon triangulation library
