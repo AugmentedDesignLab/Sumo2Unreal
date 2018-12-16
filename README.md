@@ -1,11 +1,63 @@
 # Sumo2Unreal
-Convert Sumo .net.xml road network files into road geometry inside Unreal.
 
-To run clone repository, right click on .uproject file and click "Generate Visual studio project files"
+### Introduction
+This project is an importer for [SUMO](http://sumo.dlr.de/wiki/Sumo_at_a_Glance)'s .net.xml road network files into the Unreal Engine 4 environment. This is important to bridge the capabilities of SUMO as a road network generator/convertor and traffic simulator to the Unreal Engine which is the preferred choice to create simulation software for testing self-driving cars.
 
-Please have a look at the [wiki pages](https://github.com/AugmentedDesignLab/Sumo2Unreal/wiki) for requirements, instructions on how to run and resources if you want to contribute. 
+The input taken by this importer is a SUMO's .net.xml road network file format and the output is a network of roads on the Unreal Editor. The .net.xml file is created using [NETGENERATE](http://sumo.dlr.de/wiki/NETGENERATE). The files created using NETGENERATE can be viewed using [NETEDIT](http://sumo.dlr.de/wiki/NETEDIT). We have provided some files which we generated in the [S2U_Screenshots](https://github.com/AugmentedDesignLab/Sumo2Unreal/tree/master/S2U_Screenshots) folder.
 
-Track our progress [here](https://github.com/AugmentedDesignLab/Sumo2Unreal/projects/1).
+---
+
+### Interesting Results
+#### 1. Small spider network - 
+
+NETGENERATE Command - 
+```
+netgenerate --grid --grid.x-number=20 --grid.y-number=5 --grid.y-length=40 --grid.x-length=200
+```
+(The output by default goes into the 'net.net.xml' file, but you can add a -o parameter to specify file name)
+
+Output as seen on NETEDIT Application - 
+![spider01_netedit](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/spider01_netedit.png)
+
+Output on the Unreal Editor after running our importer - 
+![spider01_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/spider01.png)
+
+#### 2. Large Spider Network - 
+
+NETGENERATE Command - 
+```
+netgenerate --spider
+```
+
+Output - 
+![spider02_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/spider02.png)
+
+#### 3. Basic Grid Network - 
+
+NETGENERATE Command - 
+```
+netgenerate --grid
+```
+
+Output - 
+![grid01_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/grid01.png)
+
+#### 4. A Random Network - 
+
+NETGENERATE Command - 
+```
+netgenerate --rand
+```
+Output - 
+![rand_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/rand_network.png)
+
+### Getting Started - 
+
+1. Please have a look at the [wiki pages](https://github.com/AugmentedDesignLab/Sumo2Unreal/wiki) for requirements, instructions on how to run the code and resources to learn if you want to contribute. 
+
+2. Track our progress [here](https://github.com/AugmentedDesignLab/Sumo2Unreal/projects/1).
 
 ### References
 For selecting the correct order of vertices for creating triangles, we are using the [earcut](https://github.com/mapbox/earcut.hpp) polygon triangulation library
+
+
