@@ -60,6 +60,8 @@ void FParseXMLModule::ShutdownModule()
 void FParseXMLModule::PluginButtonClicked()
 {
 	// Put your "OnButtonClicked" stuff here
+
+	/*
 	FText DialogText = FText::Format(
 							LOCTEXT("Open your xml", "Find the SUMO XML file on this device"),
 							FText::FromString(TEXT("FParseXMLModule::PluginButtonClicked()")),
@@ -67,6 +69,7 @@ void FParseXMLModule::PluginButtonClicked()
 					   );
 
 	FMessageDialog::Open(EAppMsgType::Ok, DialogText);
+	*/
 
 	const FString& windowTitle = "Browse XML Files";
 	const FString& defaultFilePath = "C:/Users";
@@ -94,8 +97,8 @@ void FParseXMLModule::PluginButtonClicked()
 	UfileParser fileParser(*selectedFile); //Selected File from the file dialog
 	GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
 	GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
+
 	fileParser.loadxml();
-	
 	UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
 
 
