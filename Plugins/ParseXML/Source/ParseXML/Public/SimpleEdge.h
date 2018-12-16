@@ -42,7 +42,7 @@ public:
 	float getLaneLength();
 
 	//Setting the vertices to be used during the edge mesh creation on UE4
-	void setVertexCoordinates();
+	void setVertexCoordinates(float);
 
 	//Spawn Function - Add some features to the mesh and spawn
 	void SpawnEdgeMesh();
@@ -66,10 +66,12 @@ private:
 	FString fromID;
 	FString toID;
 
-	TArray<FVector> vertexArray; //Array to store vertices
+	TArray<FVector> vertexArray; 
+	TArray<FVector> newVertexArray; //Array to store new vertex locations(relative to the centroid) 
 	TArray<float> vertexAnglesUnSorted;
 	TArray<float> vertexAnglesSorted;
-	
+
+	FVector centroid;
 	/*
 	double myLaneWidth;
 	double shapeX1;
@@ -81,7 +83,7 @@ private:
 	*/
 
 	std::vector<float> edgeShapeCoordinates;
-	int32 laneWidth = 4;
+	float laneWidth;
 
 	//testers
 	FString fromNodeID;
