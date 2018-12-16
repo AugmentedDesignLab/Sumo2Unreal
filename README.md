@@ -22,9 +22,9 @@ Output as seen on NETEDIT Application -
 Output on the Unreal Editor after running our importer - 
 ![spider01_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/spider01.png)
 
-#### 2. Large Spider Network - 
+#### 2. Large Spider Network 
 
-NETGENERATE Command - 
+NETGENERATE Command 
 ```
 netgenerate --spider
 ```
@@ -32,9 +32,9 @@ netgenerate --spider
 Output - 
 ![spider02_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/spider02.png)
 
-#### 3. Basic Grid Network - 
+#### 3. Basic Grid Network 
 
-NETGENERATE Command - 
+NETGENERATE Command 
 ```
 netgenerate --grid
 ```
@@ -42,20 +42,24 @@ netgenerate --grid
 Output - 
 ![grid01_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/grid01.png)
 
-#### 4. A Random Network - 
+#### 4. A Random Network 
 
-NETGENERATE Command - 
+NETGENERATE Command  
 ```
 netgenerate --rand
 ```
 Output - 
 ![rand_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/rand_network.png)
 
-### Getting Started - 
+---
+
+### Getting Started 
 
 1. Please have a look at the [wiki pages](https://github.com/AugmentedDesignLab/Sumo2Unreal/wiki) for requirements, instructions on how to run the code and resources to learn if you want to contribute. 
 
 2. Track our progress [here](https://github.com/AugmentedDesignLab/Sumo2Unreal/projects/1).
+
+---
 
 ### References
 For selecting the correct order of vertices for creating triangles, we are using the [earcut](https://github.com/mapbox/earcut.hpp) polygon triangulation library
