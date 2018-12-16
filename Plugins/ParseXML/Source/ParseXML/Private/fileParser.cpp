@@ -185,7 +185,7 @@ SimpleNodePtr UfileParser::InitializeNode()
 	NodeContainer.NodeMap.Add(*tempNodeID, Node.get());
 
 	FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
-	FVector origin(0.0f, 0.0f, 0.0f);
+	FVector origin(Node->NodePosition.X, Node->NodePosition.Y, 0.0f);
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 
 	FTransform SpawnTransform(RotationEdge, origin);
@@ -199,8 +199,8 @@ SimpleNodePtr UfileParser::InitializeNode()
 		while ((i+2) <= Node->nodeShapecoordinates.size())
 		{
 				
-				coordinates.X = Node->nodeShapecoordinates[i];
-				coordinates.Y = Node->nodeShapecoordinates[i + 1];
+				coordinates.X = Node->nodeShapecoordinates[i] - Node->NodePosition.X;
+				coordinates.Y = Node->nodeShapecoordinates[i + 1] - Node->NodePosition.Y;
 				coordinates.Z = 0.0f;
 				MyDeferredActor->vertices.Add(coordinates);	
 				i += 2;
@@ -246,13 +246,14 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 	Edge->setFromID(*fromNode);
 	Edge->setToID(*toNode);
 	Edge->setLaneLength(*laneLength);
-	Edge->setVertexCoordinates();
-
 	//initialize map with the pointer for extended node lifetime
 	EdgeContainer.EdgeMap.Add(*tempEdgeID, Edge.get());
+	//calculateLaneWidth();
+	Edge->setVertexCoordinates(3.2);
+	FVector originCoordinates = Edge->centroid;
 
 	FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
-	FVector origin(0.0f, 0.0f, 0.0f);
+	FVector origin(originCoordinates.X, originCoordinates.Y, originCoordinates.Z);
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 
 	FTransform SpawnTransform(RotationEdge, origin);
@@ -261,6 +262,7 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 	if (MyDeferredActor)
 
 	{
+		/*
 		for (int i = 0; i < (Edge->vertexAnglesSorted).Num(); i++) //find the corresponding index of the sorted angle to the unsorted angle vertex
 		{
 			UE_LOG(LogEngine, Warning, TEXT("The sorted angle is %f"),(Edge->vertexAnglesSorted[i]));
@@ -274,6 +276,9 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 
 			}
 		}
+		*/
+
+		(MyDeferredActor->vertices) = (Edge->vertexArray);
 
 		for (int i = 0; i < (MyDeferredActor->vertices.Num()); i++) {
 			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
@@ -289,6 +294,51 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 		UE_LOG(LogEngine, Warning, TEXT("the edge actor is spawned"));
 	}
 	return Edge;
+}
+
+void UfileParser::calculateLaneWidth()
+{
+	FVector nearestJunctionPoint(0.0f, 0.0f, 0.0f);
+
+	for (auto& Elem : EdgeContainer.EdgeMap)
+	{
+		float edgeShapeX0 = Elem.Value->edgeShapeCoordinates[1];
+		float edgeShapeY0 = Elem.Value->edgeShapeCoordinates[2];
+		
+		for (auto& ElemNode : NodeContainer.NodeMap)
+		{
+			if ((ElemNode.Value->ID).Equals(Elem.Value->fromID))
+			{
+				int i = 1;
+				float nearestJunctionX = 0;
+				while (i < ElemNode.Value->nodeShapecoordinates.size())
+				{
+					nearestJunctionX = std::abs(ElemNode.Value->nodeShapecoordinates[i] - edgeShapeX0);
+					if (nearestJunctionX <= nearestJunctionPoint.X)
+					{
+						nearestJunctionPoint.X = nearestJunctionX;
+					}
+					i += 2;
+				}
+				i = 2;
+				float nearestJunctionY = 0;
+				while (i < ElemNode.Value->nodeShapecoordinates.size())
+				{
+					nearestJunctionY = std::abs(ElemNode.Value->nodeShapecoordinates[i] - edgeShapeY0);
+					if (nearestJunctionY <= nearestJunctionPoint.Y)
+					{
+						nearestJunctionPoint.Y = nearestJunctionY;
+					}
+					i += 2;
+				}
+				if (nearestJunctionX && nearestJunctionY)
+				{
+					laneWidth = std::sqrt(std::pow(nearestJunctionX, 2) + std::pow(nearestJunctionY, 2));
+				}
+
+			}
+		}
+	}
 }
 
 bool UfileParser::loadxml()

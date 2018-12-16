@@ -8,7 +8,7 @@ class SimpleEdge;
 class SimpleNode;
 
 //List of sorted edges for a particular node
-typedef std::vector<SimpleEdge*> EdgeContainer;
+typedef std::vector<SimpleEdge*> EdgeVector;
 
 //Node Map and Edge Map
 typedef TMap<const TCHAR*, SimpleNode*> NodeTMap;

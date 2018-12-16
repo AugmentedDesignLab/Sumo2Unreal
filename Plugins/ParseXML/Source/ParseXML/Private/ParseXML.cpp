@@ -92,7 +92,10 @@ void FParseXMLModule::PluginButtonClicked()
 	FString selectedFile = FString(OutFilenames[2]);
 
 	UfileParser fileParser(*selectedFile); //Selected File from the file dialog
+	GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
+	GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
 	fileParser.loadxml();
+	
 	UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
 
 

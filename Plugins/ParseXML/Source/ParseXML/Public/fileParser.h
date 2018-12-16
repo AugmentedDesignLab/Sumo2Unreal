@@ -62,6 +62,10 @@ public:
 	//Container object for edge mappings
 	EdgeCont EdgeContainer;
 
+	//To calculate Lane width
+	void calculateLaneWidth();
+	float laneWidth;
+
 private:
 	std::vector<float> Shapecoordinates;
 	FString selectedXMLFile;
