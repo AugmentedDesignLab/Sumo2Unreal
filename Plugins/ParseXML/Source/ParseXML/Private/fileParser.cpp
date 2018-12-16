@@ -1,19 +1,23 @@
 #include "fileParser.h"
+#include "EngineMinimal.h"
 #include "Runtime/XmlParser/Public/FastXml.h"
 #include "Runtime/XmlParser/Public/XmlParser.h"
 #include "Engine.h"
 #include "SimpleNode.h"
 #include "Editor.h"
 #include "Editor/UnrealEd/Classes/Editor/EditorEngine.h"
-
+#include <cstdlib>
 #include <sstream>
 #include <memory>
 
 
-
 UfileParser::UfileParser(const TCHAR* selectedFile) : selectedXMLFile(selectedFile)
 {
-
+	UWorld* World = GEditor->GetEditorWorldContext().World();
+	FVector Location = FVector(0.0f, 0.0f, 100.0f);
+	FRotator Rotation = FRotator(0.0f, 0.0f, 0.0f);
+	FActorSpawnParameters SpawnParameters;
+	World->SpawnActor<AAtmosphericFog>(Location, Rotation, SpawnParameters);
 }
 
 UfileParser::~UfileParser()
@@ -188,6 +192,7 @@ SimpleNodePtr UfileParser::InitializeNode()
 	FVector origin(Node->NodePosition.X, Node->NodePosition.Y, 0.0f);
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 
+
 	FTransform SpawnTransform(RotationEdge, origin);
 	AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
 
@@ -205,22 +210,7 @@ SimpleNodePtr UfileParser::InitializeNode()
 				MyDeferredActor->vertices.Add(coordinates);	
 				i += 2;
 		}
-		/*
-		for (int i = 0; i < (Node->vertexAnglesSorted).Num(); i++) //find the corresponding index of the sorted angle to the unsorted angle vertex
-		{
-			UE_LOG(LogEngine, Warning, TEXT("The sorted angle is %f"), (Node->vertexAnglesSorted[i]));
-			for (int j = 0; j < (Node->vertexAnglesUnSorted).Num(); j++)
-			{
-				if ((Node->vertexAnglesUnSorted[j]) == (Node->vertexAnglesSorted[i]))
-				{
-					UE_LOG(LogEngine, Warning, TEXT("This corresponds to vertex %d"), (j + 1));
-					(MyDeferredActor->vertices).Add(Node->vertexArray[j]);
-				}
-
-			}
-		}
-		*/
-
+		
 		for (int i = 0; i < (MyDeferredActor->vertices.Num()); i++) {
 			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
 			UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[i].X);
@@ -262,22 +252,6 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 	if (MyDeferredActor)
 
 	{
-		/*
-		for (int i = 0; i < (Edge->vertexAnglesSorted).Num(); i++) //find the corresponding index of the sorted angle to the unsorted angle vertex
-		{
-			UE_LOG(LogEngine, Warning, TEXT("The sorted angle is %f"),(Edge->vertexAnglesSorted[i]));
-			for (int j = 0; j < (Edge->vertexAnglesUnSorted).Num(); j++)
-			{
-				if ((Edge->vertexAnglesUnSorted[j]) == (Edge->vertexAnglesSorted[i]))
-				{
-					UE_LOG(LogEngine, Warning, TEXT("This corresponds to vertex %d"), (j + 1));
-					(MyDeferredActor->vertices).Add(Edge->vertexArray[j]);
-				}
-
-			}
-		}
-		*/
-
 		(MyDeferredActor->vertices) = (Edge->vertexArray);
 
 		for (int i = 0; i < (MyDeferredActor->vertices.Num()); i++) {
@@ -294,51 +268,6 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 		UE_LOG(LogEngine, Warning, TEXT("the edge actor is spawned"));
 	}
 	return Edge;
-}
-
-void UfileParser::calculateLaneWidth()
-{
-	FVector nearestJunctionPoint(0.0f, 0.0f, 0.0f);
-
-	for (auto& Elem : EdgeContainer.EdgeMap)
-	{
-		float edgeShapeX0 = Elem.Value->edgeShapeCoordinates[1];
-		float edgeShapeY0 = Elem.Value->edgeShapeCoordinates[2];
-		
-		for (auto& ElemNode : NodeContainer.NodeMap)
-		{
-			if ((ElemNode.Value->ID).Equals(Elem.Value->fromID))
-			{
-				int i = 1;
-				float nearestJunctionX = 0;
-				while (i < ElemNode.Value->nodeShapecoordinates.size())
-				{
-					nearestJunctionX = std::abs(ElemNode.Value->nodeShapecoordinates[i] - edgeShapeX0);
-					if (nearestJunctionX <= nearestJunctionPoint.X)
-					{
-						nearestJunctionPoint.X = nearestJunctionX;
-					}
-					i += 2;
-				}
-				i = 2;
-				float nearestJunctionY = 0;
-				while (i < ElemNode.Value->nodeShapecoordinates.size())
-				{
-					nearestJunctionY = std::abs(ElemNode.Value->nodeShapecoordinates[i] - edgeShapeY0);
-					if (nearestJunctionY <= nearestJunctionPoint.Y)
-					{
-						nearestJunctionPoint.Y = nearestJunctionY;
-					}
-					i += 2;
-				}
-				if (nearestJunctionX && nearestJunctionY)
-				{
-					laneWidth = std::sqrt(std::pow(nearestJunctionX, 2) + std::pow(nearestJunctionY, 2));
-				}
-
-			}
-		}
-	}
 }
 
 bool UfileParser::loadxml()

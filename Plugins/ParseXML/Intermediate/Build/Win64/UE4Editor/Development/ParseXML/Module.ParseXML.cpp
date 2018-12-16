@@ -2,5 +2,6 @@
 #include "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal\Plugins\ParseXML\Source\ParseXML\Private\EdgeMesh.cpp"
 #include "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal\Plugins\ParseXML\Source\ParseXML\Private\ParseXMLCommands.cpp"
 #include "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal\Plugins\ParseXML\Source\ParseXML\Private\ParseXMLStyle.cpp"
+#include "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal\Plugins\ParseXML\Source\ParseXML\Private\SimpleEdge.cpp"
 #include "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal\Plugins\ParseXML\Source\ParseXML\Private\SimpleNode.cpp"
 #include "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal\Plugins\ParseXML\Source\ParseXML\Public\Containers.cpp"
