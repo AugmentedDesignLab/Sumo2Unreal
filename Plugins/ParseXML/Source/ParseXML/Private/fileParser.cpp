@@ -17,6 +17,11 @@ UfileParser::UfileParser(const TCHAR* selectedFile) : selectedXMLFile(selectedFi
 	FVector Location = FVector(0.0f, 0.0f, 100.0f);
 	FRotator Rotation = FRotator(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnParameters;
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(World, AEdgeMesh::StaticClass(), FoundActors);
+	for (int i = 0; i < FoundActors.Num(); i++) {
+		World->DestroyActor(FoundActors[i]); //Destroy all actors before starting
+	}
 	World->SpawnActor<AAtmosphericFog>(Location, Rotation, SpawnParameters);
 }
 
@@ -239,7 +244,7 @@ SimpleEdgePtr UfileParser::InitializeEdge()
 	//initialize map with the pointer for extended node lifetime
 	EdgeContainer.EdgeMap.Add(*tempEdgeID, Edge.get());
 	//calculateLaneWidth();
-	Edge->setVertexCoordinates(3.2);
+	Edge->setVertexCoordinates(3.2);  //default SUMO lane width
 	FVector originCoordinates = Edge->centroid;
 
 	FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);

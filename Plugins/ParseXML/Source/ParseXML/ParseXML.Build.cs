@@ -7,13 +7,15 @@ public class ParseXML : ModuleRules
 	public ParseXML(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
+
+        
 		PublicIncludePaths.AddRange(
 			new string[] {
 				"ParseXML/Public"
 				// ... add public include paths required here ...
 			}
 			);
+        
 				
 		
 		PrivateIncludePaths.AddRange(
