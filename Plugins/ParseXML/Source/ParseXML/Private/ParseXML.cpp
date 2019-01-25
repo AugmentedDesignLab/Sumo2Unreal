@@ -17,6 +17,7 @@ static const FName ParseXMLTabName("ParseXML");
 
 void FParseXMLModule::StartupModule()
 {
+	
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 	
 	FParseXMLStyle::Initialize();
@@ -59,6 +60,7 @@ void FParseXMLModule::ShutdownModule()
 
 void FParseXMLModule::PluginButtonClicked()
 {
+
 	// Put your "OnButtonClicked" stuff here
 
 	/*
@@ -95,8 +97,8 @@ void FParseXMLModule::PluginButtonClicked()
 	FString selectedFile = FString(OutFilenames[2]);
 
 	UfileParser fileParser(*selectedFile); //Selected File from the file dialog
-	GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
-	GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
+	//GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
+	//GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
 
 	fileParser.loadxml();
 	UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));

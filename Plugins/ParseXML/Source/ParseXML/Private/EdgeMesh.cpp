@@ -106,7 +106,7 @@ void AEdgeMesh::OnConstruction(const FTransform & Transform)
 
 	mesh->CreateMeshSection_LinearColor(0, vertices, Triangles, normals, UV0, vertexColors, tangents, true);
 	
-	// Enable collision data
+	//Enable collision data
 	mesh->ContainsPhysicsTriMeshData(true);
 }
 
@@ -140,9 +140,9 @@ void AEdgeMesh::PostLoad()
 // Called when the game starts or when spawned
 void AEdgeMesh::BeginPlay()
 {
-	UE_LOG(LogTemp, Warning, TEXT("*** BeginPlay of AEdgeMesh ***"));
-	CreateSection(0);
 	AActor::BeginPlay();
+	UE_LOG(LogTemp, Warning, TEXT("*** BeginPlay of AEdgeMesh ***"));
+	//CreateSection(0);
 
 }
 
