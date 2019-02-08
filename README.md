@@ -53,7 +53,7 @@ Output -
 
 #### 5. A town map
 
-XML file obtained from a [SUMO tutorial](http://sumo.sourceforge.net/userdoc/Tutorials/Import_from_OpenStreetMap.html) in which an OSM file was imported into SUMO. This was then imported into UE4 using this importer.
+XML file obtained from a [SUMO tutorial](http://sumo.sourceforge.net/userdoc/Tutorials/Import_from_OpenStreetMap.html) in which an OSM file was imported into SUMO. This was imported into UE4 using this importer.
 
 Output - 
 ![real_town](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/real_town_ue4.png)
