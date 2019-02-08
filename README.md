@@ -51,6 +51,21 @@ netgenerate --rand
 Output - 
 ![rand_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/rand_network.png)
 
+#### 5. A town map
+
+XML file obtained from a [SUMO tutorial](http://sumo.sourceforge.net/userdoc/Tutorials/Import_from_OpenStreetMap.html) in which an OSM file was imported into SUMO. This was then imported into UE4 using this importer.
+
+Output - 
+![real_town](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/real_town_ue4.png)
+
+#### 6. Townsimpy 
+
+XML files generated using [town-sim-py](https://github.com/AugmentedDesignLab/town-sim-py) which were then imported into UE4 using this importer.
+
+Outputs - 
+![townsimpy01](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/townsimpy_01_ue4.png)
+![townsimpy02](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/townsimpy_02_ue4.png)
+
 ---
 
 ### Getting Started 
