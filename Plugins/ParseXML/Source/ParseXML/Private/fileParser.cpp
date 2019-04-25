@@ -280,7 +280,8 @@ bool UfileParser::loadxml()
 	UE_LOG(LogEngine, Warning, TEXT("Loading started"));
 	FText outError;
 	int32 outErrorNum;
-	bool success = FFastXml::ParseXmlFile((IFastXmlCallback*)(this), selectedXMLFile.GetCharArray().GetData(), TEXT(""), nullptr, false, false, outError, outErrorNum);
+	FString Text = "";
+	bool success = FFastXml::ParseXmlFile((IFastXmlCallback*)(this), selectedXMLFile.GetCharArray().GetData(), (TCHAR*)*Text, nullptr, false, false, outError, outErrorNum);
 	return success;
 }
 
