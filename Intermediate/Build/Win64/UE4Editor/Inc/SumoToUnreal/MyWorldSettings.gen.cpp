@@ -1,4 +1,4 @@
-// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 /*===========================================================================
 	Generated code exported from UnrealHeaderTool.
 	DO NOT modify this manually! Edit the corresponding .h files instead!
@@ -51,13 +51,17 @@ void EmptyLinkFunctionForGeneratedCodeMyWorldSettings() {}
 	};
 	const UE4CodeGen_Private::FClassParams Z_Construct_UClass_AMyWorldSettings_Statics::ClassParams = {
 		&AMyWorldSettings::StaticClass,
-		DependentSingletons, ARRAY_COUNT(DependentSingletons),
-		0x009002A4u,
-		nullptr, 0,
-		nullptr, 0,
 		"game",
 		&StaticCppClassTypeInfo,
-		nullptr, 0,
+		DependentSingletons,
+		nullptr,
+		nullptr,
+		nullptr,
+		ARRAY_COUNT(DependentSingletons),
+		0,
+		0,
+		0,
+		0x009002A4u,
 		METADATA_PARAMS(Z_Construct_UClass_AMyWorldSettings_Statics::Class_MetaDataParams, ARRAY_COUNT(Z_Construct_UClass_AMyWorldSettings_Statics::Class_MetaDataParams))
 	};
 	UClass* Z_Construct_UClass_AMyWorldSettings()
@@ -69,7 +73,11 @@ void EmptyLinkFunctionForGeneratedCodeMyWorldSettings() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AMyWorldSettings, 3589167035);
+	IMPLEMENT_CLASS(AMyWorldSettings, 3226840761);
+	template<> SUMOTOUNREAL_API UClass* StaticClass<AMyWorldSettings>()
+	{
+		return AMyWorldSettings::StaticClass();
+	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AMyWorldSettings(Z_Construct_UClass_AMyWorldSettings, &AMyWorldSettings::StaticClass, TEXT("/Script/SumoToUnreal"), TEXT("AMyWorldSettings"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AMyWorldSettings);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

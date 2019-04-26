@@ -1,0 +1,2 @@
+C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\Definitions.SumoToUnreal.h
+c:\users\iparanja\documents\unreal projects\sumo2unreal4-22\source\sumotounreal\SumoToUnreal.h

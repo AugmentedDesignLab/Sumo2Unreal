@@ -1,0 +1,7 @@
+C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\Definitions.SumoToUnreal.h
+c:\users\iparanja\documents\unreal projects\sumo2unreal4-22\source\sumotounreal\SumoToUnrealGameModeBase.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/ServerStatReplicator.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ServerStatReplicator.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameModeBase.generated.h
+C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\Inc\SumoToUnreal\SumoToUnrealGameModeBase.generated.h

@@ -1,4 +1,4 @@
-// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 /*===========================================================================
 	Generated code exported from UnrealHeaderTool.
 	DO NOT modify this manually! Edit the corresponding .h files instead!
@@ -57,8 +57,8 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 		{ "ToolTip", "To make sure that the vertices also get copied for every PIE instance (No loss of actor data)" },
 	};
 #endif
-	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices = { UE4CodeGen_Private::EPropertyClass::Array, "vertices", RF_Public|RF_Transient|RF_MarkAsNative, (EPropertyFlags)0x0010800000000000, 1, nullptr, STRUCT_OFFSET(AEdgeMesh, vertices), METADATA_PARAMS(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_MetaData, ARRAY_COUNT(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_MetaData)) };
-	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_Inner = { UE4CodeGen_Private::EPropertyClass::Struct, "vertices", RF_Public|RF_Transient|RF_MarkAsNative, (EPropertyFlags)0x0000000000000000, 1, nullptr, 0, Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices = { "vertices", nullptr, (EPropertyFlags)0x0010800000000000, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AEdgeMesh, vertices), METADATA_PARAMS(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_MetaData, ARRAY_COUNT(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_MetaData)) };
+	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_Inner = { "vertices", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AEdgeMesh_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_Inner,
@@ -68,13 +68,17 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 	};
 	const UE4CodeGen_Private::FClassParams Z_Construct_UClass_AEdgeMesh_Statics::ClassParams = {
 		&AEdgeMesh::StaticClass,
-		DependentSingletons, ARRAY_COUNT(DependentSingletons),
-		0x009000A0u,
-		nullptr, 0,
-		Z_Construct_UClass_AEdgeMesh_Statics::PropPointers, ARRAY_COUNT(Z_Construct_UClass_AEdgeMesh_Statics::PropPointers),
 		nullptr,
 		&StaticCppClassTypeInfo,
-		nullptr, 0,
+		DependentSingletons,
+		nullptr,
+		Z_Construct_UClass_AEdgeMesh_Statics::PropPointers,
+		nullptr,
+		ARRAY_COUNT(DependentSingletons),
+		0,
+		ARRAY_COUNT(Z_Construct_UClass_AEdgeMesh_Statics::PropPointers),
+		0,
+		0x009000A0u,
 		METADATA_PARAMS(Z_Construct_UClass_AEdgeMesh_Statics::Class_MetaDataParams, ARRAY_COUNT(Z_Construct_UClass_AEdgeMesh_Statics::Class_MetaDataParams))
 	};
 	UClass* Z_Construct_UClass_AEdgeMesh()
@@ -86,7 +90,11 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AEdgeMesh, 3172074384);
+	IMPLEMENT_CLASS(AEdgeMesh, 1691831995);
+	template<> PARSEXML_API UClass* StaticClass<AEdgeMesh>()
+	{
+		return AEdgeMesh::StaticClass();
+	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AEdgeMesh(Z_Construct_UClass_AEdgeMesh, &AEdgeMesh::StaticClass, TEXT("/Script/ParseXML"), TEXT("AEdgeMesh"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AEdgeMesh);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -6,12 +6,13 @@
 /NAME:"UE4Editor-SumoToUnreal-Win64-DebugGame.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.h.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\MyWorldSettings.cpp.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\SumoToUnreal.cpp.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\SumoToUnrealGameModeBase.cpp.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\MyWorldSettings.gen.cpp.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\SumoToUnreal.init.gen.cpp.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\SumoToUnrealGameModeBase.gen.cpp.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\PCLaunch.rc.res"
-/OUT:"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\UE4Editor-SumoToUnreal-Win64-DebugGame.lib"
+"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.h.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\MyWorldSettings.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\SumoToUnreal.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\SumoToUnrealGameModeBase.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\MyWorldSettings.gen.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\SumoToUnreal.init.gen.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\SumoToUnrealGameModeBase.gen.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\Default.rc2.res"
+/OUT:"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\UE4Editor-SumoToUnreal-Win64-DebugGame.lib"
+/INCLUDE:IMPLEMENT_MODULE_SumoToUnreal
