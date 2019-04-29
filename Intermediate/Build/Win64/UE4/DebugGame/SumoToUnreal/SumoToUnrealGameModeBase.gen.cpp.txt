@@ -1,0 +1,9 @@
+C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\UE4\DebugGame\SumoToUnreal\Definitions.SumoToUnreal.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Source\SumoToUnreal/SumoToUnrealGameModeBase.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/ServerStatReplicator.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4\Inc\Engine\ServerStatReplicator.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4\Inc\Engine\GameModeBase.generated.h
+c:\users\iparanja\documents\unreal projects\sumo2unreal4-22\intermediate\build\win64\ue4\inc\sumotounreal\SumoToUnrealGameModeBase.generated.h

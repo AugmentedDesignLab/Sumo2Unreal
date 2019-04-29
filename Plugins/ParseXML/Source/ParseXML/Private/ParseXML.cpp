@@ -78,7 +78,7 @@ void FParseXMLModule::PluginButtonClicked()
 	const FString& defaultFileName = "SumoToUnreal.cpp";
 	const FString& defaultFileType = "*.jpg";
 
-	TArray <FString> originalOutFileNames = { "bro", "broski" };
+	TArray <FString> originalOutFileNames = {};
 	TArray < FString >& OutFilenames = originalOutFileNames;
 
 	IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get();
@@ -93,18 +93,16 @@ void FParseXMLModule::PluginButtonClicked()
 			defaultFileType, 0x00, OutFilenames);
 		//UE_LOG(LogTemp, Warning, TEXT("Plugin is still working!"));
 	}
-
-	FString selectedFile = FString(OutFilenames[2]);
-
-	UfileParser fileParser(*selectedFile); //Selected File from the file dialog
-	//GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
-	//GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
-
-	fileParser.loadxml();
-	UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
-
-
-	
+	if (OutFilenames.Num() > 0)
+	{
+		FString selectedFile = FString(OutFilenames[0]);
+		UfileParser fileParser(*selectedFile);
+		//Selected File from the file dialog
+		//GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
+		//GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
+		fileParser.loadxml();
+		UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
+	}	
 }
 
 void FParseXMLModule::AddMenuExtension(FMenuBuilder& Builder)

@@ -1,0 +1,98 @@
+/Zc:inline
+/nologo
+/Oi
+/c
+/Gw
+/Gy
+/Zm850
+/wd4819
+/D_CRT_STDIO_LEGACY_WIDE_SPECIFIERS=1
+/D_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS=1
+/D_DISABLE_EXTENDED_ALIGNED_STORAGE
+/source-charset:utf-8
+/execution-charset:utf-8
+/Od
+/Ob2
+/errorReport:prompt
+/Z7
+/MD
+/bigobj
+/fp:fast
+/Zp8
+/wd4463
+/wd4838
+/we4668
+/I .
+/I ..\Intermediate\Build\Win64\UE4\Inc\Engine
+/I Runtime
+/I Runtime\Engine\Classes
+/I Runtime\Engine\Public
+/I Runtime\Core\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\CoreUObject
+/I Runtime\CoreUObject\Public
+/I Runtime\ApplicationCore\Public
+/I Runtime\RHI\Public
+/I Runtime\Json\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\SlateCore
+/I Runtime\SlateCore\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\InputCore
+/I Runtime\InputCore\Classes
+/I Runtime\InputCore\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\Slate
+/I Runtime\Slate\Public
+/I Runtime\ImageWrapper\Public
+/I Runtime\Messaging\Public
+/I Runtime\MessagingCommon\Public
+/I Runtime\RenderCore\Public
+/I Runtime\Sockets\Public
+/I Runtime\UtilityShaders\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\AssetRegistry
+/I Runtime\AssetRegistry\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\EngineMessages
+/I Runtime\EngineMessages\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\EngineSettings
+/I Runtime\EngineSettings\Classes
+/I Runtime\EngineSettings\Public
+/I Runtime\SynthBenchmark\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\Renderer
+/I Runtime\Renderer\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\GameplayTags
+/I Runtime\GameplayTags\Classes
+/I Runtime\GameplayTags\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\PacketHandler
+/I Runtime\PacketHandlers
+/I Runtime\PacketHandlers\PacketHandler\Classes
+/I Runtime\PacketHandlers\PacketHandler\Public
+/I Runtime\PacketHandlers\ReliabilityHandlerComponent\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\AudioPlatformConfiguration
+/I Runtime\AudioPlatformConfiguration\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\MeshDescription
+/I Runtime\MeshDescription\Public
+/I Runtime\PakFile\Public
+/I Runtime\RSA\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\ClothingSystemRuntimeInterface
+/I Runtime\ClothingSystemRuntimeInterface\Public
+/I Runtime\NetworkReplayStreaming
+/I Runtime\NetworkReplayStreaming\NetworkReplayStreaming\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\AudioMixer
+/I Runtime\AudioMixer\Classes
+/I Runtime\AudioMixer\Public
+/I ThirdParty
+/I ThirdParty\libSampleRate\Public
+/I ..\Intermediate\Build\Win64\UE4\Inc\AnimationCore
+/I Runtime\AnimationCore\Public
+/I "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE"
+/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"
+/D_HAS_EXCEPTIONS=0
+/I "C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\SumoToUnreal\DebugGame\Engine"
+/Yc"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\SumoToUnreal\DebugGame\Engine\SharedPCH.Engine.NonOptimized.h"
+/Fp"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\SumoToUnreal\DebugGame\Engine\SharedPCH.Engine.NonOptimized.h.pch"
+"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\SumoToUnreal\DebugGame\Engine\SharedPCH.Engine.NonOptimized.cpp"
+/Fo"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\SumoToUnreal\DebugGame\Engine\SharedPCH.Engine.NonOptimized.h.obj"
+/TP
+/GR-
+/W4

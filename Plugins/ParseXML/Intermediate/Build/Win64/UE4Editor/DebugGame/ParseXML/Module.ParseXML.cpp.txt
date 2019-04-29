@@ -846,18 +846,11 @@ c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/I
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SComboBox.h
 c:\users\iparanja\documents\unreal projects\sumo2unreal4-22\plugins\parsexml\source\parsexml\public\ContainersAndTypes.h
 C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\Public\SimpleNode.h
-C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\Private\ParseXML.cpp
-C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\Public\ParseXML.h
-C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLStyle.h
-C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLCommands.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Developer/DesktopPlatform/Public/DesktopPlatformModule.h
-c:\program files\epic games\ue_4.22\engine\source\developer\desktopplatform\public\IDesktopPlatform.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Editor/MainFrame/Public/Interfaces/IMainFrameModule.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Editor\LevelEditor\Public\LevelEditor.h
-c:\program files\epic games\ue_4.22\engine\source\editor\leveleditor\public\ILevelEditor.h
-c:\program files\epic games\ue_4.22\engine\source\editor\leveleditor\public\ViewportTypeDefinition.h
 C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\Private\ParseXMLCommands.cpp
+C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLCommands.h
+c:\users\iparanja\documents\unreal projects\sumo2unreal4-22\plugins\parsexml\source\parsexml\public\ParseXMLStyle.h
 C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\Private\ParseXMLStyle.cpp
+C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\Public\ParseXML.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Public\Slate\SlateGameResources.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Projects\Public\Interfaces\IPluginManager.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Projects\Public\PluginDescriptor.h
