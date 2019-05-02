@@ -303,9 +303,9 @@ bool UfileParser::ProcessElement(const TCHAR* ElementName, const TCHAR* ElementD
 		isElementEdge = true;
 		isElementNode = false;
 	}
-	else
+	else if ((FString(ElementName)).Equals(TEXT("lane")))
 	{
-		isElementNode = false;
+		isElementLane = true;
 	}
 
 	//UE_LOG(LogEngine, Warning, TEXT("ProcessElement ElementName: %s, ElementValue: %s"), ElementName, ElementData);
@@ -326,15 +326,9 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 		}
 		
 	}
-	else if (isElementEdge == true) 
+	else if ((isElementEdge == true) || (isElementLane == true))
 	{
 		InitializeEdgeAttributes(AttributeName, AttributeValue);
-		if ((fromNodeSet == true) && (toNodeSet == true) && (lengthIsSet == true) && (shapeIsSet == true))
-		{
-			InitializeEdge();
-			//UE_LOG(LogEngine, Warning, TEXT("Edge object created!")); 
-		}
-
 	}
 	
 	return true;
@@ -342,7 +336,23 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 
 bool UfileParser::ProcessClose(const TCHAR* Element)
 {
-	resetFlagsAndTempMembers();
+	if ((fromNodeSet == true) && (toNodeSet == true) && (lengthIsSet == true) && (shapeIsSet == true))
+	{
+		InitializeEdge();
+		//UE_LOG(LogEngine, Warning, TEXT("Edge object created!")); 
+	}
+	if ((FString(Element)).Equals(TEXT("lane")))
+	{
+		Shapecoordinates.clear();
+		shapeIsSet = false;
+		lengthIsSet = false;
+		isElementLane = false;
+	}
+	else
+	{
+		resetFlagsAndTempMembers();
+	}
+	
 	//UE_LOG(LogEngine, Warning, TEXT("ProcessClose Element %s"), Element);
 	return true;
 }
