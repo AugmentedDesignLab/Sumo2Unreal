@@ -3,7 +3,7 @@
 /MACHINE:x64
 /SUBSYSTEM:WINDOWS
 /DEF
-/NAME:"UE4Editor-ParseXML-Win64-DebugGame.dll"
+/NAME:"UE4Editor-ParseXML-6310-Win64-DebugGame.dll"
 /IGNORE:4221
 /NODEFAULTLIB
 "C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h.obj"
@@ -11,4 +11,4 @@
 "C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\fileParser.cpp.obj"
 "C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.gen.cpp.obj"
 "C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\PCLaunch.rc.res"
-/OUT:"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\UE4Editor-ParseXML-Win64-DebugGame.lib"
+/OUT:"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\UE4Editor-ParseXML-6310-Win64-DebugGame.lib"

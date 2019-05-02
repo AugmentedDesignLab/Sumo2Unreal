@@ -91,6 +91,9 @@ private:
 	void resetFlagsAndTempMembers();
 	bool shapeIsSet = false;
 
+	//lane parameters
+	bool isElementLane = false;
+
 	//temporary ID
 	FString tempNodeID = "";
 	FString tempEdgeID = "";
