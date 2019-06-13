@@ -59,6 +59,16 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 #endif
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices = { "vertices", nullptr, (EPropertyFlags)0x0010800000000000, UE4CodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AEdgeMesh, vertices), METADATA_PARAMS(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_MetaData, ARRAY_COUNT(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_MetaData)) };
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_Inner = { "vertices", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+<<<<<<< Updated upstream
+=======
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AEdgeMesh_Statics::NewProp_Material_MetaData[] = {
+		{ "Category", "ProcMesh" },
+		{ "ModuleRelativePath", "Public/EdgeMesh.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_Material = { "Material", nullptr, (EPropertyFlags)0x0010000000020001, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AEdgeMesh, Material), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_Material_MetaData, ARRAY_COUNT(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_Material_MetaData)) };
+>>>>>>> Stashed changes
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AEdgeMesh_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_Inner,
@@ -90,7 +100,11 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 		}
 		return OuterClass;
 	}
+<<<<<<< Updated upstream
 	IMPLEMENT_CLASS(AEdgeMesh, 1691831995);
+=======
+	IMPLEMENT_CLASS(AEdgeMesh, 1194285728);
+>>>>>>> Stashed changes
 	template<> PARSEXML_API UClass* StaticClass<AEdgeMesh>()
 	{
 		return AEdgeMesh::StaticClass();

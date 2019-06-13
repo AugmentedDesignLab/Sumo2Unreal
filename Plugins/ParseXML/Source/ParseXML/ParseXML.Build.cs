@@ -9,6 +9,7 @@ public class ParseXML : ModuleRules
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
         
+<<<<<<< Updated upstream
 		PublicIncludePaths.AddRange(
 			new string[] {
 				"ParseXML/Public"
@@ -18,13 +19,16 @@ public class ParseXML : ModuleRules
         
 				
 		
+=======
+        /*
+>>>>>>> Stashed changes
 		PrivateIncludePaths.AddRange(
 			new string[] {
 				"ParseXML/Private",
 				// ... add other private include paths required here ...
 			}
 			);
-			
+		*/	
 		
 		PublicDependencyModuleNames.AddRange(
 			new string[]

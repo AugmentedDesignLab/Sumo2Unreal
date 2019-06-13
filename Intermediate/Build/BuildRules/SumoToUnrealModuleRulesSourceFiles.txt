@@ -1,4 +1,11 @@
+<<<<<<< Updated upstream
 C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Source\SumoToUnreal\SumoToUnreal.Build.cs
 C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Source\ParseXML\ParseXML.Build.cs
 C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Source\SumoToUnreal.Target.cs
 C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Source\SumoToUnrealEditor.Target.cs
+=======
+C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22\Source\SumoToUnreal\SumoToUnreal.Build.cs
+C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22\Plugins\ParseXML\Source\ParseXML\ParseXML.Build.cs
+C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22\Source\SumoToUnreal.Target.cs
+C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22\Source\SumoToUnrealEditor.Target.cs
+>>>>>>> Stashed changes

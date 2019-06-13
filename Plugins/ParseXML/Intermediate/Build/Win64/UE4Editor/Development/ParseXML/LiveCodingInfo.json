@@ -1,0 +1,21 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.ParseXML.cpp.obj": [
+			"EdgeMesh.cpp.obj",
+			"fileParser.cpp.obj",
+			"ParseXML.cpp.obj",
+			"ParseXMLCommands.cpp.obj",
+			"ParseXMLStyle.cpp.obj",
+			"SimpleEdge.cpp.obj",
+			"SimpleNode.cpp.obj",
+			"simpleSidewalk.cpp.obj",
+			"Containers.cpp.obj",
+			"walkingArea.cpp.obj"
+		],
+		"Module.ParseXML.gen.cpp.obj": [
+			"EdgeMesh.gen.cpp.obj",
+			"ParseXML.init.gen.cpp.obj"
+		]
+	}
+}

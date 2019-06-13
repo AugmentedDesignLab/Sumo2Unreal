@@ -21,7 +21,11 @@ void EmptyLinkFunctionForGeneratedCodeParseXML_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000040,
+<<<<<<< Updated upstream
 				0x7893099C,
+=======
+				0xC6476ABF,
+>>>>>>> Stashed changes
 				0x01BC3140,
 				METADATA_PARAMS(nullptr, 0)
 			};

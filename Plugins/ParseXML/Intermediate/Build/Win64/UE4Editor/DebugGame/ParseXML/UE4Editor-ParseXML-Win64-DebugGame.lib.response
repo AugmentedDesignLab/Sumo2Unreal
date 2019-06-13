@@ -6,6 +6,7 @@
 /NAME:"UE4Editor-ParseXML-Win64-DebugGame.dll"
 /IGNORE:4221
 /NODEFAULTLIB
+<<<<<<< Updated upstream
 "C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h.obj"
 "C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\ParseXML.cpp.obj"
 "C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.cpp.obj"
@@ -13,3 +14,11 @@
 "C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Default.rc2.res"
 /OUT:"C:\Users\iparanja\Documents\Unreal Projects\Sumo2Unreal4-22\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\UE4Editor-ParseXML-Win64-DebugGame.lib"
 /INCLUDE:IMPLEMENT_MODULE_ParseXML
+=======
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\walkingArea.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.gen.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\PCLaunch.rc.res"
+/OUT:"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\UE4Editor-ParseXML-Win64-DebugGame.lib"
+>>>>>>> Stashed changes

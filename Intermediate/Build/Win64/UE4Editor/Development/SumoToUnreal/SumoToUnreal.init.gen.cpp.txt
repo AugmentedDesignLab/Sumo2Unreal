@@ -1,0 +1,3 @@
+C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22\Intermediate\Build\Win64\UE4Editor\Development\SumoToUnreal\Definitions.SumoToUnreal.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
