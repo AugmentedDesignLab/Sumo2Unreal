@@ -54,6 +54,7 @@ private:
 	float LaneLength;
 	FString fromID;
 	FString toID;
+	const float pi_value = std::acos(-1);
 
 	TArray<FVector> vertexArray;
 	TArray<FVector> newVertexArray; //Array to store new vertex locations(relative to the centroid) 

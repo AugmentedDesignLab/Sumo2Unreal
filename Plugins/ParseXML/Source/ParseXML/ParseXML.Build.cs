@@ -8,16 +8,8 @@ public class ParseXML : ModuleRules
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
+        PublicIncludePaths.Add(System.IO.Path.Combine(ModuleDirectory, "Public"));
         
-		PublicIncludePaths.AddRange(
-			new string[] {
-				"ParseXML/Public"
-				// ... add public include paths required here ...
-			}
-			);
-        
-				
-		
 		PrivateIncludePaths.AddRange(
 			new string[] {
 				"ParseXML/Private",
