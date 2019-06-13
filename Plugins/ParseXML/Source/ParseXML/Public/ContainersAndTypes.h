@@ -6,17 +6,21 @@
 //class declaration
 class SimpleEdge;
 class SimpleNode;
+class walkingArea;
 
 //List of sorted edges for a particular node
 typedef std::vector<SimpleEdge*> EdgeVector;
 
-//Node Map and Edge Map
+//Node Map, Edge Map, walkingArea Map
 typedef TMap<const TCHAR*, SimpleNode*> NodeTMap;
 typedef TMap<const TCHAR*, SimpleEdge*> EdgeTMap;
+typedef TMap<const TCHAR*, walkingArea*> walkingAreaTMap;
 
 //Shared pointer for every node object created
 typedef std::unique_ptr<SimpleNode> SimpleNodePtr;
 typedef std::unique_ptr<SimpleEdge> SimpleEdgePtr;
+typedef std::unique_ptr<walkingArea> walkingAreaPtr;
+
 
 class NodeCont
 {
@@ -37,6 +41,17 @@ public:
 	//Map to store the pointers to the parsed edges (pointers to the objects created)
 	EdgeTMap EdgeMap;
 };
+
+class walkingAreaCont
+{
+public:
+	walkingAreaCont() {};
+	~walkingAreaCont() {};
+
+	//Map to store the pointers to the parsed walkingAreas (pointers to the objects created)
+	walkingAreaTMap walkingAreaMap;
+};
+
 
 
 

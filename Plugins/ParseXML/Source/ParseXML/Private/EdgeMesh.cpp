@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "EdgeMesh.h"
+#include "ConstructorHelpers.h"
+#include "Runtime/Engine/Classes/Materials/MaterialInstanceDynamic.h"
 #include <map>
 #include <stack>
 #include <iostream>
@@ -21,6 +23,13 @@ AEdgeMesh::AEdgeMesh()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	mesh = CreateDefaultSubobject<UProceduralMeshComponent>(TEXT("GeneratedMesh"));
+	/*
+	static ConstructorHelpers::FObjectFinder<UMaterial> MaterialO(TEXT(""));
+	if (MaterialO.Object != NULL)
+	{
+		Material = (UMaterial*)MaterialO.Object;
+	}
+	*/
 	RootComponent = mesh;
 	mesh->bUseAsyncCooking = true;
 }
@@ -67,6 +76,8 @@ void AEdgeMesh::CreateFace(int32 indexb)
 	normals.Add(FVector(0, 0, 1));
 	normals.Add(FVector(0, 0, 1));
 	normals.Add(FVector(0, 0, 1));
+	normals.Add(FVector(0, 0, 1));
+	normals.Add(FVector(0, 0, 1));
 
 	UV0.Add(FVector2D(0, 0));
 	UV0.Add(FVector2D(1, 0));
@@ -76,12 +87,16 @@ void AEdgeMesh::CreateFace(int32 indexb)
 	tangents.Add(FProcMeshTangent(0, 1, 0));
 	tangents.Add(FProcMeshTangent(0, 1, 0));
 	tangents.Add(FProcMeshTangent(0, 1, 0));
+	tangents.Add(FProcMeshTangent(0, 1, 0));
+	tangents.Add(FProcMeshTangent(0, 1, 0));
 
-	vertexColors.Add(FLinearColor(0.75, 0.75, 0.75, 1.0));
-	vertexColors.Add(FLinearColor(0.75, 0.75, 0.75, 1.0));
-	vertexColors.Add(FLinearColor(0.75, 0.75, 0.75, 1.0));
-	vertexColors.Add(FLinearColor(0.75, 0.75, 0.75, 1.0));
-
+	vertexColors.Add(FLinearColor((float)(0), (float)(0), (float)(0), 1));
+	vertexColors.Add(FLinearColor((float)(0), (float)(0), (float)(0), 1));
+	vertexColors.Add(FLinearColor((float)(0), (float)(0), (float)(0), 1));
+	vertexColors.Add(FLinearColor((float)(0), (float)(0), (float)(0), 1));
+	vertexColors.Add(FLinearColor((float)(0), (float)(0), (float)(0), 1));
+	vertexColors.Add(FLinearColor((float)(0), (float)(0), (float)(0), 1));
+	
 }
 
 void AEdgeMesh::CreateSection(int32 indexa)
@@ -89,6 +104,7 @@ void AEdgeMesh::CreateSection(int32 indexa)
 	CreateFace(indexa);
 
 	mesh->CreateMeshSection_LinearColor(indexa, vertices, Triangles, normals, UV0, vertexColors, tangents, true);
+	//mesh->SetMaterial(0, Material);
 
 	// Enable collision data
 	mesh->ContainsPhysicsTriMeshData(true);
@@ -105,7 +121,8 @@ void AEdgeMesh::OnConstruction(const FTransform & Transform)
 	CreateFace(0);
 
 	mesh->CreateMeshSection_LinearColor(0, vertices, Triangles, normals, UV0, vertexColors, tangents, true);
-	
+	//UMaterialInstanceDynamic* MaterialInstance = UMaterialInstanceDynamic::Create(Material, this);
+	//mesh->SetMaterial(0, MaterialInstance);
 	//Enable collision data
 	mesh->ContainsPhysicsTriMeshData(true);
 }

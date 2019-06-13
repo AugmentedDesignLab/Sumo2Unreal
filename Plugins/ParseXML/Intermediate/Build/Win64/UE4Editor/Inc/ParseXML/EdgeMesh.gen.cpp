@@ -18,6 +18,7 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	UPackage* Z_Construct_UPackage__Script_ParseXML();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
+	ENGINE_API UClass* Z_Construct_UClass_UMaterial_NoRegister();
 // End Cross Module References
 	void AEdgeMesh::StaticRegisterNativesAEdgeMesh()
 	{
@@ -37,6 +38,10 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 #endif
 		static const UE4CodeGen_Private::FArrayPropertyParams NewProp_vertices;
 		static const UE4CodeGen_Private::FStructPropertyParams NewProp_vertices_Inner;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_Material_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_Material;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -59,9 +64,17 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 #endif
 	const UE4CodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices = { UE4CodeGen_Private::EPropertyClass::Array, "vertices", RF_Public|RF_Transient|RF_MarkAsNative, (EPropertyFlags)0x0010800000000000, 1, nullptr, STRUCT_OFFSET(AEdgeMesh, vertices), METADATA_PARAMS(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_MetaData, ARRAY_COUNT(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_MetaData)) };
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_Inner = { UE4CodeGen_Private::EPropertyClass::Struct, "vertices", RF_Public|RF_Transient|RF_MarkAsNative, (EPropertyFlags)0x0000000000000000, 1, nullptr, 0, Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AEdgeMesh_Statics::NewProp_Material_MetaData[] = {
+		{ "Category", "ProcMesh" },
+		{ "ModuleRelativePath", "Public/EdgeMesh.h" },
+	};
+#endif
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AEdgeMesh_Statics::NewProp_Material = { UE4CodeGen_Private::EPropertyClass::Object, "Material", RF_Public|RF_Transient|RF_MarkAsNative, (EPropertyFlags)0x0010000000020001, 1, nullptr, STRUCT_OFFSET(AEdgeMesh, Material), Z_Construct_UClass_UMaterial_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_Material_MetaData, ARRAY_COUNT(Z_Construct_UClass_AEdgeMesh_Statics::NewProp_Material_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AEdgeMesh_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEdgeMesh_Statics::NewProp_vertices_Inner,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AEdgeMesh_Statics::NewProp_Material,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AEdgeMesh_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AEdgeMesh>::IsAbstract,
@@ -86,7 +99,7 @@ void EmptyLinkFunctionForGeneratedCodeEdgeMesh() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AEdgeMesh, 3172074384);
+	IMPLEMENT_CLASS(AEdgeMesh, 3219903100);
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AEdgeMesh(Z_Construct_UClass_AEdgeMesh, &AEdgeMesh::StaticClass, TEXT("/Script/ParseXML"), TEXT("AEdgeMesh"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AEdgeMesh);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

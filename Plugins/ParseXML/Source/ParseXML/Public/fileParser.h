@@ -3,7 +3,6 @@
 #include "Runtime/XmlParser/Public/XmlParser.h"
 #include "Runtime/Core/Public/Containers/Map.h"
 #include "SimpleEdge.h"
-
 #include "ContainersAndTypes.h"
 
 #include <stack>
@@ -11,6 +10,7 @@
 
 //class declarations
 class SimpleNode;
+class walkingArea;
 
 class UfileParser : public IFastXmlCallback
 {
@@ -53,17 +53,27 @@ public:
 	void addEdge(const TCHAR* Element);
 	*/
 
+	//----Functions for initializing the walkingArea objects----
+
+	//Collect all required node attributes for one object as member variables and then initialize a node object
+	void InitializeWalkingAreaAttributes(const TCHAR*, const TCHAR*);
+	walkingAreaPtr InitializewalkingArea();
+
+	//one container object to store all node mappings
+	walkingAreaCont walkingAreaContainer;
+
 	//----Functions for initializing the edge objects----
 
 	//Collect all the required edge attributes for one object as member variables and then initialize a edge object
 	void InitializeEdgeAttributes(const TCHAR*, const TCHAR*);
-	SimpleEdgePtr InitializeEdge();
+	SimpleEdgePtr InitializeEdge(const TCHAR*);
+	SimpleEdgePtr InitializePedestrianEdge();
 
 	//Container object for edge mappings
 	EdgeCont EdgeContainer;
 
 	//To calculate Lane width
-	void calculateLaneWidth();
+	//void calculateLaneWidth();
 	float laneWidth;
 
 private:
@@ -78,6 +88,7 @@ private:
 	const TCHAR* nodeYCoordinate;
 	bool xCoordinateIsSet = false;
 	bool yCoordinateIsSet = false;
+	bool laneWidthIsSet = false;
 
 	//edge flags and temp member variables
 	bool isElementEdge = false;
@@ -94,7 +105,17 @@ private:
 	//lane parameters
 	bool isElementLane = false;
 
+	//walking area member variables
+	bool isWalkingArea = false;
+
+	//pedestrian crossing member variables
+	bool isCrossing = false;
+
+	//sidewalk parameter
+	bool isSidewalk = false;
+
 	//temporary ID
 	FString tempNodeID = "";
 	FString tempEdgeID = "";
+	FString walkingAreaID = "";
 };
