@@ -25,6 +25,7 @@ public:
 	void setFromID(const TCHAR*);
 	void setToID(const TCHAR*);
 	void setShapeCoordinates(const std::vector<float>&);
+	void centroidAdjustment(const TCHAR*, FVector, FVector, FVector, FVector, FVector, FVector, FVector, FVector);
 
 	/*
 	void setLaneLength(double length);
@@ -43,6 +44,7 @@ public:
 
 	//Setting the vertices to be used during the edge mesh creation on UE4
 	void setVertexCoordinates(float);
+	void setSideWalkVertCoordinates(float);
 
 	//Spawn Function - Add some features to the mesh and spawn
 	void SpawnEdgeMesh();
@@ -70,8 +72,18 @@ private:
 	TArray<FVector> newVertexArray; //Array to store new vertex locations(relative to the centroid) 
 	TArray<float> vertexAnglesUnSorted;
 	TArray<float> vertexAnglesSorted;
+	TArray<FVector> curbVerticesTop1;
+	TArray<FVector> curbVerticesTop2; 
+	TArray<FVector> curbVerticesSide1;
+	TArray<FVector> curbVerticesSide2;
+
 
 	FVector centroid;
+	FVector CentroidcurbTop1;
+	FVector CentroidcurbTop2;
+	FVector CentroidcurbSide1;
+	FVector CentroidcurbSide2;
+
 	/*
 	double myLaneWidth;
 	double shapeX1;
