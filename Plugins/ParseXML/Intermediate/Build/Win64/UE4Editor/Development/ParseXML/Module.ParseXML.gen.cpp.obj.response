@@ -23,7 +23,7 @@
 /wd4838
 /we4668
 /I .
-/I "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Plugins\ParseXML\Source\ParseXML\Private"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private"
 /I Runtime
 /I Runtime\Projects\Public
 /I Runtime\Projects
@@ -401,28 +401,28 @@
 /I Runtime\AIModule\Public
 /I Runtime\AIModule\Classes
 /I Runtime\AIModule
-/I "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML"
-/I "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Plugins\ParseXML\Source"
-/I "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Plugins\ParseXML\Source\ParseXML\Public"
-/I "C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Plugins\ParseXML\Source\ParseXML"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML"
 /I Runtime\XmlParser\Public
 /I Runtime\XmlParser
 /I ..\Plugins\Runtime\ProceduralMeshComponent\Intermediate\Build\Win64\UE4Editor\Inc\ProceduralMeshComponent
 /I ..\Plugins\Runtime\ProceduralMeshComponent\Source
 /I ..\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent\Public
 /I ..\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent
-/I "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\INCLUDE"
+/I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\INCLUDE"
 /I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\ucrt"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\shared"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.16299.0\winrt"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Intermediate\Build\Win64\SumoToUnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.h"
-/Yu"C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Intermediate\Build\Win64\SumoToUnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.h"
-/Fp"C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Intermediate\Build\Win64\SumoToUnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.h.pch"
-"C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.gen.cpp"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Definitions.ParseXML.h"
-/Fo"C:\Users\iparanja\Documents\Unreal Projects\SumoToUnreal_4.20\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.gen.cpp.obj"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.h"
+/Yu"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.h"
+/Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.h.pch"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.gen.cpp"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Definitions.ParseXML.h"
+/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.gen.cpp.obj"
 /TP
 /GR-
 /W4

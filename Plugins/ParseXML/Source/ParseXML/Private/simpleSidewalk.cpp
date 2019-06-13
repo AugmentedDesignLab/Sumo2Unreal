@@ -1,7 +1,6 @@
 #include "simpleSidewalk.h"
 #include "Engine.h"
 
-const float pi_value = std::acos(-1);
 simpleSidewalk::simpleSidewalk() {
 
 }
