@@ -6,8 +6,9 @@
 /NAME:"UE4Editor-ParseXML.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.h.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.cpp.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.gen.cpp.obj"
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\PCLaunch.rc.res"
-/OUT:"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\UE4Editor-ParseXML.lib"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.h.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.gen.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Default.rc2.res"
+/OUT:"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\UE4Editor-ParseXML.lib"
+/INCLUDE:IMPLEMENT_MODULE_ParseXML
