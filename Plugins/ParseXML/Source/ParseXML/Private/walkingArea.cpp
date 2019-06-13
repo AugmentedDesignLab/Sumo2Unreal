@@ -1,6 +1,6 @@
 #pragma once
-#include "walkingArea.h"
-#include "earcut.h"
+#include "ParseXML/Public/walkingArea.h"
+#include "ParseXML/Public/earcut.h"
 //#include "SimpleEdge.h"
 
 walkingArea::walkingArea()

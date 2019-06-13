@@ -2,13 +2,16 @@
 /nologo
 /Oi
 /c
+/Gw
 /Gy
 /Zm850
 /wd4819
 /D_CRT_STDIO_LEGACY_WIDE_SPECIFIERS=1
 /D_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS=1
 /D_WINDLL
-/source-charset:utf-8 /execution-charset:utf-8
+/D_DISABLE_EXTENDED_ALIGNED_STORAGE
+/source-charset:utf-8
+/execution-charset:utf-8
 /Od
 /Ob2
 /errorReport:prompt
@@ -22,7 +25,7 @@
 /wd4838
 /we4668
 /I .
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private"
 /I Runtime
 /I Runtime\Projects\Public
 /I Runtime\Projects
@@ -81,10 +84,12 @@
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd
 /I Editor
 /I Programs\UnrealLightmass\Public
+/I Developer\Android\AndroidDeviceDetection\Public\Interfaces
 /I Editor\UnrealEd\Classes
 /I Editor\UnrealEd\Public
 /I Editor\UnrealEd
 /I Editor\UnrealEd\Public\AutoReimport
+/I Editor\UnrealEd\Public\Bookmarks
 /I Editor\UnrealEd\Public\Commandlets
 /I Editor\UnrealEd\Public\Dialogs
 /I Editor\UnrealEd\Public\DragAndDrop
@@ -92,6 +97,7 @@
 /I Editor\UnrealEd\Public\Kismet2
 /I Editor\UnrealEd\Public\Layers
 /I Editor\UnrealEd\Public\Settings
+/I Editor\UnrealEd\Public\Subsystems
 /I Editor\UnrealEd\Public\Tests
 /I Editor\UnrealEd\Public\Toolkits
 /I Editor\BspMode\Public
@@ -114,17 +120,22 @@
 /I Runtime\Engine
 /I Runtime\Engine\Public\AI
 /I Runtime\Engine\Public\AI\Navigation
+/I Runtime\Engine\Public\Analytics
 /I Runtime\Engine\Public\Animation
 /I Runtime\Engine\Public\Curves
 /I Runtime\Engine\Public\EdGraph
 /I Runtime\Engine\Public\Internationalization
 /I Runtime\Engine\Public\Net
+/I Runtime\Engine\Public\Net\Util
 /I Runtime\Engine\Public\PacketHandlers
 /I Runtime\Engine\Public\Performance
 /I Runtime\Engine\Public\Physics
+/I Runtime\Engine\Public\Physics\Experimental
+/I Runtime\Engine\Public\Physics\ImmediatePhysics
 /I Runtime\Engine\Public\ProfilingDebugging
 /I Runtime\Engine\Public\Rendering
 /I Runtime\Engine\Public\Slate
+/I Runtime\Engine\Public\Subsystems
 /I Runtime\Engine\Public\Tests
 /I Runtime\Engine\Public\VisualLogger
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\SlateCore
@@ -133,17 +144,17 @@
 /I Runtime\SlateCore\Public\Animation
 /I Runtime\SlateCore\Public\Application
 /I Runtime\SlateCore\Public\Brushes
+/I Runtime\SlateCore\Public\Debugging
 /I Runtime\SlateCore\Public\Fonts
 /I Runtime\SlateCore\Public\Input
 /I Runtime\SlateCore\Public\Layout
-/I Runtime\SlateCore\Public\Logging
 /I Runtime\SlateCore\Public\Rendering
 /I Runtime\SlateCore\Public\Sound
-/I Runtime\SlateCore\Public\Stats
 /I Runtime\SlateCore\Public\Styling
 /I Runtime\SlateCore\Public\Textures
 /I Runtime\SlateCore\Public\Types
 /I Runtime\SlateCore\Public\Widgets
+/I Runtime\SlateCore\Public\Widgets\Images
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\Slate
 /I Runtime\Slate\Public
 /I Runtime\Slate
@@ -177,8 +188,8 @@
 /I Runtime\MessagingCommon
 /I Runtime\RenderCore\Public
 /I Runtime\RenderCore
-/I Runtime\ShaderCore\Public
-/I Runtime\ShaderCore
+/I Runtime\Sockets\Public
+/I Runtime\Sockets
 /I Runtime\UtilityShaders\Public
 /I Runtime\UtilityShaders
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\AssetRegistry
@@ -200,8 +211,6 @@
 /I Runtime\GameplayTags\Classes
 /I Runtime\GameplayTags\Public
 /I Runtime\GameplayTags
-/I Runtime\DatabaseSupport\Public
-/I Runtime\DatabaseSupport
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\PacketHandler
 /I Runtime\PacketHandlers
 /I Runtime\PacketHandlers\PacketHandler\Classes
@@ -215,6 +224,10 @@
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\MeshDescription
 /I Runtime\MeshDescription\Public
 /I Runtime\MeshDescription
+/I Runtime\PakFile\Public
+/I Runtime\PakFile
+/I Runtime\RSA\Public
+/I Runtime\RSA
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\Kismet
 /I Editor\Kismet\Classes
 /I Editor\Kismet\Public
@@ -233,6 +246,8 @@
 /I Runtime\AudioMixer
 /I Runtime\AudioMixer\Public\Components
 /I Runtime\AudioMixer\Public\DSP
+/I Runtime\AudioMixer\Public\DSP\Encoders
+/I Runtime\AudioMixer\Public\SoundFileIO
 /I ThirdParty
 /I ThirdParty\libSampleRate\Public
 /I ThirdParty\libSampleRate
@@ -261,6 +276,9 @@
 /I Editor\BlueprintGraph\Classes
 /I Editor\BlueprintGraph\Public
 /I Editor\BlueprintGraph
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\EditorSubsystem
+/I Editor\EditorSubsystem\Public
+/I Editor\EditorSubsystem
 /I Runtime\Online
 /I Runtime\Online\HTTP\Public
 /I Runtime\Online\HTTP
@@ -326,8 +344,6 @@
 /I Editor\ContentBrowser
 /I Runtime\NetworkFileSystem\Public
 /I Runtime\NetworkFileSystem
-/I Runtime\Sockets\Public
-/I Runtime\Sockets
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\UMG
 /I Runtime\UMG\Public
 /I Runtime\UMG
@@ -335,6 +351,7 @@
 /I Runtime\UMG\Public\Binding
 /I Runtime\UMG\Public\Blueprint
 /I Runtime\UMG\Public\Components
+/I Runtime\UMG\Public\Editor
 /I Runtime\UMG\Public\Slate
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\MovieScene
 /I Runtime\MovieScene\Public
@@ -353,6 +370,7 @@
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\MovieSceneTracks
 /I Runtime\MovieSceneTracks\Public
 /I Runtime\MovieSceneTracks
+/I Runtime\MovieSceneTracks\Public\Channels
 /I Runtime\MovieSceneTracks\Public\Evaluation
 /I Runtime\MovieSceneTracks\Public\Sections
 /I Runtime\MovieSceneTracks\Public\Tracks
@@ -366,8 +384,14 @@
 /I Runtime\NavigationSystem\Public\NavFilters
 /I Runtime\NavigationSystem\Public\NavGraph
 /I Runtime\NavigationSystem\Public\NavMesh
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\MeshDescriptionOperations
+/I Developer\MeshDescriptionOperations\Public
+/I Developer\MeshDescriptionOperations
 /I Developer\MeshBuilder\Public
 /I Developer\MeshBuilder
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\MaterialShaderQualitySettings
+/I Runtime\MaterialShaderQualitySettings\Classes
+/I Runtime\MaterialShaderQualitySettings
 /I Runtime\Windows
 /I Runtime\Windows\XAudio2\Public
 /I Runtime\Windows\XAudio2
@@ -400,28 +424,28 @@
 /I Runtime\AIModule\Public
 /I Runtime\AIModule\Classes
 /I Runtime\AIModule
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML"
 /I Runtime\XmlParser\Public
 /I Runtime\XmlParser
 /I ..\Plugins\Runtime\ProceduralMeshComponent\Intermediate\Build\Win64\UE4Editor\Inc\ProceduralMeshComponent
 /I ..\Plugins\Runtime\ProceduralMeshComponent\Source
 /I ..\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent\Public
 /I ..\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent
-/I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\INCLUDE"
+/I "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE"
 /I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
-/Yu"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
-/Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h.pch"
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.cpp"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h"
-/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.cpp.obj"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
+/Yu"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
+/Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h.pch"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.cpp"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h"
+/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.cpp.obj"
 /TP
 /GR-
 /W4
