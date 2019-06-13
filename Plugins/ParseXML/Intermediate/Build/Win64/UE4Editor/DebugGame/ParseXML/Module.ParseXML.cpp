@@ -6,4 +6,5 @@
 #include "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\ParseXMLStyle.cpp"
 #include "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\SimpleEdge.cpp"
 #include "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\SimpleNode.cpp"
+#include "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\simpleSidewalk.cpp"
 #include "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\Containers.cpp"

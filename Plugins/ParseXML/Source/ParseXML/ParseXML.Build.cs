@@ -10,13 +10,14 @@ public class ParseXML : ModuleRules
 
         PublicIncludePaths.Add(System.IO.Path.Combine(ModuleDirectory, "Public"));
         
+        /*
 		PrivateIncludePaths.AddRange(
 			new string[] {
 				"ParseXML/Private",
 				// ... add other private include paths required here ...
 			}
 			);
-			
+		*/	
 		
 		PublicDependencyModuleNames.AddRange(
 			new string[]
