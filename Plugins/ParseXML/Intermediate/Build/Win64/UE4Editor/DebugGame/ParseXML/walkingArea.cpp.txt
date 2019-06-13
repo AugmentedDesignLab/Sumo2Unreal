@@ -1,6 +1,6 @@
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML/Public/walkingArea.h
-c:\users\iparanja\documents\unreal projects\myproject01\sumo2unreal 4.22 - 2\plugins\parsexml\source\parsexml\public\ContainersAndTypes.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\walkingArea.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\ContainersAndTypes.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vector
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xmemory
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xmemory0
@@ -803,7 +803,7 @@ c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/C
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SSpinBox.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SSlider.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SComboBox.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML/Public/earcut.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\earcut.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\algorithm
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
 C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt\assert.h

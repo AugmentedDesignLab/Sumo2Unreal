@@ -1,9 +1,9 @@
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\EdgeMesh.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\EdgeMesh.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\EdgeMesh.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\EdgeMesh.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent\Public\ProceduralMeshComponent.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\Runtime\ProceduralMeshComponent\Intermediate\Build\Win64\UE4Editor\Inc\ProceduralMeshComponent\ProceduralMeshComponent.generated.h
-c:\users\iparanja\documents\unreal projects\myproject01\sumo2unreal 4.22 - 2\plugins\parsexml\source\parsexml\public\earcut.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\earcut.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\algorithm
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xmemory
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xmemory0
@@ -48,7 +48,7 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.1
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xerrc.h
 C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt\share.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\tuple
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML\EdgeMesh.generated.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML\EdgeMesh.generated.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject\ConstructorHelpers.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/Engine/Classes/Materials/MaterialInstanceDynamic.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstance.h
@@ -64,13 +64,13 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.1
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\sstream
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\string
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xstring_insert.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\fileParser.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\fileParser.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\fileParser.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\fileParser.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/XmlParser/Public/FastXml.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/XmlParser/Public/XmlParser.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\xmlparser\public\XmlNode.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\xmlparser\public\XmlFile.h
-c:\users\iparanja\documents\unreal projects\myproject01\sumo2unreal 4.22 - 2\plugins\parsexml\source\parsexml\public\SimpleEdge.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\SimpleEdge.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Public\Engine.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc/MonolithicHeaderBoilerplate.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Core.h
@@ -844,21 +844,21 @@ c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/C
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SSpinBox.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SSlider.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SComboBox.h
-c:\users\iparanja\documents\unreal projects\myproject01\sumo2unreal 4.22 - 2\plugins\parsexml\source\parsexml\public\ContainersAndTypes.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\SimpleNode.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\walkingArea.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\ParseXML.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\ParseXML.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLStyle.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLCommands.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\ContainersAndTypes.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\SimpleNode.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\walkingArea.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\ParseXML.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\ParseXML.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLStyle.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLCommands.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Developer/DesktopPlatform/Public/DesktopPlatformModule.h
 c:\program files\epic games\ue_4.22\engine\source\developer\desktopplatform\public\IDesktopPlatform.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Editor/MainFrame/Public/Interfaces/IMainFrameModule.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Editor\LevelEditor\Public\LevelEditor.h
 c:\program files\epic games\ue_4.22\engine\source\editor\leveleditor\public\ILevelEditor.h
 c:\program files\epic games\ue_4.22\engine\source\editor\leveleditor\public\ViewportTypeDefinition.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\ParseXMLCommands.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\ParseXMLStyle.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\ParseXMLCommands.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\ParseXMLStyle.cpp
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Public\Slate\SlateGameResources.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Projects\Public\Interfaces\IPluginManager.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Projects\Public\PluginDescriptor.h
@@ -866,8 +866,8 @@ c:\program files\epic games\ue_4.22\engine\source\runtime\projects\public\Module
 c:\program files\epic games\ue_4.22\engine\source\runtime\projects\public\CustomBuildSteps.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\projects\public\LocalizationDescriptor.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\projects\public\PluginReferenceDescriptor.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\SimpleEdge.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\SimpleNode.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\simpleSidewalk.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\simpleSidewalk.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\Containers.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\SimpleEdge.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\SimpleNode.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\simpleSidewalk.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\simpleSidewalk.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\Containers.cpp

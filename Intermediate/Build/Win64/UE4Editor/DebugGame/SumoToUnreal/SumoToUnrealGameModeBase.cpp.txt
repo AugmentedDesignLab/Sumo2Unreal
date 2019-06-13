@@ -1,7 +1,7 @@
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\Definitions.SumoToUnreal.h
-c:\users\iparanja\documents\unreal projects\myproject01\sumo2unreal 4.22 - 2\source\sumotounreal\SumoToUnrealGameModeBase.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\Definitions.SumoToUnreal.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\source\sumotounreal\SumoToUnrealGameModeBase.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/ServerStatReplicator.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ServerStatReplicator.generated.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameModeBase.generated.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\UE4Editor\Inc\SumoToUnreal\SumoToUnrealGameModeBase.generated.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\Inc\SumoToUnreal\SumoToUnrealGameModeBase.generated.h

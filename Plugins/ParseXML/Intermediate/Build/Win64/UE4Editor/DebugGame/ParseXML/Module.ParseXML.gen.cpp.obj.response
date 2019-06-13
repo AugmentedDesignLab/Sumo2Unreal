@@ -25,7 +25,7 @@
 /wd4838
 /we4668
 /I .
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private"
 /I Runtime
 /I Runtime\Projects\Public
 /I Runtime\Projects
@@ -424,10 +424,10 @@
 /I Runtime\AIModule\Public
 /I Runtime\AIModule\Classes
 /I Runtime\AIModule
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML"
 /I Runtime\XmlParser\Public
 /I Runtime\XmlParser
 /I ..\Plugins\Runtime\ProceduralMeshComponent\Intermediate\Build\Win64\UE4Editor\Inc\ProceduralMeshComponent
@@ -440,12 +440,12 @@
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
-/Yu"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
-/Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h.pch"
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.gen.cpp"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h"
-/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.gen.cpp.obj"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
+/Yu"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
+/Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h.pch"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.gen.cpp"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h"
+/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Module.ParseXML.gen.cpp.obj"
 /TP
 /GR-
 /W4
