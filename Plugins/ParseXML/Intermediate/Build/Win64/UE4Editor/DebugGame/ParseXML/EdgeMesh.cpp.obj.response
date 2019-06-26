@@ -25,31 +25,11 @@
 /wd4838
 /we4668
 /I .
-/I ..\Intermediate\Build\Win64\UE4Editor\Inc\Engine
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private"
 /I Runtime
-/I Runtime\Engine\Classes
-/I Runtime\Engine\Public
-/I Runtime\Engine
-/I Runtime\Engine\Public\AI
-/I Runtime\Engine\Public\AI\Navigation
-/I Runtime\Engine\Public\Analytics
-/I Runtime\Engine\Public\Animation
-/I Runtime\Engine\Public\Curves
-/I Runtime\Engine\Public\EdGraph
-/I Runtime\Engine\Public\Internationalization
-/I Runtime\Engine\Public\Net
-/I Runtime\Engine\Public\Net\Util
-/I Runtime\Engine\Public\PacketHandlers
-/I Runtime\Engine\Public\Performance
-/I Runtime\Engine\Public\Physics
-/I Runtime\Engine\Public\Physics\Experimental
-/I Runtime\Engine\Public\Physics\ImmediatePhysics
-/I Runtime\Engine\Public\ProfilingDebugging
-/I Runtime\Engine\Public\Rendering
-/I Runtime\Engine\Public\Slate
-/I Runtime\Engine\Public\Subsystems
-/I Runtime\Engine\Public\Tests
-/I Runtime\Engine\Public\VisualLogger
+/I Runtime\Projects\Public
+/I Runtime\Projects
+/I Runtime\Projects\Public\Interfaces
 /I Runtime\Core\Public
 /I Runtime\Core
 /I Runtime\Core\Public\Algo
@@ -79,6 +59,18 @@
 /I Runtime\Core\Public\Traits
 /I Runtime\Core\Public\UObject
 /I Runtime\Core\Public\Windows
+/I Runtime\Json\Public
+/I Runtime\Json
+/I Runtime\Json\Public\Dom
+/I Runtime\Json\Public\Policies
+/I Runtime\Json\Public\Serialization
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\InputCore
+/I Runtime\InputCore\Classes
+/I Runtime\InputCore\Public
+/I Runtime\InputCore
+/I Runtime\InputCore\Public\GenericPlatform
+/I Runtime\InputCore\Public\HAL
+/I Runtime\InputCore\Public\Windows
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\CoreUObject
 /I Runtime\CoreUObject\Public
 /I Runtime\CoreUObject
@@ -89,6 +81,27 @@
 /I Runtime\CoreUObject\Public\Serialization\Formatters
 /I Runtime\CoreUObject\Public\Templates
 /I Runtime\CoreUObject\Public\UObject
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd
+/I Editor
+/I Programs\UnrealLightmass\Public
+/I Developer\Android\AndroidDeviceDetection\Public\Interfaces
+/I Editor\UnrealEd\Classes
+/I Editor\UnrealEd\Public
+/I Editor\UnrealEd
+/I Editor\UnrealEd\Public\AutoReimport
+/I Editor\UnrealEd\Public\Bookmarks
+/I Editor\UnrealEd\Public\Commandlets
+/I Editor\UnrealEd\Public\Dialogs
+/I Editor\UnrealEd\Public\DragAndDrop
+/I Editor\UnrealEd\Public\Features
+/I Editor\UnrealEd\Public\Kismet2
+/I Editor\UnrealEd\Public\Layers
+/I Editor\UnrealEd\Public\Settings
+/I Editor\UnrealEd\Public\Subsystems
+/I Editor\UnrealEd\Public\Tests
+/I Editor\UnrealEd\Public\Toolkits
+/I Editor\BspMode\Public
+/I Editor\BspMode
 /I Runtime\ApplicationCore\Public
 /I Runtime\ApplicationCore
 /I Runtime\ApplicationCore\Public\GenericPlatform
@@ -96,11 +109,35 @@
 /I Runtime\ApplicationCore\Public\Windows
 /I Runtime\RHI\Public
 /I Runtime\RHI
-/I Runtime\Json\Public
-/I Runtime\Json
-/I Runtime\Json\Public\Dom
-/I Runtime\Json\Public\Policies
-/I Runtime\Json\Public\Serialization
+/I Developer
+/I Developer\DirectoryWatcher\Public
+/I Developer\DirectoryWatcher
+/I Editor\Documentation\Public
+/I Editor\Documentation
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\Engine
+/I Runtime\Engine\Classes
+/I Runtime\Engine\Public
+/I Runtime\Engine
+/I Runtime\Engine\Public\AI
+/I Runtime\Engine\Public\AI\Navigation
+/I Runtime\Engine\Public\Analytics
+/I Runtime\Engine\Public\Animation
+/I Runtime\Engine\Public\Curves
+/I Runtime\Engine\Public\EdGraph
+/I Runtime\Engine\Public\Internationalization
+/I Runtime\Engine\Public\Net
+/I Runtime\Engine\Public\Net\Util
+/I Runtime\Engine\Public\PacketHandlers
+/I Runtime\Engine\Public\Performance
+/I Runtime\Engine\Public\Physics
+/I Runtime\Engine\Public\Physics\Experimental
+/I Runtime\Engine\Public\Physics\ImmediatePhysics
+/I Runtime\Engine\Public\ProfilingDebugging
+/I Runtime\Engine\Public\Rendering
+/I Runtime\Engine\Public\Slate
+/I Runtime\Engine\Public\Subsystems
+/I Runtime\Engine\Public\Tests
+/I Runtime\Engine\Public\VisualLogger
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\SlateCore
 /I Runtime\SlateCore\Public
 /I Runtime\SlateCore
@@ -118,13 +155,6 @@
 /I Runtime\SlateCore\Public\Types
 /I Runtime\SlateCore\Public\Widgets
 /I Runtime\SlateCore\Public\Widgets\Images
-/I ..\Intermediate\Build\Win64\UE4Editor\Inc\InputCore
-/I Runtime\InputCore\Classes
-/I Runtime\InputCore\Public
-/I Runtime\InputCore
-/I Runtime\InputCore\Public\GenericPlatform
-/I Runtime\InputCore\Public\HAL
-/I Runtime\InputCore\Public\Windows
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\Slate
 /I Runtime\Slate\Public
 /I Runtime\Slate
@@ -198,35 +228,32 @@
 /I Runtime\PakFile
 /I Runtime\RSA\Public
 /I Runtime\RSA
-/I ..\Intermediate\Build\Win64\UE4Editor\Inc\UnrealEd
-/I Editor
-/I Programs\UnrealLightmass\Public
-/I Developer\Android\AndroidDeviceDetection\Public\Interfaces
-/I Editor\UnrealEd\Classes
-/I Editor\UnrealEd\Public
-/I Editor\UnrealEd
-/I Editor\UnrealEd\Public\AutoReimport
-/I Editor\UnrealEd\Public\Bookmarks
-/I Editor\UnrealEd\Public\Commandlets
-/I Editor\UnrealEd\Public\Dialogs
-/I Editor\UnrealEd\Public\DragAndDrop
-/I Editor\UnrealEd\Public\Features
-/I Editor\UnrealEd\Public\Kismet2
-/I Editor\UnrealEd\Public\Layers
-/I Editor\UnrealEd\Public\Settings
-/I Editor\UnrealEd\Public\Subsystems
-/I Editor\UnrealEd\Public\Tests
-/I Editor\UnrealEd\Public\Toolkits
-/I Editor\BspMode\Public
-/I Editor\BspMode
-/I Developer
-/I Developer\DirectoryWatcher\Public
-/I Developer\DirectoryWatcher
-/I Editor\Documentation\Public
-/I Editor\Documentation
-/I Runtime\Projects\Public
-/I Runtime\Projects
-/I Runtime\Projects\Public\Interfaces
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\Kismet
+/I Editor\Kismet\Classes
+/I Editor\Kismet\Public
+/I Editor\Kismet
+/I Editor\Kismet\Public\Nodes
+/I Editor\Kismet\Public\WorkflowOrientedApp
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\ClothingSystemRuntimeInterface
+/I Runtime\ClothingSystemRuntimeInterface\Public
+/I Runtime\ClothingSystemRuntimeInterface
+/I Runtime\NetworkReplayStreaming
+/I Runtime\NetworkReplayStreaming\NetworkReplayStreaming\Public
+/I Runtime\NetworkReplayStreaming\NetworkReplayStreaming
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\AudioMixer
+/I Runtime\AudioMixer\Classes
+/I Runtime\AudioMixer\Public
+/I Runtime\AudioMixer
+/I Runtime\AudioMixer\Public\Components
+/I Runtime\AudioMixer\Public\DSP
+/I Runtime\AudioMixer\Public\DSP\Encoders
+/I Runtime\AudioMixer\Public\SoundFileIO
+/I ThirdParty
+/I ThirdParty\libSampleRate\Public
+/I ThirdParty\libSampleRate
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\AnimationCore
+/I Runtime\AnimationCore\Public
+/I Runtime\AnimationCore
 /I Runtime\SandboxFile\Public
 /I Runtime\SandboxFile
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\EditorStyle
@@ -347,9 +374,6 @@
 /I Runtime\MovieSceneTracks\Public\Evaluation
 /I Runtime\MovieSceneTracks\Public\Sections
 /I Runtime\MovieSceneTracks\Public\Tracks
-/I ..\Intermediate\Build\Win64\UE4Editor\Inc\AnimationCore
-/I Runtime\AnimationCore\Public
-/I Runtime\AnimationCore
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\PropertyPath
 /I Runtime\PropertyPath\Public
 /I Runtime\PropertyPath
@@ -371,7 +395,6 @@
 /I Runtime\Windows
 /I Runtime\Windows\XAudio2\Public
 /I Runtime\Windows\XAudio2
-/I Runtime\AudioMixer\Public
 /I Runtime\Windows\AudioMixerXAudio2
 /I Developer\CollectionManager\Public
 /I Developer\CollectionManager
@@ -401,43 +424,28 @@
 /I Runtime\AIModule\Public
 /I Runtime\AIModule\Classes
 /I Runtime\AIModule
-/I ..\Intermediate\Build\Win64\UE4Editor\Inc\Kismet
-/I Editor\Kismet\Classes
-/I Editor\Kismet\Public
-/I Editor\Kismet
-/I Editor\Kismet\Public\Nodes
-/I Editor\Kismet\Public\WorkflowOrientedApp
-/I ..\Intermediate\Build\Win64\UE4Editor\Inc\ClothingSystemRuntimeInterface
-/I Runtime\ClothingSystemRuntimeInterface\Public
-/I Runtime\ClothingSystemRuntimeInterface
-/I Runtime\NetworkReplayStreaming
-/I Runtime\NetworkReplayStreaming\NetworkReplayStreaming\Public
-/I Runtime\NetworkReplayStreaming\NetworkReplayStreaming
-/I ..\Intermediate\Build\Win64\UE4Editor\Inc\AudioMixer
-/I Runtime\AudioMixer\Classes
-/I Runtime\AudioMixer
-/I Runtime\AudioMixer\Public\Components
-/I Runtime\AudioMixer\Public\DSP
-/I Runtime\AudioMixer\Public\DSP\Encoders
-/I Runtime\AudioMixer\Public\SoundFileIO
-/I ThirdParty
-/I ThirdParty\libSampleRate\Public
-/I ThirdParty\libSampleRate
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\UE4Editor\Inc\SumoToUnreal"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Source"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Source\SumoToUnreal"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public"
+/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML"
+/I Runtime\XmlParser\Public
+/I Runtime\XmlParser
+/I ..\Plugins\Runtime\ProceduralMeshComponent\Intermediate\Build\Win64\UE4Editor\Inc\ProceduralMeshComponent
+/I ..\Plugins\Runtime\ProceduralMeshComponent\Source
+/I ..\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent\Public
+/I ..\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent
 /I "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE"
 /I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.h"
-/Yu"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.h"
-/Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.h.pch"
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\UE4Editor\Inc\SumoToUnreal\SumoToUnreal.init.gen.cpp"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\Definitions.SumoToUnreal.h"
-/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal 4.22 - 2\Intermediate\Build\Win64\UE4Editor\DebugGame\SumoToUnreal\SumoToUnreal.init.gen.cpp.obj"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
+/Yu"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
+/Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h.pch"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\EdgeMesh.cpp"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h"
+/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\EdgeMesh.cpp.obj"
 /TP
 /GR-
 /W4

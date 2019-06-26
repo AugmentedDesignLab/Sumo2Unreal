@@ -1,6 +1,15 @@
 C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\walkingArea.h
-c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\ContainersAndTypes.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\fileParser.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/XmlParser/Public/FastXml.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/XmlParser/Public/XmlParser.h
+c:\program files\epic games\ue_4.22\engine\source\runtime\xmlparser\public\XmlNode.h
+c:\program files\epic games\ue_4.22\engine\source\runtime\xmlparser\public\XmlFile.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\SimpleEdge.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\utility
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iosfwd
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cstdio
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cstring
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cwchar
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vector
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xmemory
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xmemory0
@@ -11,18 +20,40 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.1
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\climits
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cmath
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xtgmath.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cwchar
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xutility
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\utility
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iosfwd
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cstdio
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cstring
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xatomic0.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\stdexcept
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xstring
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\EdgeMesh.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent\Public\ProceduralMeshComponent.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\Runtime\ProceduralMeshComponent\Intermediate\Build\Win64\UE4Editor\Inc\ProceduralMeshComponent\ProceduralMeshComponent.generated.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\earcut.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\algorithm
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
+C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt\assert.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\memory
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\typeinfo
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vcruntime_typeinfo.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\array
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iterator
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\istream
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\ostream
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\ios
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xlocnum
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\streambuf
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xiosbase
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xlocale
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xlocinfo
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xlocinfo.h
+C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt\locale.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xfacet
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\system_error
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cerrno
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xcall_once.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xerrc.h
+C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt\share.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\tuple
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML\EdgeMesh.generated.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Public\Engine.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc/MonolithicHeaderBoilerplate.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Core.h
@@ -803,7 +834,11 @@ c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/C
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SSpinBox.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SSlider.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SComboBox.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\earcut.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\algorithm
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
-C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt\assert.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\ContainersAndTypes.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\stack
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\deque
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\SimpleNode.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\walkingArea.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\sstream
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\string
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xstring_insert.h

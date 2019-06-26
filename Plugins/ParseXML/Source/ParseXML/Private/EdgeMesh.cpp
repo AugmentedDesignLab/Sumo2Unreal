@@ -66,9 +66,9 @@ void AEdgeMesh::CreateFace(int32 indexb)
 		Triangles.Add((int32)indices[i]);
 		i += 3;
 	}
-	for (int i = 0; i < Triangles.Num(); i++) 
+	for (int j = 0; j < Triangles.Num(); j++) 
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Triangles[%d]: %d "), i, Triangles[i]);
+		UE_LOG(LogTemp, Warning, TEXT("Triangles[%d]: %d "), j, Triangles[j]);
 		UE_LOG(LogTemp, Warning, TEXT("====="));
 	}
 

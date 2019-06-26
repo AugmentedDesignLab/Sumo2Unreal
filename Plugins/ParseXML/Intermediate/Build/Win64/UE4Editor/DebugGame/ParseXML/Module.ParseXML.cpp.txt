@@ -1,10 +1,57 @@
 C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\EdgeMesh.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\EdgeMesh.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent\Public\ProceduralMeshComponent.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\Runtime\ProceduralMeshComponent\Intermediate\Build\Win64\UE4Editor\Inc\ProceduralMeshComponent\ProceduralMeshComponent.generated.h
-c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\earcut.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\algorithm
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\ParseXML.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\ParseXML.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet/GameplayStatics.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerController.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/OnlineReplStructs.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/CoreOnline.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Hash/CityHash.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\OnlineReplStructs.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerMuteList.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerMuteList.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Camera/PlayerCameraManager.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Camera/CameraShake.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\CameraShake.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerCameraManager.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Components/InputComponent.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\InputComponent.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/ForceFeedbackEffect.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ForceFeedbackEffect.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\ApplicationCore\Public\GenericPlatform/IInputInterface.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerController.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet/KismetSystemLibrary.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/CollisionProfile.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/DeveloperSettings.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\DeveloperSettings.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\CollisionProfile.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\KismetSystemLibrary.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Sound/DialogueTypes.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\DialogueTypes.generated.h
+c:\program files\epic games\ue_4.22\engine\source\runtime\engine\classes\kismet\GameplayStaticsTypes.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStaticsTypes.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStatics.generated.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLStyle.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\SlateCore\Public\Styling/SlateStyle.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\SlateCore\Public\Brushes/SlateBorderBrush.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\SlateCore\Public\Brushes/SlateBoxBrush.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\SlateCore\Public\Brushes/SlateColorBrush.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\SlateCore\Public\Brushes/SlateImageBrush.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLCommands.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Developer/DesktopPlatform/Public/DesktopPlatformModule.h
+c:\program files\epic games\ue_4.22\engine\source\developer\desktopplatform\public\IDesktopPlatform.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Editor/MainFrame/Public/Interfaces/IMainFrameModule.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\fileParser.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/XmlParser/Public/FastXml.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/XmlParser/Public/XmlParser.h
+c:\program files\epic games\ue_4.22\engine\source\runtime\xmlparser\public\XmlNode.h
+c:\program files\epic games\ue_4.22\engine\source\runtime\xmlparser\public\XmlFile.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\SimpleEdge.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\utility
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iosfwd
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cstdio
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cstring
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cwchar
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vector
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xmemory
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xmemory0
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cstdint
@@ -14,21 +61,20 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.1
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\climits
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cmath
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xtgmath.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cwchar
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xutility
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\utility
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iosfwd
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cstdio
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cstring
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xatomic0.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\stdexcept
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xstring
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\EdgeMesh.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\Runtime\ProceduralMeshComponent\Source\ProceduralMeshComponent\Public\ProceduralMeshComponent.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Plugins\Runtime\ProceduralMeshComponent\Intermediate\Build\Win64\UE4Editor\Inc\ProceduralMeshComponent\ProceduralMeshComponent.generated.h
+c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\earcut.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\algorithm
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\cassert
 C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt\assert.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\memory
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\typeinfo
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vcruntime_typeinfo.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\vector
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\stdexcept
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xstring
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\array
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iterator
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\istream
@@ -49,28 +95,6 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.1
 C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt\share.h
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\tuple
 C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Inc\ParseXML\EdgeMesh.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject\ConstructorHelpers.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/Engine/Classes/Materials/MaterialInstanceDynamic.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstance.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstanceBasePropertyOverrides.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstanceBasePropertyOverrides.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstance.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstanceDynamic.generated.h
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\map
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xtree
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\stack
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\deque
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\iostream
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\sstream
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\string
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\xstring_insert.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\fileParser.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\fileParser.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/XmlParser/Public/FastXml.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime/XmlParser/Public/XmlParser.h
-c:\program files\epic games\ue_4.22\engine\source\runtime\xmlparser\public\XmlNode.h
-c:\program files\epic games\ue_4.22\engine\source\runtime\xmlparser\public\XmlFile.h
-c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\SimpleEdge.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Public\Engine.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Misc/MonolithicHeaderBoilerplate.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Core.h
@@ -185,6 +209,7 @@ c:\program files\epic games\ue_4.22\engine\source\runtime\coreuobject\public\Ser
 c:\program files\epic games\ue_4.22\engine\source\runtime\coreuobject\public\Serialization/ArchiveObjectPropertyMapper.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\coreuobject\public\Serialization/ArchiveReferenceMarker.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\coreuobject\public\Serialization/ArchiveObjectCrc32.h
+c:\program files\epic games\ue_4.22\engine\source\runtime\coreuobject\public\UObject/ConstructorHelpers.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\coreuobject\public\UObject/LinkerSave.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\coreuobject\public\Misc/RedirectCollector.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\coreuobject\public\UObject/ScriptStackTracker.h
@@ -240,23 +265,6 @@ C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFra
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/RootMotionSource.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\RootMotionSource.generated.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Character.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerController.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/OnlineReplStructs.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\CoreUObject\Public\UObject/CoreOnline.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Core\Public\Hash/CityHash.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\OnlineReplStructs.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/PlayerMuteList.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerMuteList.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Camera/PlayerCameraManager.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Camera/CameraShake.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\CameraShake.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerCameraManager.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Components/InputComponent.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\InputComponent.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/ForceFeedbackEffect.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\ForceFeedbackEffect.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\ApplicationCore\Public\GenericPlatform/IInputInterface.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PlayerController.generated.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/GameModeBase.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/Info.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\Info.generated.h
@@ -330,18 +338,12 @@ C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\In
 C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\PointLightComponent.generated.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Components/SpotLightComponent.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\SpotLightComponent.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/CollisionProfile.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Engine/DeveloperSettings.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\DeveloperSettings.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\CollisionProfile.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet/GameplayStatics.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Kismet/KismetSystemLibrary.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\KismetSystemLibrary.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Sound/DialogueTypes.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\DialogueTypes.generated.h
-c:\program files\epic games\ue_4.22\engine\source\runtime\engine\classes\kismet\GameplayStaticsTypes.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStaticsTypes.generated.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\GameplayStatics.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstance.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstanceBasePropertyOverrides.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstanceBasePropertyOverrides.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstance.generated.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Materials/MaterialInstanceDynamic.h
+C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\MaterialInstanceDynamic.generated.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\Sound/AmbientSound.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\AmbientSound.generated.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Runtime\Engine\Classes\GameFramework/Volume.h
@@ -773,12 +775,7 @@ c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Textu
 c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Fonts/FontBulkData.h
 C:\Program Files\Epic Games\UE_4.22\Engine\Intermediate\Build\Win64\UE4Editor\Inc\SlateCore\FontBulkData.generated.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Fonts/FontMeasure.h
-c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Brushes/SlateBorderBrush.h
-c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Brushes/SlateBoxBrush.h
-c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Brushes/SlateColorBrush.h
-c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Brushes/SlateImageBrush.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Styling/SlateStyleRegistry.h
-c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Styling/SlateStyle.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Types/NavigationMetaData.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Rendering/RenderingPolicy.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slatecore\public\Rendering/SlateDrawBuffer.h
@@ -845,15 +842,8 @@ c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/I
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SSlider.h
 c:\program files\epic games\ue_4.22\engine\source\runtime\slate\public\Widgets/Input/SComboBox.h
 c:\users\iparanja\documents\unreal projects\myproject03\sumo2unreal\plugins\parsexml\source\parsexml\public\ContainersAndTypes.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\SimpleNode.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\walkingArea.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\ParseXML.cpp
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\ParseXML.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLStyle.h
-C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\ParseXMLCommands.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Developer/DesktopPlatform/Public/DesktopPlatformModule.h
-c:\program files\epic games\ue_4.22\engine\source\developer\desktopplatform\public\IDesktopPlatform.h
-C:\Program Files\Epic Games\UE_4.22\Engine\Source\Editor/MainFrame/Public/Interfaces/IMainFrameModule.h
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\stack
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\INCLUDE\deque
 C:\Program Files\Epic Games\UE_4.22\Engine\Source\Editor\LevelEditor\Public\LevelEditor.h
 c:\program files\epic games\ue_4.22\engine\source\editor\leveleditor\public\ILevelEditor.h
 c:\program files\epic games\ue_4.22\engine\source\editor\leveleditor\public\ViewportTypeDefinition.h
@@ -868,6 +858,9 @@ c:\program files\epic games\ue_4.22\engine\source\runtime\projects\public\Locali
 c:\program files\epic games\ue_4.22\engine\source\runtime\projects\public\PluginReferenceDescriptor.h
 C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\SimpleEdge.cpp
 C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\SimpleNode.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\SimpleNode.h
 C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\simpleSidewalk.cpp
 C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\simpleSidewalk.h
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\walkingArea.cpp
+C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\walkingArea.h
 C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Public\Containers.cpp

@@ -443,9 +443,9 @@
 /FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
 /Yu"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h"
 /Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\DebugGame\UnrealEd\SharedPCH.UnrealEd.NonOptimized.h.pch"
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\walkingArea.cpp"
+"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\Private\fileParser.cpp"
 /FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\Definitions.ParseXML.h"
-/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\walkingArea.cpp.obj"
+/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject03\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\DebugGame\ParseXML\fileParser.cpp.obj"
 /TP
 /GR-
 /W4

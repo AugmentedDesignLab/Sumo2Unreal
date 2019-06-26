@@ -251,11 +251,11 @@ walkingAreaPtr UfileParser::InitializewalkingArea()
 			i += 2;
 		}
 
-		for (int i = 0; i < (MyDeferredActor->vertices.Num()); i++) {
-			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[i].X);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[i].Y);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[i].Z);
+		for (int j = 0; j < (MyDeferredActor->vertices.Num()); j++) {
+			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), j);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[j].X);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[j].Y);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[j].Z);
 			UE_LOG(LogEngine, Warning, TEXT("====="));
 		}
 
@@ -302,11 +302,11 @@ SimpleNodePtr UfileParser::InitializeNode()
 				i += 2;
 		}
 		
-		for (int i = 0; i < (MyDeferredActor->vertices.Num()); i++) {
-			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[i].X);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[i].Y);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[i].Z);
+		for (int j = 0; j < (MyDeferredActor->vertices.Num()); j++) {
+			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), j);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[j].X);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[j].Y);
+			UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[j].Z);
 			UE_LOG(LogEngine, Warning, TEXT("====="));
 		}
 
@@ -369,11 +369,11 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge()
 		{
 			(MyDeferredActor->vertices) = (Edge->vertexArray);
 
-			for (int i = 0; i < (MyDeferredActor->vertices.Num()); i++) {
-				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[i].X);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[i].Y);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[i].Z);
+			for (int j = 0; j < (MyDeferredActor->vertices.Num()); j++) {
+				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), j);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[j].X);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[j].Y);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[j].Z);
 				UE_LOG(LogEngine, Warning, TEXT("====="));
 			}
 
@@ -399,11 +399,11 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge()
 		{
 			(MyDeferredActor1->vertices) = (Edge->curbVerticesTop1);
 
-			for (int i = 0; i < (MyDeferredActor1->vertices.Num()); i++) {
-				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor1->vertices[i].X);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor1->vertices[i].Y);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor1->vertices[i].Z);
+			for (int k = 0; k < (MyDeferredActor1->vertices.Num()); k++) {
+				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), k);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor1->vertices[k].X);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor1->vertices[k].Y);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor1->vertices[k].Z);
 				UE_LOG(LogEngine, Warning, TEXT("====="));
 			}
 
@@ -429,11 +429,11 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge()
 		{
 			(MyDeferredActor2->vertices) = (Edge->curbVerticesTop2);
 
-			for (int i = 0; i < (MyDeferredActor2->vertices.Num()); i++) {
-				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor2->vertices[i].X);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor2->vertices[i].Y);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor2->vertices[i].Z);
+			for (int l = 0; l < (MyDeferredActor2->vertices.Num()); l++) {
+				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), l);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor2->vertices[l].X);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor2->vertices[l].Y);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor2->vertices[l].Z);
 				UE_LOG(LogEngine, Warning, TEXT("====="));
 			}
 
@@ -512,11 +512,11 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 		{
 			(MyDeferredActor->vertices) = (Edge->vertexArray);
 
-			for (int i = 0; i < (MyDeferredActor->vertices.Num()); i++) {
-				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), i);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[i].X);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[i].Y);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[i].Z);
+			for (int j = 0; j < (MyDeferredActor->vertices.Num()); j++) {
+				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), j);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[j].X);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[j].Y);
+				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[j].Z);
 				UE_LOG(LogEngine, Warning, TEXT("====="));
 			}
 

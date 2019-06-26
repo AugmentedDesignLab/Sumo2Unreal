@@ -13,7 +13,7 @@
 	"CanContainContent": false,
 	"IsBetaVersion": false,
 	"Installed": false,
-	"Modules": [
+  "Modules": [
     {
       "Name": "ParseXML",
       "Type": "Editor",
@@ -24,5 +24,12 @@
         "ProceduralMeshComponent"
       ]
     }
-	]
+  ],
+  "Plugins": [
+    {
+      "Enabled": true,
+      "Name": "ProceduralMeshComponent"
+    }
+  ]
+
 }
