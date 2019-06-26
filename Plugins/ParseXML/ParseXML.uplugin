@@ -1,19 +1,19 @@
 {
-	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "1.0",
-	"FriendlyName": "ParseXML",
-	"Description": "",
-	"Category": "Other",
-	"CreatedBy": "",
-	"CreatedByURL": "",
-	"DocsURL": "",
-	"MarketplaceURL": "",
-	"SupportURL": "",
-	"CanContainContent": false,
-	"IsBetaVersion": false,
-	"Installed": false,
-	"Modules": [
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "ParseXML",
+  "Description": "",
+  "Category": "Other",
+  "CreatedBy": "",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": false,
+  "IsBetaVersion": false,
+  "Installed": false,
+  "Modules": [
     {
       "Name": "ParseXML",
       "Type": "Editor",
@@ -24,5 +24,11 @@
         "ProceduralMeshComponent"
       ]
     }
-	]
+  ],
+  "Plugins": [
+    {
+      "Enabled": true,
+      "Name": "ProceduralMeshComponent"
+    }
+  ]
 }

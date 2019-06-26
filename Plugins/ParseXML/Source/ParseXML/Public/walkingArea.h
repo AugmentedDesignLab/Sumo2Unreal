@@ -1,3 +1,5 @@
+#ifndef WALKINGAREA_HEADER
+#define WALKINGAREA_HEADER
 #include "ContainersAndTypes.h"
 #include "Platform.h"
 #include "Engine.h"
@@ -23,3 +25,5 @@ private:
 	FString walkingAreaID;
 	std::vector<float> walkingAreaShapeCoordinates;
 };
+
+#endif

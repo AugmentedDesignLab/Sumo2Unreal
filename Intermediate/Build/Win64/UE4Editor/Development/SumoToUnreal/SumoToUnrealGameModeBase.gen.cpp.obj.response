@@ -400,21 +400,21 @@
 /I ThirdParty
 /I ThirdParty\libSampleRate\Public
 /I ThirdParty\libSampleRate
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\Inc\SumoToUnreal"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Source"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Source\SumoToUnreal"
+/I "C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\Inc\SumoToUnreal"
+/I "C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Source"
+/I "C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Source\SumoToUnreal"
 /I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.20.27508\INCLUDE"
 /I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h"
-/Yu"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h"
-/Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h.pch"
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\Inc\SumoToUnreal\SumoToUnrealGameModeBase.gen.cpp"
-/FI"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\Development\SumoToUnreal\Definitions.SumoToUnreal.h"
-/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\Development\SumoToUnreal\SumoToUnrealGameModeBase.gen.cpp.obj"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h"
+/Yu"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h"
+/Fp"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h.pch"
+"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\Inc\SumoToUnreal\SumoToUnrealGameModeBase.gen.cpp"
+/FI"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\Development\SumoToUnreal\Definitions.SumoToUnreal.h"
+/Fo"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\UE4Editor\Development\SumoToUnreal\SumoToUnrealGameModeBase.gen.cpp.obj"
 /TP
 /GR-
 /W4

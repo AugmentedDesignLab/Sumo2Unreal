@@ -1,4 +1,4 @@
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Source\SumoToUnreal\SumoToUnreal.Build.cs
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\ParseXML.Build.cs
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Source\SumoToUnreal.Target.cs
-C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Source\SumoToUnrealEditor.Target.cs
+C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Source\SumoToUnreal\SumoToUnreal.Build.cs
+C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Source\ParseXML\ParseXML.Build.cs
+C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Source\SumoToUnreal.Target.cs
+C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Source\SumoToUnrealEditor.Target.cs

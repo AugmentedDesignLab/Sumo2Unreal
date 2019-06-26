@@ -185,11 +185,11 @@
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um"
 /I "C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt"
-/I "C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine"
-/Yc"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h"
-/Fp"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h.pch"
-"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.cpp"
-/Fo"C:\Users\iparanja\Documents\Unreal Projects\MyProject01\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h.obj"
+/I "C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine"
+/Yc"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h"
+/Fp"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h.pch"
+"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.cpp"
+/Fo"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\Engine\SharedPCH.Engine.h.obj"
 /TP
 /GR-
 /W4
