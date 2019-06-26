@@ -1,6 +1,6 @@
 # Sumo2Unreal
 
-#### For Sumo2Unreal version that works for UE4.22 please check out to [UE4.22 branch](https://github.com/AugmentedDesignLab/Sumo2Unreal/tree/UE4.22)
+#### For Sumo2Unreal version that works for UE4.22 please check out to [UE4.22 branch](https://github.com/AugmentedDesignLab/Sumo2Unreal/tree/Unreal4.22)
 
 ### Introduction
 This project is an importer for [SUMO](http://sumo.dlr.de/wiki/Sumo_at_a_Glance)'s .net.xml road network files into the Unreal Engine 4 environment. This is important to bridge the capabilities of SUMO as a road network generator/convertor and traffic simulator to the Unreal Engine which is the preferred choice to create simulation software for testing self-driving cars.
