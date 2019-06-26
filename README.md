@@ -14,7 +14,7 @@ The input taken by this importer is a SUMO's .net.xml road network file format a
 
 NETGENERATE Command - 
 ```
-netgenerate --grid --grid.x-number=20 --grid.y-number=5 --grid.y-length=40 --grid.x-length=200
+netgenerate --spider --spider.arm-number=4 --spider.circle-number=3 --spider.space-radius=100 --output-file=MySUMOFile.net.xml
 ```
 (The output by default goes into the 'net.net.xml' file, but you can add a -o parameter to specify file name)
 
