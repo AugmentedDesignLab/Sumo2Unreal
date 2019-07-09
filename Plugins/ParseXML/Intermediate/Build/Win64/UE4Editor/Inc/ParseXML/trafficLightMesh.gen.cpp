@@ -1,4 +1,4 @@
-// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 /*===========================================================================
 	Generated code exported from UnrealHeaderTool.
 	DO NOT modify this manually! Edit the corresponding .h files instead!
@@ -49,13 +49,17 @@ void EmptyLinkFunctionForGeneratedCodetrafficLightMesh() {}
 	};
 	const UE4CodeGen_Private::FClassParams Z_Construct_UClass_AtrafficLightMesh_Statics::ClassParams = {
 		&AtrafficLightMesh::StaticClass,
-		DependentSingletons, ARRAY_COUNT(DependentSingletons),
-		0x009000A0u,
-		nullptr, 0,
-		nullptr, 0,
 		nullptr,
 		&StaticCppClassTypeInfo,
-		nullptr, 0,
+		DependentSingletons,
+		nullptr,
+		nullptr,
+		nullptr,
+		ARRAY_COUNT(DependentSingletons),
+		0,
+		0,
+		0,
+		0x009000A0u,
 		METADATA_PARAMS(Z_Construct_UClass_AtrafficLightMesh_Statics::Class_MetaDataParams, ARRAY_COUNT(Z_Construct_UClass_AtrafficLightMesh_Statics::Class_MetaDataParams))
 	};
 	UClass* Z_Construct_UClass_AtrafficLightMesh()
@@ -67,7 +71,11 @@ void EmptyLinkFunctionForGeneratedCodetrafficLightMesh() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AtrafficLightMesh, 463709120);
+	IMPLEMENT_CLASS(AtrafficLightMesh, 779534016);
+	template<> PARSEXML_API UClass* StaticClass<AtrafficLightMesh>()
+	{
+		return AtrafficLightMesh::StaticClass();
+	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AtrafficLightMesh(Z_Construct_UClass_AtrafficLightMesh, &AtrafficLightMesh::StaticClass, TEXT("/Script/ParseXML"), TEXT("AtrafficLightMesh"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AtrafficLightMesh);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
