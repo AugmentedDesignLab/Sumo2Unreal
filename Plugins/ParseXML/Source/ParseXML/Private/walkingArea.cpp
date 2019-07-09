@@ -1,4 +1,3 @@
-#pragma once
 #include "walkingArea.h"
 
 walkingArea::walkingArea()
