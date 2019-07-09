@@ -10,6 +10,5 @@
 #include "D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\trafficLight.cpp"
 #include "D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\trafficLightActor.cpp"
 #include "D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\trafficLightMesh.cpp"
-#include "D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Private\walkingArea.cpp"
 #include "D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\Containers.cpp"
 #include "D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\Public\trafficLightActor.cpp"
