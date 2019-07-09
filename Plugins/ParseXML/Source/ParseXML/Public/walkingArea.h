@@ -1,12 +1,7 @@
-#ifndef WALKINGAREA_HEADER
-#define WALKINGAREA_HEADER
-#include "ContainersAndTypes.h"
-#include "Platform.h"
 #include "Engine.h"
+#include "Platform.h"
 #include <vector>
 
-//class declaration
-class UfileParser;
 
 class walkingArea
 {
@@ -17,6 +12,7 @@ public:
 
 	void setWalkingAreaID(const TCHAR* tempID);
 	void centroidCalculation();
+	//FVector trafficLightLocation();
 
 
 private:
@@ -25,5 +21,3 @@ private:
 	FString walkingAreaID;
 	std::vector<float> walkingAreaShapeCoordinates;
 };
-
-#endif
