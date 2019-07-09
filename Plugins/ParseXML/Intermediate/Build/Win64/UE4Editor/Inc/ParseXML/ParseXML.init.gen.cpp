@@ -19,8 +19,8 @@ void EmptyLinkFunctionForGeneratedCodeParseXML_init() {}
 			static const UE4CodeGen_Private::FPackageParams PackageParams = {
 				"/Script/ParseXML",
 				PKG_CompiledIn | 0x00000040,
-				0xDF5CEF16,
-				0xB66FE2A3,
+				0x46D45016,
+				0xD17F9C9F,
 				nullptr, 0,
 				METADATA_PARAMS(nullptr, 0)
 			};

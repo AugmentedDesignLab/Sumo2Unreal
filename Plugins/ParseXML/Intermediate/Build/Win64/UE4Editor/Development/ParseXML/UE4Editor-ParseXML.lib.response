@@ -8,7 +8,13 @@
 /NODEFAULTLIB
 "C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Intermediate\Build\Win64\SumoToUnrealEditor\Development\UnrealEd\SharedPCH.UnrealEd.h.obj"
 "C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\fileParser.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\trafficLight.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\trafficLightActor.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\trafficLightMesh.cpp.obj"
 "C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\walkingArea.cpp.obj"
 "C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\Module.ParseXML.gen.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\EdgeMesh.gen.cpp.obj"
+"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\ParseXML.init.gen.cpp.obj"
 "C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\PCLaunch.rc.res"
 /OUT:"C:\Users\iparanja\Documents\Unreal Projects\NewS2U\Sumo2Unreal\Plugins\ParseXML\Intermediate\Build\Win64\UE4Editor\Development\ParseXML\UE4Editor-ParseXML.lib"

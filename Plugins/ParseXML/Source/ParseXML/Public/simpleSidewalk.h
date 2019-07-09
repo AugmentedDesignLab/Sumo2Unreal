@@ -3,8 +3,6 @@
 #include <vector>
 #include "EdgeMesh.h"
 #include "fileParser.h"
-#include "Engine.h"
-#include "Platform.h"
 
 
 class simpleSidewalk {

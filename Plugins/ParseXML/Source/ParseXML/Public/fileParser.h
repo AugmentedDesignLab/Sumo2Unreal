@@ -2,15 +2,15 @@
 #include "Runtime/XmlParser/Public/FastXml.h"
 #include "Runtime/XmlParser/Public/XmlParser.h"
 #include "Runtime/Core/Public/Containers/Map.h"
-#include "SimpleEdge.h"
+#include "trafficLightMesh.h"
 #include "ContainersAndTypes.h"
+#include "Editor.h"
+#include "Editor/UnrealEd/Classes/Editor/EditorEngine.h"
 
 #include <stack>
 #include <memory>
 
-//class declarations
-class SimpleNode;
-class walkingArea;
+//forward declarations
 
 class UfileParser : public IFastXmlCallback
 {
@@ -76,13 +76,19 @@ public:
 	//void calculateLaneWidth();
 	float laneWidth;
 
+	//----------------Functions for initialzing Traffic Light----------------
+	void InitializetrafficLightAttributes(const TCHAR*, const TCHAR*);
+	void InitializeTrafficLight();
+
 private:
+	UWorld* World = GEditor->GetEditorWorldContext().World();
 	std::vector<float> Shapecoordinates;
 	FString selectedXMLFile;
 
 	//node flags and temp member variables
 	bool isElementNode = false;
 	bool isPriorityNode = false;
+	bool isTrafficNode = false;
 	
 	const TCHAR* nodeXCoordinate;
 	const TCHAR* nodeYCoordinate;
@@ -107,15 +113,20 @@ private:
 
 	//walking area member variables
 	bool isWalkingArea = false;
+	bool doesWalkingAreaExist = false; //useful when trying to spawn the traffic light.
 
 	//pedestrian crossing member variables
 	bool isCrossing = false;
 
-	//sidewalk parameter
+	//sidewalk member variables
 	bool isSidewalk = false;
+
+	//traffic light member variables
+	bool isElementtrafficLight = false;
 
 	//temporary ID
 	FString tempNodeID = "";
 	FString tempEdgeID = "";
 	FString walkingAreaID = "";
+	FString tempTrafficLightID = "";
 };

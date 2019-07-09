@@ -1,7 +1,5 @@
 #pragma once
 #include "walkingArea.h"
-#include "earcut.h"
-//#include "SimpleEdge.h"
 
 walkingArea::walkingArea()
 {
@@ -37,3 +35,10 @@ void walkingArea::centroidCalculation()
 	centroidX = cumulativeX / (walkingAreaShapeCoordinates.size() / 2);
 	centroidY = cumulativeY / (walkingAreaShapeCoordinates.size() / 2);
 }
+
+/*
+FVector walkingArea::trafficLightLocation()
+{
+	
+}
+*/
