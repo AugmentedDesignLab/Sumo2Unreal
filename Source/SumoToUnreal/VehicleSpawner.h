@@ -18,6 +18,10 @@ public:
 protected:
    void BeginPlay() override;
 
+private:
+   int Iteration;
+   float TimeToSpawn;
+
 public:
    void Tick(float DeltaTime) override;
 
