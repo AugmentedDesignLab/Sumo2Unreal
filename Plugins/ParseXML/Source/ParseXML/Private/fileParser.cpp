@@ -13,22 +13,39 @@ UfileParser::UfileParser(const TCHAR* selectedFile) : selectedXMLFile(selectedFi
 	FVector Location = FVector(0.0f, 0.0f, 2000.0f);
 	FRotator Rotation = FRotator(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnParameters;
-	TArray<AActor*> FoundActors;
-	UGameplayStatics::GetAllActorsOfClass(World, AEdgeMesh::StaticClass(), FoundActors);
-
-	for (int i = 0; i < FoundActors.Num(); i++) {
-		World->DestroyActor(FoundActors[i]); //Destroy all actors before starting
-	}
-
+	getAllActorsOfClass();
 	World->SpawnActor<AAtmosphericFog>(Location, Rotation, SpawnParameters);
 	Location.Z = 100000.0f;
-	World->SpawnActor<ASkyLight>(Location, Rotation, SpawnParameters);
+	ASkyLight* Skylight = World->SpawnActor<ASkyLight>(Location, Rotation, SpawnParameters);
+	if (Skylight !=nullptr) {
+		UE_LOG(LogEngine, Warning, TEXT("skylight spawned!"));
+		Skylight->GetLightComponent()->SetIntensity(5.0f);
+		//Skylight->GetLightComponent()->SetMobility(EComponentMobility::Movable);
+		GEditor->BuildLighting(LightOptions);
+	}
 }
 
 UfileParser::~UfileParser()
 {
 	
 }
+
+void UfileParser::getAllActorsOfClass() {
+
+	UGameplayStatics::GetAllActorsOfClass(World, AEdgeMesh::StaticClass(), FoundActors);
+	for (int i = 0; i < FoundActors.Num(); i++) {
+		World->DestroyActor(FoundActors[i]); //Destroy all actors before starting
+	}
+	UGameplayStatics::GetAllActorsOfClass(World, AAtmosphericFog::StaticClass(), FoundActors);
+	for (int i = 0; i < FoundActors.Num(); i++) {
+		World->DestroyActor(FoundActors[i]); //Destroy all actors before starting
+	}
+	UGameplayStatics::GetAllActorsOfClass(World, ASkyLight::StaticClass(), FoundActors);
+	for (int i = 0; i < FoundActors.Num(); i++) {
+		World->DestroyActor(FoundActors[i]); //Destroy all actors before starting
+	}
+}
+
 
 void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue) 
 {
@@ -232,24 +249,23 @@ void UfileParser::InitializeNodeAttributes(const TCHAR* AttributeName, const TCH
 
 //walking Area parsing is similar to the nodes. TMap storing the walkingArea objects is different. Also walkingArea meshes will be 
 //3d at some point. 
-walkingAreaPtr UfileParser::InitializewalkingArea()
+void UfileParser::InitializewalkingArea()
 {
 	//unique_ptr for object creation for extended lifetime
 	walkingAreaPtr currentWalkingArea = std::make_unique<walkingArea>();
 	currentWalkingArea->walkingAreaShapeCoordinates = Shapecoordinates;
 	currentWalkingArea->setWalkingAreaID(*walkingAreaID);
 
-	UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-=-=The walking area ID stored is %s-=-=-=-=-=-=-="), *walkingAreaID);
-
 	FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
 	currentWalkingArea->centroidCalculation();
 	FVector origin(currentWalkingArea->centroidX, currentWalkingArea->centroidY, 0.1f);
 
+	walkingAreaPtr movedWalkingAreaPointer = nullptr;
 
 	FTransform SpawnTransform(RotationEdge, origin);
 	AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
 
-	if (MyDeferredActor)
+	if (MyDeferredActor != nullptr)
 	{
 		FVector coordinates;
 		int i = 0;
@@ -273,11 +289,10 @@ walkingAreaPtr UfileParser::InitializewalkingArea()
 		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 		//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
 
-		UE_LOG(LogEngine, Warning, TEXT("the walkingArea actor is spawned"));
-		walkingAreaContainer.walkingAreaMap.Add(*walkingAreaID, std::move(currentWalkingArea));
+		walkingAreaContainer.walkingAreaMap.Add(*(currentWalkingArea->walkingAreaID), std::move(currentWalkingArea));
+		UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-=-=The walking area ID stored is %s-=-=-=-=-=-=-="), *walkingAreaID);
+
 	}
-	
-	return currentWalkingArea;
 }
 
 
@@ -296,14 +311,12 @@ SimpleNodePtr UfileParser::InitializeNode()
 	FTransform SpawnTransform(RotationEdge, origin);
 	AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
 
-	if (MyDeferredActor)
-
+	if (MyDeferredActor != nullptr)
 	{
 		FVector coordinates;
 		int i=0;
 		while ((i+2) <= Node->nodeShapecoordinates.size())
-		{
-				
+		{		
 				coordinates.X = Node->nodeShapecoordinates[i] - Node->NodePosition.X;
 				coordinates.Y = Node->nodeShapecoordinates[i + 1] - Node->NodePosition.Y;
 				coordinates.Z = 0.0f;
@@ -450,7 +463,6 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge()
 
 			UE_LOG(LogEngine, Warning, TEXT("=================the curbcurbcurb actor 2 is spawned==========="));
 		}
-
 		i += 2;
 	}
 
@@ -516,10 +528,8 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 		AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
 
 		if (MyDeferredActor)
-
 		{
 			(MyDeferredActor->vertices) = (Edge->vertexArray);
-
 			for (int j = 0; j < (MyDeferredActor->vertices.Num()); j++) {
 				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), j);
 				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[j].X);
@@ -527,44 +537,66 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[j].Z);
 				UE_LOG(LogEngine, Warning, TEXT("====="));
 			}
-
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
-
 			UE_LOG(LogEngine, Warning, TEXT("the edge actor is spawned"));
 		}
-
 		i+=2;
 	}
 	return Edge;
 }
 
-void UfileParser::InitializeTrafficLight()//spawn two traffic lights per walking area - At the first and fourth x,y coordinate.
+void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two traffic lights per walking area - At the first and fourth x,y coordinate.
 {
-	UE_LOG(LogEngine, Warning, TEXT("******Initialize traffic light function!!*********"));
 	walkingArea* currentWalkingAreaObject;
-	//TArray<const TCHAR*> keyArray;
-	//walkingAreaContainer.walkingAreaMap.GenerateKeyArray(keyArray); //populate the key array.
 	for (const TPair<const TCHAR*, walkingAreaPtr>& pair : walkingAreaContainer.walkingAreaMap)// Find the corresponding walking area for a traffic light for a particular junction.
 	{
 		FString currentKey = FString(pair.Key);
 		UE_LOG(LogEngine, Warning, TEXT("The walking area key is %s"), pair.Key);
 		FString currentTrafficLightNodeID = tempTrafficLightID;
-		FVector trafficLight1Location;
-		FRotator trafficLightRotation(0.0f, 0.0f, 0.0f);
+		FVector trafficControl1Location;
+		FQuat trafficControlRotation(0.0f, 0.0f, 0.0f, 0.0f);
 		FActorSpawnParameters SpawnInfo;
-		if (currentKey.Contains(currentTrafficLightNodeID))
+		FVector trafficLightScale(1.0f, 1.0f, 1.0f);
+		if ((currentKey.Contains(currentTrafficLightNodeID)) && (FString(controlType).Equals(TEXT("trafficLight"))))
 		{
 			UE_LOG(LogEngine, Warning, TEXT("******%s contains %s!!*********"), *currentKey, *currentTrafficLightNodeID);
 			currentWalkingAreaObject = pair.Value.get();
-			trafficLight1Location.X = currentWalkingAreaObject->walkingAreaShapeCoordinates[0];
-			trafficLight1Location.Y = currentWalkingAreaObject->walkingAreaShapeCoordinates[1];
-			trafficLight1Location.Z;
-				
-			World->SpawnActor<AtrafficLightMesh>(trafficLight1Location, trafficLightRotation, SpawnInfo);
-			break;
+			currentWalkingAreaObject->trafficLightLocationCalculator();
+			trafficControl1Location = currentWalkingAreaObject->trafficLight1Location;
+			trafficControlRotation = currentWalkingAreaObject->trafficLight1Orientation;
+			FTransform SpawnTransform(trafficControlRotation, trafficControl1Location, trafficLightScale);
+			AtrafficLightMesh* MyDeferredTrafficLight = Cast<AtrafficLightMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AtrafficLightMesh::StaticClass(), SpawnTransform)); //Downcasting
+			UGameplayStatics::FinishSpawningActor(MyDeferredTrafficLight, SpawnTransform);
+		}
+		else if ((currentKey.Contains(currentTrafficLightNodeID)) && (FString(controlType).Equals(TEXT("stopSign"))))
+		{
+			UE_LOG(LogEngine, Warning, TEXT("******%s contains %s!!*********"), *currentKey, *currentTrafficLightNodeID);
+			currentWalkingAreaObject = pair.Value.get();
+
+			currentWalkingAreaObject->trafficLightLocationCalculator();
+			trafficControl1Location = currentWalkingAreaObject->trafficLight1Location;
+			trafficControl1Location.Z = 2.0f; //Spawn higher
+
+			currentWalkingAreaObject->stopSignRotationCalculator();
+			trafficControlRotation = currentWalkingAreaObject->stopSignOrientation;
+			UE_LOG(LogEngine, Warning, TEXT("#####The stop sign rotation is %f, %f, %f #####"), trafficControlRotation.X, trafficControlRotation.Y, trafficControlRotation.Z);
+			//trafficControlRotation.X += 90.0f;
+			UE_LOG(LogEngine, Warning, TEXT("#####The stop sign rotation is %f, %f, %f #####"), trafficControlRotation.X, trafficControlRotation.Y, trafficControlRotation.Z);
+
+			FTransform SpawnTransform(trafficControlRotation, trafficControl1Location, trafficLightScale);
+			AStopSignMesh* MyDeferredStopSign = Cast<AStopSignMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AStopSignMesh::StaticClass(), SpawnTransform)); //Downcasting
+			UGameplayStatics::FinishSpawningActor(MyDeferredStopSign, SpawnTransform);
 		}
 	}	
+}
+void UfileParser::iterateWalkingAreas()
+{
+	for (TMap<const TCHAR*, walkingAreaPtr>::TConstIterator it = walkingAreaContainer.walkingAreaMap.CreateConstIterator(); it; ++it)// Find the corresponding walking area for a traffic light for a particular junction.
+	{
+		FString currentKey = FString(it->Key);
+		UE_LOG(LogEngine, Warning, TEXT("The walking area key is %s"), it->Key);
+	}
 }
 
 bool UfileParser::loadxml()
@@ -692,6 +724,7 @@ bool UfileParser::ProcessClose(const TCHAR* Element)
 			{
 				UE_LOG(LogEngine, Warning, TEXT("Walking area shape is set"));
 				InitializewalkingArea();
+				iterateWalkingAreas();
 				UE_LOG(LogEngine, Warning, TEXT("WalkingArea created"));
 				doesWalkingAreaExist = true; 
 				isWalkingArea = false;
@@ -706,7 +739,7 @@ bool UfileParser::ProcessClose(const TCHAR* Element)
 
 	if ((FString(Element)).Equals(TEXT("tlLogic")))
 	{
-		InitializeTrafficLight();
+		InitializeTrafficControl(TEXT("trafficLight"));
 		isElementtrafficLight = false;
 		tempTrafficLightID = "";
 

@@ -15,6 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	AtrafficLightMesh();
 
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* trafficLightComponent;
 
 protected:
@@ -23,8 +24,5 @@ protected:
 
 public:	
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	
-	
+	virtual void Tick(float DeltaTime) override;	
 };
