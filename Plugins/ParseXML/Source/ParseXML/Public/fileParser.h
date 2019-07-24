@@ -3,10 +3,11 @@
 #include "Runtime/XmlParser/Public/XmlParser.h"
 #include "Runtime/Core/Public/Containers/Map.h"
 #include "trafficLightMesh.h"
+#include "StopSignMesh.h"
 #include "ContainersAndTypes.h"
 #include "Editor.h"
 #include "Editor/UnrealEd/Classes/Editor/EditorEngine.h"
-
+#include "LightingBuildOptions.h"
 #include <stack>
 #include <memory>
 
@@ -42,22 +43,14 @@ public:
 	FString getTempNodeID();
 	bool setTempNodeID(const TCHAR*);
 
-	/*
-	//parses through edgelist and prints all edges
-	void printEdges();
-
-	//adds attributes to edge
-	void InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue);
-
-	//adds edges to the edge list
-	void addEdge(const TCHAR* Element);
-	*/
+	//To find all actors that are of the types AEdgeMesh, AAtmosphericFog and ASkyLight types. 
+	void getAllActorsOfClass();
 
 	//----Functions for initializing the walkingArea objects----
 
 	//Collect all required node attributes for one object as member variables and then initialize a node object
 	void InitializeWalkingAreaAttributes(const TCHAR*, const TCHAR*);
-	walkingAreaPtr InitializewalkingArea();
+	void InitializewalkingArea();
 
 	//one container object to store all node mappings
 	walkingAreaCont walkingAreaContainer;
@@ -76,14 +69,17 @@ public:
 	//void calculateLaneWidth();
 	float laneWidth;
 
-	//----------------Functions for initialzing Traffic Light----------------
-	void InitializetrafficLightAttributes(const TCHAR*, const TCHAR*);
-	void InitializeTrafficLight();
+	//----------------Functions for initialzing Traffic Lights and Stop signs----------------
+	void InitializetrafficLightAttributes(const TCHAR*, const TCHAR*); //Traffic light id is currently being used to place stop signs also.
+	void InitializeTrafficControl(const TCHAR*);  //Used for either initializing traffic lights and stop signs. 
+	void iterateWalkingAreas();
 
 private:
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 	std::vector<float> Shapecoordinates;
 	FString selectedXMLFile;
+	TArray<AActor*> FoundActors;
+	FLightingBuildOptions LightOptions;
 
 	//node flags and temp member variables
 	bool isElementNode = false;
@@ -128,5 +124,6 @@ private:
 	FString tempNodeID = "";
 	FString tempEdgeID = "";
 	FString walkingAreaID = "";
+	FString walkingAreaKeyID = "";
 	FString tempTrafficLightID = "";
 };

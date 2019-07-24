@@ -3,11 +3,14 @@
 
 vs/
 Binaries/*
-Intermediate/AssetRegistryCache/*
-Intermediate/ProjectFiles/*
-Intermediate/ReimportCache/*
-Intermediate/CachedAssetRegistry.bin
+Intermediate/*
+DerivedDataCache/*
 Saved/*
+Content/*
+
+#Plugin specific files
+Plugins/ParseXML/Binaries/*
+Plugins/ParseXML/Intermediate/*
 
 # User-specific files
 *.suo
