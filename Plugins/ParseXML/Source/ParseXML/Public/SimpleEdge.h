@@ -33,11 +33,15 @@ public:
 	void setSecondShape(std::pair<double, double> shape);
 	*/
 
-	//Getter Functions
+	// Getter Functions
+   // Ivan: Unreal Engine Style Guide suggest renaming functions name to UpperCaseStyle
+   // 
 	FString getID();
 	FString getFromID();
 	FString getToID();
 	float getLaneLength();
+   FVector GetCentroid() const { return this->centroid; }
+
 
 	//Setting the vertices to be used during the edge mesh creation on UE4
 	void setVertexCoordinates(float);

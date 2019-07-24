@@ -80,6 +80,10 @@ public:
 	void InitializetrafficLightAttributes(const TCHAR*, const TCHAR*);
 	void InitializeTrafficLight();
 
+   //---------------- Functions for initializing Vehicles ----------------
+   void InitializeVehicles();
+
+
 private:
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 	std::vector<float> Shapecoordinates;

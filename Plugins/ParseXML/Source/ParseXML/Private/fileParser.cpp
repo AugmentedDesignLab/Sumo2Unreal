@@ -567,6 +567,28 @@ void UfileParser::InitializeTrafficLight()//spawn two traffic lights per walking
 	}	
 }
 
+void UfileParser::InitializeVehicles()
+{
+   const auto& Map = EdgeContainer.EdgeMap;
+
+   //for (const auto& Pair : Map)
+   //{
+   //   auto Key = FString(Pair.Key);
+   //}
+
+   auto Iter = Map.CreateConstIterator();
+
+   const auto Index = FMath::RandRange(0, Map.Num() - 1);
+   for (auto i = 0; i < Index; ++i)
+   {
+      ++Iter;
+   }
+
+   auto Key = FString(Iter->Key);
+
+   UE_LOG(LogEngine, Warning, TEXT("*************** Initialize vehicles"));
+}
+
 bool UfileParser::loadxml()
 {
 	UE_LOG(LogEngine, Warning, TEXT("Loading started"));
@@ -574,6 +596,9 @@ bool UfileParser::loadxml()
 	int32 outErrorNum;
 	FString Text = "";
 	bool success = FFastXml::ParseXmlFile((IFastXmlCallback*)(this), selectedXMLFile.GetCharArray().GetData(), (TCHAR*)*Text, nullptr, false, false, outError, outErrorNum);
+
+   // TODO: Spawn the car
+
 	return success;
 }
 
@@ -651,7 +676,7 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 	{
 		InitializetrafficLightAttributes(AttributeName, AttributeValue);
 	}
-	
+
 	return true;
 }
 
@@ -711,6 +736,10 @@ bool UfileParser::ProcessClose(const TCHAR* Element)
 		tempTrafficLightID = "";
 
 	}
+
+   // TODO: Make this properly 
+   InitializeVehicles();
+
 	//UE_LOG(LogEngine, Warning, TEXT("ProcessClose Element %s"), Element);
 	return true;
 }
