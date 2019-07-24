@@ -1,4 +1,0 @@
-D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Source\SumoToUnreal\SumoToUnreal.Build.cs
-D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Plugins\ParseXML\Source\ParseXML\ParseXML.Build.cs
-D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Source\SumoToUnreal.Target.cs
-D:\School HW\ucsc\ADL Lab\Sumo2Unreal 4.22 - 2\Source\SumoToUnrealEditor.Target.cs
