@@ -416,7 +416,7 @@ void SimpleEdge::setVertexCoordinates(float paralaneWidth)
 	vertexArray.Empty();
 	UE_LOG(LogEngine, Warning, TEXT("Vertex Array emptied"));
 
-	Ax0.X = Ax0.X - (centroid.X);  //Update the vertex coordinates relative to centroid
+	Ax0.X = Ax0.X - (centroid.X);  //Update the vertex coordinates to be relative to centroid
 	Ax0.Y = Ax0.Y - (centroid.Y);
 	vertexArray.Add(Ax0);
 

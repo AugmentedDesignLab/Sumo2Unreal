@@ -19,6 +19,9 @@ public:
 	UfileParser(const TCHAR*);
 	virtual ~UfileParser();
 
+	//before starting any parsing.
+	void destroyFoundActors();
+
 	//IFastXMLCallback
 	bool ProcessXmlDeclaration(const TCHAR* ElementData, int32 XmlFileLineNumber);
 	bool ProcessElement(const TCHAR* ElementName, const TCHAR* ElementData, int32 XmlFileLineNumber);
@@ -71,7 +74,7 @@ public:
 
 	//----------------Functions for initialzing Traffic Lights and Stop signs----------------
 	void InitializetrafficLightAttributes(const TCHAR*, const TCHAR*); //Traffic light id is currently being used to place stop signs also.
-	void InitializeTrafficControl(const TCHAR*);  //Used for either initializing traffic lights and stop signs. 
+	void InitializeTrafficControl(const TCHAR*);  //Used for either initializing traffic lights and stop signs.
 	void iterateWalkingAreas();
 
 private:
@@ -81,16 +84,17 @@ private:
 	TArray<AActor*> FoundActors;
 	FLightingBuildOptions LightOptions;
 
-	//node flags and temp member variables
-	bool isElementNode = false;
+	//node related flags and member variables
+	
+	bool isElementNode = false;//flag
 	bool isPriorityNode = false;
 	bool isTrafficNode = false;
-	
-	const TCHAR* nodeXCoordinate;
+	const TCHAR* nodeXCoordinate;//attribute
 	const TCHAR* nodeYCoordinate;
 	bool xCoordinateIsSet = false;
 	bool yCoordinateIsSet = false;
 	bool laneWidthIsSet = false;
+	TArray<TUniquePtr<FString>> trafficControlIDList; //List of node IDs which are of traffic light or stop sign type. 
 
 	//edge flags and temp member variables
 	bool isElementEdge = false;

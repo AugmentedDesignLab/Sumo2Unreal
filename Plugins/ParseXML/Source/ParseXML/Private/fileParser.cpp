@@ -30,24 +30,28 @@ UfileParser::~UfileParser()
 	
 }
 
-void UfileParser::getAllActorsOfClass() {
-
-	UGameplayStatics::GetAllActorsOfClass(World, AEdgeMesh::StaticClass(), FoundActors);
-	for (int i = 0; i < FoundActors.Num(); i++) {
-		World->DestroyActor(FoundActors[i]); //Destroy all actors before starting
-	}
-	UGameplayStatics::GetAllActorsOfClass(World, AAtmosphericFog::StaticClass(), FoundActors);
-	for (int i = 0; i < FoundActors.Num(); i++) {
-		World->DestroyActor(FoundActors[i]); //Destroy all actors before starting
-	}
-	UGameplayStatics::GetAllActorsOfClass(World, ASkyLight::StaticClass(), FoundActors);
+void UfileParser::destroyFoundActors() {
 	for (int i = 0; i < FoundActors.Num(); i++) {
 		World->DestroyActor(FoundActors[i]); //Destroy all actors before starting
 	}
 }
 
 
-void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue) 
+
+void UfileParser::getAllActorsOfClass() {
+
+	UGameplayStatics::GetAllActorsOfClass(World, ARoadMesh::StaticClass(), FoundActors);
+	destroyFoundActors();
+	UGameplayStatics::GetAllActorsOfClass(World, AAtmosphericFog::StaticClass(), FoundActors);
+	destroyFoundActors();
+	UGameplayStatics::GetAllActorsOfClass(World, ASkyLight::StaticClass(), FoundActors);
+	destroyFoundActors();
+	UGameplayStatics::GetAllActorsOfClass(World, AStopSignMesh::StaticClass(), FoundActors);
+	destroyFoundActors();
+}
+
+
+void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue)
 {
 	if (FString(AttributeName).Equals(TEXT("id")))
 	{
@@ -92,18 +96,12 @@ void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCH
 		laneWidthIsSet = true;
 	}
 
-	else if (FString(AttributeName).Equals(TEXT("allow")))
-	{
+	else if (FString(AttributeName).Equals(TEXT("allow"))) {
 		isSidewalk = true;
-	}
-
-	else
-	{
 		return;
 	}
 
-	//UE_LOG(LogEngine, Warning, TEXT("Edge Attributes initialized!"));
-	
+	else return;
 }
 
 FString UfileParser::getTempNodeID()
@@ -122,26 +120,37 @@ void UfileParser::ShapeProcessing(const TCHAR* ShapeString)
 {
 	std::string CoordinateString = TCHAR_TO_UTF8(ShapeString);
 	Shapecoordinates.clear();
-	for (std::string::iterator it = CoordinateString.begin(); it != CoordinateString.end(); ++it) 
+	for (std::string::iterator it = CoordinateString.begin(); it != CoordinateString.end(); ++it)
 	{
-		if (*it == ',') 
+		if (*it == ',')
 		{
 			*it = ' ';
 		}
 		else continue;			//convert all commas in string stream into space
 	}
-	
+
 	std::stringstream ss;
 	ss << CoordinateString;
 
 	float found;
 
-	while (!ss.eof()) 
+	int i = 1;
+	while (!ss.eof())
 	{
-		//check if it is valid to put stringstream object into float variable
+		//check if it is valid to put stringstream object into float variable. Also check for every second index - if found multiply with with negative 1 to mirror about y axis.
 		if (ss >> found)
 		{
-			Shapecoordinates.push_back(found);
+			if ((i % 2) == 0)
+			{
+				found = (-1) * found; //mirror the network about the x-axis. This means changing the sign of the y coordinate. 
+				Shapecoordinates.push_back(found*100); //Since the default unreal engine unit is cm and the default SUMO unit is m, we perform the conversion here.
+				i += 1;
+			}
+			else
+			{
+				Shapecoordinates.push_back(found*100);
+				i += 1;
+			}
 		}
 	}
 }
@@ -149,7 +158,7 @@ void UfileParser::ShapeProcessing(const TCHAR* ShapeString)
 void UfileParser::resetFlagsAndTempMembers()
 {
 	//isElementNode = false;
-	isTrafficNode = false;
+	//isTrafficNode = false;
 	isPriorityNode = false;
 	tempNodeID = "";
 	nodeXCoordinate = nullptr;
@@ -173,7 +182,6 @@ void UfileParser::InitializetrafficLightAttributes(const TCHAR* AttributeName, c
 	if (FString(AttributeName).Equals(TEXT("id")))
 	{
 		tempTrafficLightID = FString(AttributeValue);
-		UE_LOG(LogEngine, Warning, TEXT("Traffic Light ID is %s"), AttributeValue);
 		return;
 	}
 }
@@ -186,33 +194,40 @@ void UfileParser::InitializeWalkingAreaAttributes(const TCHAR* AttributeName, co
 		return;
 	}
 
-	if ((FString(AttributeName)).Equals(TEXT("shape")))
+	else if ((FString(AttributeName)).Equals(TEXT("shape")))
 	{
 		ShapeProcessing(AttributeValue);
 		shapeIsSet = true;
 		return;
 	}
+	else return;
 
 }
 
 void UfileParser::InitializeNodeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue)
 {
-
 	if (FString(AttributeName).Equals(TEXT("id")))
 	{
 		setTempNodeID(AttributeValue);
 		return;
 	}
 
-	if ((FString(AttributeValue)).Equals(TEXT("priority")))
+	else if ((FString(AttributeValue)).Equals(TEXT("priority")))
 	{
 		isPriorityNode = true;
 		return;
 	}
 
-	if ((FString(AttributeValue)).Equals(TEXT("traffic_light")))
+	else if ((FString(AttributeValue)).Equals(TEXT("traffic_light")) || FString(AttributeValue).Equals(TEXT("allway_stop")))
 	{
 		isTrafficNode = true;
+		TUniquePtr<FString> tempPointer = MakeUnique<FString>(tempNodeID);//creates a new object which is 'owned' by tempPointer
+		trafficControlIDList.Push(MoveTempIfPossible(tempPointer)); 
+		/*
+		use the move constructor to 'move' the ownership of the newly created object to 
+		the new unique pointer within trafficControlIDList. As long as the pointer exists,
+		the object it is pointing to (the Node ID) will exist. 
+		*/
 		return;
 	}
 
@@ -243,8 +258,6 @@ void UfileParser::InitializeNodeAttributes(const TCHAR* AttributeName, const TCH
 		return;
 	}
 
-	UE_LOG(LogEngine, Warning, TEXT("Node Attributes initialized!"));
-
 }
 
 //walking Area parsing is similar to the nodes. TMap storing the walkingArea objects is different. Also walkingArea meshes will be 
@@ -263,7 +276,7 @@ void UfileParser::InitializewalkingArea()
 	walkingAreaPtr movedWalkingAreaPointer = nullptr;
 
 	FTransform SpawnTransform(RotationEdge, origin);
-	AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
+	ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
 
 	if (MyDeferredActor != nullptr)
 	{
@@ -277,20 +290,12 @@ void UfileParser::InitializewalkingArea()
 			MyDeferredActor->vertices.Add(coordinates);
 			i += 2;
 		}
-
-		for (int j = 0; j < (MyDeferredActor->vertices.Num()); j++) {
-			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), j);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[j].X);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[j].Y);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[j].Z);
-			UE_LOG(LogEngine, Warning, TEXT("====="));
-		}
-
 		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
-		//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
-
 		walkingAreaContainer.walkingAreaMap.Add(*(currentWalkingArea->walkingAreaID), std::move(currentWalkingArea));
-		UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-=-=The walking area ID stored is %s-=-=-=-=-=-=-="), *walkingAreaID);
+		/*
+		Here we transfer ownership of the object pointed to by 'currentWalkingArea' pointer within the 
+		walking area hashmap. As long as the pointer object exists, the object pointed by it will exist. 
+		*/
 
 	}
 }
@@ -309,7 +314,7 @@ SimpleNodePtr UfileParser::InitializeNode()
 
 
 	FTransform SpawnTransform(RotationEdge, origin);
-	AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
+	ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
 
 	if (MyDeferredActor != nullptr)
 	{
@@ -323,22 +328,10 @@ SimpleNodePtr UfileParser::InitializeNode()
 				MyDeferredActor->vertices.Add(coordinates);	
 				i += 2;
 		}
-		
-		for (int j = 0; j < (MyDeferredActor->vertices.Num()); j++) {
-			UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), j);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[j].X);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[j].Y);
-			UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[j].Z);
-			UE_LOG(LogEngine, Warning, TEXT("====="));
-		}
-
 		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
-		//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
 
 		//initialize map with the pointer for extended node lifetime
 		NodeContainer.NodeMap.Add(*tempNodeID, std::move(Node));
-
-		UE_LOG(LogEngine, Warning, TEXT("the Node actor is spawned"));
 	}
 	return Node;
 }
@@ -364,14 +357,8 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge()
 		Edge->setShapeCoordinates(tempvector);
 		tempvector.clear();
 
-		if (laneWidthIsSet == true)
-		{
-			Edge->setSideWalkVertCoordinates(laneWidth);  //default SUMO lane width
-		}
-		else
-		{
-			Edge->setSideWalkVertCoordinates(3.2);  //default SUMO lane width
-		}
+		if (laneWidthIsSet == true) Edge->setSideWalkVertCoordinates(laneWidth*100); //default SUMO lane width
+		else Edge->setSideWalkVertCoordinates(320);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm (12 feet).
 
 		FVector originCoordinates = Edge->centroid;
 		FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
@@ -383,25 +370,11 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge()
 		
 
 		FTransform SpawnTransform(RotationEdge, origin);
-		AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
+		ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
 
-		if (MyDeferredActor)
-
-		{
+		if (MyDeferredActor != nullptr) {
 			(MyDeferredActor->vertices) = (Edge->vertexArray);
-
-			for (int j = 0; j < (MyDeferredActor->vertices.Num()); j++) {
-				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), j);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[j].X);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[j].Y);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[j].Z);
-				UE_LOG(LogEngine, Warning, TEXT("====="));
-			}
-
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
-			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
-
-			UE_LOG(LogEngine, Warning, TEXT("==============pedestrian actor is spawned!==========="));
 		}
 
 		FVector originCoordinatesCurb1 = Edge->CentroidcurbTop1;
@@ -413,25 +386,11 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge()
 		originCurb1.Z = 0.2f;
 
 		FTransform SpawnTransformCurb1(RotationEdgeCurb1, originCurb1);
-		AEdgeMesh* MyDeferredActor1 = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransformCurb1)); //Downcasting
+		ARoadMesh* MyDeferredActor1 = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransformCurb1)); //Downcasting
 
-		if (MyDeferredActor1)
-
-		{
-			(MyDeferredActor1->vertices) = (Edge->curbVerticesTop1);
-
-			for (int k = 0; k < (MyDeferredActor1->vertices.Num()); k++) {
-				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), k);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor1->vertices[k].X);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor1->vertices[k].Y);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor1->vertices[k].Z);
-				UE_LOG(LogEngine, Warning, TEXT("====="));
-			}
-
+		if (MyDeferredActor1 != nullptr){
+			MyDeferredActor1->vertices = Edge->curbVerticesTop1;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor1, SpawnTransformCurb1);
-			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
-
-			UE_LOG(LogEngine, Warning, TEXT("==============the curb actor 1 is spawned=============="));
 		}
 
 		FVector originCoordinatesCurb2 = Edge->CentroidcurbTop2;
@@ -443,25 +402,11 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge()
 		originCurb2.Z = 0.2f;
 
 		FTransform SpawnTransformCurb2(RotationEdgeCurb2, originCurb2);
-		AEdgeMesh* MyDeferredActor2 = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransformCurb2)); //Downcasting
+		ARoadMesh* MyDeferredActor2 = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransformCurb2)); //Downcasting
 
-		if (MyDeferredActor2)
-
-		{
-			(MyDeferredActor2->vertices) = (Edge->curbVerticesTop2);
-
-			for (int l = 0; l < (MyDeferredActor2->vertices.Num()); l++) {
-				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), l);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor2->vertices[l].X);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor2->vertices[l].Y);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor2->vertices[l].Z);
-				UE_LOG(LogEngine, Warning, TEXT("====="));
-			}
-
+		if (MyDeferredActor2 !=nullptr) {
+			MyDeferredActor2->vertices = Edge->curbVerticesTop2;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor2, SpawnTransformCurb2);
-			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
-
-			UE_LOG(LogEngine, Warning, TEXT("=================the curbcurbcurb actor 2 is spawned==========="));
 		}
 		i += 2;
 	}
@@ -499,7 +444,7 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 		}
 		else
 		{
-			Edge->setVertexCoordinates(3.2);  //default SUMO lane width
+			Edge->setVertexCoordinates(320);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm. 
 		}
 
 		FVector originCoordinates = Edge->centroid;
@@ -525,68 +470,55 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 		}
 
 		FTransform SpawnTransform(RotationEdge, origin);
-		AEdgeMesh* MyDeferredActor = Cast<AEdgeMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AEdgeMesh::StaticClass(), SpawnTransform)); //Downcasting
+		ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
 
 		if (MyDeferredActor)
 		{
 			(MyDeferredActor->vertices) = (Edge->vertexArray);
-			for (int j = 0; j < (MyDeferredActor->vertices.Num()); j++) {
-				UE_LOG(LogEngine, Warning, TEXT("MyDeferredActor->vertices[%d]: "), j);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorX: %f"), MyDeferredActor->vertices[j].X);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorY: %f"), MyDeferredActor->vertices[j].Y);
-				UE_LOG(LogEngine, Warning, TEXT("FVectorZ: %f"), MyDeferredActor->vertices[j].Z);
-				UE_LOG(LogEngine, Warning, TEXT("====="));
-			}
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
-			UE_LOG(LogEngine, Warning, TEXT("the edge actor is spawned"));
 		}
 		i+=2;
 	}
 	return Edge;
 }
 
+
 void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two traffic lights per walking area - At the first and fourth x,y coordinate.
 {
-	walkingArea* currentWalkingAreaObject;
+	walkingArea* currentWalkingAreaObject; 
 	for (const TPair<const TCHAR*, walkingAreaPtr>& pair : walkingAreaContainer.walkingAreaMap)// Find the corresponding walking area for a traffic light for a particular junction.
 	{
-		FString currentKey = FString(pair.Key);
-		UE_LOG(LogEngine, Warning, TEXT("The walking area key is %s"), pair.Key);
-		FString currentTrafficLightNodeID = tempTrafficLightID;
-		FVector trafficControl1Location;
-		FQuat trafficControlRotation(0.0f, 0.0f, 0.0f, 0.0f);
-		FActorSpawnParameters SpawnInfo;
+		FString currentKey = FString(pair.Key); //ID of the walking area.
+		FString currentControlNodeID = FString(TEXT(":0_0_"));
+		/*
+		For stop sign from IntGen --> Netgenerate, we only check for the walking areas within one junction. 
+		This is to prevent turn lane's junction walking areas to be considered when trying to place the stop sign. 
+		*/
+		FVector trafficControl1Location; 
+		FQuat trafficControlRotation;
 		FVector trafficLightScale(1.0f, 1.0f, 1.0f);
-		if ((currentKey.Contains(currentTrafficLightNodeID)) && (FString(controlType).Equals(TEXT("trafficLight"))))
+
+		if ((currentKey.Contains(currentControlNodeID)) && (FString(controlType).Equals(TEXT("trafficLight"))))
 		{
-			UE_LOG(LogEngine, Warning, TEXT("******%s contains %s!!*********"), *currentKey, *currentTrafficLightNodeID);
 			currentWalkingAreaObject = pair.Value.get();
-			currentWalkingAreaObject->trafficLightLocationCalculator();
-			trafficControl1Location = currentWalkingAreaObject->trafficLight1Location;
+			currentWalkingAreaObject->trafficControlLocationCalculator();
+			trafficControl1Location = currentWalkingAreaObject->trafficControlLocation;
 			trafficControlRotation = currentWalkingAreaObject->trafficLight1Orientation;
 			FTransform SpawnTransform(trafficControlRotation, trafficControl1Location, trafficLightScale);
 			AtrafficLightMesh* MyDeferredTrafficLight = Cast<AtrafficLightMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AtrafficLightMesh::StaticClass(), SpawnTransform)); //Downcasting
 			UGameplayStatics::FinishSpawningActor(MyDeferredTrafficLight, SpawnTransform);
 		}
-		else if ((currentKey.Contains(currentTrafficLightNodeID)) && (FString(controlType).Equals(TEXT("stopSign"))))
+		else if ((currentKey.Contains(currentControlNodeID)) && (FString(controlType).Equals(TEXT("stopSign"))))
 		{
-			UE_LOG(LogEngine, Warning, TEXT("******%s contains %s!!*********"), *currentKey, *currentTrafficLightNodeID);
 			currentWalkingAreaObject = pair.Value.get();
 
-			currentWalkingAreaObject->trafficLightLocationCalculator();
-			trafficControl1Location = currentWalkingAreaObject->trafficLight1Location;
-			trafficControl1Location.Z = 2.0f; //Spawn higher
-
-			currentWalkingAreaObject->stopSignRotationCalculator();
-			trafficControlRotation = currentWalkingAreaObject->stopSignOrientation;
-			UE_LOG(LogEngine, Warning, TEXT("#####The stop sign rotation is %f, %f, %f #####"), trafficControlRotation.X, trafficControlRotation.Y, trafficControlRotation.Z);
-			//trafficControlRotation.X += 90.0f;
-			UE_LOG(LogEngine, Warning, TEXT("#####The stop sign rotation is %f, %f, %f #####"), trafficControlRotation.X, trafficControlRotation.Y, trafficControlRotation.Z);
-
-			FTransform SpawnTransform(trafficControlRotation, trafficControl1Location, trafficLightScale);
+			trafficControl1Location = currentWalkingAreaObject->trafficControlLocationCalculator();
+			trafficControlRotation = currentWalkingAreaObject->stopSignRotationCalculator();
+			FVector stopSignScale(100.0f, 100.0f, 100.0f);
+			FTransform SpawnTransform(trafficControlRotation, trafficControl1Location, stopSignScale);
 			AStopSignMesh* MyDeferredStopSign = Cast<AStopSignMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AStopSignMesh::StaticClass(), SpawnTransform)); //Downcasting
-			UGameplayStatics::FinishSpawningActor(MyDeferredStopSign, SpawnTransform);
+			UGameplayStatics::FinishSpawningActor(MyDeferredStopSign, SpawnTransform); //deferred actor spawning because it gives us the option to change scale of actor when needed. 
 		}
 	}	
 }
@@ -649,7 +581,7 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 		InitializeNodeAttributes(AttributeName, AttributeValue);
 		if ((shapeIsSet == true) && (xCoordinateIsSet == true) && (yCoordinateIsSet == true))
 		{
-			InitializeNode();
+			InitializeNode(); 
 			UE_LOG(LogEngine, Warning, TEXT("Node object created!"));
 		}
 	}
@@ -683,7 +615,6 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 	{
 		InitializetrafficLightAttributes(AttributeName, AttributeValue);
 	}
-	
 	return true;
 }
 
@@ -737,14 +668,13 @@ bool UfileParser::ProcessClose(const TCHAR* Element)
 		resetFlagsAndTempMembers();
 	}
 
-	if ((FString(Element)).Equals(TEXT("tlLogic")))
+	if (isTrafficNode == true)
 	{
-		InitializeTrafficControl(TEXT("trafficLight"));
+		InitializeTrafficControl(TEXT("stopSign"));
 		isElementtrafficLight = false;
 		tempTrafficLightID = "";
-
+		isTrafficNode = false;
 	}
-	//UE_LOG(LogEngine, Warning, TEXT("ProcessClose Element %s"), Element);
 	return true;
 }
 

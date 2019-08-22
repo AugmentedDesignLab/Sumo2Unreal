@@ -13,15 +13,15 @@ public:
 
 	void setWalkingAreaID(const TCHAR* tempID);
 	void centroidCalculation();
-	void trafficLightLocationCalculator();
+	FVector trafficControlLocationCalculator();
 	FVector directionVectorCalculator(float, float, float, float);
-	void stopSignRotationCalculator();
-	void getStopSignOrientation(FVector&);
+	FQuat stopSignRotationCalculator();
+	FQuat getStopSignOrientation(FVector&);
 
 private:
 	bool NoTrafficLightatWalkingArea = false;
 	FQuat trafficLight1Orientation;
-	FVector trafficLight1Location;
+	FVector trafficControlLocation;
 	FQuat stopSignOrientation;
 	float centroidX;
 	float centroidY;

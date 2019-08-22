@@ -24,7 +24,6 @@ void FParseXMLModule::StartupModule()
 	FParseXMLStyle::ReloadTextures();
 
 	FParseXMLCommands::Register();
-	
 	PluginCommands = MakeShareable(new FUICommandList);
 
 	PluginCommands->MapAction(
@@ -63,16 +62,6 @@ void FParseXMLModule::PluginButtonClicked()
 
 	// Put your "OnButtonClicked" stuff here
 
-	/*
-	FText DialogText = FText::Format(
-							LOCTEXT("Open your xml", "Find the SUMO XML file on this device"),
-							FText::FromString(TEXT("FParseXMLModule::PluginButtonClicked()")),
-							FText::FromString(TEXT("ParseXML.cpp"))
-					   );
-
-	FMessageDialog::Open(EAppMsgType::Ok, DialogText);
-	*/
-
 	const FString& windowTitle = "Browse XML Files";
 	const FString& defaultFilePath = "C:/Users";
 	const FString& defaultFileName = "SumoToUnreal.cpp";
@@ -89,21 +78,20 @@ void FParseXMLModule::PluginButtonClicked()
 	if (MainFrameParentWindow.IsValid() && MainFrameParentWindow->GetNativeWindow().IsValid())
 	{
 		ParentWindowWindowHandle = MainFrameParentWindow->GetNativeWindow()->GetOSWindowHandle();
-		DesktopPlatform->OpenFileDialog(ParentWindowWindowHandle, windowTitle, defaultFilePath, defaultFileName,
-			defaultFileType, 0x00, OutFilenames);
-		//UE_LOG(LogTemp, Warning, TEXT("Plugin is still working!"));
-	}
-	if (OutFilenames.Num() > 0)
-	{
-		FString selectedFile = FString(OutFilenames[0]);
-		UfileParser fileParser(*selectedFile); //Selected File from the file dialog
+		if (DesktopPlatform->OpenFileDialog(ParentWindowWindowHandle, windowTitle, defaultFilePath, defaultFileName,
+			defaultFileType, 0x00, OutFilenames))
+		{
+			FString selectedFile = FString(OutFilenames[0]);
+			UfileParser fileParser(*selectedFile); //Selected File from the file dialog
 
-		//Uncomment these lines if you do not want any debug UE_LOG statements
-		//GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
-		//GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
+			//Uncomment these lines if you do not want any debug UE_LOG statements
+			//GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
+			//GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
 
-		fileParser.loadxml();
-		UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
+			fileParser.loadxml();
+			UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));
+		}
+		
 	}
 }
 
