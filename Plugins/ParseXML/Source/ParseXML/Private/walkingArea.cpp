@@ -52,17 +52,17 @@ FVector walkingArea::directionVectorCalculator(float x0, float y0, float x1, flo
 	return directionVector;
 }
 
-void walkingArea::trafficLightLocationCalculator()
+FVector walkingArea::trafficControlLocationCalculator()
 {
 	NoTrafficLightatWalkingArea = false;
-	if (walkingAreaShapeCoordinates.size() > 12)
+	if (walkingAreaShapeCoordinates.size() > 12) //To eliminate non-junction walking areas
 	{
-		FVector directionVector = directionVectorCalculator(walkingAreaShapeCoordinates[0], walkingAreaShapeCoordinates[1], walkingAreaShapeCoordinates[2], walkingAreaShapeCoordinates[3]);
+		FVector directionVector = directionVectorCalculator(walkingAreaShapeCoordinates[4], walkingAreaShapeCoordinates[5], walkingAreaShapeCoordinates[6], walkingAreaShapeCoordinates[7]);
 		//FVector rightVector = directionVector.ToOrientationQuat().GetRightVector();
 
-		trafficLight1Location.X = walkingAreaShapeCoordinates[0];
-		trafficLight1Location.Y = walkingAreaShapeCoordinates[1];
-		trafficLight1Location.Z = -1.8f;
+		trafficControlLocation.X = walkingAreaShapeCoordinates[6];
+		trafficControlLocation.Y = walkingAreaShapeCoordinates[7];
+		trafficControlLocation.Z = 200.0f;
 
 		trafficLight1Orientation = directionVector.ToOrientationQuat();
 	}
@@ -71,31 +71,37 @@ void walkingArea::trafficLightLocationCalculator()
 		FVector directionVector = directionVectorCalculator(walkingAreaShapeCoordinates[2], walkingAreaShapeCoordinates[3], walkingAreaShapeCoordinates[4], walkingAreaShapeCoordinates[5]);
 		//FVector rightVector = directionVector.ToOrientationQuat().GetRightVector();
 
-		trafficLight1Location.X = walkingAreaShapeCoordinates[2];
-		trafficLight1Location.Y = walkingAreaShapeCoordinates[3];
-		trafficLight1Location.Z = -1.8f;
+		trafficControlLocation.X = walkingAreaShapeCoordinates[2];
+		trafficControlLocation.Y = walkingAreaShapeCoordinates[3];
+		trafficControlLocation.Z = 200.0f;
 
 		trafficLight1Orientation = directionVector.ToOrientationQuat();
-	}	
+	}
+	return trafficControlLocation;
 }
 
-void walkingArea::stopSignRotationCalculator() {
+FQuat walkingArea::stopSignRotationCalculator() {
+	FQuat stopSignRotationQuat;
 	if (walkingAreaShapeCoordinates.size() > 12)
 	{
-		FVector directionVector = directionVectorCalculator(walkingAreaShapeCoordinates[0], walkingAreaShapeCoordinates[1], walkingAreaShapeCoordinates[2], walkingAreaShapeCoordinates[3]);
-		getStopSignOrientation(directionVector);
+		FVector directionVector = directionVectorCalculator(walkingAreaShapeCoordinates[4], walkingAreaShapeCoordinates[5], walkingAreaShapeCoordinates[6], walkingAreaShapeCoordinates[7]);
+		stopSignRotationQuat = getStopSignOrientation(directionVector);
 	}
 	else
 	{
 		FVector directionVector = directionVectorCalculator(walkingAreaShapeCoordinates[2], walkingAreaShapeCoordinates[3], walkingAreaShapeCoordinates[4], walkingAreaShapeCoordinates[5]);
-		getStopSignOrientation(directionVector);
+		stopSignRotationQuat = getStopSignOrientation(directionVector);
 	}
+	return stopSignRotationQuat;
 }
 
-void walkingArea::getStopSignOrientation(FVector& currentDirectionVector) {
-	FRotator stopSignRotation = currentDirectionVector.ToOrientationQuat().GetRightVector().ToOrientationQuat().Rotator(); //Make the stop sign face the correct direction
-	stopSignRotation.Roll += 90.0f; //Make the stop sign stand up
-	stopSignOrientation = stopSignRotation.Quaternion(); //Convert to FQuat type to give it as an input while spawning the stopSign mesh.
+FQuat walkingArea::getStopSignOrientation(FVector& currentDirectionVector) {
+	//Next two lines are unique for the stop sign 3D model in our project. There is an offset of 180 degrees for the yaw value.   
+	FRotator stopSignRotation = currentDirectionVector.ToOrientationQuat().GetRightVector().ToOrientationQuat().Rotator(); 
+	stopSignRotation.Roll += 90.0f; //Make the stop sign stand
+	stopSignRotation.Yaw += 180.0f;
+	stopSignOrientation = stopSignRotation.Quaternion(); //Convert rotation to FQuat type to give it as an input while spawning the stopSign mesh (deferred actor spawn). 
+	return stopSignOrientation;
 }
 
 
