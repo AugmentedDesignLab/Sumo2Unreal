@@ -22,11 +22,12 @@ ARoadMesh::ARoadMesh()
 	PrimaryActorTick.bCanEverTick = false;
 	mesh = CreateDefaultSubobject<UProceduralMeshComponent>(TEXT("GeneratedMesh"));
 	mesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
-	static const ConstructorHelpers::FObjectFinder<UMaterialInstanceConstant> MaterialO(TEXT("MaterialInstanceConstant'/Game/CarlaContent/Static/GenericMaterials/Brick/M_Brick_03.M_Brick_03'"));
+	//static const ConstructorHelpers::FObjectFinder<UMaterialInstanceConstant> MaterialO(TEXT("MaterialInstanceConstant'/Game/CarlaContent/Static/GenericMaterials/Brick/M_Brick_03.M_Brick_03'"));
 	//static ConstructorHelpers::FObjectFinder<UTexture2D> TextureO(TEXT("Texture2D'/Game/CarlaAssets/Static/GenericMaterials/Brick/T_Brick_02_d.T_Brick_02_d'"));
 	//TArray<UTexture*> textureArray;
 	//textureArray.Add((UTexture*)TextureO.Object);
 
+	/*
 	if (MaterialO.Succeeded())
 	{
 		Material = (UMaterial*)MaterialO.Object;
@@ -34,6 +35,7 @@ ARoadMesh::ARoadMesh()
 		mesh->SetMaterial(0, Material);
 	}
 	mesh->bUseAsyncCooking = true;
+	*/
 
 	eachTriangleNormal.Init(FVector(0.0f, 0.0f, 1.0f), 3);
 	eachTriangleTangents.Init(FProcMeshTangent(1.0f, 0.0f, 0.0f), 3);
@@ -46,23 +48,30 @@ ARoadMesh::~ARoadMesh()
 
 void ARoadMesh::CreateSection()
 {
+	TArray<float> vertexXCoordinates;
+	vertexXCoordinates.Empty();
+	TArray<float> vertexYCoordinates;
+	vertexYCoordinates.Empty();
 	for (int i = 0; i < vertices.Num(); i++)
 	{
 		Point vertex;
 		vertex[0] = vertices[i].X;
-		vertex[1] = vertices[i].Y; //create a mirror of the network about the x-axis.
-		UE_LOG(LogEngine, Warning, TEXT("________________The vertex coordinates are (%f, %f)___________"), vertex[0], vertex[1]);
+		vertex[1] = vertices[i].Y; 
+		vertexXCoordinates.Add(vertices[i].X);
+		UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX X COORDINATE IS %f -=-=-=-="), vertices[i].X);
+		vertexYCoordinates.Add(vertices[i].Y);
+		UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX Y COORDINATE IS %f -=-=-=-="), vertices[i].Y);
 		polygonVertices.push_back(vertex);
 	}
 	polygon.push_back(polygonVertices);
-	std::vector<N> indices = mapbox::earcut<N>(polygon);//3 consecutive indices in clockwise order
+	std::vector<N> indices = mapbox::earcut<N>(polygon);
+	//3 consecutive indices in clockwise order of the vertices of the input polygon.
 
 	int i = 0;
 	//creating triangles from these indices. Each iteration is a new triangle.
 	while ((i + 3) <= indices.size())
 	{
-		UE_LOG(LogEngine, Warning, TEXT("________________The index coordinates are (%d, %d, %d)___________"), (uint32_t)indices[i], (uint32_t)indices[i+1], (uint32_t)indices[i+2]);
-		Triangles.Add((uint32_t)indices[i+2]);
+		Triangles.Add((uint32_t)indices[i+2]); //assuming that the first triangle starts from 0
 		Triangles.Add((uint32_t)indices[i+1]);
 		Triangles.Add((uint32_t)indices[i]);
 		normals.Append(eachTriangleNormal);
@@ -70,11 +79,39 @@ void ARoadMesh::CreateSection()
 		vertexColors.Append(eachTriangleVertexColors);
 		i += 3;
 	}
-	UV0.Add(FVector2D(0.0f, 0.0f));
-	UV0.Add(FVector2D(1.0f, 0.0f));
-	UV0.Add(FVector2D(0.0f, 1.0f));
-	UV0.Add(FVector2D(1.0f, 1.0f));
+
+	/*
+	if (vertices.Num() == 4) {
+		UV0.Add(FVector2D(0.0f, (roadLength*2)));
+		UV0.Add(FVector2D(6.40f, (roadLength * 2)));
+		UV0.Add(FVector2D(6.40f, 0.0f));
+		UV0.Add(FVector2D(0.0f, 0.0f));
+	}
+	else {
+		/*
+	UV mapping calculation - We need to map the 2D texture surface to the 2D junction surface.
+	We need to find the Xmax, Xmin, Ymax and Ymin of the polygon. Then we calculate Xrange and Yrange of the polygon.
+	After normalizing the coordinates of the vertices over this range, we can make the polygon fit over the 2D texture.
+	*/
+	float Xrange = FMath::Max(vertexXCoordinates) - FMath::Min(vertexXCoordinates);
+	UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX Xrange IS %f -=-=-=-="), Xrange);
+	float Yrange = FMath::Max(vertexYCoordinates) - FMath::Min(vertexYCoordinates);
+	UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX Yrange IS %f -=-=-=-="), Yrange);
+
+		
+	float minimumX = FMath::Min(vertexXCoordinates);
+	float minimumY = FMath::Min(vertexYCoordinates);
+	for (int32 i = 0; i < vertices.Num(); i++) {
+		float X = (vertices[i].X - minimumX) / 50.0f;
+		float Y = (vertices[i].Y - minimumY) / 50.0f;
+		UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= NORMALIZED VERTEX X COORDINATE IS %d -=-=-=-="), X);
+		UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= NORMALIZED VERTEX Y COORDINATE IS %d -=-=-=-="), Y);
+		UV0.Add(FVector2D(X, Y));
+	}
+	vertexXCoordinates.Empty();
+	vertexYCoordinates.Empty();
 }
+
 
 
 void ARoadMesh::OnConstruction(const FTransform & Transform)

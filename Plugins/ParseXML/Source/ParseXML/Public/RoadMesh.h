@@ -39,6 +39,8 @@ public:
 	TArray<FProcMeshTangent> eachTriangleTangents;
 	TArray<FLinearColor> eachTriangleVertexColors;
 
+	float roadLength;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
