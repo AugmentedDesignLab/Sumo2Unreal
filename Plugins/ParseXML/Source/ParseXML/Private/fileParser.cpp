@@ -322,14 +322,13 @@ SimpleNodePtr UfileParser::InitializeNode()
 		int i=0;
 		while ((i+2) <= Node->nodeShapecoordinates.size())
 		{		
-				coordinates.X = Node->nodeShapecoordinates[i] - Node->NodePosition.X;
+				coordinates.X = Node->nodeShapecoordinates[i] - Node->NodePosition.X; //node vertex coordinate relative to the node spawn point. 
 				coordinates.Y = Node->nodeShapecoordinates[i + 1] - Node->NodePosition.Y;
 				coordinates.Z = 0.0f;
 				MyDeferredActor->vertices.Add(coordinates);	
 				i += 2;
 		}
 		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
-
 		//initialize map with the pointer for extended node lifetime
 		NodeContainer.NodeMap.Add(*tempNodeID, std::move(Node));
 	}
@@ -475,6 +474,7 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 		if (MyDeferredActor)
 		{
 			(MyDeferredActor->vertices) = (Edge->vertexArray);
+			MyDeferredActor->roadLength = Edge->LaneLength;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
 		}
@@ -522,6 +522,7 @@ void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two 
 		}
 	}	
 }
+//example function (for reference) to iterate walking areas.
 void UfileParser::iterateWalkingAreas()
 {
 	for (TMap<const TCHAR*, walkingAreaPtr>::TConstIterator it = walkingAreaContainer.walkingAreaMap.CreateConstIterator(); it; ++it)// Find the corresponding walking area for a traffic light for a particular junction.
@@ -655,7 +656,7 @@ bool UfileParser::ProcessClose(const TCHAR* Element)
 			{
 				UE_LOG(LogEngine, Warning, TEXT("Walking area shape is set"));
 				InitializewalkingArea();
-				iterateWalkingAreas();
+				//iterateWalkingAreas();
 				UE_LOG(LogEngine, Warning, TEXT("WalkingArea created"));
 				doesWalkingAreaExist = true; 
 				isWalkingArea = false;
