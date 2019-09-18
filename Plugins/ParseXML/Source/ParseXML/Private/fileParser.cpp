@@ -2,6 +2,7 @@
 #include "EngineMinimal.h"
 #include "Runtime/XmlParser/Public/FastXml.h"
 #include "Runtime/XmlParser/Public/XmlParser.h"
+#include "GuidingSpline.h"
 #include "Engine.h"
 #include <cstdlib>
 #include <sstream>
@@ -48,60 +49,6 @@ void UfileParser::getAllActorsOfClass() {
 	destroyFoundActors();
 	UGameplayStatics::GetAllActorsOfClass(World, AStopSignMesh::StaticClass(), FoundActors);
 	destroyFoundActors();
-}
-
-
-void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue)
-{
-	if (FString(AttributeName).Equals(TEXT("id")))
-	{
-		tempEdgeID = FString(AttributeValue);
-		return;
-	}
-
-	else if (FString(AttributeName).Equals(TEXT("from")))
-	{
-		fromNode = FString(AttributeValue);
-		fromNodeSet = true;
-		return;
-	}
-
-	else if (FString(AttributeName).Equals(TEXT("to")))
-	{
-		toNode = FString(AttributeValue);
-		toNodeSet = true;
-		return;
-	}
-
-	else if (FString(AttributeName).Equals(TEXT("length")))
-	{
-		laneLength = FString(AttributeValue);
-		lengthIsSet = true;
-		return;
-	}
-
-	else if (FString(AttributeName).Equals(TEXT("shape")))
-	{
-		if (isElementLane == true)
-		{
-			ShapeProcessing(AttributeValue);
-			shapeIsSet = true;
-		}
-		return;
-	}
-
-	else if (FString(AttributeName).Equals(TEXT("width")))
-	{
-		laneWidth = FCString::Atof(AttributeValue);
-		laneWidthIsSet = true;
-	}
-
-	else if (FString(AttributeName).Equals(TEXT("allow"))) {
-		isSidewalk = true;
-		return;
-	}
-
-	else return;
 }
 
 FString UfileParser::getTempNodeID()
@@ -177,6 +124,109 @@ void UfileParser::resetFlagsAndTempMembers()
 	toNodeSet = false;
 	lengthIsSet = false;
 }
+
+void UfileParser::InitializeInternalEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue) {
+	if (FString(AttributeName).Equals(TEXT("shape"))) {
+		ShapeProcessing(AttributeValue);
+		shapeIsSet = true;
+	}
+}
+
+void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue)
+{
+	if (FString(AttributeName).Equals(TEXT("id")))
+	{
+		tempEdgeID = FString(AttributeValue);
+		return;
+	}
+
+	else if (FString(AttributeName).Equals(TEXT("from")))
+	{
+		fromNode = FString(AttributeValue);
+		fromNodeSet = true;
+		return;
+	}
+
+	else if (FString(AttributeName).Equals(TEXT("to")))
+	{
+		toNode = FString(AttributeValue);
+		toNodeSet = true;
+		return;
+	}
+
+	else if (FString(AttributeName).Equals(TEXT("length")))
+	{
+		laneLength = FString(AttributeValue);
+		lengthIsSet = true;
+		return;
+	}
+
+	else if (FString(AttributeName).Equals(TEXT("shape")))
+	{
+		if (isElementLane == true)
+		{
+			ShapeProcessing(AttributeValue);
+			shapeIsSet = true;
+		}
+		return;
+	}
+
+	else if (FString(AttributeName).Equals(TEXT("width")))
+	{
+		laneWidth = FCString::Atof(AttributeValue);
+		laneWidthIsSet = true;
+	}
+
+	else if (FString(AttributeName).Equals(TEXT("allow"))) {
+		isSidewalk = true;
+		return;
+	}
+	else return;
+}
+
+//processing the shape coordinates of the regular edge to make a spline. Assumption - vector parameter has 4 elements. 
+void UfileParser::MakeSpline(std::vector<float>& shapeCoordinates, FVector& centroid) {
+	TArray<FSplinePoint> SplinePoint;
+	SplinePoint.Add(FSplinePoint(0.0, FVector((shapeCoordinates[0] - centroid.X), (shapeCoordinates[1] - centroid.Y), 0.2f)));
+	SplinePoint.Add(FSplinePoint(1.0, FVector((shapeCoordinates[2] - centroid.X), (shapeCoordinates[3] - centroid.Y), 0.2f)));
+}
+
+void UfileParser::MakeSpline(std::vector<float>& shapeCoordinates) {
+	TArray<FSplinePoint> SplinePoint;
+	FVector SplineCentroid;
+	float sumX = 0;
+    float sumY = 0;
+	for (int i = 0; i < (shapeCoordinates.size()-1); i++) {
+		if (i % 2 == 0) sumX += shapeCoordinates[i];
+		else sumY += shapeCoordinates[i];
+	}
+	SplineCentroid.X = sumX / (shapeCoordinates.size() / 2);
+	SplineCentroid.Y = sumY / (shapeCoordinates.size() / 2);
+	SplineCentroid.Z = 0.0f;
+
+	int j = 0;
+	float k = 0.0;
+	while (j < (shapeCoordinates.size() - 1)) {
+		SplinePoint.Add(FSplinePoint(k, FVector((shapeCoordinates[j] - SplineCentroid.X), (shapeCoordinates[j+1] - SplineCentroid.Y), 0.2f)));
+		k += 1.0;
+		j += 2;
+	}
+
+	FQuat SplineRotation(0.0f, 0.0f, 0.0f, 0.0f);
+	FTransform SpawnTransform(SplineRotation, SplineCentroid);
+	AGuidingSpline* GuidingSplineDeferred = Cast<AGuidingSpline>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AGuidingSpline::StaticClass(), SpawnTransform));
+
+	if (GuidingSplineDeferred != nullptr)
+	{
+		GuidingSplineDeferred->Spline->SplineCurves.Position.Points.Empty();
+		GuidingSplineDeferred->Spline->SplineCurves.Rotation.Points.Empty();
+		GuidingSplineDeferred->Spline->SplineCurves.Scale.Points.Empty();
+		GuidingSplineDeferred->Spline->AddPoints(SplinePoint);
+		UGameplayStatics::FinishSpawningActor(GuidingSplineDeferred, SpawnTransform);
+	}
+}
+
+
 void UfileParser::InitializetrafficLightAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue)
 {
 	if (FString(AttributeName).Equals(TEXT("id")))
@@ -201,7 +251,6 @@ void UfileParser::InitializeWalkingAreaAttributes(const TCHAR* AttributeName, co
 		return;
 	}
 	else return;
-
 }
 
 void UfileParser::InitializeNodeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue)
@@ -299,7 +348,6 @@ void UfileParser::InitializewalkingArea()
 
 	}
 }
-
 
 SimpleNodePtr UfileParser::InitializeNode()
 {
@@ -411,11 +459,11 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge()
 	}
 
 	//initialize map with the pointer for extended node lifetime
-	EdgeContainer.EdgeMap.Add(*tempEdgeID, std::move(Edge));
-	
+	EdgeContainer.EdgeMap.Add(*tempEdgeID, std::move(Edge));	
 	return Edge;
 }
 
+//function for making an edge actor as well as the edge spline. 
 SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 {
 	//unique_ptr for object creation for extended lifetime
@@ -426,29 +474,28 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 	Edge->setLaneLength(*laneLength);
 
 	int i = 0;
+	float j = 0.0;
 	std::vector<float> tempvector;
+	TArray<FSplinePoint> SplinePoint;
 	while ((i + 3) <= (Shapecoordinates.size() - 1))
 	{
-		tempvector.push_back(Shapecoordinates[i]);
-		tempvector.push_back(Shapecoordinates[i+1]);
-		tempvector.push_back(Shapecoordinates[i+2]);
-		tempvector.push_back(Shapecoordinates[i+3]);
-
+		float temp[] = { Shapecoordinates[i], Shapecoordinates[i + 1], Shapecoordinates[i + 2], Shapecoordinates[i + 3] };
+		tempvector.assign(temp, temp + 4);
+		SplinePoint.Empty();
 		Edge->setShapeCoordinates(tempvector);
 		tempvector.clear();
 
-		if (laneWidthIsSet == true)
-		{
-			Edge->setVertexCoordinates(laneWidth);  //default SUMO lane width
-		}
-		else
-		{
-			Edge->setVertexCoordinates(320);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm. 
-		}
+		if (laneWidthIsSet == true) Edge->setVertexCoordinates(laneWidth);  //default SUMO lane width
+		else Edge->setVertexCoordinates(320);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm.
 
 		FVector originCoordinates = Edge->centroid;
 		FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
 		FVector origin(0.0f, 0.0f, 0.0f);
+
+		SplinePoint.Add(FSplinePoint(j, FVector((Shapecoordinates[i]-(Edge->centroid.X)), (Shapecoordinates[i + 1]-(Edge->centroid.Y)), 0.2f)));
+		SplinePoint.Add(FSplinePoint(j + 1.0, FVector((Shapecoordinates[i + 2]-(Edge->centroid.X)), (Shapecoordinates[i + 3]-(Edge->centroid.Y)), 0.2f)));
+		j = 0.0;
+
 		if (FString(edgeType).Equals(TEXT("standard")))
 		{
 			origin.X = originCoordinates.X;
@@ -478,6 +525,18 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
 		}
+
+		AGuidingSpline* GuidingSplineDeferred = Cast<AGuidingSpline>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AGuidingSpline::StaticClass(), SpawnTransform));
+
+		if (GuidingSplineDeferred)
+		{
+			GuidingSplineDeferred->Spline->SplineCurves.Position.Points.Empty();
+			GuidingSplineDeferred->Spline->SplineCurves.Rotation.Points.Empty();
+			GuidingSplineDeferred->Spline->SplineCurves.Scale.Points.Empty();
+			GuidingSplineDeferred->Spline->AddPoints(SplinePoint);
+			UGameplayStatics::FinishSpawningActor(GuidingSplineDeferred, SpawnTransform);
+			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
+		}
 		i+=2;
 	}
 	return Edge;
@@ -492,7 +551,7 @@ void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two 
 		FString currentKey = FString(pair.Key); //ID of the walking area.
 		FString currentControlNodeID = FString(TEXT(":0_0_"));
 		/*
-		For stop sign from IntGen --> Netgenerate, we only check for the walking areas within one junction. 
+		For stop sign from IntGen --> Netgenerate, we only check for the walking areas within one junction.  
 		This is to prevent turn lane's junction walking areas to be considered when trying to place the stop sign. 
 		*/
 		FVector trafficControl1Location; 
@@ -515,7 +574,7 @@ void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two 
 
 			trafficControl1Location = currentWalkingAreaObject->trafficControlLocationCalculator();
 			trafficControlRotation = currentWalkingAreaObject->stopSignRotationCalculator();
-			FVector stopSignScale(100.0f, 100.0f, 100.0f);
+			FVector stopSignScale(50.0f, 50.0f, 50.0f);
 			FTransform SpawnTransform(trafficControlRotation, trafficControl1Location, stopSignScale);
 			AStopSignMesh* MyDeferredStopSign = Cast<AStopSignMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AStopSignMesh::StaticClass(), SpawnTransform)); //Downcasting
 			UGameplayStatics::FinishSpawningActor(MyDeferredStopSign, SpawnTransform); //deferred actor spawning because it gives us the option to change scale of actor when needed. 
@@ -568,8 +627,6 @@ bool UfileParser::ProcessElement(const TCHAR* ElementName, const TCHAR* ElementD
 	{
 		isElementtrafficLight = true;
 	}
-
-	//UE_LOG(LogEngine, Warning, TEXT("ProcessElement ElementName: %s, ElementValue: %s"), ElementName, ElementData);
 	return true;
 }
 
@@ -583,17 +640,31 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 		if ((shapeIsSet == true) && (xCoordinateIsSet == true) && (yCoordinateIsSet == true))
 		{
 			InitializeNode(); 
-			UE_LOG(LogEngine, Warning, TEXT("Node object created!"));
 		}
 	}
 	else if ((isElementEdge == true) || (isElementLane == true))
 	{
-		InitializeEdgeAttributes(AttributeName, AttributeValue);
+		if (FString(AttributeValue).Equals(TEXT("internal"))) {
+			isInternalEdge = true;
+			return true;
+		}
+		if (isInternalEdge == true)
+		{
+			InitializeInternalEdgeAttributes(AttributeName, AttributeValue);
+			if (shapeIsSet == true)
+			{
+				MakeSpline(Shapecoordinates);
+				shapeIsSet = false;
+				isInternalEdge = false;
+			}
+		}
+		else InitializeEdgeAttributes(AttributeName, AttributeValue);
 	}
 
 	if (FString(AttributeValue).Equals(TEXT("walkingarea")))
 	{
 		isWalkingArea = true;
+		return true;
 	}
 	if (isWalkingArea == true)
 	{
@@ -604,6 +675,7 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 	if (FString(AttributeValue).Equals(TEXT("crossing")))
 	{
 		isCrossing = true;
+		return true;
 	}
 
 	if (isCrossing == true)
@@ -630,15 +702,14 @@ bool UfileParser::ProcessClose(const TCHAR* Element)
 		else
 		{
 			InitializeEdge(TEXT("standard"));
-		}
-		//UE_LOG(LogEngine, Warning, TEXT("Edge object created!")); 
+		} 
 	}
-	else if ((isCrossing == true) && (shapeIsSet == true))
+ 	else if ((isCrossing == true) && (shapeIsSet == true))
 	{
 		InitializeEdge(TEXT("crossing"));
 	}
-	if ((FString(Element)).Equals(TEXT("lane"))) //To allow multiple lanes in an edge element
-		//we need to clear out the data of the previous lane. 
+
+	if ((FString(Element)).Equals(TEXT("lane"))) 
 	{
 		if (isWalkingArea == false)
 		{

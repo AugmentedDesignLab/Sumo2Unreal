@@ -59,6 +59,10 @@ public:
 	walkingAreaCont walkingAreaContainer;
 
 	//----Functions for initializing the edge objects----
+	//Collect all the required internal edge attributes (specifically for splines which are within a junction)
+	void InitializeInternalEdgeAttributes(const TCHAR*, const TCHAR*);
+	void MakeSpline(std::vector<float>&, FVector&);
+	void MakeSpline(std::vector<float>&);
 
 	//Collect all the required edge attributes for one object as member variables and then initialize a edge object
 	void InitializeEdgeAttributes(const TCHAR*, const TCHAR*);
@@ -85,7 +89,6 @@ private:
 	FLightingBuildOptions LightOptions;
 
 	//node related flags and member variables
-	
 	bool isElementNode = false;//flag
 	bool isPriorityNode = false;
 	bool isTrafficNode = false;
@@ -97,6 +100,7 @@ private:
 	TArray<TUniquePtr<FString>> trafficControlIDList; //List of node IDs which are of traffic light or stop sign type. 
 
 	//edge flags and temp member variables
+	bool isInternalEdge = false;
 	bool isElementEdge = false;
 	FString fromNode = "";
 	FString toNode = "";
