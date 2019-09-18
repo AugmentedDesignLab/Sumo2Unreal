@@ -62,7 +62,7 @@ FVector walkingArea::trafficControlLocationCalculator()
 
 		trafficControlLocation.X = walkingAreaShapeCoordinates[6];
 		trafficControlLocation.Y = walkingAreaShapeCoordinates[7];
-		trafficControlLocation.Z = 200.0f;
+		trafficControlLocation.Z = 100.0f;
 
 		trafficLight1Orientation = directionVector.ToOrientationQuat();
 	}
@@ -73,7 +73,7 @@ FVector walkingArea::trafficControlLocationCalculator()
 
 		trafficControlLocation.X = walkingAreaShapeCoordinates[2];
 		trafficControlLocation.Y = walkingAreaShapeCoordinates[3];
-		trafficControlLocation.Z = 200.0f;
+		trafficControlLocation.Z = 100.0f;
 
 		trafficLight1Orientation = directionVector.ToOrientationQuat();
 	}
