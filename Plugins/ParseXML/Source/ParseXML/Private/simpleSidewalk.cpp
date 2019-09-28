@@ -174,24 +174,4 @@ void simpleSidewalk::setVertexCoordinates(float paralaneWidth)
 	vertexArray.Add(Bx1);
 	vertexArray.Add(Bx0);
 
-	/*
-	for (int i = 0; i < vertexArray.Num(); i++)
-	{
-		FVector dir = vertexArray[i] - centroid;		//Direction vector A to B. Calculated using (FVector B - FVector A)
-
-		float angle = std::atan2((vertexArray[i].Y - centroid.Y), (vertexArray[i].X - centroid.X)) + pi_value;		//convert direction vector to heading angle to get it in 0-2pi range
-		if (i == 3)
-		{
-			angle -= 0.00001;  // hack to handle case where final two angles are identical, force ordering to 3 then 2
-		}
-		float actualVertexIndex = (float)(i + 1); //just for logging purposes
-
-		UE_LOG(LogEngine, Warning, TEXT("The atan2 angle for vertex %f is %f"), actualVertexIndex, angle);
-		vertexAnglesUnSorted.Add(angle);		//Add vertex angles to a Tarray
-	}
-
-	vertexAnglesSorted = vertexAnglesUnSorted; //copy to another array
-	vertexAnglesSorted.Sort(); //new array of sorted angles
-	*/
-
 }

@@ -6,21 +6,24 @@
 #include "SimpleNode.h"
 #include "trafficLight.h"
 #include "walkingArea.h"
+#include "SimpleSpline.h"
 
 //List of sorted edges for a particular node
 typedef std::vector<SimpleEdge*> EdgeVector;
-
-//Node Map, Edge Map, walkingArea and trafficLight Map
-typedef TMap<const TCHAR*, std::unique_ptr<SimpleNode>> NodeTMap;
-typedef TMap<const TCHAR*, std::unique_ptr<SimpleEdge>> EdgeTMap;
-typedef TMap<const TCHAR*, std::unique_ptr<walkingArea>> walkingAreaTMap;
-typedef TMap<const TCHAR*, trafficLight*> trafficLightTMap;
 
 //Shared pointer for every node object created
 typedef std::unique_ptr<SimpleNode> SimpleNodePtr;
 typedef std::unique_ptr<SimpleEdge> SimpleEdgePtr;
 typedef std::unique_ptr<walkingArea> walkingAreaPtr;
 typedef std::unique_ptr<trafficLight> trafficLightPtr;
+typedef std::tr1::shared_ptr<SimpleSpline> SimpleSplinePtr;
+
+//Node Map, Edge Map, walkingArea and trafficLight Map
+typedef TMap<const TCHAR*, SimpleNodePtr> NodeTMap;
+typedef TMap<const TCHAR*, SimpleEdgePtr> EdgeTMap;
+typedef TMap<const TCHAR*, walkingAreaPtr> walkingAreaTMap;
+typedef TMap<const TCHAR*, trafficLight*> trafficLightTMap;
+typedef TMap<FString, SimpleSplinePtr> SplineTMap;
 
 
 class NodeCont
@@ -62,6 +65,15 @@ public:
 
 	//Map to store the pointers to the parsed walkingAreas (pointers to the objects created)
 	trafficLightTMap trafficLightMap;
+};
+
+class splineCont {
+public:
+	splineCont() {};
+	~splineCont() {};
+
+	//Map to store pointers to spline objects.
+	SplineTMap SplineMap;
 };
 
 

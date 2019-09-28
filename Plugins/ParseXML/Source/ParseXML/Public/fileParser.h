@@ -30,6 +30,9 @@ public:
 	bool ProcessComment(const TCHAR* Comment);
 	bool loadxml();
 
+	//Spline Container
+	splineCont SplineContainer;
+
 	//Put the shape coordinates into Shapecoordinates vector
 	void ShapeProcessing(const TCHAR*);
 
@@ -62,7 +65,7 @@ public:
 	//Collect all the required internal edge attributes (specifically for splines which are within a junction)
 	void InitializeInternalEdgeAttributes(const TCHAR*, const TCHAR*);
 	void MakeSpline(std::vector<float>&, FVector&);
-	void MakeSpline(std::vector<float>&);
+	void MakeSpline();
 
 	//Collect all the required edge attributes for one object as member variables and then initialize a edge object
 	void InitializeEdgeAttributes(const TCHAR*, const TCHAR*);
@@ -79,7 +82,9 @@ public:
 	//----------------Functions for initialzing Traffic Lights and Stop signs----------------
 	void InitializetrafficLightAttributes(const TCHAR*, const TCHAR*); //Traffic light id is currently being used to place stop signs also.
 	void InitializeTrafficControl(const TCHAR*);  //Used for either initializing traffic lights and stop signs.
-	void iterateWalkingAreas();
+
+	//---------------Functions for initializing spline attributes--------------------
+	void InitializeSplineAttributes(const TCHAR*, const TCHAR*);
 
 private:
 	UWorld* World = GEditor->GetEditorWorldContext().World();
@@ -127,6 +132,13 @@ private:
 
 	//traffic light member variables
 	bool isElementtrafficLight = false;
+
+	//connection member variables
+	bool isConnection = false;
+	FString fromID = "";
+	FString toID = "";
+	FString viaID = "";
+	bool viaIsSet;
 
 	//temporary ID
 	FString tempNodeID = "";
