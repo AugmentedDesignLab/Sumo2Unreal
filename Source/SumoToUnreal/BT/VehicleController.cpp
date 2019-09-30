@@ -145,10 +145,10 @@ float AVehicleController::CalculateSteeringValue(float delta)
 	FVector veh_forward = Vehicle->GetVehicleForward();
 	UKismetSystemLibrary::DrawDebugArrow(this, veh_loc, veh_loc + veh_forward * 1000, 500, FColor::Red, 0.1, 20);
 
-	FVector next_direction = Vehicle->LastControl.WayPoint->SP->GetDirectionAtDistanceAlongSpline(Vehicle->GetTraveledDistance(), ESplineCoordinateSpace::World);
+	FVector next_direction = Vehicle->LastControl.WayPoint->SplineComponent->GetDirectionAtDistanceAlongSpline(Vehicle->GetTraveledDistance(), ESplineCoordinateSpace::World);
 	UKismetSystemLibrary::DrawDebugArrow(this, veh_loc, veh_loc + next_direction * 1000, 500, FColor::Blue, 0.1, 20);
 
-	FVector nearest_spline_point = Vehicle->LastControl.WayPoint->SP->FindLocationClosestToWorldLocation(veh_loc, ESplineCoordinateSpace::World);
+	FVector nearest_spline_point = Vehicle->LastControl.WayPoint->SplineComponent->FindLocationClosestToWorldLocation(veh_loc, ESplineCoordinateSpace::World);
 	
 	FVector veh_move_direction = (nearest_spline_point - veh_loc);
 	veh_move_direction.Z = 0;

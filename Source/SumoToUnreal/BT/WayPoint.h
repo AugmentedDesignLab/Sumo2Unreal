@@ -35,7 +35,7 @@ public:
 
 	//main spline component 
 	UPROPERTY(EditAnywhere)
-	USplineComponent *SP;
+	USplineComponent *SplineComponent;
 
 	//connected spline with the main spline
 	UPROPERTY(EditAnywhere)

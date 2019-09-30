@@ -5,8 +5,8 @@ AWayPoint::AWayPoint()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	SP = CreateDefaultSubobject<USplineComponent>("SplineObject"); //creating main spline
-	RootComponent = SP;
+	SplineComponent = CreateDefaultSubobject<USplineComponent>("SplineComponent"); //creating main spline
+	RootComponent = SplineComponent;
 
 }
 
@@ -14,7 +14,7 @@ AWayPoint::AWayPoint()
 void AWayPoint::BeginPlay()
 {
 	Super::BeginPlay();
-	TotalDistance = SP->GetSplineLength();
+	TotalDistance = SplineComponent->GetSplineLength();
 }
 
 // Called every frame
