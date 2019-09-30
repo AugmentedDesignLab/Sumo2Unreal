@@ -749,12 +749,10 @@ bool UfileParser::ProcessClose(const TCHAR* Element)
 		else
 		{
 			if (viaIsSet == true) {
-				SplineContainer.SplineMap[fromID]->SplineActor->NextSplineActor = SplineContainer.SplineMap[viaID]->SplineActor;
-				UE_LOG(LogEngine, Warning, TEXT("====Spline %s is connected to spline %s"), *(SplineContainer.SplineMap[*fromID]->SplineActor->splineID), *(SplineContainer.SplineMap[*fromID]->SplineActor->NextSplineActor->splineID));
+				SplineContainer.SplineMap[fromID]->SplineActor->NextSplineActorList.Add((SplineContainer.SplineMap[viaID])->SplineActor);
 			}
 			else {
-				SplineContainer.SplineMap[fromID]->SplineActor->NextSplineActor = SplineContainer.SplineMap[toID]->SplineActor;
-				UE_LOG(LogEngine, Warning, TEXT("====Spline %s is connected to spline %s"), *(SplineContainer.SplineMap[*fromID]->SplineActor->splineID), *(SplineContainer.SplineMap[*fromID]->SplineActor->NextSplineActor->splineID));
+				SplineContainer.SplineMap[fromID]->SplineActor->NextSplineActorList.Add((SplineContainer.SplineMap[toID])->SplineActor);
 			}
 		}
 		viaIsSet = false;

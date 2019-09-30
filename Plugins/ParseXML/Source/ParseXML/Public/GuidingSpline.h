@@ -25,8 +25,10 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	USplineComponent *Spline;
+	UPROPERTY(EditAnywhere)
 	FString splineID;
-	AGuidingSpline* NextSplineActor;
+	UPROPERTY(EditAnywhere)
+	TArray<AGuidingSpline*> NextSplineActorList;
 };
 
 
