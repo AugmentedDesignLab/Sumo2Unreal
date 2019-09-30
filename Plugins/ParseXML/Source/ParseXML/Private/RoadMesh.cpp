@@ -94,11 +94,7 @@ void ARoadMesh::CreateSection()
 	After normalizing the coordinates of the vertices over this range, we can make the polygon fit over the 2D texture.
 	*/
 	float Xrange = FMath::Max(vertexXCoordinates) - FMath::Min(vertexXCoordinates);
-	UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX Xrange IS %f -=-=-=-="), Xrange);
-	float Yrange = FMath::Max(vertexYCoordinates) - FMath::Min(vertexYCoordinates);
-	UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX Yrange IS %f -=-=-=-="), Yrange);
-
-		
+	float Yrange = FMath::Max(vertexYCoordinates) - FMath::Min(vertexYCoordinates);	
 	float minimumX = FMath::Min(vertexXCoordinates);
 	float minimumY = FMath::Min(vertexYCoordinates);
 	for (int32 i = 0; i < vertices.Num(); i++) {
