@@ -116,6 +116,11 @@ void ARoadMesh::OnConstruction(const FTransform & Transform)
 	CreateSection();
 	mesh->CreateMeshSection_LinearColor(0, vertices, Triangles, normals, UV0, vertexColors, tangents, false);
 	mesh->ContainsPhysicsTriMeshData(true); //Enable collision data
+	mesh->bUseComplexAsSimpleCollision = false;
+	mesh->AddCollisionConvexMesh(vertices);
+	mesh->SetSimulatePhysics(true);
+	mesh->SetMobility(EComponentMobility::Static);
+	mesh->SetEnableGravity(false);
 }
 
 void ARoadMesh::PostInitializeComponents()
