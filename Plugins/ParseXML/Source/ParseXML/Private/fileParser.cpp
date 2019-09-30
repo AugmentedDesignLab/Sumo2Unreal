@@ -515,13 +515,13 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 		{
 			origin.X = originCoordinates.X;
 			origin.Y = originCoordinates.Y;
-			origin.Z = 0.1f;
+			origin.Z = 0.0f;
 		}
 		else if (FString(edgeType).Equals(TEXT("sidewalk")))
 		{
 			origin.X = originCoordinates.X;
 			origin.Y = originCoordinates.Y;
-			origin.Z = 0.2f;
+			origin.Z = 0.0f;
 		}
 
 		splineOrigin = origin; //might break for curved edges.
