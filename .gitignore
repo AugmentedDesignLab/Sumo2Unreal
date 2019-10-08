@@ -6,7 +6,7 @@ Binaries/*
 Intermediate/*
 DerivedDataCache/*
 Saved/*
-Content/*
+
 
 #Plugin specific files
 Plugins/ParseXML/Binaries/*
