@@ -7,7 +7,12 @@ Binaries/*
 Intermediate/*
 DerivedDataCache/*
 Saved/*
-Content/*
+Content/CarlaContent/*
+Content/StopSign/*
+Content/Collections
+Content/Developers
+Content/trafficlight
+Content/trial_trafficLight
 
 #Plugin specific files
 Plugins/ParseXML/Binaries/*
