@@ -1,8 +1,8 @@
 #pragma once
-#include "GuidingSpline.h"
+#include "WayPoint.h"
 
 class SimpleSpline {
 public:
 	SimpleSpline();
-	AGuidingSpline* SplineActor;
+	AWayPoint* SplineActor;
 };

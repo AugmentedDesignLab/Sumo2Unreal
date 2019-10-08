@@ -2,7 +2,6 @@
 #include "Runtime/XmlParser/Public/FastXml.h"
 #include "Runtime/XmlParser/Public/XmlParser.h"
 #include "Runtime/Core/Public/Containers/Map.h"
-#include "trafficLightMesh.h"
 #include "StopSignMesh.h"
 #include "ContainersAndTypes.h"
 #include "Editor.h"
@@ -82,6 +81,8 @@ public:
 	//----------------Functions for initialzing Traffic Lights and Stop signs----------------
 	void InitializetrafficLightAttributes(const TCHAR*, const TCHAR*); //Traffic light id is currently being used to place stop signs also.
 	void InitializeTrafficControl(const TCHAR*);  //Used for either initializing traffic lights and stop signs.
+
+	StopSignCont StopSignContainer;
 
 	//---------------Functions for initializing spline attributes--------------------
 	void InitializeSplineAttributes(const TCHAR*, const TCHAR*);
