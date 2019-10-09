@@ -60,6 +60,7 @@ FVector walkingArea::trafficControlLocationCalculator()
 		FVector directionVector = directionVectorCalculator(walkingAreaShapeCoordinates[4], walkingAreaShapeCoordinates[5], walkingAreaShapeCoordinates[6], walkingAreaShapeCoordinates[7]);
 		//FVector rightVector = directionVector.ToOrientationQuat().GetRightVector();
 
+		
 		trafficControlLocation.X = walkingAreaShapeCoordinates[6];
 		trafficControlLocation.Y = walkingAreaShapeCoordinates[7];
 		trafficControlLocation.Z = 100.0f;
