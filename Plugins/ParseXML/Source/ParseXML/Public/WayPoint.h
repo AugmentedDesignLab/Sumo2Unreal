@@ -24,11 +24,15 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere)
-	USplineComponent *Spline;
+	USplineComponent *SplineComponent;
 	UPROPERTY(EditAnywhere)
 	FString splineID;
 	UPROPERTY(EditAnywhere)
 	TArray<AWayPoint*> ConnectedSpline;
+	UPROPERTY(EditAnywhere)
+	float TotalDistance = 0.0;
+	UPROPERTY(EditAnywhere)
+	int SpeedLimit = 0;
 };
 
 
