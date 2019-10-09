@@ -16,6 +16,7 @@ void ACarSpawner::Spawn(FVector Location)
 {
 	if (ToSpawn)
 	{
+		Location = this->GetActorLocation();
 		UWorld* world = GetWorld();
 		if (world)
 		{
