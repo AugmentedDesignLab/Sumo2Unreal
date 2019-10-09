@@ -23,6 +23,9 @@ public:
 	void Spawn(FVector Location);
 
 	UPROPERTY(EditAnywhere)
+	TArray<int> CarSpawningSpline;
+
+	UPROPERTY(EditAnywhere)
 	float SpawnTimer = 0;
 
 protected:
