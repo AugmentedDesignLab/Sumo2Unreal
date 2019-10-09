@@ -17,7 +17,7 @@ AWayPoint::AWayPoint()
 void AWayPoint::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	TotalDistance = SplineComponent->GetSplineLength();
 }
 
 // Called every frame
