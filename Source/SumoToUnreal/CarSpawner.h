@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "BT/VehicleMovement.h"
 #include "CarSpawner.generated.h"
 
 UCLASS()
@@ -14,6 +15,15 @@ class SUMOTOUNREAL_API ACarSpawner : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ACarSpawner();
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AVehicleMovement> ToSpawn;
+
+	UFUNCTION()
+	void Spawn(FVector Location);
+
+	UPROPERTY(EditAnywhere)
+	float SpawnTimer = 0;
 
 protected:
 	// Called when the game starts or when spawned
