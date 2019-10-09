@@ -22,21 +22,15 @@ ARoadMesh::ARoadMesh()
 	PrimaryActorTick.bCanEverTick = false;
 	mesh = CreateDefaultSubobject<UProceduralMeshComponent>(TEXT("GeneratedMesh"));
 	mesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
-	//static const ConstructorHelpers::FObjectFinder<UMaterialInstanceConstant> MaterialO(TEXT("MaterialInstanceConstant'/Game/CarlaContent/Static/GenericMaterials/Brick/M_Brick_03.M_Brick_03'"));
-	//static ConstructorHelpers::FObjectFinder<UTexture2D> TextureO(TEXT("Texture2D'/Game/CarlaAssets/Static/GenericMaterials/Brick/T_Brick_02_d.T_Brick_02_d'"));
-	//TArray<UTexture*> textureArray;
-	//textureArray.Add((UTexture*)TextureO.Object);
-
-	/*
-	if (MaterialO.Succeeded())
-	{
-		Material = (UMaterial*)MaterialO.Object;
-		//UMaterialInstanceDynamic* MaterialInstance = UMaterialInstanceDynamic::Create(Material, this);
-		mesh->SetMaterial(0, Material);
+	static const ConstructorHelpers::FObjectFinder<UMaterial> SideWalkMaterial(TEXT("Material'/Game/finalRoadMaterials/Sidewalk_Final_MAT.Sidewalk_Final_MAT'"));
+	static const ConstructorHelpers::FObjectFinder<UMaterial> RoadMaterial(TEXT("Material'/Game/finalRoadMaterials/Road_without_reflectors_MAT.Road_without_reflectors_MAT'"));
+	if (RoadMaterial.Succeeded()) {
+		Material0 = RoadMaterial.Object;
+	}
+	if (SideWalkMaterial.Succeeded()) {
+		Material1 = SideWalkMaterial.Object;
 	}
 	mesh->bUseAsyncCooking = true;
-	*/
-
 	eachTriangleNormal.Init(FVector(0.0f, 0.0f, 1.0f), 3);
 	eachTriangleTangents.Init(FProcMeshTangent(1.0f, 0.0f, 0.0f), 3);
 	eachTriangleVertexColors.Init(FLinearColor(0.0f, 0.0f, 0.0f, 1.0f), 3);
@@ -58,9 +52,7 @@ void ARoadMesh::CreateSection()
 		vertex[0] = vertices[i].X;
 		vertex[1] = vertices[i].Y; 
 		vertexXCoordinates.Add(vertices[i].X);
-		UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX X COORDINATE IS %f -=-=-=-="), vertices[i].X);
 		vertexYCoordinates.Add(vertices[i].Y);
-		UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX Y COORDINATE IS %f -=-=-=-="), vertices[i].Y);
 		polygonVertices.push_back(vertex);
 	}
 	polygon.push_back(polygonVertices);
@@ -79,26 +71,13 @@ void ARoadMesh::CreateSection()
 		vertexColors.Append(eachTriangleVertexColors);
 		i += 3;
 	}
-
-	/*
-	if (vertices.Num() == 4) {
-		UV0.Add(FVector2D(0.0f, (roadLength*2)));
-		UV0.Add(FVector2D(6.40f, (roadLength * 2)));
-		UV0.Add(FVector2D(6.40f, 0.0f));
-		UV0.Add(FVector2D(0.0f, 0.0f));
-	}
-	else {
 		/*
 	UV mapping calculation - We need to map the 2D texture surface to the 2D junction surface.
 	We need to find the Xmax, Xmin, Ymax and Ymin of the polygon. Then we calculate Xrange and Yrange of the polygon.
 	After normalizing the coordinates of the vertices over this range, we can make the polygon fit over the 2D texture.
 	*/
 	float Xrange = FMath::Max(vertexXCoordinates) - FMath::Min(vertexXCoordinates);
-	UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX Xrange IS %f -=-=-=-="), Xrange);
-	float Yrange = FMath::Max(vertexYCoordinates) - FMath::Min(vertexYCoordinates);
-	UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-=-=-= VERTEX Yrange IS %f -=-=-=-="), Yrange);
-
-		
+	float Yrange = FMath::Max(vertexYCoordinates) - FMath::Min(vertexYCoordinates);	
 	float minimumX = FMath::Min(vertexXCoordinates);
 	float minimumY = FMath::Min(vertexYCoordinates);
 	for (int32 i = 0; i < vertices.Num(); i++) {
@@ -119,7 +98,13 @@ void ARoadMesh::OnConstruction(const FTransform & Transform)
 	AActor::OnConstruction(Transform);
 	CreateSection();
 	mesh->CreateMeshSection_LinearColor(0, vertices, Triangles, normals, UV0, vertexColors, tangents, false);
+	if (isSideWalkType == true) mesh->SetMaterial(0, Material1);
+	else mesh->SetMaterial(0, Material0);
 	mesh->ContainsPhysicsTriMeshData(true); //Enable collision data
+	mesh->bUseComplexAsSimpleCollision = false;
+	mesh->AddCollisionConvexMesh(vertices);
+	mesh->SetMobility(EComponentMobility::Static);
+	mesh->SetEnableGravity(false);
 }
 
 void ARoadMesh::PostInitializeComponents()
