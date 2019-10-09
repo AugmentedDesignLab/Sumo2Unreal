@@ -20,7 +20,10 @@ public:
 	~ARoadMesh();
 
 	UPROPERTY(VisibleAnywhere, Category = ProcMesh)
-	UMaterial* Material;
+	UMaterial* Material0;
+
+	UPROPERTY(VisibleAnywhere, Category = ProcMesh)
+	UMaterial* Material1;
 
 	UPROPERTY(EditAnywhere, Category = ProcMesh)
 	UProceduralMeshComponent *mesh;
@@ -33,6 +36,7 @@ public:
 	TArray<FVector2D> UV0;
 	TArray<FProcMeshTangent> tangents;
 	TArray<FLinearColor> vertexColors;
+	FString MaterialPath = "";
 
 	//temp triangle arrays
 	TArray<FVector> eachTriangleNormal;
@@ -40,6 +44,7 @@ public:
 	TArray<FLinearColor> eachTriangleVertexColors;
 
 	float roadLength;
+	bool isSideWalkType;
 
 protected:
 	// Called when the game starts or when spawned
