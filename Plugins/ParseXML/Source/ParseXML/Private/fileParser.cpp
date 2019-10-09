@@ -202,17 +202,17 @@ void UfileParser::MakeSpline() {
 	AWayPoint* WayPointDeferred = Cast<AWayPoint>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AWayPoint::StaticClass(), SpawnTransform));
 
 	if (WayPointDeferred != nullptr) {
-		WayPointDeferred->Spline->SplineCurves.Position.Points.Empty();
-		WayPointDeferred->Spline->SplineCurves.Rotation.Points.Empty();
-		WayPointDeferred->Spline->SplineCurves.Scale.Points.Empty();//Empty the list of default spline points. 
-		WayPointDeferred->Spline->AddPoints(SplinePoint);
+		WayPointDeferred->SplineComponent->SplineCurves.Position.Points.Empty();
+		WayPointDeferred->SplineComponent->SplineCurves.Rotation.Points.Empty();
+		WayPointDeferred->SplineComponent->SplineCurves.Scale.Points.Empty();//Empty the list of default spline points. 
+		WayPointDeferred->SplineComponent->AddPoints(SplinePoint);
 		UGameplayStatics::FinishSpawningActor(WayPointDeferred, SpawnTransform);
 	}
 
-	SimpleSplinePtr Spline = std::make_shared<SimpleSpline>();
-	Spline->SplineActor = WayPointDeferred;
-	Spline->SplineActor->splineID = tempEdgeID;
-	SplineContainer.SplineMap.Add(WayPointDeferred->splineID, Spline);
+	SimpleSplinePtr SplineComponent = std::make_shared<SimpleSpline>();
+	SplineComponent->SplineActor = WayPointDeferred;
+	SplineComponent->SplineActor->splineID = tempEdgeID;
+	SplineContainer.SplineMap.Add(WayPointDeferred->splineID, SplineComponent);
 	//UE_LOG(LogEngine, Warning, TEXT("The stored spline ID is %s"), *(SplineContainer.SplineMap[WayPointDeferred->splineID]->SplineActor->splineID));
 }
 
@@ -514,10 +514,10 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType)
 	AWayPoint* WayPointDeferred = Cast<AWayPoint>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AWayPoint::StaticClass(), SpawnTransform));
 	if (WayPointDeferred)
 	{
-		WayPointDeferred->Spline->SplineCurves.Position.Points.Empty();
-		WayPointDeferred->Spline->SplineCurves.Rotation.Points.Empty();
-		WayPointDeferred->Spline->SplineCurves.Scale.Points.Empty();
-		WayPointDeferred->Spline->AddPoints(SplinePoint);
+		WayPointDeferred->SplineComponent->SplineCurves.Position.Points.Empty();
+		WayPointDeferred->SplineComponent->SplineCurves.Rotation.Points.Empty();
+		WayPointDeferred->SplineComponent->SplineCurves.Scale.Points.Empty();
+		WayPointDeferred->SplineComponent->AddPoints(SplinePoint);
 		UGameplayStatics::FinishSpawningActor(WayPointDeferred, SpawnTransform);
 	}
 	SimpleSplinePtr Spline = std::make_shared<SimpleSpline>();

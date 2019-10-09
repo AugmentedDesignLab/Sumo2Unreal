@@ -61,7 +61,7 @@ void AVehicleController::ProcessPerceivedInformation(const TArray<AActor*>& Upda
 				OtherVehicle.AddUnique(temp_vehicle_controller);
 				for (int i = 0; i < OtherVehicle.Num(); i++)
 				{
-					if (OtherVehicle[i]->GetWayPoint()->ID == this->Vehicle->GetWayPoint()->ID)
+					if (OtherVehicle[i]->GetWayPoint()->splineID == this->Vehicle->GetWayPoint()->splineID)
 					{
 						OtherVehicleOnSpline = OtherVehicle[i];
 						BlackboardComp->SetValueAsBool("IsVehicleAhead", true);

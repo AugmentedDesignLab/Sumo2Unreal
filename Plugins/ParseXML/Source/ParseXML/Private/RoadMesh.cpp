@@ -101,8 +101,8 @@ void ARoadMesh::OnConstruction(const FTransform & Transform)
 	if (isSideWalkType == true) mesh->SetMaterial(0, Material1);
 	else mesh->SetMaterial(0, Material0);
 	mesh->ContainsPhysicsTriMeshData(true); //Enable collision data
-	mesh->bUseComplexAsSimpleCollision = false;
-	mesh->AddCollisionConvexMesh(vertices);
+	//mesh->bUseComplexAsSimpleCollision = false;
+	//mesh->AddCollisionConvexMesh(vertices);
 	mesh->SetMobility(EComponentMobility::Static);
 	mesh->SetEnableGravity(false);
 }
