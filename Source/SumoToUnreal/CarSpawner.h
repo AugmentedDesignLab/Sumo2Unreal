@@ -20,13 +20,19 @@ public:
 	TSubclassOf<class AVehicleMovement> ToSpawn;
 
 	UFUNCTION()
-	void Spawn(FVector Location);
+	AVehicleMovement* Spawn(FVector Location);
+
+	UFUNCTION()
+	TArray<AActor*> FindAllWaypoint();
+
+	UFUNCTION()
+	void PrintLog(FString Text);
 
 	UPROPERTY(EditAnywhere)
 	TArray<int> CarSpawningSpline;
 
 	UPROPERTY(EditAnywhere)
-	float SpawnTimer = 0;
+	float SpawnHeight = 0;
 
 protected:
 	// Called when the game starts or when spawned
