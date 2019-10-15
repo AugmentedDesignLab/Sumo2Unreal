@@ -96,6 +96,7 @@ public:
 
 	void SetTraveledDistance(float Distance);
 
+	void Initialize(AWayPoint* WayPoint, float SpeedLimit);
 
 	/*
 		Variables
