@@ -55,15 +55,29 @@ FVector walkingArea::directionVectorCalculator(float x0, float y0, float x1, flo
 FVector walkingArea::trafficControlLocationCalculator()
 {
 	NoTrafficLightatWalkingArea = false;
+	FVector temp1(0.0f, 0.0f, 0.0f);
+	FVector temp2(0.0f, 0.0f, 0.0f);
+	FVector temp3(0.0f, 0.0f, 0.0f);
 	if (walkingAreaShapeCoordinates.size() > 12) //To eliminate non-junction walking areas
 	{
 		FVector directionVector = directionVectorCalculator(walkingAreaShapeCoordinates[4], walkingAreaShapeCoordinates[5], walkingAreaShapeCoordinates[6], walkingAreaShapeCoordinates[7]);
 		//FVector rightVector = directionVector.ToOrientationQuat().GetRightVector();
 
-		
-		trafficControlLocation.X = walkingAreaShapeCoordinates[6];
-		trafficControlLocation.Y = walkingAreaShapeCoordinates[7];
+		temp1.X = walkingAreaShapeCoordinates[6];
+		temp1.Y = walkingAreaShapeCoordinates[7];
+		temp1.Z = 0.0f;
+
+		temp2.X = walkingAreaShapeCoordinates[4];
+		temp2.Y = walkingAreaShapeCoordinates[5];
+		temp2.Z = 0.0f;
+
+		float tempdistance = FVector::Distance(temp1, temp2);
+		temp3 = temp2 - temp1; //vector pointing from temp1 to temp2
+		temp3.Normalize();
+
+		trafficControlLocation = temp1 + ((0.25 * tempdistance) * temp3);
 		trafficControlLocation.Z = 100.0f;
+		//point along line between temp1 and temp2 at 0.25 of total distance between the two points from temp1.
 
 		trafficLight1Orientation = directionVector.ToOrientationQuat();
 	}
@@ -72,10 +86,22 @@ FVector walkingArea::trafficControlLocationCalculator()
 		FVector directionVector = directionVectorCalculator(walkingAreaShapeCoordinates[2], walkingAreaShapeCoordinates[3], walkingAreaShapeCoordinates[4], walkingAreaShapeCoordinates[5]);
 		//FVector rightVector = directionVector.ToOrientationQuat().GetRightVector();
 
-		trafficControlLocation.X = walkingAreaShapeCoordinates[2];
-		trafficControlLocation.Y = walkingAreaShapeCoordinates[3];
-		trafficControlLocation.Z = 100.0f;
+		temp1.X = walkingAreaShapeCoordinates[2];
+		temp1.Y = walkingAreaShapeCoordinates[3];
+		temp1.Z = 0.0f;
 
+		temp2.X = walkingAreaShapeCoordinates[4];
+		temp2.Y = walkingAreaShapeCoordinates[5];
+		temp2.Z = 0.0f;
+
+		float tempdistance = FVector::Distance(temp1, temp2);
+		temp3 = temp2 - temp1; //vector pointing from temp1 to temp2
+		temp3.Normalize();
+
+		trafficControlLocation = temp1 + ((0.25 * tempdistance) * temp3);
+		trafficControlLocation.Z = 100.0f;
+		//point along line between temp1 and temp2 at 0.25 of total distance between the two points from temp1.
+		
 		trafficLight1Orientation = directionVector.ToOrientationQuat();
 	}
 	return trafficControlLocation;

@@ -29,10 +29,15 @@ public:
 	FString splineID;
 	UPROPERTY(EditAnywhere)
 	TArray<AWayPoint*> ConnectedSpline;
+
+	//UPROPERTY(EditAnywhere)
+	//TMap<FString, AWayPoint*> ConnectedSplineMap;
 	UPROPERTY(EditAnywhere)
 	float TotalDistance = 0.0;
 	UPROPERTY(EditAnywhere)
 	int SpeedLimit = 0;
+	UPROPERTY(EditAnywhere)
+	bool isStopSignConnected = false;
 };
 
 
