@@ -11,6 +11,8 @@
 
 AVehicleController::AVehicleController() 
 {
+
+	PrintLog("Inside the constructor ");
 	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>("VehicleBlackBoard");
 	BehaviorComp = CreateDefaultSubobject<UBehaviorTreeComponent>("VehicleBehaviorTree");
 	//perception setup
@@ -97,7 +99,7 @@ void AVehicleController::BeginPlay()
 	BlackboardComp->SetValueAsBool("IsStopSignAhead", false);
 	BlackboardComp->SetValueAsBool("IsVehicleAhead", false);
 	
-	//PrintLog("inside controller beginplay" + FString::SanitizeFloat(Vehicle->LastControl.SteeringValue));
+	PrintLog("inside controller beginplay");
 }
 
 void AVehicleController::Tick(float DeltaTime)

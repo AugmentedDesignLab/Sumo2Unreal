@@ -11,12 +11,13 @@
 
 AVehicleMovement::AVehicleMovement()
 {
-	
+	PrintLog("Cosntructor...");
 }
 
 void AVehicleMovement::BeginPlay()
 {
 	Super::BeginPlay();
+	PrintLog("Begin Play...");
 }
 
 void AVehicleMovement::PrintLog(FString text)
@@ -105,6 +106,12 @@ void AVehicleMovement::SetSpeedLimit(float SpeedLimit)
 void AVehicleMovement::SetTraveledDistance(float Distance)
 {
 	LastControl.TraveledDistance = Distance;
+}
+
+void AVehicleMovement::Initialize(AWayPoint* WayPoint, float SpeedLimit)
+{
+	//this->SetWayPoint(WayPoint);
+	//this->SetSpeedLimit(SpeedLimit);
 }
 
 void AVehicleMovement::Tick(float DeltaTime)

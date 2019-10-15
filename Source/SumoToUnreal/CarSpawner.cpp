@@ -12,39 +12,72 @@ ACarSpawner::ACarSpawner()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-void ACarSpawner::Spawn(FVector Location)
+AVehicleMovement* ACarSpawner::Spawn(FVector Location)
 {
 	if (ToSpawn)
 	{
-		Location = this->GetActorLocation();
 		UWorld* world = GetWorld();
+		Location = FVector(Location.X, Location.Y, SpawnHeight);
 		if (world)
 		{
 			FActorSpawnParameters spawn_param;
 			spawn_param.Owner = this;
 			FRotator rotator;
-			world->SpawnActor<AVehicleMovement>(ToSpawn, Location, rotator, spawn_param);
+			PrintLog(Location.ToString());
+			AVehicleMovement* temp = world->SpawnActor<AVehicleMovement>(ToSpawn, Location, rotator, spawn_param);
+			return temp;
+		}
+		else
+		{
+			return NULL;
 		}
 	}
+	else
+	{
+		return NULL;
+	}
 }
+
+TArray<AActor*> ACarSpawner::FindAllWaypoint()
+{
+	
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AWayPoint::StaticClass(), FoundActors);
+	
+	return FoundActors;
+}
+
+
 
 // Called when the game starts or when spawned
 void ACarSpawner::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	//PrintLog("Calling find all waypoint");
+	TArray<AActor*> SplineActors;
+	SplineActors = FindAllWaypoint();
+	for (int i = 0; i < SplineActors.Num(); i++)
+	{
+		//PrintLog("Spawning car " + (SplineActors)[i]->GetActorLocation().ToString());
+		//Spawn((SplineActors)[i]->GetActorLocation());
+	}
+	AVehicleMovement* temp = Spawn((SplineActors)[26]->GetActorLocation());
+	AWayPoint* way_point = (AWayPoint*)(SplineActors)[26];
+	temp->Initialize(way_point, 20);
+
 }
 
 // Called every frame
 void ACarSpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	SpawnTimer += DeltaTime;
+	
 
-	if (SpawnTimer > 5.0f)
-	{
-		Spawn(FVector(0.0, 0.0, 0.0));
-		SpawnTimer = 0.0;
-	}
+	
 }
 
+void ACarSpawner::PrintLog(FString Text)
+{
+	if (!GEngine) return;
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, *Text);
+}
