@@ -277,3 +277,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+SumoToUnreal.sln
+.vs/SumoToUnreal/v16/Solution.VC.db-shm

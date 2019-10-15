@@ -31,6 +31,7 @@ public:
 
 	//Spline Container
 	splineCont SplineContainer;
+	FString turnType = "";
 
 	//Put the shape coordinates into Shapecoordinates vector
 	void ShapeProcessing(const TCHAR*);
@@ -40,6 +41,7 @@ public:
 	//Collect all required node attributes for one object as member variables and then initialize a node object
 	void InitializeNodeAttributes(const TCHAR*, const TCHAR*);
 	SimpleNodePtr InitializeNode();
+	TArray<FString> incomingLaneContainer;
 
 	//one container object to store all node mappings
 	NodeCont NodeContainer;		
@@ -81,6 +83,8 @@ public:
 	//----------------Functions for initialzing Traffic Lights and Stop signs----------------
 	void InitializetrafficLightAttributes(const TCHAR*, const TCHAR*); //Traffic light id is currently being used to place stop signs also.
 	void InitializeTrafficControl(const TCHAR*);  //Used for either initializing traffic lights and stop signs.
+	void LinkTrafficControlToSplines(); //Links all incoming splines to a junction to the closest traffic lights
+	TArray<FVector> finalSplinePoints;
 
 	StopSignCont StopSignContainer;
 
