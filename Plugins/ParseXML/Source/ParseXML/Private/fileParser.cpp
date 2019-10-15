@@ -717,8 +717,9 @@ bool UfileParser::ProcessClose(const TCHAR* Element) {
 	if (isConnection == true) {
 		if (fromID.Contains(TEXT("w")) || toID.Contains(TEXT("w"))) {} //avoid walking area related splines.  
 		else {
-			if (viaIsSet == true) SplineContainer.SplineMap[fromID]->SplineActor->ConnectedSpline.Add((SplineContainer.SplineMap[viaID])->SplineActor);
-			else SplineContainer.SplineMap[fromID]->SplineActor->ConnectedSpline.Add((SplineContainer.SplineMap[toID])->SplineActor);
+			bool isUTurnSpline = turnType.Equals(TEXT("uturn"));
+			if ((viaIsSet == true) && (isUTurnSpline == false)) SplineContainer.SplineMap[fromID]->SplineActor->ConnectedSpline.Add((SplineContainer.SplineMap[viaID])->SplineActor);
+			else if (isUTurnSpline == false) SplineContainer.SplineMap[fromID]->SplineActor->ConnectedSpline.Add((SplineContainer.SplineMap[toID])->SplineActor);
 		}
 		viaIsSet = false;
 		isConnection = false;
