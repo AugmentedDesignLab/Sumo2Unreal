@@ -69,12 +69,22 @@ Outputs -
 
 XML files generated using specifications from [IntGen](https://github.com/AugmentedDesignLab/intgen). The output of IntGen is a json file which contains a description for one road intersection. The traffic control for this road intersection defaults to stop signs. Other details for this road intersection include number of turn lanes, number of incoming roads, number of lanes for each incoming road.
 
+#### 1. Three way intersection.
+
+Below is an example of a three way intersection generated on IntGen and Netgenerate. This was then imported into UE4 using Sumo2Unreal. This road intersection includes one turn lane and one of the incoming roads is four laned.
+![intgen1](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/newTests/threeway-oneturnlane-onefourlanedroad.png)
+
+#### 2. Four way intersection.
+
+Below is an example of a four way intersection generated on IntGen and Netgenerate. This road intersection also contains one turn lane and one of the incoming roads is four laned. 
+![intgen2](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/newTests/4-way-onefourlanedroad.png)
+
+
 ### Getting Started 
 
 1. Please have a look at the [wiki pages](https://github.com/AugmentedDesignLab/Sumo2Unreal/wiki) for requirements, instructions on how to run the code and resources to learn if you want to contribute. 
 
 2. Track our progress [here](https://github.com/AugmentedDesignLab/Sumo2Unreal/projects/1).
-
 ---
 
 ### Guideline for running cars on these roads.
