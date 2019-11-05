@@ -10,7 +10,7 @@ AStopSignMesh::AStopSignMesh()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	stopSignMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("stopSignActor"));
-	static ConstructorHelpers::FObjectFinder<UStaticMesh>stopSignMeshAsset(TEXT("StaticMesh'/Game/StopSign/StopSign.StopSign'"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh>stopSignMeshAsset(TEXT("StaticMesh'/Game/finalStopSign/StopSignStaticMesh2.StopSignStaticMesh2'"));
 	UStaticMesh* stopSignMesh= stopSignMeshAsset.Object;
 	stopSignMeshComponent->SetStaticMesh(stopSignMesh);
 }

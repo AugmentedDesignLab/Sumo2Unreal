@@ -85,8 +85,8 @@ void FParseXMLModule::PluginButtonClicked()
 			UfileParser fileParser(*selectedFile); //Selected File from the file dialog
 
 			//Uncomment these lines if you do not want any debug UE_LOG statements
-			//GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
-			//GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
+			GEngine->Exec(nullptr, TEXT("Log LogTemp off")); //comment (1/2) to see log messages
+			GEngine->Exec(nullptr, TEXT("Log LogEngine off")); //comment (2/2) to see log messages
 
 			fileParser.loadxml();
 			UE_LOG(LogTemp, Warning, TEXT("Xml file parsed!"));

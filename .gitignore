@@ -7,12 +7,15 @@ Binaries/*
 Intermediate/*
 DerivedDataCache/*
 Saved/*
-Content/CarlaContent/*
-Content/StopSign/*
+Content/AI
+Content/CarlaContent
 Content/Collections
 Content/Developers
 Content/trafficlight
 Content/trial_trafficLight
+Content/VehicleModel
+Content/*.uasset
+Content/*.umap
 
 
 #Plugin specific files

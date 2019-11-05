@@ -121,6 +121,10 @@ void UfileParser::InitializeInternalEdgeAttributes(const TCHAR* AttributeName, c
 		ShapeProcessing(AttributeValue);
 		shapeIsSet = true;
 	}
+	else if (FString(AttributeValue).Equals(TEXT("crossing"))) {
+		isCrossing = true;
+		shapeIsSet = true;
+	}
 }
 
 void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue) {
@@ -160,7 +164,7 @@ void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCH
 		laneWidthIsSet = true;
 	}
 
-	else if (FString(AttributeName).Equals(TEXT("allow"))) {
+	else if (FString(AttributeName).Equals(TEXT("allow")) && (isCrossing == false)) { //we need to check if edge is sidewalk but not crossing.
 		isSidewalk = true;
 		return;
 	}
@@ -311,8 +315,7 @@ void UfileParser::InitializeNodeAttributes(const TCHAR* AttributeName, const TCH
 
 //walking Area parsing is similar to the nodes. TMap storing the walkingArea objects is different. Also walkingArea meshes will be 
 //3d at some point. 
-void UfileParser::InitializewalkingArea()
-{
+void UfileParser::InitializewalkingArea() {
 	//unique_ptr for object creation for extended lifetime
 	walkingAreaPtr currentWalkingArea = std::make_unique<walkingArea>();
 	currentWalkingArea->walkingAreaShapeCoordinates = Shapecoordinates;
@@ -327,8 +330,7 @@ void UfileParser::InitializewalkingArea()
 	FTransform SpawnTransform(RotationEdge, origin);
 	ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
 
-	if (MyDeferredActor != nullptr)
-	{
+	if (MyDeferredActor != nullptr) {
 		FVector coordinates;
 		int i = 0;
 		while ((i + 2) <= currentWalkingArea->walkingAreaShapeCoordinates.size())
@@ -349,8 +351,7 @@ void UfileParser::InitializewalkingArea()
 	}
 }
 
-SimpleNodePtr UfileParser::InitializeNode()
-{
+SimpleNodePtr UfileParser::InitializeNode() {
 	//unique_ptr for object creation for extended lifetime
 	SimpleNodePtr Node = std::make_unique<SimpleNode>();
 	Node->SetID(*tempNodeID);
@@ -399,8 +400,9 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge() {
 		Edge->setShapeCoordinates(tempvector);
 		tempvector.clear();
 
-		if (laneWidthIsSet == true) Edge->setSideWalkVertCoordinates(laneWidth*100); //default SUMO lane width
-		else Edge->setSideWalkVertCoordinates(320);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm (12 feet).
+		
+		if (laneWidthIsSet == true) Edge->setVertexCoordinates(laneWidth*100.0f); //default SUMO lane width
+		else Edge->setVertexCoordinates(320.0f);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm (12 feet).
 
 		FVector originCoordinates = Edge->centroid;
 		FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
@@ -474,6 +476,10 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 	TArray<FSplinePoint> SplinePoint;
 	FVector splineOrigin(0.0f, 0.0f, 0.0f);
 	FQuat splineRotation(0.0f, 0.0f, 0.0f, 0.0f);
+	FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
+	FVector origin(0.0f, 0.0f, 0.0f);
+	FString checkConnectedSplineID = tempEdgeID;
+	
 
 	while ((i + 3) <= (Shapecoordinates.size() - 1)){  //accounting for smaller edges to make a curved edge.
 		float temp[] = { Shapecoordinates[i], Shapecoordinates[i + 1], Shapecoordinates[i + 2], Shapecoordinates[i + 3] };
@@ -482,18 +488,15 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 		Edge->setShapeCoordinates(tempvector);
 		tempvector.clear();
 
-		if (laneWidthIsSet == true) Edge->setVertexCoordinates(laneWidth);  //default SUMO lane width
+		if (laneWidthIsSet == true) Edge->setVertexCoordinates(laneWidth * 100.0f);  //default SUMO lane width
 		else Edge->setVertexCoordinates(320);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm.
 
 		FVector originCoordinates = Edge->centroid;
-		FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
-		FVector origin(0.0f, 0.0f, 0.0f);
 
-		SplinePoint.Add(FSplinePoint(j, FVector((Shapecoordinates[i]-(Edge->centroid.X)), (Shapecoordinates[i + 1]-(Edge->centroid.Y)), 0.2f)));
-		SplinePoint.Add(FSplinePoint(j + 1.0, FVector((Shapecoordinates[i + 2]-(Edge->centroid.X)), (Shapecoordinates[i + 3]-(Edge->centroid.Y)), 0.2f)));
-		j += 2.0;
+		SplinePoint.Add(FSplinePoint(0.0, FVector((Shapecoordinates[i]-(Edge->centroid.X)), (Shapecoordinates[i + 1]-(Edge->centroid.Y)), 0.2f)));
+		SplinePoint.Add(FSplinePoint(1.0, FVector((Shapecoordinates[i + 2]-(Edge->centroid.X)), (Shapecoordinates[i + 3]-(Edge->centroid.Y)), 0.2f)));
 
-		finalSplinePoints.Add(FVector((Shapecoordinates[i + 2] - (Edge->centroid.X)), (Shapecoordinates[i + 3] - (Edge->centroid.Y)), 0.2f)); //change for curved roads. For curved roads check for last iteration first.
+		//finalSplinePoints.Add(FVector((Shapecoordinates[i + 2] - (Edge->centroid.X)), (Shapecoordinates[i + 3] - (Edge->centroid.Y)), 0.2f)); //change for curved roads. For curved roads check for last iteration first.
 
 		if (FString(edgeType).Equals(TEXT("standard"))) {
 			origin.X = originCoordinates.X;
@@ -513,7 +516,7 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 
 		splineOrigin = origin; //might break for curved edges.
 		splineRotation = RotationEdge;
-		FTransform SpawnTransform(RotationEdge, origin);
+		FTransform SpawnTransform(splineRotation, splineOrigin);
 		ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
 		if (MyDeferredActor) {
 			MyDeferredActor->vertices = Edge->vertexArray;
@@ -521,26 +524,38 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
 		}
-		i+=2;
+
+		//spline actor
+		AWayPoint* WayPointDeferred = Cast<AWayPoint>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AWayPoint::StaticClass(), SpawnTransform));
+		if (WayPointDeferred) {
+			WayPointDeferred->SplineComponent->SplineCurves.Position.Points.Empty();
+			WayPointDeferred->SplineComponent->SplineCurves.Rotation.Points.Empty();
+			WayPointDeferred->SplineComponent->SplineCurves.Scale.Points.Empty();//Empty the default spline data.
+			WayPointDeferred->SplineComponent->AddPoints(SplinePoint);
+			UGameplayStatics::FinishSpawningActor(WayPointDeferred, SpawnTransform);
+		}
+
+		//separate spline object
+		SimpleSplinePtr Spline = std::make_shared<SimpleSpline>();
+		Spline->SplineActor = WayPointDeferred;
+		if ((i >= 2) && ((i % 2) == 0)) {
+			Spline->SplineActor->splineID = tempEdgeID + FString::FromInt(i);
+			SplineContainer.SplineMap[tempEdgeID]->SplineActor->twoTimesTotalConnectedSplines = i;
+			SplineContainer.SplineMap.Add(Spline->SplineActor->splineID, Spline);
+			SplineContainer.SplineMap[checkConnectedSplineID]->SplineActor->ConnectedSpline.Add((SplineContainer.SplineMap[Spline->SplineActor->splineID])->SplineActor);
+		}
+		else {
+			Spline->SplineActor->splineID = tempEdgeID;
+			SplineContainer.SplineMap.Add(Spline->SplineActor->splineID, Spline);
+		}
+		Spline->SplineActor->SpeedLimit = 20;
+		Spline->SplineActor->TotalDistance = Spline->SplineActor->SplineComponent->GetSplineLength(); 
+		checkConnectedSplineID = Spline->SplineActor->splineID;
+		UE_LOG(LogEngine, Warning, TEXT("The added spline is %s added in iteration %d"), *(WayPointDeferred->splineID), i);
+		i += 2;
 	}
 
-	FTransform SpawnTransform(splineRotation, splineOrigin);
-	AWayPoint* WayPointDeferred = Cast<AWayPoint>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AWayPoint::StaticClass(), SpawnTransform));
-	if (WayPointDeferred) {
-		WayPointDeferred->SplineComponent->SplineCurves.Position.Points.Empty();
-		WayPointDeferred->SplineComponent->SplineCurves.Rotation.Points.Empty();
-		WayPointDeferred->SplineComponent->SplineCurves.Scale.Points.Empty();
-		WayPointDeferred->SplineComponent->AddPoints(SplinePoint);
-		UGameplayStatics::FinishSpawningActor(WayPointDeferred, SpawnTransform);
-	}
-	SimpleSplinePtr Spline = std::make_shared<SimpleSpline>();
-	Spline->SplineActor = WayPointDeferred;
-	Spline->SplineActor->splineID = tempEdgeID;
-	Spline->SplineActor->SpeedLimit = 20;
-	Spline->SplineActor->TotalDistance = Spline->SplineActor->SplineComponent->GetSplineLength();
-	SplineContainer.SplineMap.Add(WayPointDeferred->splineID, Spline);
-	UE_LOG(LogEngine, Warning, TEXT("The added spline is %s"), *(WayPointDeferred->splineID));
-
+	
 	//Add Edge object to the hashmap.
 	EdgeContainer.EdgeMap.Add(*tempEdgeID, std::move(Edge));
 	return Edge;
@@ -558,7 +573,7 @@ void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two 
 	FVector trafficControl1Location;
 	FQuat trafficControlRotation;
 	FVector trafficLightScale(1.0f, 1.0f, 1.0f);
-	FVector stopSignScale(50.0f, 50.0f, 50.0f);
+	FVector stopSignScale(1.0f, 1.0f, 1.0f);
 	for (const TPair<const TCHAR*, walkingAreaPtr>& pair : walkingAreaContainer.walkingAreaMap)// Find the corresponding walking area for a traffic light for a particular junction.
 	{
 		FString currentKey = FString(pair.Key); //ID of the walking area.
@@ -669,11 +684,6 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 	}
 	else if (isWalkingArea == true) InitializeWalkingAreaAttributes(AttributeName, AttributeValue);
 
-	if (FString(AttributeValue).Equals(TEXT("crossing"))) {
-		isCrossing = true;
-		return true;
-	}
-
 	else if (isCrossing == true) InitializeEdgeAttributes(AttributeName, AttributeValue);
 	if (isElementtrafficLight == true) InitializetrafficLightAttributes(AttributeName, AttributeValue);
 	if (isConnection == true) InitializeSplineAttributes(AttributeName, AttributeValue);
@@ -718,8 +728,20 @@ bool UfileParser::ProcessClose(const TCHAR* Element) {
 		if (fromID.Contains(TEXT("w")) || toID.Contains(TEXT("w"))) {} //avoid walking area related splines.  
 		else {
 			bool isUTurnSpline = turnType.Equals(TEXT("uturn"));
-			if ((viaIsSet == true) && (isUTurnSpline == false)) SplineContainer.SplineMap[fromID]->SplineActor->ConnectedSpline.Add((SplineContainer.SplineMap[viaID])->SplineActor);
-			else if (isUTurnSpline == false) SplineContainer.SplineMap[fromID]->SplineActor->ConnectedSpline.Add((SplineContainer.SplineMap[toID])->SplineActor);
+			if ((viaIsSet == true) && (isUTurnSpline == false)) {
+				if (SplineContainer.SplineMap[fromID]->SplineActor->twoTimesTotalConnectedSplines >= 2) {
+					fromID = fromID + FString::FromInt(SplineContainer.SplineMap[fromID]->SplineActor->twoTimesTotalConnectedSplines);
+				}
+				else {}
+				SplineContainer.SplineMap[fromID]->SplineActor->ConnectedSpline.Add((SplineContainer.SplineMap[viaID])->SplineActor);
+			}
+			else if (isUTurnSpline == false) {
+				if (SplineContainer.SplineMap[fromID]->SplineActor->twoTimesTotalConnectedSplines >= 2) {
+					fromID = fromID + FString::FromInt(SplineContainer.SplineMap[fromID]->SplineActor->twoTimesTotalConnectedSplines);
+				}
+				else {}
+				SplineContainer.SplineMap[fromID]->SplineActor->ConnectedSpline.Add((SplineContainer.SplineMap[toID])->SplineActor);
+			}
 		}
 		viaIsSet = false;
 		isConnection = false;
