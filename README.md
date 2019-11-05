@@ -76,7 +76,7 @@ Below is an example of a three way intersection generated on IntGen and Netgener
 
 #### 2. Four way intersection.
 
-Below is an example of a four way intersection generated on IntGen and Netgenerate. This road intersection also contains one turn lane and one of the incoming roads is four laned. 
+Below is an example of a four way intersection generated on IntGen and Netgenerate. This road intersection also contains one turn lane and one of the incoming roads is four laned. The menu on the right side presents the details of the road that is available via the spline. These details include the ID of the connected splines, the length of a spline (shown in the 'distance' field), the speed limit of a spline and a boolean representing whether a stop sign is 'attached' to this spline or not. This information is sufficient for a car behavior tree to drive itself on these and make a turn at the given intersection. 
 ![intgen2](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/newTests/4-way-onefourlanedroad.png)
 
 
@@ -91,7 +91,7 @@ Below is an example of a four way intersection generated on IntGen and Netgenera
 
 1. For running cars, one would need a 3D model of a vehicle. This 3D model can be included in the project as a uasset file.
 
-2. The behavior of cars can be defined using [behavior trees](https://docs.unrealengine.com/en-US/Engine/ArtificialIntelligence/BehaviorTrees/index.html). Examples of task nodes include stopping for stop signs or other vehicles and changing splines.
+2. The behavior of cars can be defined using [behavior trees](https://docs.unrealengine.com/en-US/Engine/ArtificialIntelligence/BehaviorTrees/index.html). Examples of task nodes include stopping for stop signs or other vehicles and changing splines. The [AI perception system](https://docs.unrealengine.com/en-US/Engine/ArtificialIntelligence/AIPerception/index.html) can be used to sense various objects in the scene. 
 
 3. Communication of road data to the vehicle is done using splines. Once a spline is connected to a car, that spline can be used to switch to other splines and also to get information such as whether a stop sign is present at the end of spline or not. 
 
