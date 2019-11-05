@@ -20,7 +20,7 @@ Output as seen on NETEDIT Application -
 ![spider01_netedit](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/spider01_netedit.png)
 
 Output on the Unreal Editor after running our importer - 
-![spider01_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/spider01.png)
+![spider01_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/newTests/diamond-spider.png)
 
 #### 2. Large Spider Network 
 
@@ -30,7 +30,7 @@ netgenerate --spider
 ```
 
 Output - 
-![spider02_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/S2U_Screenshots/spider02.png)
+![spider02_unreal](https://github.com/AugmentedDesignLab/Sumo2Unreal/blob/master/newTests/regularSpiderWeb.png)
 
 #### 3. Basic Grid Network 
 
