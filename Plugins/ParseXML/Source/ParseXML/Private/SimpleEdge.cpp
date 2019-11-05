@@ -201,7 +201,6 @@ void SimpleEdge::setSideWalkVertCoordinates(float paralaneWidth)
 		vertexArray.Add(Bx1_s);
 		curbVerticesTop2.Add(Bx1_s);
 	}
-
 	
 	centroidAdjustment(TEXT("vertexArray"), Ax0, Ax0_s, Ax1, Ax1_s, Bx0, Bx0_s, Bx1, Bx1_s);
 	centroidAdjustment(TEXT("curbVerticesTop1"), Ax0, Ax0_s, Ax1, Ax1_s, Bx0, Bx0_s, Bx1, Bx1_s);
@@ -370,8 +369,7 @@ void SimpleEdge::setVertexCoordinates(float paralaneWidth)
 	centroid.Y = 0.0f;
 	centroid.Z = 0.0f;
 
-	for (int i = 0; i < vertexArray.Num(); i++)
-	{
+	for (int i = 0; i < vertexArray.Num(); i++) {
 		centroid += vertexArray[i];
 	}
 

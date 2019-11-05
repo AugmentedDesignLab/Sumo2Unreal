@@ -125,8 +125,8 @@ FQuat walkingArea::stopSignRotationCalculator() {
 FQuat walkingArea::getStopSignOrientation(FVector& currentDirectionVector) {
 	//Next two lines are unique for the stop sign 3D model in our project. There is an offset of 180 degrees for the yaw value.   
 	FRotator stopSignRotation = currentDirectionVector.ToOrientationQuat().GetRightVector().ToOrientationQuat().Rotator(); 
-	stopSignRotation.Roll += 90.0f; //Make the stop sign stand
-	stopSignRotation.Yaw += 180.0f;
+	stopSignRotation.Roll += 0.0f; //Make the stop sign stand
+	stopSignRotation.Yaw += 200.0f;
 	stopSignOrientation = stopSignRotation.Quaternion(); //Convert rotation to FQuat type to give it as an input while spawning the stopSign mesh (deferred actor spawn). 
 	return stopSignOrientation;
 }

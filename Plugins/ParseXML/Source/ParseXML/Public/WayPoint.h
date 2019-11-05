@@ -38,6 +38,7 @@ public:
 	int SpeedLimit = 0;
 	UPROPERTY(EditAnywhere)
 	bool isStopSignConnected = false;
+	int32 twoTimesTotalConnectedSplines = 0; //multiple of 2
 };
 
 
