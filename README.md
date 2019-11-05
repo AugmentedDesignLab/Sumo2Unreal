@@ -7,7 +7,7 @@ The input taken by this importer is a SUMO's .net.xml road network file format a
 
 ---
 ### Description
-
+Sumo2Unreal has the capability to procedurally generate 2D road meshes (with road and sidewalk materials and textures) in Unreal Engine 4 based on road data received from an XML file. In this project, the xml file is generated using Netgenerate from the SUMO traffic simulator's suite of applications. Sumo2Unreal also has the capability to place splines along these roads. Stop signs are placed on road intersections created by the [IntGen](https://github.com/AugmentedDesignLab/intgen) application. Stop signs also contain the required materials and textures.    
 
 
 ### Results from Netgenerate's default road networks.
