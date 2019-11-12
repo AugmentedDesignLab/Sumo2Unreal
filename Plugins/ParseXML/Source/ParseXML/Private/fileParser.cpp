@@ -504,6 +504,7 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 			origin.Z = originCoordinates.Z;
 		}
 		else if (FString(edgeType).Equals(TEXT("crossing"))) {
+			UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=Inside pedestrian crossing-=-=-=-=-="));
 			origin.X = originCoordinates.X;
 			origin.Y = originCoordinates.Y;
 			origin.Z = 0.0f;
