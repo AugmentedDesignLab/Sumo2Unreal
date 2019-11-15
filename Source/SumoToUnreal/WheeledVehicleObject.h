@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "WheeledVehicle.h"
 #include "Engine.h"
+#include "WayPoint.h"
 #include "VehicleAIController.h"
 #include <Runtime\AIModule\Classes\BehaviorTree\BehaviorTree.h>
 #include "WheeledVehicleObject.generated.h"
@@ -32,6 +33,9 @@ public:
 
 	AVehicleAIController* VehicleAIController;
 	UBlackboardComponent* BlackBoardData;
+
+	UPROPERTY(EditAnywhere)
+	AWayPoint* WayPoint;
 
 	void PrintLog(FString Text)
 	{

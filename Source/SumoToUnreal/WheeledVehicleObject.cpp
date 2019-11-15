@@ -6,23 +6,28 @@
 #include "WheeledVehicleMovementComponent4W.h"
 #include "GameFramework/Pawn.h"
 
+//runs first when simulate
 AWheeledVehicleObject::AWheeledVehicleObject()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	PrintLog("Inside constructor vehicle object");
+	PrintLog("Inside vehicle object constructor ");
 }
 
+//runs fourth time
 void AWheeledVehicleObject::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PrintLog("Inside vehicle object begin play");
+	PrintLog("Inside vehicle object beginplay");
+	
 	VehicleAIController = GetController<AVehicleAIController>();
 	BlackBoardData = VehicleAIController->BlackboardComp;
-	if (BlackBoardData != NULL)
-	{
-		PrintLog("Not Null vehicle BB");
-	}
+	if (BlackBoardData == NULL && VehicleAIController == NULL) return;
+
+	//setting up variable in the blackboard
+	BlackBoardData->SetValueAsObject("WayPoint", WayPoint);
+	BlackBoardData->SetValueAsObject("VehicleObject", this);
+	
 	
 }
 
@@ -30,7 +35,7 @@ void AWheeledVehicleObject::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//PrintLog("Inside wheeleded vehicle tick");
+	//PrintLog("Inside vehicle object tick");
 	
 	float brake_value = BlackBoardData->GetValueAsFloat("BrakeValue");
 	float steer_value = BlackBoardData->GetValueAsFloat("SteerValue");
@@ -39,5 +44,6 @@ void AWheeledVehicleObject::Tick(float DeltaTime)
 	this->GetVehicleMovement()->SetBrakeInput(brake_value);
 	this->GetVehicleMovement()->SetSteeringInput(steer_value);
 	this->GetVehicleMovement()->SetThrottleInput(throttle_value);
+	
 	
 }

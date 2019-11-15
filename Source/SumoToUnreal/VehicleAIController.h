@@ -5,8 +5,10 @@
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "Engine.h"
+#include "WayPoint.h"
 #include <Runtime\AIModule\Classes\BehaviorTree\BehaviorTreeComponent.h>
 #include <Runtime\AIModule\Classes\BehaviorTree\BlackboardComponent.h>
+#include "WheeledVehicle.h"
 #include "VehicleAIController.generated.h"
 
 /**
@@ -16,22 +18,26 @@ UCLASS()
 class SUMOTOUNREAL_API AVehicleAIController : public AAIController
 {
 	GENERATED_BODY()
+
 public:
 	AVehicleAIController();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:
-
 	void Tick(float DeltaTime) override;
 
 	UPROPERTY()
 	UBlackboardComponent* BlackboardComp;
-
 	UPROPERTY()
 	UBehaviorTreeComponent* BehaviorComp;
+	UPROPERTY()
+	AWayPoint* WayPoint;
+	UPROPERTY()
+	float DistanceAlongWayPoint = 0.0;
+
+	float UpdatedSteeringValue(float Delta);
 
 
 	//Function to load object from content folder
