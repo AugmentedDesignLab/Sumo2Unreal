@@ -22,7 +22,7 @@ EBTNodeResult::Type UTaskChangeSpline::ExecuteTask(UBehaviorTreeComponent& Owner
 	{
 		int n = FMath::RandRange(0, connected_spline_number - 1);
 		MyController->BlackboardComp->SetValueAsObject("WayPoint", WayPoint->ConnectedSpline[n]);
-		MyController->DistanceAlongWayPoint = 0.0;
+		MyController->BlackboardComp->SetValueAsFloat("DistanceAlongWayPoint", 0.0);
 		return EBTNodeResult::Succeeded;
 	}
 	return EBTNodeResult::Failed;

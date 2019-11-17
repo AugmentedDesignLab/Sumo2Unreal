@@ -34,8 +34,6 @@ public:
 	UBehaviorTreeComponent* BehaviorComp;
 	UPROPERTY()
 	AWayPoint* WayPoint;
-	UPROPERTY()
-	float DistanceAlongWayPoint = 0.0;
 
 	float UpdatedSteeringValue(float Delta);
 

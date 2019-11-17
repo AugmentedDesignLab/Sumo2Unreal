@@ -5,6 +5,7 @@
 #include <Runtime\AIModule\Classes\BehaviorTree\BlackboardComponent.h>
 #include "WheeledVehicleMovementComponent4W.h"
 #include "GameFramework/Pawn.h"
+#include "Kismet/KismetMathLibrary.h"
 
 //runs first when simulate
 AWheeledVehicleObject::AWheeledVehicleObject()
@@ -27,6 +28,10 @@ void AWheeledVehicleObject::BeginPlay()
 	//setting up variable in the blackboard
 	BlackBoardData->SetValueAsObject("WayPoint", WayPoint);
 	BlackBoardData->SetValueAsObject("VehicleObject", this);
+
+	float distance_along_spline = GetDistanceAlongSpline(GetActorLocation(), WayPoint->SplineComponent);
+	BlackBoardData->SetValueAsFloat("DistanceAlongWayPoint", distance_along_spline);
+	PrintLog("Get dsitance along spline " + FString::SanitizeFloat(distance_along_spline));
 	
 	
 }
@@ -46,4 +51,19 @@ void AWheeledVehicleObject::Tick(float DeltaTime)
 	this->GetVehicleMovement()->SetThrottleInput(throttle_value);
 	
 	
+}
+
+
+
+float AWheeledVehicleObject::GetDistanceAlongSpline(FVector InWorldLocation, USplineComponent* InSpline)
+{
+	if (!InSpline)
+		return 0.f;
+
+	auto InputKeyFloat = InSpline->FindInputKeyClosestToWorldLocation(InWorldLocation);
+	auto InputKey = FMath::TruncToInt(InputKeyFloat);
+	auto A = InSpline->GetDistanceAlongSplineAtSplinePoint(InputKey);
+	auto B = InSpline->GetDistanceAlongSplineAtSplinePoint(InputKey + 1);
+
+	return A + ((B - A) * (InputKeyFloat - InputKey));
 }

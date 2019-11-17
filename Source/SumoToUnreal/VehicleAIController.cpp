@@ -44,7 +44,8 @@ void AVehicleAIController::BeginPlay()
 	BlackboardComp->SetValueAsFloat("ThreshWaypointDeviation", 20);
 	
 	
-	
+	//code to get distance along spline
+
 	
 	
 }
@@ -54,7 +55,8 @@ void AVehicleAIController::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	//PrintLog("Inside controller tick ");
 	BlackboardComp->SetValueAsFloat("SteerValue", UpdatedSteeringValue(DeltaTime));
-	PrintLog("Distance " + FString::SanitizeFloat(DistanceAlongWayPoint));
+	float DistanceAlongWayPoint = BlackboardComp->GetValueAsFloat("DistanceAlongWayPoint");
+	//PrintLog("Distance " + FString::SanitizeFloat(DistanceAlongWayPoint));
 	
 }
 
@@ -62,12 +64,15 @@ float AVehicleAIController::UpdatedSteeringValue(float Delta)
 {
 	AWayPoint* WayPoint = Cast<AWayPoint>(BlackboardComp->GetValueAsObject("WayPoint"));
 	AWheeledVehicleObject* Vehicle = Cast<AWheeledVehicleObject>(BlackboardComp->GetValueAsObject("VehicleObject"));
-
+	float DistanceAlongWayPoint = BlackboardComp->GetValueAsFloat("DistanceAlongWayPoint");
+	
 	float steer_value = 0.0;
 	FVector delta_distance = Vehicle->GetVelocity() * Delta * 0.036;
 	float distance_value = delta_distance.Size() * 27.78;
 
 	DistanceAlongWayPoint += distance_value;
+	PrintLog("Distance along spline" + FString::SanitizeFloat(DistanceAlongWayPoint));
+	BlackboardComp->SetValueAsFloat("DistanceAlongWayPoint", DistanceAlongWayPoint);
 
 	FVector veh_loc = Vehicle->GetActorLocation();
 

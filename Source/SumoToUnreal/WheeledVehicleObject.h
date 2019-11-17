@@ -37,6 +37,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	AWayPoint* WayPoint;
 
+	float GetDistanceAlongSpline(FVector Location, USplineComponent* Spline);
+
 	void PrintLog(FString Text)
 	{
 		if (!GEngine) return;
