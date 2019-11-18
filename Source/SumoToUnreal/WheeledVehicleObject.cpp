@@ -29,8 +29,10 @@ void AWheeledVehicleObject::BeginPlay()
 	BlackBoardData->SetValueAsObject("WayPoint", WayPoint);
 	BlackBoardData->SetValueAsObject("VehicleObject", this);
 
+	//csutom function to calculate distance along spline
 	float distance_along_spline = GetDistanceAlongSpline(GetActorLocation(), WayPoint->SplineComponent);
 	BlackBoardData->SetValueAsFloat("DistanceAlongWayPoint", distance_along_spline);
+	BlackBoardData->SetValueAsBool("IsStopSignAhead", WayPoint->isStopSignConnected);
 	PrintLog("Get dsitance along spline " + FString::SanitizeFloat(distance_along_spline));
 	
 	

@@ -4,16 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
-#include "TaskChangeSpline.generated.h"
+#include "Engine.h"
+#include "TaskCheckStopAtStopSign.generated.h"
+
 
 /**
  * 
  */
 UCLASS()
-class SUMOTOUNREAL_API UTaskChangeSpline : public UBTTask_BlackboardBase
+class SUMOTOUNREAL_API UTaskCheckStopAtStopSign : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
-	
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
 	void PrintLog(FString Text)
