@@ -39,6 +39,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void spawnActor();
-	void calculateDecalRotation();
+	//void calculateDecalRotation();
 	void spawnPedestrianCrossingDecal();
 };

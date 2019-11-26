@@ -29,6 +29,8 @@ public:
 	FString splineID;
 	UPROPERTY(EditAnywhere)
 	TArray<AWayPoint*> ConnectedSpline;
+	FString turnType;
+	FVector directionOfSpline;
 
 	//UPROPERTY(EditAnywhere)
 	//TMap<FString, AWayPoint*> ConnectedSplineMap;
@@ -39,6 +41,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool isStopSignConnected = false;
 	int32 twoTimesTotalConnectedSplines = 0; //multiple of 2
+	void calculateCurrentSplineTurnTypes();
+	FString calculateDecalSelection();
 };
 
 

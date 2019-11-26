@@ -24,6 +24,36 @@ void AWayPoint::BeginPlay()
 void AWayPoint::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+}
+void AWayPoint::calculateCurrentSplineTurnTypes()
+{
+	float distance = SplineComponent->GetSplineLength();
+	directionOfSpline = SplineComponent->GetDirectionAtDistanceAlongSpline(0.0f, ESplineCoordinateSpace::World);
+	FVector direction2 = SplineComponent->GetDirectionAtDistanceAlongSpline(distance, ESplineCoordinateSpace::World);
+	FVector crossProduct = FVector::CrossProduct(direction2, directionOfSpline);
 
+	if (crossProduct.Z > 0) turnType = "left";
+	else if (crossProduct.Z < 0) turnType = "right";
+	else if (crossProduct.Z == 0) turnType = "straight";
+}
+
+FString AWayPoint::calculateDecalSelection()
+{
+	if (ConnectedSpline.Num() > 1)
+	{
+		FString temp = "";
+		for (auto i : ConnectedSpline)
+		{
+			if ((i->turnType).Equals(TEXT("right"))) temp = "straightRight";
+			else if ((i->turnType).Equals(TEXT("left"))) temp = "straightLeft";
+		}
+		return temp;
+	}
+	else if (ConnectedSpline.Num() == 1) return (ConnectedSpline[0]->turnType);
+	else
+	{
+		FString temp = "";
+		return temp;
+	}
 }
 
