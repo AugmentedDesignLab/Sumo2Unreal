@@ -32,11 +32,18 @@ public:
 	UBlackboardComponent* BlackboardComp;
 	UPROPERTY()
 	UBehaviorTreeComponent* BehaviorComp;
+
+	UPROPERTY()
+	UBehaviorTree* BehaviorTreeAsset;
+
 	UPROPERTY()
 	AWayPoint* WayPoint;
 
 	float UpdatedSteeringValue(float Delta);
 
+	bool InitializeBehaviorTree(FString BTPath);
+
+	bool RunBehaviorTree();
 
 	//Function to load object from content folder
 	template <typename ObjClass>

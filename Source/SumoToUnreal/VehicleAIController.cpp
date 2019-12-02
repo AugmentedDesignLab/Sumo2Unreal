@@ -14,9 +14,9 @@ AVehicleAIController::AVehicleAIController()
 	PrimaryActorTick.bCanEverTick = true;
 	PrintLog("Inside controller constructor");
 	
-	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>("VehicleBlackBoard");
+	//creating subobject
 	BehaviorComp = CreateDefaultSubobject<UBehaviorTreeComponent>("VehicleBehaviorTree");
-	
+	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>("VehicleBlackBoard");
 }
 
 //Runs at the third place
@@ -26,23 +26,9 @@ void AVehicleAIController::BeginPlay()
 
 	PrintLog("Inside controller beginplay");
 	
-	UBehaviorTree* BehaviorTreeAsset = LoadObjFromPath<UBehaviorTree>(FName("'/Game/BehaviorTree/AI/BehaviorTree.BehaviorTree'"));
-	if (BehaviorTreeAsset != NULL)
-	{
-		BlackboardComp->InitializeBlackboard(*BehaviorTreeAsset->BlackboardAsset);
-		BehaviorComp->StartTree(*BehaviorTreeAsset);
-	}
-	else 
-	{
-		PrintLog("Behavior Asset not found");
-		return;
-	}
+	
 
-	BlackboardComp->SetValueAsFloat("BrakeValue", 0.0);
-	BlackboardComp->SetValueAsFloat("SteerValue", 0.0);
-	BlackboardComp->SetValueAsFloat("ThrottleValue", 0.5);
-	BlackboardComp->SetValueAsFloat("ThreshWaypointDeviation", 20);
-	BlackboardComp->SetValueAsFloat("ThreshStopAtStopSignDistance", 700);
+	
 	
 	
 	//code to get distance along spline
@@ -55,9 +41,11 @@ void AVehicleAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	//PrintLog("Inside controller tick ");
+	/*
 	BlackboardComp->SetValueAsFloat("SteerValue", UpdatedSteeringValue(DeltaTime));
 	float DistanceAlongWayPoint = BlackboardComp->GetValueAsFloat("DistanceAlongWayPoint");
 	//PrintLog("isstopsignahead " + BlackboardComp->GetValueAsBool("IsStopSignAhead"));
+	*/
 	
 }
 
@@ -116,4 +104,31 @@ float AVehicleAIController::UpdatedSteeringValue(float Delta)
 
 
 	return steer_value;
+}
+
+bool AVehicleAIController::InitializeBehaviorTree(FString BTPath)
+{
+	BehaviorTreeAsset = LoadObjFromPath<UBehaviorTree>(FName(*BTPath));
+	if (BehaviorTreeAsset != NULL)
+	{
+		BlackboardComp->InitializeBlackboard(*BehaviorTreeAsset->BlackboardAsset);
+		BlackboardComp->SetValueAsFloat("BrakeValue", 0.0);
+		BlackboardComp->SetValueAsFloat("SteerValue", 0.0);
+		BlackboardComp->SetValueAsFloat("ThrottleValue", 0.5);
+		BlackboardComp->SetValueAsFloat("ThreshWaypointDeviation", 20);
+		BlackboardComp->SetValueAsFloat("ThreshStopAtStopSignDistance", 700);
+		PrintLog("Behavior tree and blackboard init");
+		return true;
+	}
+	else
+	{
+		PrintLog("Behavior Asset not found");
+		return false;
+	}
+}
+
+bool AVehicleAIController::RunBehaviorTree()
+{
+	BehaviorComp->StartTree(*BehaviorTreeAsset);
+	return false;
 }

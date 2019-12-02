@@ -31,13 +31,17 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditAnywhere)
 	AVehicleAIController* VehicleAIController;
+
 	UBlackboardComponent* BlackBoardData;
 
 	UPROPERTY(EditAnywhere)
 	AWayPoint* WayPoint;
 
 	float GetDistanceAlongSpline(FVector Location, USplineComponent* Spline);
+
+	bool InitializeWheeledVehicle(AWayPoint* WayPoint);
 
 	void PrintLog(FString Text)
 	{
