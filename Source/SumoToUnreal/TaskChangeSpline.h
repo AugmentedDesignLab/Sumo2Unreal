@@ -19,6 +19,6 @@ class SUMOTOUNREAL_API UTaskChangeSpline : public UBTTask_BlackboardBase
 	void PrintLog(FString Text)
 	{
 		if (!GEngine) return;
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, *Text);
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, *Text);
 	}
 };

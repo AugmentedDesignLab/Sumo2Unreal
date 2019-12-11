@@ -21,6 +21,7 @@ EBTNodeResult::Type UTaskCheckStopAtStopSign::ExecuteTask(UBehaviorTreeComponent
 	bool IsStopSignAhead = MyController->BlackboardComp->GetValueAsBool("IsStopSignAhead");
 	if ( IsStopSignAhead && (SplineLength - DistanceAlongWayPoint) < ThreshStopAtStopSignDistance) 
 	{
+		
 		return EBTNodeResult::Succeeded;
 	}
 	else 

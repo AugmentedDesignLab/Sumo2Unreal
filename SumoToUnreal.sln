@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28315.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{DFEF44BF-DE3E-4B6C-B101-20508825921D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{35FB3DAE-F219-46AC-8DFC-CF10308444C0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{D2E2F652-231C-4C03-8254-DE99B9544780}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{9F76F84E-42E4-45F7-BABE-C0877AA28C97}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE4", "Intermediate\ProjectFiles\UE4.vcxproj", "{8826642A-1EAC-4022-82AC-35D598BCFA07}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SumoToUnreal", "Intermediate\ProjectFiles\SumoToUnreal.vcxproj", "{38FBC522-86ED-45E9-9975-16A4D87B753D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{D3A71149-72CE-4CC0-A945-51AB8EB5C0DC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{823E288E-887A-46EC-BD84-57BAD597DAB0}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\..\..\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis = ..\..\..\..\..\Program Files\Epic Games\UE_4.22\Engine\Extras\VisualStudioDebugging\UE4.natvis
 	EndProjectSection
@@ -81,10 +81,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8826642A-1EAC-4022-82AC-35D598BCFA07} = {DFEF44BF-DE3E-4B6C-B101-20508825921D}
-		{38FBC522-86ED-45E9-9975-16A4D87B753D} = {D2E2F652-231C-4C03-8254-DE99B9544780}
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0F61EE15-9560-4EB2-9F16-38D9F4039817}
+		{8826642A-1EAC-4022-82AC-35D598BCFA07} = {35FB3DAE-F219-46AC-8DFC-CF10308444C0}
+		{38FBC522-86ED-45E9-9975-16A4D87B753D} = {9F76F84E-42E4-45F7-BABE-C0877AA28C97}
 	EndGlobalSection
 EndGlobal

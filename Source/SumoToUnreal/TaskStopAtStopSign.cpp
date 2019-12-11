@@ -15,8 +15,10 @@ EBTNodeResult::Type UTaskStopAtStopSign::ExecuteTask(UBehaviorTreeComponent& Own
 		return EBTNodeResult::Failed;
 	}
 	AWheeledVehicleObject* VehicleObject = Cast<AWheeledVehicleObject>(MyController->BlackboardComp->GetValueAsObject("VehicleObject"));
-	if (VehicleObject->GetVelocity().Size() > 0)
+	FVector2D v = FVector2D(VehicleObject->GetVelocity().X, VehicleObject->GetVelocity().Y);
+	if (v.Size() > 1)
 	{
+		//PrintLog("vehicle velocity " + VehicleObject->GetVelocity().ToString());
 		float BrakeValue = MyController->BlackboardComp->GetValueAsFloat("BrakeValue");
 		if (BrakeValue < 1) 
 		{
@@ -31,12 +33,14 @@ EBTNodeResult::Type UTaskStopAtStopSign::ExecuteTask(UBehaviorTreeComponent& Own
 	}
 	else
 	{
-		if (UKismetSystemLibrary::GetGameTimeInSeconds(this) - StartTime < 3.0)
+		if (UKismetSystemLibrary::GetGameTimeInSeconds(this) - StartTime < 1.0)
 		{
+			//PrintLog("Not time" + FString::SanitizeFloat(UKismetSystemLibrary::GetGameTimeInSeconds(this) - StartTime));
 			return EBTNodeResult::Failed;
 		}
 		else
 		{
+			//PrintLog("Here we start again");
 			MyController->BlackboardComp->SetValueAsBool("IsStopSignAhead", false);
 			MyController->BlackboardComp->SetValueAsFloat("BrakeValue", 0.0);
 			MyController->BlackboardComp->SetValueAsFloat("ThrottleValue", 0.5);

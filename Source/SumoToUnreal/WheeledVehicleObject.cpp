@@ -30,7 +30,7 @@ void AWheeledVehicleObject::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	//PrintLog("Inside vehicle object tick");
-	/*
+	
 	float brake_value = BlackBoardData->GetValueAsFloat("BrakeValue");
 	float steer_value = BlackBoardData->GetValueAsFloat("SteerValue");
 	float throttle_value = BlackBoardData->GetValueAsFloat("ThrottleValue");
@@ -39,7 +39,7 @@ void AWheeledVehicleObject::Tick(float DeltaTime)
 	this->GetVehicleMovement()->SetSteeringInput(steer_value);
 	this->GetVehicleMovement()->SetThrottleInput(throttle_value);
 	
-	*/
+	
 }
 
 

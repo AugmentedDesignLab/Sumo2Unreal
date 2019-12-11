@@ -31,5 +31,5 @@ EBTNodeResult::Type UTaskCheckChangeSpline::ExecuteTask(UBehaviorTreeComponent& 
 void UTaskCheckChangeSpline::PrintLog(FString Text)
 {
 	if (!GEngine) return;
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, *Text);
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, *Text);
 }

@@ -58,7 +58,7 @@ public:
 	void PrintLog(FString Text) 
 	{
 		if (!GEngine) return;
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, *Text);
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, *Text);
 	}
 
 };

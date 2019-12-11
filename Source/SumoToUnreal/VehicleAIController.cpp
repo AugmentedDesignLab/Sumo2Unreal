@@ -41,11 +41,11 @@ void AVehicleAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	//PrintLog("Inside controller tick ");
-	/*
+	
 	BlackboardComp->SetValueAsFloat("SteerValue", UpdatedSteeringValue(DeltaTime));
 	float DistanceAlongWayPoint = BlackboardComp->GetValueAsFloat("DistanceAlongWayPoint");
 	//PrintLog("isstopsignahead " + BlackboardComp->GetValueAsBool("IsStopSignAhead"));
-	*/
+	
 	
 }
 
@@ -111,12 +111,14 @@ bool AVehicleAIController::InitializeBehaviorTree(FString BTPath)
 	BehaviorTreeAsset = LoadObjFromPath<UBehaviorTree>(FName(*BTPath));
 	if (BehaviorTreeAsset != NULL)
 	{
+		float randomspeed = UKismetMathLibrary::RandomFloatInRange(0.50, 0.55);
+		float randomdevthres = UKismetMathLibrary::RandomFloatInRange(5.0, 12.0);
 		BlackboardComp->InitializeBlackboard(*BehaviorTreeAsset->BlackboardAsset);
 		BlackboardComp->SetValueAsFloat("BrakeValue", 0.0);
 		BlackboardComp->SetValueAsFloat("SteerValue", 0.0);
-		BlackboardComp->SetValueAsFloat("ThrottleValue", 0.5);
-		BlackboardComp->SetValueAsFloat("ThreshWaypointDeviation", 20);
-		BlackboardComp->SetValueAsFloat("ThreshStopAtStopSignDistance", 700);
+		BlackboardComp->SetValueAsFloat("ThrottleValue", randomspeed);
+		BlackboardComp->SetValueAsFloat("ThreshWaypointDeviation", randomdevthres);
+		BlackboardComp->SetValueAsFloat("ThreshStopAtStopSignDistance", 800);
 		PrintLog("Behavior tree and blackboard init");
 		return true;
 	}

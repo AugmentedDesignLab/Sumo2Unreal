@@ -27,8 +27,20 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class AWheeledVehicleObject> ToSpawn;
 
+	UPROPERTY(EditAnywhere)
+	TArray<int> SpawningSplineID;
+
+	UPROPERTY(EditAnywhere)
+	float SpawnTickTime;
+
+
+	TArray<AActor*> SplineActors;
+	TArray<AWayPoint*> Waypoints;
+	float temp = 0;
+	int spawning = 0;
+
 	UFUNCTION()
-	AWheeledVehicleObject* Spawn(FVector Location);
+	AWheeledVehicleObject* Spawn(FVector Location, AWayPoint* WayPoint);
 
 	UFUNCTION()
 	TArray<AActor*> FindAllWaypoint();
