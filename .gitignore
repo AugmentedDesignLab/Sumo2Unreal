@@ -21,6 +21,9 @@ Content/*.umap
 #Plugin specific files
 Plugins/ParseXML/Binaries/*
 Plugins/ParseXML/Intermediate/*
+Plugins/SpawnPedestrian/Binaries/*
+Plugins/SpawnPedestrian/Intermediate/*
+
 
 # User-specific files
 *.suo

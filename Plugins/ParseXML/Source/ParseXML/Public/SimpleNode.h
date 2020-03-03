@@ -3,7 +3,7 @@
 #include "Platform.h"
 #include <vector>
 
-class SimpleNode
+class PARSEXML_API SimpleNode
 {
 	friend class UfileParser;
 public: 
