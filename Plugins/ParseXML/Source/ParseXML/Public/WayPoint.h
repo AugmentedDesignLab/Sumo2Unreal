@@ -29,6 +29,8 @@ public:
 	FString splineID;
 	UPROPERTY(EditAnywhere)
 	TArray<AWayPoint*> ConnectedSpline;
+	UPROPERTY(EditAnywhere)
+	TArray<AWayPoint*> CutSpline;
 
 	//UPROPERTY(EditAnywhere)
 	//TMap<FString, AWayPoint*> ConnectedSplineMap;
