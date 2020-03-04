@@ -98,7 +98,7 @@ void ARoadMesh::OnConstruction(const FTransform & Transform)
 	AActor::OnConstruction(Transform);
 	CreateSection();
 	mesh->CreateMeshSection_LinearColor(0, vertices, Triangles, normals, UV0, vertexColors, tangents, true);
-	if (isSideWalkType == true) mesh->SetMaterial(0, Material1);
+	if (currentMeshType == MeshType::Sidewalk) mesh->SetMaterial(0, Material1);
 	else mesh->SetMaterial(0, Material0);
 	mesh->ContainsPhysicsTriMeshData(true); //Enable collision data
 	//mesh->bUseComplexAsSimpleCollision = false;

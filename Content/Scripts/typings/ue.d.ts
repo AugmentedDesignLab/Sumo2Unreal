@@ -10401,16 +10401,125 @@ declare class AnimGraphNode_WheelHandler extends AnimGraphNode_SkeletalControlBa
 	static C(Other: UObject | any): AnimGraphNode_WheelHandler;
 }
 
+declare class laneMarking extends Actor { 
+	DecalMaterial: Material;
+	DecalComponent: DecalComponent;
+	currentDecalSelection: string;
+	static GetDefaultObject(): laneMarking;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): laneMarking;
+	static C(Other: UObject | any): laneMarking;
+}
+
+declare type MeshType = 'Junction' | 'Sidewalk' | 'Crossing' | 'Road' | 'MeshType_MAX';
+declare var MeshType : { Junction:'Junction',Sidewalk:'Sidewalk',Crossing:'Crossing',Road:'Road',MeshType_MAX:'MeshType_MAX', };
+declare class RoadMesh extends Actor { 
+	currentMeshType: MeshType;
+	Material0: Material;
+	Material1: Material;
+	Mesh: ProceduralMeshComponent;
+	Vertices: Vector[];
+	static GetDefaultObject(): RoadMesh;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RoadMesh;
+	static C(Other: UObject | any): RoadMesh;
+}
+
+declare class StopSignMesh extends Actor { 
+	static GetDefaultObject(): StopSignMesh;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): StopSignMesh;
+	static C(Other: UObject | any): StopSignMesh;
+}
+
+declare class WayPoint extends Actor { 
+	SplineComponent: SplineComponent;
+	splineID: string;
+	ConnectedSpline: WayPoint[];
+	turnType: string;
+	TotalDistance: number;
+	SpeedLimit: number;
+	isStopSignConnected: boolean;
+	static GetDefaultObject(): WayPoint;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WayPoint;
+	static C(Other: UObject | any): WayPoint;
+}
+
 declare class MyWorldSettings extends WorldSettings { 
 	static GetDefaultObject(): MyWorldSettings;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): MyWorldSettings;
 	static C(Other: UObject | any): MyWorldSettings;
 }
 
+declare class ScenarioGenerator extends Actor { 
+	static GetDefaultObject(): ScenarioGenerator;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): ScenarioGenerator;
+	static C(Other: UObject | any): ScenarioGenerator;
+}
+
 declare class SumoToUnrealGameModeBase extends GameModeBase { 
 	static GetDefaultObject(): SumoToUnrealGameModeBase;
 	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): SumoToUnrealGameModeBase;
 	static C(Other: UObject | any): SumoToUnrealGameModeBase;
+}
+
+declare class TaskChangeSpline extends BTTask_BlackboardBase { 
+	static Load(ResourceName: string): TaskChangeSpline;
+	static Find(Outer: UObject, ResourceName: string): TaskChangeSpline;
+	static GetDefaultObject(): TaskChangeSpline;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TaskChangeSpline;
+	static C(Other: UObject | any): TaskChangeSpline;
+}
+
+declare class TaskCheckChangeSpline extends BTTask_BlackboardBase { 
+	static Load(ResourceName: string): TaskCheckChangeSpline;
+	static Find(Outer: UObject, ResourceName: string): TaskCheckChangeSpline;
+	static GetDefaultObject(): TaskCheckChangeSpline;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TaskCheckChangeSpline;
+	static C(Other: UObject | any): TaskCheckChangeSpline;
+}
+
+declare class TaskCheckStopAtStopSign extends BTTask_BlackboardBase { 
+	static Load(ResourceName: string): TaskCheckStopAtStopSign;
+	static Find(Outer: UObject, ResourceName: string): TaskCheckStopAtStopSign;
+	static GetDefaultObject(): TaskCheckStopAtStopSign;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TaskCheckStopAtStopSign;
+	static C(Other: UObject | any): TaskCheckStopAtStopSign;
+}
+
+declare class TaskStopAtStopSign extends BTTask_BlackboardBase { 
+	static Load(ResourceName: string): TaskStopAtStopSign;
+	static Find(Outer: UObject, ResourceName: string): TaskStopAtStopSign;
+	static GetDefaultObject(): TaskStopAtStopSign;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): TaskStopAtStopSign;
+	static C(Other: UObject | any): TaskStopAtStopSign;
+}
+
+declare class VehicleAIController extends AIController { 
+	BlackboardComp: BlackboardComponent;
+	BehaviorComp: BehaviorTreeComponent;
+	BehaviorTreeAsset: BehaviorTree;
+	WayPoint: WayPoint;
+	static GetDefaultObject(): VehicleAIController;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VehicleAIController;
+	static C(Other: UObject | any): VehicleAIController;
+}
+
+declare class WheeledVehicleObject extends WheeledVehicle { 
+	VehicleAIController: VehicleAIController;
+	WayPoint: WayPoint;
+	static GetDefaultObject(): WheeledVehicleObject;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WheeledVehicleObject;
+	static C(Other: UObject | any): WheeledVehicleObject;
+}
+
+declare class VehicleSpawner extends Actor { 
+	ToSpawn: UnrealEngineClass;
+	SpawningSplineID: number[];
+	SpawnTickTime: number;
+	static GetDefaultObject(): VehicleSpawner;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): VehicleSpawner;
+	Spawn(Location: Vector,WayPoint: WayPoint): WheeledVehicleObject;
+	PrintLog(text: string): void;
+	FindAllWaypoint(): Actor[];
+	static C(Other: UObject | any): VehicleSpawner;
 }
 
 declare type EMeshPaintColorViewMode = 'Normal' | 'RGB' | 'Alpha' | 'Red' | 'Green' | 'Blue' | 'EMeshPaintColorViewMode_MAX';
@@ -12717,42 +12826,42 @@ declare class SteamVRControllerLibrary extends BlueprintFunctionLibrary {
 	static C(Other: UObject | any): SteamVRControllerLibrary;
 }
 
-declare class laneMarking extends Actor { 
-	DecalMaterial: Material;
-	DecalComponent: DecalComponent;
-	currentDecalSelection: string;
-	static GetDefaultObject(): laneMarking;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): laneMarking;
-	static C(Other: UObject | any): laneMarking;
+declare class BTService_CheckForLocation extends BTService { 
+	static Load(ResourceName: string): BTService_CheckForLocation;
+	static Find(Outer: UObject, ResourceName: string): BTService_CheckForLocation;
+	static GetDefaultObject(): BTService_CheckForLocation;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTService_CheckForLocation;
+	static C(Other: UObject | any): BTService_CheckForLocation;
 }
 
-declare class RoadMesh extends Actor { 
-	Material0: Material;
-	Material1: Material;
-	Mesh: ProceduralMeshComponent;
-	Vertices: Vector[];
-	static GetDefaultObject(): RoadMesh;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): RoadMesh;
-	static C(Other: UObject | any): RoadMesh;
+declare class BTTask_MoveToLocation extends BTTask_BlackboardBase { 
+	static Load(ResourceName: string): BTTask_MoveToLocation;
+	static Find(Outer: UObject, ResourceName: string): BTTask_MoveToLocation;
+	static GetDefaultObject(): BTTask_MoveToLocation;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): BTTask_MoveToLocation;
+	static C(Other: UObject | any): BTTask_MoveToLocation;
 }
 
-declare class StopSignMesh extends Actor { 
-	static GetDefaultObject(): StopSignMesh;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): StopSignMesh;
-	static C(Other: UObject | any): StopSignMesh;
+declare class PedestrianAIController extends AIController { 
+	BehaviorComp: BehaviorTreeComponent;
+	BlackboardComp: BlackboardComponent;
+	static GetDefaultObject(): PedestrianAIController;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PedestrianAIController;
+	static C(Other: UObject | any): PedestrianAIController;
 }
 
-declare class WayPoint extends Actor { 
-	SplineComponent: SplineComponent;
-	splineID: string;
-	ConnectedSpline: WayPoint[];
-	turnType: string;
-	TotalDistance: number;
-	SpeedLimit: number;
-	isStopSignConnected: boolean;
-	static GetDefaultObject(): WayPoint;
-	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): WayPoint;
-	static C(Other: UObject | any): WayPoint;
+declare class PedestrianCharacter extends Character { 
+	BehaviorTree: BehaviorTree;
+	static GetDefaultObject(): PedestrianCharacter;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PedestrianCharacter;
+	static C(Other: UObject | any): PedestrianCharacter;
+}
+
+declare class PedestrianSimGameModeBase extends GameModeBase { 
+	ThirdPersonCharacterBP: UnrealEngineClass;
+	static GetDefaultObject(): PedestrianSimGameModeBase;
+	static CreateDefaultSubobject(Name: string, Transient?: boolean, Required?: boolean, Abstract?: boolean): PedestrianSimGameModeBase;
+	static C(Other: UObject | any): PedestrianSimGameModeBase;
 }
 
 declare class SubstanceFactory extends Factory { 
