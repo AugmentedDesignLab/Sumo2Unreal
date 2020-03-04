@@ -514,7 +514,8 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 		if (MyDeferredActor) {
 			MyDeferredActor->vertices = Edge->vertexArray;
 			MyDeferredActor->roadLength = Edge->LaneLength;
-			MyDeferredActor->currentMeshType = MeshType::Road;
+			if (FString(edgeType).Equals(TEXT("crossing"))) MyDeferredActor->currentMeshType = MeshType::Crossing;
+			else if (FString(edgeType).Equals(TEXT("standard"))) MyDeferredActor->currentMeshType = MeshType::Road;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
 		}
