@@ -54,161 +54,6 @@ float SimpleEdge::getLaneLength()
 	return LaneLength;
 }
 
-void SimpleEdge::setSideWalkVertCoordinates(float paralaneWidth)
-{
-	laneWidth = paralaneWidth;
-	FVector Ax0;
-	FVector Ax0_s;
-	FVector Ax1;
-	FVector Ax1_s;
-
-	FVector Bx0;
-	FVector Bx0_s;
-	FVector Bx1;
-	FVector Bx1_s;
-
-	float intermediateTheta = ((std::abs(edgeShapeCoordinates[3] - edgeShapeCoordinates[1])) / std::sqrt((std::pow((edgeShapeCoordinates[3] - edgeShapeCoordinates[1]), 2)) + (std::pow((edgeShapeCoordinates[2] - edgeShapeCoordinates[0]), 2))));
-
-	if (intermediateTheta > 1.0)
-	{
-		intermediateTheta = 1.0; // clamp domain to -1 .. 1
-	}
-
-	if (intermediateTheta < -1.0)
-	{
-		intermediateTheta = -1.0;
-	}
-
-	float theta = std::asin(intermediateTheta);
-	UE_LOG(LogEngine, Warning, TEXT("theta is %f"), theta);
-
-	float xOffset = ((laneWidth / 2) * (std::cos((pi_value / 2) - theta)));
-	UE_LOG(LogEngine, Warning, TEXT("The value of xOffset is %f"), xOffset);
-
-	float yOffset = ((laneWidth / 2) * (std::sin((pi_value / 2) - theta)));
-	UE_LOG(LogEngine, Warning, TEXT("The value of yOffset is %f"), yOffset);
-
-	if (((edgeShapeCoordinates[3] > edgeShapeCoordinates[1]) && (edgeShapeCoordinates[2] > edgeShapeCoordinates[0])) || ((edgeShapeCoordinates[3] < edgeShapeCoordinates[1]) && (edgeShapeCoordinates[2] < edgeShapeCoordinates[0])))
-	{	//Case - both x and y of one shape coordinate is greater than the other
-		Ax0.X = edgeShapeCoordinates[0] - xOffset;
-		Ax0.Y = edgeShapeCoordinates[1] + yOffset;
-		Ax0.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex 1: (%f,%f)"), Ax0.X, Ax0.Y);
-		curbVerticesTop1.Add(Ax0);
-
-		Ax0_s.X = edgeShapeCoordinates[0] - xOffset + (float)(0.25*xOffset);
-		Ax0_s.Y = edgeShapeCoordinates[1] + yOffset - (float)(0.25*yOffset);
-		Ax0_s.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("curb1 Vertex: (%f,%f)"), Ax0_s.X, Ax0_s.Y);
-		vertexArray.Add(Ax0_s);
-		curbVerticesTop1.Add(Ax0_s);
-		
-
-		Ax1.X = edgeShapeCoordinates[0] + xOffset;
-		Ax1.Y = edgeShapeCoordinates[1] - yOffset;
-		Ax1.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("curb2 Vertex: (%f,%f)"), Ax1.X, Ax1.Y);
-		curbVerticesTop2.Add(Ax1);
-
-		Ax1_s.X = edgeShapeCoordinates[0] + xOffset - (float)(0.25*xOffset);
-		Ax1_s.Y = edgeShapeCoordinates[1] - yOffset + (float)(0.25*yOffset);
-		Ax1_s.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex 2: (%f,%f)"), Ax1_s.X, Ax1_s.Y);
-		vertexArray.Add(Ax1_s);
-		curbVerticesTop2.Add(Ax1_s);
-
-
-		Bx0.X = edgeShapeCoordinates[2] - xOffset;
-		Bx0.Y = edgeShapeCoordinates[3] + yOffset;
-		Bx0.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex 3: (%f,%f)"), Bx0.X, Bx0.Y);
-		curbVerticesTop1.Add(Bx0);
-
-		Bx0_s.X = edgeShapeCoordinates[2] - xOffset + (float)(0.25*xOffset);
-		Bx0_s.Y = edgeShapeCoordinates[3] + yOffset - (float)(0.25*yOffset);
-		Bx0_s.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("curb1 Vertex: (%f,%f)"), Bx0.X, Bx0.Y);
-		vertexArray.Add(Bx0_s);
-		curbVerticesTop1.Add(Bx0_s);
-
-
-		Bx1.X = edgeShapeCoordinates[2] + xOffset;
-		Bx1.Y = edgeShapeCoordinates[3] - yOffset;
-		Bx1.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex 4: (%f,%f)"), Bx1.X, Bx1.Y);
-		curbVerticesTop2.Add(Bx1);
-
-		Bx1_s.X = edgeShapeCoordinates[2] + xOffset - (float)(0.25*xOffset);
-		Bx1_s.Y = edgeShapeCoordinates[3] - yOffset + (float)(0.25*yOffset);
-		Bx1_s.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex 4: (%f,%f)"), Bx1.X, Bx1.Y);
-		vertexArray.Add(Bx1_s);
-		curbVerticesTop2.Add(Bx1_s);
-	}
-	else
-	{   //either x or y of one vertex is greater but not both
-		Ax0.X = edgeShapeCoordinates[0] + xOffset;
-		Ax0.Y = edgeShapeCoordinates[1] + yOffset;
-		Ax0.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex 1: (%f,%f)"), Ax0.X, Ax0.Y);
-		curbVerticesTop1.Add(Ax0);
-
-		Ax0_s.X = edgeShapeCoordinates[0] + xOffset - (float)(0.25*xOffset);
-		Ax0_s.Y = edgeShapeCoordinates[1] + yOffset - (float)(0.25*yOffset);
-		Ax0_s.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("curb1 Vertex: (%f,%f)"), Ax0_s.X, Ax0_s.Y);
-		vertexArray.Add(Ax0_s);
-		curbVerticesTop1.Add(Ax0_s);
-
-		Ax1.X = edgeShapeCoordinates[0] - xOffset;
-		Ax1.Y = edgeShapeCoordinates[1] - yOffset;
-		Ax1.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex: (%f,%f)"), Ax1.X, Ax1.Y);
-		curbVerticesTop2.Add(Ax1);
-
-		Ax1_s.X = edgeShapeCoordinates[0] - xOffset + (float)(0.25*xOffset);
-		Ax1_s.Y = edgeShapeCoordinates[1] - yOffset + (float)(0.25*yOffset);
-		Ax1_s.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex: (%f,%f)"), Ax1_s.X, Ax1_s.Y);
-		vertexArray.Add(Ax1_s);
-		curbVerticesTop2.Add(Ax1_s);
-
-
-		Bx0.X = edgeShapeCoordinates[2] + xOffset;
-		Bx0.Y = edgeShapeCoordinates[3] + yOffset;
-		Bx0.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex: (%f,%f)"), Bx0.X, Bx0.Y);
-		curbVerticesTop1.Add(Bx0);
-
-		Bx0_s.X = edgeShapeCoordinates[2] + xOffset - (float)(0.25*xOffset);
-		Bx0_s.Y = edgeShapeCoordinates[3] + yOffset - (float)(0.25*yOffset);
-		Bx0_s.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("curb1 Vertex: (%f,%f)"), Bx0.X, Bx0.Y);
-		vertexArray.Add(Bx0_s);
-		curbVerticesTop1.Add(Bx0_s);
-
-
-		Bx1.X = edgeShapeCoordinates[2] - xOffset;
-		Bx1.Y = edgeShapeCoordinates[3] - yOffset;
-		Bx1.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex: (%f,%f)"), Bx1.X, Bx1.Y);
-		curbVerticesTop2.Add(Bx1);
-
-		Bx1_s.X = edgeShapeCoordinates[2] - xOffset + (float)(0.25*xOffset);
-		Bx1_s.Y = edgeShapeCoordinates[3] - yOffset + (float)(0.25*yOffset);
-		Bx1_s.Z = 0.0f;
-		UE_LOG(LogEngine, Warning, TEXT("Vertex: (%f,%f)"), Bx1.X, Bx1.Y);
-		vertexArray.Add(Bx1_s);
-		curbVerticesTop2.Add(Bx1_s);
-	}
-	
-	centroidAdjustment(TEXT("vertexArray"), Ax0, Ax0_s, Ax1, Ax1_s, Bx0, Bx0_s, Bx1, Bx1_s);
-	centroidAdjustment(TEXT("curbVerticesTop1"), Ax0, Ax0_s, Ax1, Ax1_s, Bx0, Bx0_s, Bx1, Bx1_s);
-	centroidAdjustment(TEXT("curbVerticesTop2"), Ax0, Ax0_s, Ax1, Ax1_s, Bx0, Bx0_s, Bx1, Bx1_s);
-
-	
-}
-
 void SimpleEdge::centroidAdjustment(const TCHAR* vertexType, FVector Ax0, FVector Ax0_s, FVector Ax1, FVector Ax1_s, FVector Bx0, FVector Bx0_s, FVector Bx1, FVector Bx1_s)
 {
 	if (FString(vertexType).Equals(TEXT("vertexArray")))
@@ -295,6 +140,130 @@ void SimpleEdge::centroidAdjustment(const TCHAR* vertexType, FVector Ax0, FVecto
 		curbVerticesTop2.Add(Bx1);
 		curbVerticesTop2.Add(Bx1_s);
 	}
+}
+
+void SimpleEdge::setSideWalkVertCoordinates(float paralaneWidth)
+{
+	laneWidth = paralaneWidth;
+	FVector Ax0;
+	FVector Ax0_s;
+	FVector Ax1;
+	FVector Ax1_s;
+
+	FVector Bx0;
+	FVector Bx0_s;
+	FVector Bx1;
+	FVector Bx1_s;
+
+	float intermediateTheta = ((std::abs(edgeShapeCoordinates[3] - edgeShapeCoordinates[1])) / std::sqrt((std::pow((edgeShapeCoordinates[3] - edgeShapeCoordinates[1]), 2)) + (std::pow((edgeShapeCoordinates[2] - edgeShapeCoordinates[0]), 2))));
+
+	if (intermediateTheta > 1.0) intermediateTheta = 1.0; // clamp domain to -1 .. 1
+
+	else if (intermediateTheta < -1.0) intermediateTheta = -1.0;
+
+	float theta = std::asin(intermediateTheta);
+	float xOffset = ((laneWidth / 2) * (std::cos((pi_value / 2) - theta)));
+	float yOffset = ((laneWidth / 2) * (std::sin((pi_value / 2) - theta)));
+
+	if (((edgeShapeCoordinates[3] > edgeShapeCoordinates[1]) && (edgeShapeCoordinates[2] > edgeShapeCoordinates[0])) || ((edgeShapeCoordinates[3] < edgeShapeCoordinates[1]) && (edgeShapeCoordinates[2] < edgeShapeCoordinates[0])))
+	{	//Case - both x and y of one shape coordinate is greater than the other
+		Ax0.X = edgeShapeCoordinates[0] - xOffset;
+		Ax0.Y = edgeShapeCoordinates[1] + yOffset;
+		Ax0.Z = 0.0f;
+		curbVerticesTop1.Add(Ax0);
+
+		Ax0_s.X = edgeShapeCoordinates[0] - xOffset + (float)(0.25*xOffset);
+		Ax0_s.Y = edgeShapeCoordinates[1] + yOffset - (float)(0.25*yOffset);
+		Ax0_s.Z = 0.0f;
+		vertexArray.Add(Ax0_s);
+		curbVerticesTop1.Add(Ax0_s);
+		
+
+		Ax1.X = edgeShapeCoordinates[0] + xOffset;
+		Ax1.Y = edgeShapeCoordinates[1] - yOffset;
+		Ax1.Z = 0.0f;
+		curbVerticesTop2.Add(Ax1);
+
+		Ax1_s.X = edgeShapeCoordinates[0] + xOffset - (float)(0.25*xOffset);
+		Ax1_s.Y = edgeShapeCoordinates[1] - yOffset + (float)(0.25*yOffset);
+		Ax1_s.Z = 0.0f;
+		vertexArray.Add(Ax1_s);
+		curbVerticesTop2.Add(Ax1_s);
+
+
+		Bx0.X = edgeShapeCoordinates[2] - xOffset;
+		Bx0.Y = edgeShapeCoordinates[3] + yOffset;
+		Bx0.Z = 0.0f;
+		curbVerticesTop1.Add(Bx0);
+
+		Bx0_s.X = edgeShapeCoordinates[2] - xOffset + (float)(0.25*xOffset);
+		Bx0_s.Y = edgeShapeCoordinates[3] + yOffset - (float)(0.25*yOffset);
+		Bx0_s.Z = 0.0f;
+		vertexArray.Add(Bx0_s);
+		curbVerticesTop1.Add(Bx0_s);
+
+
+		Bx1.X = edgeShapeCoordinates[2] + xOffset;
+		Bx1.Y = edgeShapeCoordinates[3] - yOffset;
+		Bx1.Z = 0.0f;
+		curbVerticesTop2.Add(Bx1);
+
+		Bx1_s.X = edgeShapeCoordinates[2] + xOffset - (float)(0.25*xOffset);
+		Bx1_s.Y = edgeShapeCoordinates[3] - yOffset + (float)(0.25*yOffset);
+		Bx1_s.Z = 0.0f;
+		vertexArray.Add(Bx1_s);
+		curbVerticesTop2.Add(Bx1_s);
+	}
+	else
+	{   //either x or y of one vertex is greater but not both
+		Ax0.X = edgeShapeCoordinates[0] + xOffset;
+		Ax0.Y = edgeShapeCoordinates[1] + yOffset;
+		Ax0.Z = 0.0f;
+		curbVerticesTop1.Add(Ax0);
+
+		Ax0_s.X = edgeShapeCoordinates[0] + xOffset - (float)(0.25*xOffset);
+		Ax0_s.Y = edgeShapeCoordinates[1] + yOffset - (float)(0.25*yOffset);
+		Ax0_s.Z = 0.0f;
+		vertexArray.Add(Ax0_s);
+		curbVerticesTop1.Add(Ax0_s);
+
+		Ax1.X = edgeShapeCoordinates[0] - xOffset;
+		Ax1.Y = edgeShapeCoordinates[1] - yOffset;
+		Ax1.Z = 0.0f;
+		curbVerticesTop2.Add(Ax1);
+
+		Ax1_s.X = edgeShapeCoordinates[0] - xOffset + (float)(0.25*xOffset);
+		Ax1_s.Y = edgeShapeCoordinates[1] - yOffset + (float)(0.25*yOffset);
+		Ax1_s.Z = 0.0f;
+		vertexArray.Add(Ax1_s);
+		curbVerticesTop2.Add(Ax1_s);
+
+
+		Bx0.X = edgeShapeCoordinates[2] + xOffset;
+		Bx0.Y = edgeShapeCoordinates[3] + yOffset;
+		Bx0.Z = 0.0f;
+		curbVerticesTop1.Add(Bx0);
+
+		Bx0_s.X = edgeShapeCoordinates[2] + xOffset - (float)(0.25*xOffset);
+		Bx0_s.Y = edgeShapeCoordinates[3] + yOffset - (float)(0.25*yOffset);
+		Bx0_s.Z = 0.0f;
+		curbVerticesTop1.Add(Bx0_s);
+
+
+		Bx1.X = edgeShapeCoordinates[2] - xOffset;
+		Bx1.Y = edgeShapeCoordinates[3] - yOffset;
+		Bx1.Z = 0.0f;
+		curbVerticesTop2.Add(Bx1);
+
+		Bx1_s.X = edgeShapeCoordinates[2] - xOffset + (float)(0.25*xOffset);
+		Bx1_s.Y = edgeShapeCoordinates[3] - yOffset + (float)(0.25*yOffset);
+		Bx1_s.Z = 0.0f;
+		vertexArray.Add(Bx1_s);
+		curbVerticesTop2.Add(Bx1_s);
+	}	
+	centroidAdjustment(TEXT("vertexArray"), Ax0, Ax0_s, Ax1, Ax1_s, Bx0, Bx0_s, Bx1, Bx1_s);
+	centroidAdjustment(TEXT("curbVerticesTop1"), Ax0, Ax0_s, Ax1, Ax1_s, Bx0, Bx0_s, Bx1, Bx1_s);
+	centroidAdjustment(TEXT("curbVerticesTop2"), Ax0, Ax0_s, Ax1, Ax1_s, Bx0, Bx0_s, Bx1, Bx1_s);	
 }
 
 void SimpleEdge::setVertexCoordinates(float paralaneWidth) 

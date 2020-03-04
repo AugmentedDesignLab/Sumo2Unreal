@@ -403,8 +403,8 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge() {
 		tempvector.clear();
 
 		
-		if (laneWidthIsSet == true) Edge->setVertexCoordinates(laneWidth*100.0f); //default SUMO lane width
-		else Edge->setVertexCoordinates(320.0f);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm (12 feet).
+		if (laneWidthIsSet == true) Edge->setSideWalkVertCoordinates(laneWidth*100.0f); //default SUMO lane width
+		else Edge->setSideWalkVertCoordinates(320.0f);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm (12 feet).
 
 		FVector originCoordinates = Edge->centroid;
 		FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
