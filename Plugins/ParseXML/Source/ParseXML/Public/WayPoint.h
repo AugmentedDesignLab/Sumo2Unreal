@@ -29,6 +29,8 @@ public:
 	FString splineID;
 	UPROPERTY(EditAnywhere)
 	TArray<AWayPoint*> ConnectedSpline;
+
+	UPROPERTY(EditAnywhere)
 	FString turnType;
 	FVector directionOfSpline;
 

@@ -339,7 +339,7 @@ void UfileParser::InitializewalkingArea() {
 			MyDeferredActor->vertices.Add(coordinates);
 			i += 2;
 		}
-		MyDeferredActor->isSideWalkType = true;
+		MyDeferredActor->currentMeshType = MeshType::Sidewalk;
 		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 		walkingAreaContainer.walkingAreaMap.Add(*(currentWalkingArea->walkingAreaID), std::move(currentWalkingArea));
 		/*
@@ -360,7 +360,7 @@ SimpleNodePtr UfileParser::InitializeNode() {
 	FVector origin(Node->NodePosition.X, Node->NodePosition.Y, 0.0f);
 
 	FTransform SpawnTransform(RotationEdge, origin);
-	ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
+	ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform));
 
 	if (MyDeferredActor != nullptr) {
 		FVector coordinates;
@@ -372,9 +372,13 @@ SimpleNodePtr UfileParser::InitializeNode() {
 				MyDeferredActor->vertices.Add(coordinates);	
 				i += 2;
 		}
+		MyDeferredActor->currentMeshType = MeshType::Junction;
 		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
-		//initialize map with the pointer for extended node lifetime
+		//initialize map with the unique pointer as value. The object exists as long as the pointer does. 
 		NodeContainer.NodeMap.Add(*tempNodeID, std::move(Node));
+	}
+	else {
+
 	}
 	return Node;
 }
@@ -414,8 +418,8 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge() {
 		ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
 
 		if (MyDeferredActor != nullptr) {
-			(MyDeferredActor->vertices) = (Edge->vertexArray);
-			MyDeferredActor->isSideWalkType = true;
+			MyDeferredActor->vertices = Edge->vertexArray;
+			MyDeferredActor->currentMeshType = MeshType::Sidewalk;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 		}
 
@@ -432,7 +436,7 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge() {
 
 		if (MyDeferredActor1 != nullptr){
 			MyDeferredActor1->vertices = Edge->curbVerticesTop1;
-			MyDeferredActor1->isSideWalkType = true;
+			MyDeferredActor1->currentMeshType = MeshType::Sidewalk;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor1, SpawnTransformCurb1);
 		}
 
@@ -449,7 +453,7 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge() {
 
 		if (MyDeferredActor2 !=nullptr) {
 			MyDeferredActor2->vertices = Edge->curbVerticesTop2;
-			MyDeferredActor2->isSideWalkType = true;
+			MyDeferredActor2->currentMeshType = MeshType::Sidewalk;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor2, SpawnTransformCurb2);
 		}
 		i += 2;
@@ -496,22 +500,12 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 
 		//finalSplinePoints.Add(FVector((Shapecoordinates[i + 2] - (Edge->centroid.X)), (Shapecoordinates[i + 3] - (Edge->centroid.Y)), 0.2f)); //change for curved roads. For curved roads check for last iteration first.
 
+		origin.X = originCoordinates.X;
+		origin.Y = originCoordinates.Y;
 		if (FString(edgeType).Equals(TEXT("standard"))) {
-			origin.X = originCoordinates.X;
-			origin.Y = originCoordinates.Y;
 			origin.Z = originCoordinates.Z;
 		}
-		else if (FString(edgeType).Equals(TEXT("crossing"))) {
-			UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=Inside pedestrian crossing-=-=-=-=-="));
-			origin.X = originCoordinates.X;
-			origin.Y = originCoordinates.Y;
-			origin.Z = 0.0f;
-		}
-		else if (FString(edgeType).Equals(TEXT("sidewalk"))) {
-			origin.X = originCoordinates.X;
-			origin.Y = originCoordinates.Y;
-			origin.Z = 0.0f;
-		}
+		else origin.Z = 0.0f;
 
 		splineOrigin = origin; //might break for curved edges.
 		splineRotation = RotationEdge;
@@ -520,6 +514,7 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 		if (MyDeferredActor) {
 			MyDeferredActor->vertices = Edge->vertexArray;
 			MyDeferredActor->roadLength = Edge->LaneLength;
+			MyDeferredActor->currentMeshType = MeshType::Road;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
 		}
@@ -570,7 +565,7 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two traffic lights per walking area - At the first and fourth x,y coordinate.
 {
 	walkingArea* currentWalkingAreaObject; 
-	FString currentControlNodeID = FString(TEXT(":0_0_"));
+	FString currentControlNodeID = FString(TEXT(":0_0_"));//Hard coding the junction id for stop signs
 	/*
 	For stop sign from IntGen --> Netgenerate, we only check for the walking areas within one junction.
 	This is to prevent turn lane's junction walking areas to be considered when trying to place the stop sign.
@@ -582,18 +577,6 @@ void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two 
 	for (const TPair<const TCHAR*, walkingAreaPtr>& pair : walkingAreaContainer.walkingAreaMap)// Find the corresponding walking area for a traffic light for a particular junction.
 	{
 		FString currentKey = FString(pair.Key); //ID of the walking area.
-		/*
-		if ((currentKey.Contains(currentControlNodeID)) && (FString(controlType).Equals(TEXT("trafficLight"))))
-		{
-			currentWalkingAreaObject = pair.Value.get();
-			currentWalkingAreaObject->trafficControlLocationCalculator();
-			trafficControl1Location = currentWalkingAreaObject->trafficControlLocation;
-			trafficControlRotation = currentWalkingAreaObject->trafficLight1Orientation;
-			FTransform SpawnTransform(trafficControlRotation, trafficControl1Location, trafficLightScale);
-			AtrafficLightMesh* MyDeferredTrafficLight = Cast<AtrafficLightMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AtrafficLightMesh::StaticClass(), SpawnTransform)); //Downcasting
-			UGameplayStatics::FinishSpawningActor(MyDeferredTrafficLight, SpawnTransform);
-		}
-		*/
 		if ((currentKey.Contains(currentControlNodeID)) && (FString(controlType).Equals(TEXT("stopSign"))))
 		{
 			currentWalkingAreaObject = pair.Value.get();
@@ -783,7 +766,6 @@ bool UfileParser::ProcessComment(const TCHAR* Comment)
 	//UE_LOG(LogEngine, Warning, TEXT("ProcessComment Comment: %s"), Comment);
 	return true;
 }
-
 
 
 
