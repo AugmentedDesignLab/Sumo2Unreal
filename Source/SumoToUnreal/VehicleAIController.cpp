@@ -8,60 +8,55 @@
 #include "Kismet/KismetMathLibrary.h"
 
 
-//runs at the second place
+//runs at the second Tick
 AVehicleAIController::AVehicleAIController()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	PrintLog("Inside controller constructor");
+	//PrintLog("Inside controller constructor");
 	
-	//creating subobject
-	BehaviorComp = CreateDefaultSubobject<UBehaviorTreeComponent>("VehicleBehaviorTree");
-	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>("VehicleBlackBoard");
+	//Creating subobject 
+	BehaviorTreeComponent = CreateDefaultSubobject<UBehaviorTreeComponent>("VehicleBehaviorTree");
+	BlackboardComponent = CreateDefaultSubobject<UBlackboardComponent>("VehicleBlackBoard");
 }
 
-//Runs at the third place
+//Runs at the third Tick
 void AVehicleAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
 	PrintLog("Inside controller beginplay");
-	
-	
 
-	
-	
-	
-	//code to get distance along spline
-
-	
-	
 }
 
 void AVehicleAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	//PrintLog("Inside controller tick ");
-	
-	BlackboardComp->SetValueAsFloat("SteerValue", UpdatedSteeringValue(DeltaTime));
-	float DistanceAlongWayPoint = BlackboardComp->GetValueAsFloat("DistanceAlongWayPoint");
-	//PrintLog("isstopsignahead " + BlackboardComp->GetValueAsBool("IsStopSignAhead"));
-	
-	
+	//updating steering value each frame. 
+	BlackboardComponent->SetValueAsFloat("SteerValue", UpdatedSteeringValue(DeltaTime));
+	// Update distance value in the blackboard
+	float DistanceAlongWayPoint = BlackboardComponent->GetValueAsFloat("DistanceAlongWayPoint");
 }
 
+
+/*
+ *Update the steering value. Get the vehicle object, waypoint, Distance covered,  from Blackboard
+ * 
+ */
 float AVehicleAIController::UpdatedSteeringValue(float Delta)
 {
-	AWayPoint* WayPoint = Cast<AWayPoint>(BlackboardComp->GetValueAsObject("WayPoint"));
-	AWheeledVehicleObject* Vehicle = Cast<AWheeledVehicleObject>(BlackboardComp->GetValueAsObject("VehicleObject"));
-	float DistanceAlongWayPoint = BlackboardComp->GetValueAsFloat("DistanceAlongWayPoint");
+	AWayPoint* WayPoint = Cast<AWayPoint>(BlackboardComponent->GetValueAsObject("WayPoint"));
+	AWheeledVehicleObject* Vehicle = Cast<AWheeledVehicleObject>(BlackboardComponent->GetValueAsObject("VehicleObject"));
+	float DistanceAlongWayPoint = BlackboardComponent->GetValueAsFloat("DistanceAlongWayPoint");
 	
 	float steer_value = 0.0;
-	FVector delta_distance = Vehicle->GetVelocity() * Delta * 0.036;
+	VehicleVelocity = Vehicle->GetVelocity();
+	FVector delta_distance = VehicleVelocity * Delta * 0.036;
 	float distance_value = delta_distance.Size() * 27.78;
 
 	DistanceAlongWayPoint += distance_value;
 	//PrintLog("Distance along spline" + FString::SanitizeFloat(DistanceAlongWayPoint));
-	BlackboardComp->SetValueAsFloat("DistanceAlongWayPoint", DistanceAlongWayPoint);
+	BlackboardComponent->SetValueAsFloat("DistanceAlongWayPoint", DistanceAlongWayPoint);
 
 	FVector veh_loc = Vehicle->GetActorLocation();
 
@@ -75,7 +70,7 @@ float AVehicleAIController::UpdatedSteeringValue(float Delta)
 
 	FVector veh_move_direction = (nearest_spline_point - veh_loc);
 	veh_move_direction.Z = 0;
-	float distance_threshold = BlackboardComp->GetValueAsFloat("ThreshWaypointDeviation");
+	float distance_threshold = BlackboardComponent->GetValueAsFloat("ThreshWaypointDeviation");
 
 	if (veh_move_direction.Size() > distance_threshold) {
 		veh_move_direction = veh_move_direction.GetSafeNormal();
@@ -113,12 +108,12 @@ bool AVehicleAIController::InitializeBehaviorTree(FString BTPath)
 	{
 		float randomspeed = UKismetMathLibrary::RandomFloatInRange(0.50, 0.55);
 		float randomdevthres = UKismetMathLibrary::RandomFloatInRange(5.0, 12.0);
-		BlackboardComp->InitializeBlackboard(*BehaviorTreeAsset->BlackboardAsset);
-		BlackboardComp->SetValueAsFloat("BrakeValue", 0.0);
-		BlackboardComp->SetValueAsFloat("SteerValue", 0.0);
-		BlackboardComp->SetValueAsFloat("ThrottleValue", randomspeed);
-		BlackboardComp->SetValueAsFloat("ThreshWaypointDeviation", randomdevthres);
-		BlackboardComp->SetValueAsFloat("ThreshStopAtStopSignDistance", 800);
+		BlackboardComponent->InitializeBlackboard(*BehaviorTreeAsset->BlackboardAsset);
+		BlackboardComponent->SetValueAsFloat("BrakeValue", 0.0);
+		BlackboardComponent->SetValueAsFloat("SteerValue", 0.0);
+		BlackboardComponent->SetValueAsFloat("ThrottleValue", randomspeed);
+		BlackboardComponent->SetValueAsFloat("ThreshWaypointDeviation", randomdevthres);
+		BlackboardComponent->SetValueAsFloat("ThreshStopAtStopSignDistance", 800);
 		PrintLog("Behavior tree and blackboard init");
 		return true;
 	}
@@ -131,6 +126,12 @@ bool AVehicleAIController::InitializeBehaviorTree(FString BTPath)
 
 bool AVehicleAIController::RunBehaviorTree()
 {
-	BehaviorComp->StartTree(*BehaviorTreeAsset);
+	BehaviorTreeComponent->StartTree(*BehaviorTreeAsset);
+	// need to check why this still works :')
 	return false;
+}
+
+FVector AVehicleAIController::GetVehicleVelocity()
+{
+	return VehicleVelocity;
 }

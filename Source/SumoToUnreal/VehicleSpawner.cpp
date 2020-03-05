@@ -27,7 +27,7 @@ void AVehicleSpawner::BeginPlay()
 		Waypoints.Add((AWayPoint*)SplineActors[i]);
 	}
 
-	FVector LocationVector = Waypoints[SpawningSplineID[spawning]]->SplineComponent->GetLocationAtDistanceAlongSpline(150, ESplineCoordinateSpace::World);
+	FVector LocationVector = Waypoints[SpawningSplineID[spawning]]->SplineComponent->GetLocationAtDistanceAlongSpline(6000, ESplineCoordinateSpace::World);
 	AWheeledVehicleObject* temp = Spawn(LocationVector, Waypoints[SpawningSplineID[spawning]]);
 	spawning += 1;
 

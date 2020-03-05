@@ -14,11 +14,11 @@ EBTNodeResult::Type UTaskCheckStopAtStopSign::ExecuteTask(UBehaviorTreeComponent
 	{
 		return EBTNodeResult::Failed;
 	}
-	float ThreshStopAtStopSignDistance = MyController->BlackboardComp->GetValueAsFloat("ThreshStopAtStopSignDistance");
-	float DistanceAlongWayPoint = MyController->BlackboardComp->GetValueAsFloat("DistanceAlongWayPoint");
-	AWayPoint* WayPoint = Cast<AWayPoint>(MyController->BlackboardComp->GetValueAsObject("WayPoint"));
+	float ThreshStopAtStopSignDistance = MyController->BlackboardComponent->GetValueAsFloat("ThreshStopAtStopSignDistance");
+	float DistanceAlongWayPoint = MyController->BlackboardComponent->GetValueAsFloat("DistanceAlongWayPoint");
+	AWayPoint* WayPoint = Cast<AWayPoint>(MyController->BlackboardComponent->GetValueAsObject("WayPoint"));
 	float SplineLength = WayPoint->SplineComponent->GetSplineLength();
-	bool IsStopSignAhead = MyController->BlackboardComp->GetValueAsBool("IsStopSignAhead");
+	bool IsStopSignAhead = MyController->BlackboardComponent->GetValueAsBool("IsStopSignAhead");
 	if ( IsStopSignAhead && (SplineLength - DistanceAlongWayPoint) < ThreshStopAtStopSignDistance) 
 	{
 		
