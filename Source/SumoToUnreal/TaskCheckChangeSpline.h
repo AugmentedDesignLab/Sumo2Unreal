@@ -13,6 +13,10 @@ UCLASS()
 class SUMOTOUNREAL_API UTaskCheckChangeSpline : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
+
+	/*
+	 * checks if the vehicle reached at the (Length - Threshold) of the spline. 
+	 */
 	
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 

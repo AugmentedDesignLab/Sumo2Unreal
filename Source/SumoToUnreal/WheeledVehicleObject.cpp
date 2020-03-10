@@ -85,3 +85,10 @@ bool AWheeledVehicleObject::InitializeWheeledVehicle(AWayPoint* _WayPoint)
 	VehicleAIController->RunBehaviorTree();
 	return true;
 }
+
+bool AWheeledVehicleObject::SelfDestroy()
+{
+	//begin destroy. Delete all reference in the middle and delete after that
+	this->Destroy();
+	return true;
+}
