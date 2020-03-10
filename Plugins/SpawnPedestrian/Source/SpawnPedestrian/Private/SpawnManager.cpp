@@ -1,20 +1,15 @@
 #include "SpawnManager.h"
 
-#include "Atmosphere/AtmosphericFog.h"
-#include "Engine/SkyLight.h"
-#include "Components/SkyLightComponent.h"
-
 #include "EngineUtils.h"
-#include "Engine/StaticMeshActor.h"
-#include "Builders/CubeBuilder.h"
 #include "EditorModeManager.h"
-
-#include "Kismet/GameplayStatics.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "NavigationSystem.h"
-#include "IPluginManager.h"
+#include "Builders/CubeBuilder.h"
+
 #include "NavModifierVolume.h"
 #include "NavArea_Obstacle.h"
+
+// Sumo2Unreal
+#include "RoadMesh.h"
 
 #define DEBUG_PRINT(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
 
@@ -22,84 +17,72 @@ FSpawnManager::FSpawnManager()
 {
 	UE_LOG(LogTemp, Warning, TEXT("SpawnManager::SpawnManager() Called."));
 
-	NavMeshOrigin = FVector::ZeroVector;
-	NavMeshExtend = FVector(4096.0f, 8192.0f, 256.0f);
-}
+	UObject* SpawnActor = Cast<UObject>(
+		StaticLoadObject(UObject::StaticClass(), nullptr,
+		                 TEXT(
+			                 "Blueprint'/SpawnPedestrian/BasePedestrian/Blueprints/BP_PedestrianCharacter.BP_PedestrianCharacter'")));
 
-void FSpawnManager::InitializeMap() const
-{
-	UWorld* World = GEditor->GetEditorWorldContext().World();
-
-	const FVector Location = FVector(0.0f, 0.0f, 2000.0f);
-	const FVector LightLocation = FVector(0.0f, 0.0f, 100000.0f);
-
-	World->SpawnActor<AAtmosphericFog>(Location, FRotator::ZeroRotator);
-
-	const ASkyLight* Skylight = World->SpawnActor<ASkyLight>(LightLocation, FRotator::ZeroRotator);
-	if (Skylight != nullptr)
+	PedestrianCharacterBP = Cast<UBlueprint>(SpawnActor);
+	if (!SpawnActor)
 	{
-		Skylight->GetLightComponent()->SetIntensity(5.0f);
-		GEditor->BuildLighting(LightOptions);
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("CANT FIND OBJECT TO SPAWN")));
+		return;
+	}
+
+	UClass* SpawnClass = SpawnActor->StaticClass();
+	if (SpawnClass == nullptr)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("CLASS == NULL")));
+		return;
 	}
 }
 
-void FSpawnManager::InitializeNavMesh() const
+void FSpawnManager::InitializeNavMesh()
 {
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 
-	DummySpawnBoxedVolume(FVector::ZeroVector, FVector{8192.0f, 20480.0f, 512.0f}, TEXT("NavMeshBoundsVolume"));
+	DummySpawnBoxedVolume(
+		FVector{10000.0f, -10000.0f, 0.0f}, FVector{40000.0f, 40000.0f, 512.0f}, TEXT("NavMeshBoundsVolume"));
 
-	for (TActorIterator<AStaticMeshActor> ActorItr(World); ActorItr; ++ActorItr)
+	// Iterate through sumo Actors
+	for (TActorIterator<ARoadMesh> ActorItr(World); ActorItr; ++ActorItr)
 	{
-		FVector Origin;
-		FVector Bounds;
-		ActorItr->GetActorBounds(false, Origin, Bounds);
-		Bounds += FVector(0.0f, 0.0f, 512.0f);
+		if (ActorItr->currentMeshType == MeshType::Road)
+		{
+			FVector Origin;
+			FVector Bounds;
+			ActorItr->GetActorBounds(true, Origin, Bounds);
 
-		// TODO: Remove this part, this is temporary
-		auto a = ActorItr->GetName();
-		if (ActorItr->GetName().Compare(FString{"Road"}))
-		{
-			//DummySpawnBoxedVolume(Origin, Bounds * 2, TEXT("NavMeshBoundsVolume"));
-		}
-		else
-		{
-			FVector Half = FVector{0.0f, Bounds.Y / 2, 0.0f};
+			Bounds.Z += 512.0f;
 			Bounds.X *= 2;
+			Bounds.Y *= 2;
 
-			FVector NewOrigin = Origin - Half;
-			NewOrigin.Y -= 512.0f;
-			DummySpawnBoxedVolume(NewOrigin, Bounds, TEXT("NavModifierVolume"));
-
-			NewOrigin = Origin + Half;
-			NewOrigin.Y += 512.0f;
-
-
-			DummySpawnBoxedVolume(NewOrigin, Bounds, TEXT("NavModifierVolume"));
-
-			for (TActorIterator<ANavModifierVolume> VolumeItr(World); VolumeItr; ++VolumeItr)
-			{
-				VolumeItr->SetAreaClass(UNavArea_Obstacle::StaticClass());
-			}
+			DummySpawnBoxedVolume(Origin, Bounds, TEXT("NavModifierVolume"));
 		}
+	}
+
+	for (TActorIterator<ANavModifierVolume> VolumeItr(World); VolumeItr; ++VolumeItr)
+	{
+		VolumeItr->SetAreaClass(UNavArea_Obstacle::StaticClass());
 	}
 }
 
-void FSpawnManager::InitializePedestrian() const
+void FSpawnManager::InitializePedestrian()
 {
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 
-	// Currently spawning one pedestrian at random position.
-	// TODO: Spawn more
-	const FVector NewLocation = UKismetMathLibrary::RandomPointInBoundingBox(
-		NavMeshOrigin, NavMeshExtend);
-}
+	for (TActorIterator<ARoadMesh> ActorItr(World); ActorItr; ++ActorItr)
+	{
+		if (ActorItr->currentMeshType == MeshType::Sidewalk)
+		{
+			SideWalkCenters.Add(ActorItr->GetActorLocation());
+		}
+	}
 
-FString FSpawnManager::InContent(const FString& RelativePath)
-{
-	static FString ContentDir = IPluginManager::Get().FindPlugin(TEXT("SpawnPedestrian"))->GetContentDir();
+	const FVector Start = SideWalkCenters[FMath::RandRange(0, SideWalkCenters.Num() - 1)];
+	FVector End = SideWalkCenters[FMath::RandRange(0, SideWalkCenters.Num() - 1)];
 
-	return ContentDir / RelativePath;
+	SpawnPedestrian(Start, Start);
 }
 
 void FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, TCHAR* VolumeClassName)
@@ -116,7 +99,7 @@ void FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, TCH
 	CubeAdditiveBrushBuilder->Z = BoxExtend.Z;
 	CubeAdditiveBrushBuilder->Build(World);
 
-	//GEditor->Exec(World, TEXT("BRUSH MOVETO X=0 Y=0 Z=0"));
+	// GEditor->Exec(World, TEXT("BRUSH MOVETO X=0 Y=0 Z=0"));
 	WorldBrush->Modify();
 	WorldBrush->SetActorLocation(Origin, false);
 
@@ -127,4 +110,17 @@ void FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, TCH
 	GEditor->Exec(World, ToCStr(Cmd));
 
 	GLevelEditorModeTools().MapChangeNotify();
+}
+
+void FSpawnManager::SpawnPedestrian(const FVector StartLocation, FVector EndLocation) const
+{
+	UWorld* World = GEditor->GetEditorWorldContext().World();
+
+	// Spawn the character at start location
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	World->SpawnActor<AActor>(
+		PedestrianCharacterBP->GeneratedClass, StartLocation, FRotator::ZeroRotator, SpawnParams);
+
+	// Then set the end location for the character
 }

@@ -61,9 +61,9 @@ void FSpawnPedestrianModule::ShutdownModule()
 
 void FSpawnPedestrianModule::PluginButtonClicked()
 {
-	const FSpawnManager Manager;
+	// Main entry point to my Plugin
+	FSpawnManager Manager;
 
-	Manager.InitializeMap();
 	Manager.InitializeNavMesh();
 	Manager.InitializePedestrian();
 }
