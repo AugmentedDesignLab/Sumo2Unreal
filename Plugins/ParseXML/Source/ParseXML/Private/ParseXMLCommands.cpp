@@ -6,7 +6,7 @@
 
 void FParseXMLCommands::RegisterCommands()
 {
-	UI_COMMAND(PluginAction, "ParseXML", "Execute ParseXML action", EUserInterfaceActionType::Button, FInputGesture());
+	UI_COMMAND(PluginAction, "Sumo2Unreal", "Execute ParseXML action", EUserInterfaceActionType::Button, FInputGesture());
 }
 
 #undef LOCTEXT_NAMESPACE

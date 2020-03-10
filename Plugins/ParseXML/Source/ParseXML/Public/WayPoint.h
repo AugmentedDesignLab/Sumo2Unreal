@@ -34,6 +34,10 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<APawn*> VehiclePawnList;
 
+	UPROPERTY(EditAnywhere)
+	FString turnType;
+	FVector directionOfSpline;
+
 	//UPROPERTY(EditAnywhere)
 	//TMap<FString, AWayPoint*> ConnectedSplineMap;
 	UPROPERTY(EditAnywhere)
@@ -43,6 +47,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool isStopSignConnected = false;
 	int32 twoTimesTotalConnectedSplines = 0; //multiple of 2
+	void calculateCurrentSplineTurnTypes();
+	FString calculateDecalSelection();
 };
 
 

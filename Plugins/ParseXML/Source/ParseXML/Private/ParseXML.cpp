@@ -11,7 +11,7 @@
 
 #include "LevelEditor.h"
 
-static const FName ParseXMLTabName("ParseXML");
+static const FName ParseXMLTabName("Sumo2Unreal");
 
 #define LOCTEXT_NAMESPACE "FParseXMLModule"
 

@@ -1,36 +1,26 @@
 #pragma once
 
-#include "Editor.h"
-#include "LightingBuildOptions.h"
-#include "PedestrianCharacter.h"
-
 #include "SimpleNode.h"
 
-class FSpawnManager
+class SPAWNPEDESTRIAN_API FSpawnManager
 {
 public:
 	FSpawnManager();
 
-	void InitializeMap() const;
-	void InitializeNavMesh() const;
-	void InitializePedestrian() const;
+	void InitializeNavMesh();
+	void InitializePedestrian();
 
-	static FString InContent(const FString& RelativePath);
-
-	static void DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, TCHAR* VolumeClassName);
+	// UFUNCTION(BlueprintCallable, BlueprintPure, Category = "MyOwnCategory")
+	void SpawnPedestrian(FVector StartLocation, FVector EndLocation) const;
 
 protected:
+	static void DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, TCHAR* VolumeClassName);
 
-	TSubclassOf<ACharacter> ThirdPersonCharacterBP;
-	TSubclassOf<APedestrianCharacter> PedestrianCharacterBP;
-
-	// Here we have some information of the NavMesh
-	// TODO: add a reference to NavMesh
-	FVector NavMeshOrigin;
-	FVector NavMeshExtend;
-	// ANavMeshBoundsVolume
-
+	
 private:
+	// Store the blueprint pedestrian character, need to be initialized in the constructor
+	UBlueprint* PedestrianCharacterBP;
 
-	FLightingBuildOptions LightOptions;
+	// Store A list of possible moveable points.
+	TArray<FVector> SideWalkCenters;
 };

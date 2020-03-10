@@ -2,6 +2,7 @@
 #include "EngineMinimal.h"
 #include "Runtime/XmlParser/Public/FastXml.h"
 #include "Runtime/XmlParser/Public/XmlParser.h"
+#include "laneMarking.h"
 #include "WayPoint.h"
 #include "Engine.h"
 #include <cstdlib>
@@ -121,10 +122,6 @@ void UfileParser::InitializeInternalEdgeAttributes(const TCHAR* AttributeName, c
 		ShapeProcessing(AttributeValue);
 		shapeIsSet = true;
 	}
-	else if (FString(AttributeValue).Equals(TEXT("crossing"))) {
-		isCrossing = true;
-		shapeIsSet = true;
-	}
 }
 
 void UfileParser::InitializeEdgeAttributes(const TCHAR* AttributeName, const TCHAR* AttributeValue) {
@@ -217,6 +214,7 @@ void UfileParser::MakeSpline() {
 	SplineComponent->SplineActor->splineID = tempEdgeID;
 	SplineComponent->SplineActor->SpeedLimit = 8;
 	SplineComponent->SplineActor->TotalDistance = SplineComponent->SplineActor->SplineComponent->GetSplineLength();
+	SplineComponent->SplineActor->calculateCurrentSplineTurnTypes();
 	SplineContainer.SplineMap.Add(WayPointDeferred->splineID, SplineComponent);
 	UE_LOG(LogEngine, Warning, TEXT("The added spline is %s"), *(WayPointDeferred->splineID));
 }
@@ -341,7 +339,7 @@ void UfileParser::InitializewalkingArea() {
 			MyDeferredActor->vertices.Add(coordinates);
 			i += 2;
 		}
-		MyDeferredActor->isSideWalkType = true;
+		MyDeferredActor->currentMeshType = MeshType::Sidewalk;
 		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 		walkingAreaContainer.walkingAreaMap.Add(*(currentWalkingArea->walkingAreaID), std::move(currentWalkingArea));
 		/*
@@ -362,7 +360,7 @@ SimpleNodePtr UfileParser::InitializeNode() {
 	FVector origin(Node->NodePosition.X, Node->NodePosition.Y, 0.0f);
 
 	FTransform SpawnTransform(RotationEdge, origin);
-	ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
+	ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform));
 
 	if (MyDeferredActor != nullptr) {
 		FVector coordinates;
@@ -374,9 +372,13 @@ SimpleNodePtr UfileParser::InitializeNode() {
 				MyDeferredActor->vertices.Add(coordinates);	
 				i += 2;
 		}
+		MyDeferredActor->currentMeshType = MeshType::Junction;
 		UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
-		//initialize map with the pointer for extended node lifetime
+		//initialize map with the unique pointer as value. The object exists as long as the pointer does. 
 		NodeContainer.NodeMap.Add(*tempNodeID, std::move(Node));
+	}
+	else {
+
 	}
 	return Node;
 }
@@ -401,8 +403,8 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge() {
 		tempvector.clear();
 
 		
-		if (laneWidthIsSet == true) Edge->setVertexCoordinates(laneWidth*100.0f); //default SUMO lane width
-		else Edge->setVertexCoordinates(320.0f);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm (12 feet).
+		if (laneWidthIsSet == true) Edge->setSideWalkVertCoordinates(laneWidth*100.0f); //default SUMO lane width
+		else Edge->setSideWalkVertCoordinates(320.0f);  //default SUMO lane width is 320cm. Default interstate highway lane width is 470cm (12 feet).
 
 		FVector originCoordinates = Edge->centroid;
 		FQuat RotationEdge(0.0f, 0.0f, 0.0f, 0.0f);
@@ -416,8 +418,8 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge() {
 		ARoadMesh* MyDeferredActor = Cast<ARoadMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, ARoadMesh::StaticClass(), SpawnTransform)); //Downcasting
 
 		if (MyDeferredActor != nullptr) {
-			(MyDeferredActor->vertices) = (Edge->vertexArray);
-			MyDeferredActor->isSideWalkType = true;
+			MyDeferredActor->vertices = Edge->vertexArray;
+			MyDeferredActor->currentMeshType = MeshType::Sidewalk;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 		}
 
@@ -434,7 +436,7 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge() {
 
 		if (MyDeferredActor1 != nullptr){
 			MyDeferredActor1->vertices = Edge->curbVerticesTop1;
-			MyDeferredActor1->isSideWalkType = true;
+			MyDeferredActor1->currentMeshType = MeshType::Sidewalk;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor1, SpawnTransformCurb1);
 		}
 
@@ -451,13 +453,13 @@ SimpleEdgePtr UfileParser::InitializePedestrianEdge() {
 
 		if (MyDeferredActor2 !=nullptr) {
 			MyDeferredActor2->vertices = Edge->curbVerticesTop2;
-			MyDeferredActor2->isSideWalkType = true;
+			MyDeferredActor2->currentMeshType = MeshType::Sidewalk;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor2, SpawnTransformCurb2);
 		}
 		i += 2;
 	}
 	//initialize map with the pointer for extended node lifetime
-	EdgeContainer.EdgeMap.Add(*tempEdgeID, std::move(Edge));	
+	//EdgeContainer.EdgeMap.Add(*tempEdgeID, std::move(Edge));	
 	return Edge;
 }
 
@@ -498,22 +500,12 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 
 		//finalSplinePoints.Add(FVector((Shapecoordinates[i + 2] - (Edge->centroid.X)), (Shapecoordinates[i + 3] - (Edge->centroid.Y)), 0.2f)); //change for curved roads. For curved roads check for last iteration first.
 
+		origin.X = originCoordinates.X;
+		origin.Y = originCoordinates.Y;
 		if (FString(edgeType).Equals(TEXT("standard"))) {
-			origin.X = originCoordinates.X;
-			origin.Y = originCoordinates.Y;
 			origin.Z = originCoordinates.Z;
 		}
-		else if (FString(edgeType).Equals(TEXT("crossing"))) {
-			UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=Inside pedestrian crossing-=-=-=-=-="));
-			origin.X = originCoordinates.X;
-			origin.Y = originCoordinates.Y;
-			origin.Z = 0.0f;
-		}
-		else if (FString(edgeType).Equals(TEXT("sidewalk"))) {
-			origin.X = originCoordinates.X;
-			origin.Y = originCoordinates.Y;
-			origin.Z = 0.0f;
-		}
+		else origin.Z = 0.0f;
 
 		splineOrigin = origin; //might break for curved edges.
 		splineRotation = RotationEdge;
@@ -522,6 +514,8 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 		if (MyDeferredActor) {
 			MyDeferredActor->vertices = Edge->vertexArray;
 			MyDeferredActor->roadLength = Edge->LaneLength;
+			if (FString(edgeType).Equals(TEXT("crossing"))) MyDeferredActor->currentMeshType = MeshType::Crossing;
+			else if (FString(edgeType).Equals(TEXT("standard"))) MyDeferredActor->currentMeshType = MeshType::Road;
 			UGameplayStatics::FinishSpawningActor(MyDeferredActor, SpawnTransform);
 			//MyDeferredActor->FinishSpawning(SpawnLocAndRotation);
 		}
@@ -552,13 +546,19 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 		Spline->SplineActor->SpeedLimit = 20;
 		Spline->SplineActor->TotalDistance = Spline->SplineActor->SplineComponent->GetSplineLength(); 
 		checkConnectedSplineID = Spline->SplineActor->splineID;
-		UE_LOG(LogEngine, Warning, TEXT("The added spline is %s added in iteration %d"), *(WayPointDeferred->splineID), i);
+		Spline->SplineActor->calculateCurrentSplineTurnTypes();
+		if (FString(edgeType).Equals(TEXT("crossing")))
+		{
+			FTransform SpawnTransform(FQuat(0.0f, 0.0f, 0.0f, 0.0f), FVector(0.0f, 0.0f, 0.0f), FVector(1.0f, 1.0f, 1.0f));
+			AlaneMarking* decalSpawner = Cast<AlaneMarking>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AlaneMarking::StaticClass(), SpawnTransform));
+			decalSpawner->directionVector = Spline->SplineActor->directionOfSpline;
+			decalSpawner->currentDecalSelection = Spline->SplineActor->calculateDecalSelection();
+			decalSpawner->Spawnlocation = origin;
+			decalSpawner->spawnPedestrianCrossingDecal();
+		}
 		i += 2;
 	}
-
-	
-	//Add Edge object to the hashmap.
-	EdgeContainer.EdgeMap.Add(*tempEdgeID, std::move(Edge));
+	EdgeContainer.EdgeMap.Add(tempEdgeID, std::move(Edge));
 	return Edge;
 }
 
@@ -566,7 +566,7 @@ SimpleEdgePtr UfileParser::InitializeEdge(const TCHAR* edgeType) {
 void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two traffic lights per walking area - At the first and fourth x,y coordinate.
 {
 	walkingArea* currentWalkingAreaObject; 
-	FString currentControlNodeID = FString(TEXT(":0_0_"));
+	FString currentControlNodeID = FString(TEXT(":0_0_"));//Hard coding the junction id for stop signs
 	/*
 	For stop sign from IntGen --> Netgenerate, we only check for the walking areas within one junction.
 	This is to prevent turn lane's junction walking areas to be considered when trying to place the stop sign.
@@ -578,18 +578,6 @@ void UfileParser::InitializeTrafficControl(const TCHAR* controlType)//spawn two 
 	for (const TPair<const TCHAR*, walkingAreaPtr>& pair : walkingAreaContainer.walkingAreaMap)// Find the corresponding walking area for a traffic light for a particular junction.
 	{
 		FString currentKey = FString(pair.Key); //ID of the walking area.
-		/*
-		if ((currentKey.Contains(currentControlNodeID)) && (FString(controlType).Equals(TEXT("trafficLight"))))
-		{
-			currentWalkingAreaObject = pair.Value.get();
-			currentWalkingAreaObject->trafficControlLocationCalculator();
-			trafficControl1Location = currentWalkingAreaObject->trafficControlLocation;
-			trafficControlRotation = currentWalkingAreaObject->trafficLight1Orientation;
-			FTransform SpawnTransform(trafficControlRotation, trafficControl1Location, trafficLightScale);
-			AtrafficLightMesh* MyDeferredTrafficLight = Cast<AtrafficLightMesh>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AtrafficLightMesh::StaticClass(), SpawnTransform)); //Downcasting
-			UGameplayStatics::FinishSpawningActor(MyDeferredTrafficLight, SpawnTransform);
-		}
-		*/
 		if ((currentKey.Contains(currentControlNodeID)) && (FString(controlType).Equals(TEXT("stopSign"))))
 		{
 			currentWalkingAreaObject = pair.Value.get();
@@ -622,15 +610,27 @@ void UfileParser::InitializeSplineAttributes(const TCHAR* AttributeName, const T
 	}
 }
 
-void UfileParser::LinkTrafficControlToSplines() {
+void UfileParser::LinkTrafficControlToSplines() 
+{
+	FTransform SpawnTransform(FQuat(0.0f, 0.0f, 0.0f, 0.0f), FVector(0.0f, 0.0f, 0.0f), FVector(1.0f, 1.0f, 1.0f));
+	AlaneMarking* decalSpawner = Cast<AlaneMarking>(UGameplayStatics::BeginDeferredActorSpawnFromClass(World, AlaneMarking::StaticClass(), SpawnTransform));
 	for (int g = 0; g < incomingLaneContainer.Num(); g++) {
-		UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-incoming lane set is %s-=-=-=-=-=-=-="), *incomingLaneContainer[g]);
 		if (incomingLaneContainer[g].Contains(TEXT("w"))) {}
 		else {
-			UE_LOG(LogEngine, Warning, TEXT("-=-=-=-=-=-Current incoming lane is %s-=-=-=-=-=-=-="), *incomingLaneContainer[g]);
-			if (SplineContainer.SplineMap.Contains(incomingLaneContainer[g])) SplineContainer.SplineMap[incomingLaneContainer[g]]->SplineActor->isStopSignConnected = true; //Many incoming lanes in the set for which splines do not exist. 	
+			if (SplineContainer.SplineMap.Contains(incomingLaneContainer[g]))
+			{
+				SplineContainer.SplineMap[incomingLaneContainer[g]]->SplineActor->isStopSignConnected = true; //Many incoming lanes in the set for which splines do not exist.
+				decalSpawner->directionVector = SplineContainer.SplineMap[incomingLaneContainer[g]]->SplineActor->directionOfSpline;
+				decalSpawner->currentDecalSelection = SplineContainer.SplineMap[incomingLaneContainer[g]]->SplineActor->calculateDecalSelection();
+				if (EdgeContainer.EdgeMap.Contains(incomingLaneContainer[g]))
+				{
+					decalSpawner->Spawnlocation = EdgeContainer.EdgeMap[incomingLaneContainer[g]]->centroid;
+					decalSpawner->spawnActor();
+				}
+			}
 		}
 	}
+	UGameplayStatics::FinishSpawningActor(decalSpawner, SpawnTransform);
 }
 
 bool UfileParser::loadxml() {
@@ -667,14 +667,10 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 			isInternalEdge = true;
 			return true;
 		}
+		else if (FString(AttributeValue).Equals(TEXT("crossing"))) isCrossing = true;
 		if (isInternalEdge == true) {
 			InitializeInternalEdgeAttributes(AttributeName, AttributeValue);
-			if (shapeIsSet == true)
-			{
-				MakeSpline();
-				//shapeIsSet = false;
-				//isInternalEdge = false;
-			}
+			if (shapeIsSet == true) MakeSpline();
 		}
 		else InitializeEdgeAttributes(AttributeName, AttributeValue);
 	}
@@ -684,7 +680,6 @@ bool UfileParser::ProcessAttribute(const TCHAR* AttributeName, const TCHAR* Attr
 		return true;
 	}
 	else if (isWalkingArea == true) InitializeWalkingAreaAttributes(AttributeName, AttributeValue);
-
 	else if (isCrossing == true) InitializeEdgeAttributes(AttributeName, AttributeValue);
 	if (isElementtrafficLight == true) InitializetrafficLightAttributes(AttributeName, AttributeValue);
 	if (isConnection == true) InitializeSplineAttributes(AttributeName, AttributeValue);
@@ -772,7 +767,6 @@ bool UfileParser::ProcessComment(const TCHAR* Comment)
 	//UE_LOG(LogEngine, Warning, TEXT("ProcessComment Comment: %s"), Comment);
 	return true;
 }
-
 
 
 

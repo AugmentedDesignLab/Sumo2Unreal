@@ -9,15 +9,26 @@
 #include <array>
 #include "RoadMesh.generated.h"
 
+UENUM()
+enum class MeshType
+{
+	Junction UMETA(DisplayName = "Junction"),
+	Sidewalk UMETA(DisplayName = "Sidewalk"),
+	Crossing UMETA(DisplayName = "Crossing"),
+	Road UMETA(DisplayName = "Road")
+};
+
 UCLASS()
 class PARSEXML_API ARoadMesh : public AActor
 {
 	GENERATED_BODY()
-	
 public:	
 	// Sets default values for this actor's properties
 	ARoadMesh();
 	~ARoadMesh();
+	
+	UPROPERTY(EditAnywhere, Category = Enum)
+	MeshType currentMeshType;
 
 	UPROPERTY(VisibleAnywhere, Category = ProcMesh)
 	UMaterial* Material0;
@@ -44,7 +55,6 @@ public:
 	TArray<FLinearColor> eachTriangleVertexColors;
 
 	float roadLength;
-	bool isSideWalkType;
 
 protected:
 	// Called when the game starts or when spawned

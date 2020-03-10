@@ -22,7 +22,7 @@ typedef std::tr1::shared_ptr<SimpleSpline> SimpleSplinePtr;
 
 //Node Map, Edge Map, walkingArea and trafficLight Map
 typedef TMap<const TCHAR*, SimpleNodePtr> NodeTMap;
-typedef TMap<const TCHAR*, SimpleEdgePtr> EdgeTMap;
+typedef TMap<FString, SimpleEdgePtr> EdgeTMap;
 typedef TMap<const TCHAR*, walkingAreaPtr> walkingAreaTMap;
 typedef TMap<const TCHAR*, trafficLight*> trafficLightTMap;
 typedef TMap<const TCHAR*, AStopSignMesh*> StopSignTMap;
