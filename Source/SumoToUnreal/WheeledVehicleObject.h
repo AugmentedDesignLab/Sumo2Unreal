@@ -31,17 +31,31 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	/*
+	 * get the distance along spline when get spawned. Make the code independent to spawn at any location
+	 */
+	float GetDistanceAlongSpline(FVector Location, USplineComponent* Spline);
+
+	/*
+	 * init the BT. Path address is not dynamic. need to set it as para. Move forward if only BT and BB are not null. Set
+	 * some value in the BB. 
+	 */
+	bool InitializeWheeledVehicle(AWayPoint* WayPoint);
+
+	/*
+	 * destroying vehicle at the end of the spline. get called from the task.  
+	 */
+	bool SelfDestroy();
+	
 	UPROPERTY(EditAnywhere)
 	AVehicleAIController* VehicleAIController;
 
-	UBlackboardComponent* BlackBoardData;
+	UBlackboardComponent* BlackBoard;
 
 	UPROPERTY(EditAnywhere)
 	AWayPoint* WayPoint;
 
-	float GetDistanceAlongSpline(FVector Location, USplineComponent* Spline);
 
-	bool InitializeWheeledVehicle(AWayPoint* WayPoint);
 
 	void PrintLog(FString Text)
 	{

@@ -16,9 +16,9 @@ EBTNodeResult::Type UTaskCheckChangeSpline::ExecuteTask(UBehaviorTreeComponent& 
 		return EBTNodeResult::Failed;
 	}
 
-	AWayPoint* WayPoint = Cast<AWayPoint>(MyController->BlackboardComp->GetValueAsObject("WayPoint"));
+	AWayPoint* WayPoint = Cast<AWayPoint>(MyController->BlackboardComponent->GetValueAsObject("WayPoint"));
 	float TotalWayPointLength = WayPoint->TotalDistance;
-	float DistanceAlongWayPoint = MyController->BlackboardComp->GetValueAsFloat("DistanceAlongWayPoint");
+	float DistanceAlongWayPoint = MyController->BlackboardComponent->GetValueAsFloat("DistanceAlongWayPoint");
 
 	if (TotalWayPointLength - DistanceAlongWayPoint < SplineChangeThreshold)
 	{

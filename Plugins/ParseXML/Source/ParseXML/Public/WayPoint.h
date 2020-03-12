@@ -29,6 +29,10 @@ public:
 	FString splineID;
 	UPROPERTY(EditAnywhere)
 	TArray<AWayPoint*> ConnectedSpline;
+	UPROPERTY(EditAnywhere)
+	TArray<AWayPoint*> CutSpline;
+	UPROPERTY(EditAnywhere)
+	TArray<APawn*> VehiclePawnList;
 
 	UPROPERTY(EditAnywhere)
 	FString turnType;

@@ -7,14 +7,14 @@
 #include "GameFramework/Pawn.h"
 #include "Kismet/KismetMathLibrary.h"
 
-//runs first when simulate
+//runs first Tick when simulate
 AWheeledVehicleObject::AWheeledVehicleObject()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	PrintLog("Inside vehicle object constructor ");
 }
 
-//runs fourth time
+//runs fourth tick time
 void AWheeledVehicleObject::BeginPlay()
 {
 	Super::BeginPlay();
@@ -30,10 +30,13 @@ void AWheeledVehicleObject::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	//PrintLog("Inside vehicle object tick");
-	
-	float brake_value = BlackBoardData->GetValueAsFloat("BrakeValue");
-	float steer_value = BlackBoardData->GetValueAsFloat("SteerValue");
-	float throttle_value = BlackBoardData->GetValueAsFloat("ThrottleValue");
+
+	/*
+	 * get brake steering and throttle each frame and apply it to vehicle
+	 */
+	float brake_value = BlackBoard->GetValueAsFloat("BrakeValue");
+	float steer_value = BlackBoard->GetValueAsFloat("SteerValue");
+	float throttle_value = BlackBoard->GetValueAsFloat("ThrottleValue");
 	
 	this->GetVehicleMovement()->SetBrakeInput(brake_value);
 	this->GetVehicleMovement()->SetSteeringInput(steer_value);
@@ -62,23 +65,30 @@ bool AWheeledVehicleObject::InitializeWheeledVehicle(AWayPoint* _WayPoint)
 	PrintLog("Initializer ");
 	WayPoint = _WayPoint;
 	PrintLog("WayPoint name " + WayPoint->GetName());
-	//initizlizeBT
+	//initizlizeBT. need to make it a parameter. 
 	FString TreePath = "'/Game/BehaviorTree/AI/BehaviorTree.BehaviorTree'";
 	VehicleAIController->InitializeBehaviorTree(TreePath);
 
-	BlackBoardData = VehicleAIController->BlackboardComp;
-	if (BlackBoardData == NULL && VehicleAIController == NULL) return false;
+	BlackBoard = VehicleAIController->BlackboardComponent;
+	if (BlackBoard == NULL && VehicleAIController == NULL) return false;
 
 	//setting up variable in the blackboard
-	BlackBoardData->SetValueAsObject("WayPoint", WayPoint);
-	BlackBoardData->SetValueAsObject("VehicleObject", this);
+	BlackBoard->SetValueAsObject("WayPoint", WayPoint);
+	BlackBoard->SetValueAsObject("VehicleObject", this);
 
 	//csutom function to calculate distance along spline
 	float distance_along_spline = GetDistanceAlongSpline(GetActorLocation(), WayPoint->SplineComponent);
-	BlackBoardData->SetValueAsFloat("DistanceAlongWayPoint", distance_along_spline);
-	BlackBoardData->SetValueAsBool("IsStopSignAhead", WayPoint->isStopSignConnected);
-	PrintLog("Get dsitance along spline " + FString::SanitizeFloat(distance_along_spline));
+	BlackBoard->SetValueAsFloat("DistanceAlongWayPoint", distance_along_spline);
+	BlackBoard->SetValueAsBool("IsStopSignAhead", WayPoint->isStopSignConnected);
+	PrintLog("Get distance along spline " + FString::SanitizeFloat(distance_along_spline));
 
 	VehicleAIController->RunBehaviorTree();
+	return true;
+}
+
+bool AWheeledVehicleObject::SelfDestroy()
+{
+	//begin destroy. Delete all reference in the middle and delete after that
+	this->Destroy();
 	return true;
 }
