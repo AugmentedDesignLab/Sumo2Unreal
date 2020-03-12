@@ -3,15 +3,15 @@
 
 #include "VehicleSpawner.h"
 
+#include "SpawnManager.h"
 
 
 // Sets default values
 AVehicleSpawner::AVehicleSpawner()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	//PrintLog("Inside constructor spawner");
-
 }
 
 // Called when the game starts or when spawned
@@ -22,12 +22,12 @@ void AVehicleSpawner::BeginPlay()
 	spawning = 0;
 	//PrintLog("Inside beginplay() spawner");
 	SplineActors = FindAllWaypoint();
-	
+
 	for (int i = 0; i < SplineActors.Num(); i++)
 	{
-		Waypoints.Add((AWayPoint*)SplineActors[i]);
+		Waypoints.Add(static_cast<AWayPoint*>(SplineActors[i]));
 	}
-	VehicleList.Sort(AVehicleSpawner::Comparison);
+	VehicleList.Sort(Comparison);
 	//PrintLog("First vehicle " + FString::SanitizeFloat(VehicleList[0].SpawnAfterSec));
 	//PrintLog("last vehicle " + FString::SanitizeFloat(VehicleList[VehicleList.Num() - 1].SpawnAfterSec));
 }
@@ -39,9 +39,9 @@ void AVehicleSpawner::Tick(float DeltaTime)
 	temp += DeltaTime;
 
 	//PrintLog(" spawning  " + FString::SanitizeFloat(spawning) + " VehicleList.Num() " + FString::SanitizeFloat(VehicleList.Num()));
-	if(spawning < VehicleList.Num())
+	if (spawning < VehicleList.Num())
 	{
-		if(temp > VehicleList[spawning].SpawnAfterSec)
+		if (temp > VehicleList[spawning].SpawnAfterSec)
 		{
 			FVehicleSpecification Vehicle = VehicleList[spawning];
 			//PrintLog("Spawning car " + FString::SanitizeFloat(Vehicle.SpawnAfterSec));
@@ -49,26 +49,38 @@ void AVehicleSpawner::Tick(float DeltaTime)
 			Vehicle.Spline->VehiclePawnList.Add(t);
 			spawning++;
 		}
-
 	}
 	else
 	{
 		//PrintLog("else ");
 	}
 
+	// Ivan's addition
+	if (PedestrianSpawnIndex < PedestrianList.Num())
+	{
+		if (temp > PedestrianList[PedestrianSpawnIndex].SpawnAfterSec)
+		{
+			const FPedestrianSpecification PedSpec = PedestrianList[PedestrianSpawnIndex];
+			SpawnPedestrian(PedSpec.PedestrianObject, PedSpec.SideWalk);
+			++PedestrianSpawnIndex;
+		}
+	}
 }
 
-APawn* AVehicleSpawner::SpawnVehicle(TSubclassOf<class AWheeledVehicleObject> VehicleObject, AWayPoint* WayPoint, float DistanceAlongSpline, float SpawnHeight = 20.0F)
+APawn* AVehicleSpawner::SpawnVehicle(TSubclassOf<class AWheeledVehicleObject> VehicleObject, AWayPoint* WayPoint,
+                                     float DistanceAlongSpline, float SpawnHeight = 20.0F)
 {
 	if (!VehicleObject) return nullptr;
 	UWorld* world = GetWorld();
 	if (!world) return nullptr;
-	FVector LocationVector = WayPoint->SplineComponent->GetLocationAtDistanceAlongSpline(DistanceAlongSpline, ESplineCoordinateSpace::World);
+	FVector LocationVector = WayPoint->SplineComponent->GetLocationAtDistanceAlongSpline(
+		DistanceAlongSpline, ESplineCoordinateSpace::World);
 	FVector SpawnLocation = FVector(LocationVector.X, LocationVector.Y, SpawnHeight);
 	FActorSpawnParameters spawn_param;
 	spawn_param.Owner = this;
 	FVector start = FVector(1, 0, 0);
-	FVector end = WayPoint->SplineComponent->GetDirectionAtDistanceAlongSpline(WayPoint->SplineComponent->GetSplineLength() * 0.5f, ESplineCoordinateSpace::World);
+	FVector end = WayPoint->SplineComponent->GetDirectionAtDistanceAlongSpline(
+		WayPoint->SplineComponent->GetSplineLength() * 0.5f, ESplineCoordinateSpace::World);
 	float angle = acos(FVector::DotProduct(start, end)) * 180 / 3.14159;
 	float del = start.X * end.Y - end.X * start.Y;
 	if (del < 0)
@@ -82,9 +94,19 @@ APawn* AVehicleSpawner::SpawnVehicle(TSubclassOf<class AWheeledVehicleObject> Ve
 	AWheeledVehicleObject* t = Cast<AWheeledVehicleObject>(temp);
 	t->InitializeWheeledVehicle(WayPoint);
 	return temp;
-
 }
 
+APawn* AVehicleSpawner::SpawnPedestrian(const TSubclassOf<APedestrianCharacter> PedestrianObject, ARoadMesh* SideWalk)
+{
+	if (!PedestrianObject) return nullptr;
+	UWorld* World = GetWorld();
+	if (!World) return nullptr;
+
+	const FVector SpawnLocation = SideWalk->GetActorLocation();
+	AActor* Pedestrian = FSpawnManager::SpawnPedestrianOn(World, SpawnLocation);
+
+	return Cast<APedestrianCharacter>(Pedestrian);
+}
 
 
 TArray<AActor*> AVehicleSpawner::FindAllWaypoint()

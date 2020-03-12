@@ -62,10 +62,8 @@ void FSpawnPedestrianModule::ShutdownModule()
 void FSpawnPedestrianModule::PluginButtonClicked()
 {
 	// Main entry point to my Plugin
-	FSpawnManager Manager;
-
-	Manager.InitializeNavMesh();
-	Manager.InitializePedestrian();
+	FSpawnManager::LoadBlueprintAssets();
+	FSpawnManager::InitializeNavMesh();
 }
 
 void FSpawnPedestrianModule::AddMenuExtension(FMenuBuilder& Builder)

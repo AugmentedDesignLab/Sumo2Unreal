@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "BehaviorTree/BehaviorTree.h"
+#include "PedestrianAIController.h"
 #include "PedestrianCharacter.generated.h"
 
 UCLASS()

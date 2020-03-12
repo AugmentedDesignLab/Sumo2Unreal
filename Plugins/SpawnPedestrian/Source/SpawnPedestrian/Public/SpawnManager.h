@@ -5,22 +5,35 @@
 class SPAWNPEDESTRIAN_API FSpawnManager
 {
 public:
-	FSpawnManager();
+	/**
+	 * \brief Must be called before calling any spawn pedestrian function.
+	 */
+	static void LoadBlueprintAssets();
 
-	void InitializeNavMesh();
-	void InitializePedestrian();
+	/**
+	 * \brief Generate both NavMesh bounds and NavMesh modifiers.
+	 */
+	static void InitializeNavMesh();
 
-	// UFUNCTION(BlueprintCallable, BlueprintPure, Category = "MyOwnCategory")
-	void SpawnPedestrian(FVector StartLocation) const;
+	/**
+	 * \brief This function is designed to be called by the Scenario Generator. But it can be called by
+	 * other part of code as well.
+	 * \param InWorld The world which you are spawning in. 
+	 * \param SpawnLocation ALocation you want to spawn the pedestrian
+	 * \return The spawned Pedestrian actor
+	 */
+	static AActor* SpawnPedestrianOn(UWorld* InWorld, FVector SpawnLocation);
 
 protected:
+	
 	static AVolume* DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, bool bIsNavMeshBound = false);
 
-
 private:
-	// Store the blueprint pedestrian character, need to be initialized in the constructor
-	UBlueprint* PedestrianCharacterBP;
 
-	// Store A list of possible moveable points.
-	TArray<FVector> SideWalkCenters;
+	/**
+	 * \brief Storing a reference to the loaded Blueprint Object
+	 */
+	static UBlueprint* PedestrianCharacterBlueprint;
+
+	//TArray<FVector> SideWalkCenters;
 };

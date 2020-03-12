@@ -14,7 +14,7 @@ void APedestrianCharacter::BeginPlay()
 	Super::BeginPlay();
 }
 
-void APedestrianCharacter::Tick(float DeltaTime)
+void APedestrianCharacter::Tick(const float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }

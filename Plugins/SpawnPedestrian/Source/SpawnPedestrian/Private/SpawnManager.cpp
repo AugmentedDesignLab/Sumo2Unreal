@@ -13,18 +13,15 @@
 // Sumo2Unreal
 #include "RoadMesh.h"
 
-#define DEBUG_PRINT(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5, FColor::White,text)
+UBlueprint* FSpawnManager::PedestrianCharacterBlueprint = nullptr;
 
-FSpawnManager::FSpawnManager()
+void FSpawnManager::LoadBlueprintAssets()
 {
-	UE_LOG(LogTemp, Warning, TEXT("SpawnManager::SpawnManager() Called."));
-
 	UObject* SpawnActor = Cast<UObject>(
 		StaticLoadObject(UObject::StaticClass(), nullptr,
-		                 TEXT(
-			                 "Blueprint'/SpawnPedestrian/BasePedestrian/Blueprints/BP_PedestrianCharacter.BP_PedestrianCharacter'")));
+			TEXT(
+				"Blueprint'/SpawnPedestrian/BasePedestrian/Blueprints/BP_PedestrianCharacter.BP_PedestrianCharacter'")));
 
-	PedestrianCharacterBP = Cast<UBlueprint>(SpawnActor);
 	if (!SpawnActor)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("CANT FIND OBJECT TO SPAWN")));
@@ -37,6 +34,8 @@ FSpawnManager::FSpawnManager()
 		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("CLASS == NULL")));
 		return;
 	}
+
+	PedestrianCharacterBlueprint = Cast<UBlueprint>(SpawnActor);
 }
 
 void FSpawnManager::InitializeNavMesh()
@@ -83,28 +82,45 @@ void FSpawnManager::InitializeNavMesh()
 	GLevelEditorModeTools().MapChangeNotify();
 }
 
-void FSpawnManager::InitializePedestrian()
+AActor* FSpawnManager::SpawnPedestrianOn(UWorld* InWorld, const FVector SpawnLocation)
 {
-	UWorld* World = GEditor->GetEditorWorldContext().World();
-
-	for (TActorIterator<ARoadMesh> ActorItr(World); ActorItr; ++ActorItr)
-	{
-		if (ActorItr->currentMeshType == MeshType::Sidewalk)
-		{
-			SideWalkCenters.Add(ActorItr->GetActorLocation());
-		}
-	}
-
-	if (SideWalkCenters.Num() <= 0)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("SideWalkCenters.Num() <= 0 !!!")));
-		return;
-	}
+	check(PedestrianCharacterBlueprint != nullptr);
 	
-	const FVector Start = SideWalkCenters[FMath::RandRange(0, SideWalkCenters.Num() - 1)];
+	// Spawn the character at start location
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	AActor* Pedestrian = InWorld->SpawnActor<AActor>(
+		PedestrianCharacterBlueprint->GeneratedClass, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
 
-	SpawnPedestrian(Start);
+	// Readjust the location (lift above the ground)
+	Pedestrian->SetActorLocation(SpawnLocation + FVector{0.0f, 0.0f, 128.0f});
+
+	return Pedestrian;
 }
+
+//
+//void FSpawnManager::InitializePedestrian()
+//{
+//	UWorld* World = GEditor->GetEditorWorldContext().World();
+//
+//	for (TActorIterator<ARoadMesh> ActorItr(World); ActorItr; ++ActorItr)
+//	{
+//		if (ActorItr->currentMeshType == MeshType::Sidewalk)
+//		{
+//			SideWalkCenters.Add(ActorItr->GetActorLocation());
+//		}
+//	}
+//
+//	if (SideWalkCenters.Num() <= 0)
+//	{
+//		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("SideWalkCenters.Num() <= 0 !!!")));
+//		return;
+//	}
+//	
+//	const FVector Start = SideWalkCenters[FMath::RandRange(0, SideWalkCenters.Num() - 1)];
+//
+//	SpawnPedestrian(Start);
+//}
 
 AVolume* FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, bool bIsNavMeshBound)
 {
@@ -172,20 +188,4 @@ AVolume* FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend,
 	GLevelEditorModeTools().MapChangeNotify();
 
 	return Actor;
-}
-
-void FSpawnManager::SpawnPedestrian(const FVector StartLocation) const
-{
-	UWorld* World = GEditor->GetEditorWorldContext().World();
-
-	// Spawn the character at start location
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-	AActor* Pedestrian = World->SpawnActor<AActor>(
-		PedestrianCharacterBP->GeneratedClass, StartLocation, FRotator::ZeroRotator, SpawnParams);
-
-	// Readjust the location (lift above the ground)
-	Pedestrian->SetActorLocation(StartLocation + FVector{0.0f, 0.0f, 128.0f});
-
-	// Then set the end location for the character
 }
