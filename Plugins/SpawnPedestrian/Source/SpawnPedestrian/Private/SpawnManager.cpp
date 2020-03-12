@@ -84,6 +84,8 @@ void FSpawnManager::InitializeNavMesh()
 
 AActor* FSpawnManager::SpawnPedestrianOn(UWorld* InWorld, const FVector SpawnLocation)
 {
+	// If you encountered an error at here, most likely you forgot to click the <SpawnPedestrian> Plugin button.
+	// 
 	check(PedestrianCharacterBlueprint != nullptr);
 	
 	// Spawn the character at start location
