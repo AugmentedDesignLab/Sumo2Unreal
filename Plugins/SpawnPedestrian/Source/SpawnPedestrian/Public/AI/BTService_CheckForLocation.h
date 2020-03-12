@@ -7,7 +7,7 @@
 #include "BTService_CheckForLocation.generated.h"
 
 /**
- * 
+ * The goal of  this task is to determine a random point in the navigable area, and store its location into black board.
  */
 UCLASS()
 class SPAWNPEDESTRIAN_API UBTService_CheckForLocation : public UBTService

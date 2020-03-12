@@ -32,5 +32,7 @@ public:
 
 	void OnPossess(APawn* InPawn) override;
 
+	// Key Id for "TargetLocation" FVector
+	// 
 	uint8 TargetKeyId;
 };
