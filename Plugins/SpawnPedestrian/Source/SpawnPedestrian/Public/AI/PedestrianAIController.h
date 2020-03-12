@@ -10,9 +10,6 @@
 
 #include "PedestrianAIController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class SPAWNPEDESTRIAN_API APedestrianAIController : public AAIController
 {
@@ -27,7 +24,6 @@ protected:
 	UBlackboardComponent* BlackboardComp;
 
 public:
-
 	APedestrianAIController();
 
 	void OnPossess(APawn* InPawn) override;

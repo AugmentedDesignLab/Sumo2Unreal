@@ -95,10 +95,15 @@ void FSpawnManager::InitializePedestrian()
 		}
 	}
 
+	if (SideWalkCenters.Num() <= 0)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("SideWalkCenters.Num() <= 0 !!!")));
+		return;
+	}
+	
 	const FVector Start = SideWalkCenters[FMath::RandRange(0, SideWalkCenters.Num() - 1)];
-	FVector End = SideWalkCenters[FMath::RandRange(0, SideWalkCenters.Num() - 1)];
 
-	SpawnPedestrian(Start, Start);
+	SpawnPedestrian(Start);
 }
 
 AVolume* FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, bool bIsNavMeshBound)
@@ -169,7 +174,7 @@ AVolume* FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend,
 	return Actor;
 }
 
-void FSpawnManager::SpawnPedestrian(const FVector StartLocation, FVector EndLocation) const
+void FSpawnManager::SpawnPedestrian(const FVector StartLocation) const
 {
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 

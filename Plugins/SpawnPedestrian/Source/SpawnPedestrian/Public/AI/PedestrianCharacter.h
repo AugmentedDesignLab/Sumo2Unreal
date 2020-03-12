@@ -15,6 +15,7 @@ class SPAWNPEDESTRIAN_API APedestrianCharacter : public ACharacter
 public:
 	APedestrianCharacter();
 
+	// We are attaching a behavior tree component to the pedestrian character
 	UPROPERTY(EditDefaultsOnly)
 	UBehaviorTree* BehaviorTree;
 

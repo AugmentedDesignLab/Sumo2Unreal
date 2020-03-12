@@ -11,7 +11,7 @@ public:
 	void InitializePedestrian();
 
 	// UFUNCTION(BlueprintCallable, BlueprintPure, Category = "MyOwnCategory")
-	void SpawnPedestrian(FVector StartLocation, FVector EndLocation) const;
+	void SpawnPedestrian(FVector StartLocation) const;
 
 protected:
 	static AVolume* DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, bool bIsNavMeshBound = false);
