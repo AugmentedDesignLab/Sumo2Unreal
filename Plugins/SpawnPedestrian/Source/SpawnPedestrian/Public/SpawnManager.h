@@ -14,9 +14,9 @@ public:
 	void SpawnPedestrian(FVector StartLocation, FVector EndLocation) const;
 
 protected:
-	static void DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, TCHAR* VolumeClassName);
+	static AVolume* DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, bool bIsNavMeshBound = false);
 
-	
+
 private:
 	// Store the blueprint pedestrian character, need to be initialized in the constructor
 	UBlueprint* PedestrianCharacterBP;

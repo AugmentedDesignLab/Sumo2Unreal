@@ -5,6 +5,8 @@
 #include "NavigationSystem.h"
 #include "Builders/CubeBuilder.h"
 
+#include "BSPOps.h"
+#include "NavMeshBoundsVolume.h"
 #include "NavModifierVolume.h"
 #include "NavArea_Obstacle.h"
 
@@ -42,7 +44,7 @@ void FSpawnManager::InitializeNavMesh()
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 
 	DummySpawnBoxedVolume(
-		FVector{10000.0f, -10000.0f, 0.0f}, FVector{40000.0f, 40000.0f, 512.0f}, TEXT("NavMeshBoundsVolume"));
+		FVector{10000.0f, -10000.0f, 0.0f}, FVector{40000.0f, 40000.0f, 512.0f}, true);
 
 	// Iterate through sumo Actors
 	for (TActorIterator<ARoadMesh> ActorItr(World); ActorItr; ++ActorItr)
@@ -51,13 +53,25 @@ void FSpawnManager::InitializeNavMesh()
 		{
 			FVector Origin;
 			FVector Bounds;
+
+			// Save the original rotation of the mesh
+			const FRotator OriginalRotator = ActorItr->GetActorRotation();
+
+			// Turn it to axis aligned, then get the bounds
+			ActorItr->SetActorRotation(FRotator::ZeroRotator);
 			ActorItr->GetActorBounds(true, Origin, Bounds);
 
+			// double the base area, then lift it up
 			Bounds.Z += 512.0f;
 			Bounds.X *= 2;
 			Bounds.Y *= 2;
 
-			DummySpawnBoxedVolume(Origin, Bounds, TEXT("NavModifierVolume"));
+
+			AVolume* SpawnedVolume = DummySpawnBoxedVolume(Origin, Bounds);
+
+			// Restore the rotator of both
+			SpawnedVolume->SetActorRotation(OriginalRotator);
+			ActorItr->SetActorRotation(OriginalRotator);
 		}
 	}
 
@@ -65,6 +79,8 @@ void FSpawnManager::InitializeNavMesh()
 	{
 		VolumeItr->SetAreaClass(UNavArea_Obstacle::StaticClass());
 	}
+
+	GLevelEditorModeTools().MapChangeNotify();
 }
 
 void FSpawnManager::InitializePedestrian()
@@ -85,7 +101,7 @@ void FSpawnManager::InitializePedestrian()
 	SpawnPedestrian(Start, Start);
 }
 
-void FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, TCHAR* VolumeClassName)
+AVolume* FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, bool bIsNavMeshBound)
 {
 	UWorld* World = GEditor->GetEditorWorldContext().World();
 	ABrush* WorldBrush = World->GetDefaultBrush();
@@ -102,14 +118,55 @@ void FSpawnManager::DummySpawnBoxedVolume(FVector Origin, FVector BoxExtend, TCH
 	// GEditor->Exec(World, TEXT("BRUSH MOVETO X=0 Y=0 Z=0"));
 	WorldBrush->Modify();
 	WorldBrush->SetActorLocation(Origin, false);
+	WorldBrush->SetActorRotation(FRotator::ZeroRotator);
 
-	// GEditor->Exec(World, TEXT("BRUSH ADDVOLUME CLASS=NavMeshVolume"));
-	TArray<FStringFormatArg> Args;
-	Args.Add(FStringFormatArg(VolumeClassName));
-	const auto Cmd = FString::Format(TEXT("BRUSH ADDVOLUME CLASS={0}"), Args);
-	GEditor->Exec(World, ToCStr(Cmd));
+
+	//// GEditor->Exec(World, TEXT("BRUSH ADDVOLUME CLASS=NavMeshVolume"));
+	//TArray<FStringFormatArg> Args;
+	//Args.Add(FStringFormatArg(VolumeClassName));
+	//const auto Cmd = FString::Format(TEXT("BRUSH ADDVOLUME CLASS={0}"), Args);
+	//GEditor->Exec(World, ToCStr(Cmd));
+
+	UClass* VolumeClass = bIsNavMeshBound ? ANavMeshBoundsVolume::StaticClass() : ANavModifierVolume::StaticClass();
+
+	const FVector SpawnLoc = WorldBrush->GetActorLocation();
+	AVolume* Actor = World->SpawnActor<AVolume>(VolumeClass, SpawnLoc, FRotator::ZeroRotator);
+	if (Actor)
+	{
+		Actor->PreEditChange(nullptr);
+
+		FBSPOps::csgCopyBrush
+		(
+			Actor,
+			WorldBrush,
+			0,
+			RF_Transactional,
+			true,
+			true
+		);
+
+		// Set the texture on all polys to NULL.  This stops invisible texture
+		// dependencies from being formed on volumes.
+		if (Actor->Brush)
+		{
+			for (int32 poly = 0; poly < Actor->Brush->Polys->Element.Num(); ++poly)
+			{
+				FPoly* Poly = &(Actor->Brush->Polys->Element[poly]);
+				Poly->Material = nullptr;
+			}
+		}
+		Actor->PostEditChange();
+	}
+
+	if (Actor)
+	{
+		ULevel::LevelDirtiedEvent.Broadcast();
+		World->BroadcastLevelsChanged();
+	}
 
 	GLevelEditorModeTools().MapChangeNotify();
+
+	return Actor;
 }
 
 void FSpawnManager::SpawnPedestrian(const FVector StartLocation, FVector EndLocation) const
@@ -119,8 +176,11 @@ void FSpawnManager::SpawnPedestrian(const FVector StartLocation, FVector EndLoca
 	// Spawn the character at start location
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-	World->SpawnActor<AActor>(
+	AActor* Pedestrian = World->SpawnActor<AActor>(
 		PedestrianCharacterBP->GeneratedClass, StartLocation, FRotator::ZeroRotator, SpawnParams);
+
+	// Readjust the location (lift above the ground)
+	Pedestrian->SetActorLocation(StartLocation + FVector{0.0f, 0.0f, 128.0f});
 
 	// Then set the end location for the character
 }
