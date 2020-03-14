@@ -72,6 +72,31 @@ void FSpawnManager::InitializeNavMesh()
 			SpawnedVolume->SetActorRotation(OriginalRotator);
 			ActorItr->SetActorRotation(OriginalRotator);
 		}
+
+
+		if (ActorItr->currentMeshType == MeshType::Junction)
+		{
+			FVector Origin;
+			FVector Bounds;
+
+			// Save the original rotation of the mesh
+			const FRotator OriginalRotator = ActorItr->GetActorRotation();
+
+			// Turn it to axis aligned, then get the bounds
+			ActorItr->SetActorRotation(FRotator::ZeroRotator);
+			ActorItr->GetActorBounds(true, Origin, Bounds);
+
+			// double the base area, then lift it up
+			Bounds.Z += 512.0f;
+			Bounds.X *= 1.25;
+			Bounds.Y *= 1.25;
+
+			AVolume* SpawnedVolume = DummySpawnBoxedVolume(Origin, Bounds);
+
+			// Restore the rotator of both
+			SpawnedVolume->SetActorRotation(OriginalRotator);
+			ActorItr->SetActorRotation(OriginalRotator);
+		}
 	}
 
 	for (TActorIterator<ANavModifierVolume> VolumeItr(World); VolumeItr; ++VolumeItr)
